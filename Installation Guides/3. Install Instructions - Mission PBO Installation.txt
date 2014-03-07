@@ -1,0 +1,35 @@
+Installation Instructions for DZAI 1.7.0+ (mission file version)
+Last Updated: 7:39 PM 1/19/2014
+
+About the Mission File Version of DZAI: Use these instructions to convert the DZAI install package for compatibility with your mission pbo if you are unable to edit your dayz_server.pbo
+
+
+What you need:
+----------------------------------------------------
+- cpbo* or PBO Manager**.
+- A text editor (Notepad++ is recommended).
+- Access to your mission .pbo.
+- A downloaded copy of DZAI
+
+* cpbo can be downloaded as part of the Arma Tools package here: http://www.armaholic.com/page.php?id=411
+** PBO Manager can be downloaded here: http://www.armaholic.com/page.php?id=16369
+
+
+Basic Installation Guide:
+----------------------------------------------------
+
+1. Unpack your mission pbo. If using cpbo, right click the .pbo file and click "Extract".
+2. Copy the downloaded DZAI folder from the download package inside your unpacked mission folder. In this folder, you should also see init.sqf, mission.sqm, description.ext.
+3. Edit DZAI\init\DZAI_version.hpp with a text editor. Remove the double slashes on Line 9 as instructed in the file. The line should now look like this:
+
+	#define DZAI_MISSIONFILE_INSTALL 1
+
+4. Edit your mission init.sqf with a text editor. Add this line at the end of your init.sqf:
+
+    if (isServer) then {call compile preprocessFileLineNumbers "DZAI\dzai_initserver.sqf";};
+
+5. Optionally, you may edit DZAI's settings in DZAI\init\dzai_config.sqf
+
+6. Repack your mission pbo by right-clicking the unpacked folder, then click on "create PBO". If prompted to overwrite, click "Yes".
+
+Note: You may store your custom settings changes in DZAI\DZAI_settings_override.sqf. This file is a convenient way to store and transfer your custom settings when upgrading to a newer version of DZAI. Further instructions are provided inside this file.

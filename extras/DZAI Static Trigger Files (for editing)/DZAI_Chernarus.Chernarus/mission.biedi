@@ -1,0 +1,1316 @@
+class _prefix_0
+{
+	objectType="prefix";
+	class Arguments
+	{
+	};
+};
+class _center_0
+{
+	objectType="center";
+	class Arguments
+	{
+		SIDE="west";
+	};
+};
+class _group_0
+{
+	objectType="group";
+	class Arguments
+	{
+		CENTER="_center_0";
+	};
+};
+class _unit_5
+{
+	objectType="unit";
+	class Arguments
+	{
+		POSITION="[13409.133, 2823.1218, 2.9492393]";
+		GROUP="_group_0";
+		TYPE="Bandit1_DZ";
+		SKILL="0.60000002";
+		PLAYER="true";
+		LEADER="true";
+	};
+};
+class _marker_27
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[11958.352, 13143.257, 3.0517578e-005]";
+		NAME="NEAF1";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_28
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[12212.049, 12482.955]";
+		NAME="NEAF2";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_29
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[11816.073, 12926.985, 3.0517578e-005]";
+		NAME="NEAF3";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_30
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[11746.358, 12610.153, -3.0517578e-005]";
+		NAME="NEAF4";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_31
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[12483.098, 12883.227, -4.5776367e-005]";
+		NAME="NEAF5";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_51
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[14160.69, 2707.7178, -4.7683716e-007]";
+		NAME="Skalisty1";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_53
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[13310.174, 2752.4612, 7.4863434e-005]";
+		NAME="Skalisty2";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_54
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[13797.646, 3064.9883, 0.00012779236]";
+		NAME="Skalisty3";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_64
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4592.4634, 2724.5557, 4.7683716e-006]";
+		NAME="Balota1";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_65
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4794.811, 2735.4512, 1.7166138e-005]";
+		NAME="Balota2";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_66
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4962.8208, 2648.8101, -9.5367432e-007]";
+		NAME="Balota3";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_67
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4524.6079, 2708.7559, -1.9073486e-006]";
+		NAME="Balota4";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_68
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4869.4707, 2702.0361]";
+		NAME="Balota5";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_80
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[6886.5234, 11494.024, -3.0517578e-005]";
+		NAME="DevilsCastle";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_84
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[7069.1392, 11639.588, -9.1552734e-005]";
+		NAME="DevilsCastle2";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_86
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4576.5781, 10877.494, 9.1552734e-005]";
+		NAME="NWAF5_1";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_87
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4863.6953, 10688.869]";
+		NAME="NWAF5_2";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_88
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4676.2095, 10923.367, 0.00012207031]";
+		NAME="NWAF5_3";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_90
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4823.3579, 10614.722, 9.1552734e-005]";
+		NAME="NWAF5_4";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_91
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[3966.0071, 10825.011, -3.0517578e-005]";
+		NAME="NWAF6_1";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_92
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[3983.3364, 10706.798, -6.1035156e-005]";
+		NAME="NWAF6_2";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_93
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[3860.4697, 10906.981, -9.1552734e-005]";
+		NAME="NWAF6_3";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_94
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4042.3828, 10907.524, -9.1552734e-005]";
+		NAME="NWAF6_4";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_95
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4044.9353, 10609.702]";
+		NAME="NWAF7_1";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_96
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4279.9717, 10233.461, 3.0517578e-005]";
+		NAME="NWAF7_2";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_97
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4026.0771, 10301.227, 3.0517578e-005]";
+		NAME="NWAF7_3";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_98
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4246.4731, 10168.34, 0]";
+		NAME="NWAF7_4";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_99
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[5123.7661, 9896.9561, 0]";
+		NAME="NWAF4_1";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_100
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[5230.0479, 9855.4219, 3.0517578e-005]";
+		NAME="NWAF4_2";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_101
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[5218.3945, 9664.8857, 3.0517578e-005]";
+		NAME="NWAF4_3";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_102
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[5305.8325, 9810.5674, 0.00024414063]";
+		NAME="NWAF4_4";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_109
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[6702.0234, 11622.7, 3.0517578e-005]";
+		NAME="Devils3";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_111
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[6789.7358, 11246.682, -0.00012207031]";
+		NAME="Devils4";
+		TYPE="Empty";
+		FILL="Solid";
+	};
+};
+class _marker_114
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[1867.8379, 2290.2583]";
+		NAME="DZAI_Kamenka";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_115
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[3633.8445, 2392.9741]";
+		NAME="DZAI_Komarovo";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_116
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4482.1094, 2424.5408, 4.1991434]";
+		NAME="DZAI_Balota";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_117
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4787.6616, 2551.0151]";
+		NAME="DZAI_BalotaAirstrip";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_118
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[6560.6025, 2419.9658]";
+		NAME="DZAI_Cherno1";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_119
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[6504.7559, 2773.7056, 6.6184349]";
+		NAME="DZAI_Cherno2";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_120
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[6674.2568, 2583.6072]";
+		NAME="DZAI_Cherno4";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_121
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[6975.0464, 2645.3413]";
+		NAME="DZAI_Cherno3";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_122
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[10168.299, 1954.9338]";
+		NAME="DZAI_Elektro1";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_123
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[10454.194, 2245.2053, 9.1402712]";
+		NAME="DZAI_Elektro3";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_125
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[10469.834, 2467.689]";
+		NAME="DZAI_Elektro2";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_127
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[13657.813, 2925.7288]";
+		NAME="DZAI_Skalisty";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_129
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[12067.335, 3621.5562]";
+		NAME="DZAI_Kamyshovo";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_130
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[12866.335, 4463.1636]";
+		NAME="DZAI_Tulga";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_132
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[11254.334, 4278.8921]";
+		NAME="DZAI_Rog";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_133
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[9162.2178, 3838.3701]";
+		NAME="DZAI_Pusta";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_134
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[13256.896, 5440.0186]";
+		NAME="DZAI_ThreeValleys";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_135
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[13334.822, 6261.1094]";
+		NAME="DZAI_Solnichniy";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_137
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[13090.676, 7070.6646]";
+		NAME="DZAI_SolnichniyFactory";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_138
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[12889.117, 8149.4814]";
+		NAME="DZAI_Nizhnoye";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_139
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[12163.348, 7298.52]";
+		NAME="DZAI_Orlovets";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_140
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[12031.008, 9118.2402]";
+		NAME="DZAI_Berezino";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_141
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[12249.986, 9588.9346]";
+		NAME="DZAI_Berezino4";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_142
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[12734.031, 9623.2559]";
+		NAME="DZAI_Berezino2";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_143
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[12870.814, 10054.313]";
+		NAME="DZAI_Berezino3";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_144
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[12313.479, 10851.807, 4.392067]";
+		NAME="DZAI_Khelm";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_145
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[13367.774, 12848.616]";
+		NAME="DZAI_Olsha";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_146
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[12076.522, 12637.961, 0.056991577]";
+		NAME="DZAI_NEAF";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_147
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[11128.36, 12342.763]";
+		NAME="DZAI_Krasnostav";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_148
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[8717.3887, 11794.308]";
+		NAME="DZAI_Gvozdno";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="225";
+		B="225";
+	};
+};
+class _marker_149
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[1700.5154, 3838.8384]";
+		NAME="DZAI_Pavlovo";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_150
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[3338.4927, 3923.6582, 3.5301208]";
+		NAME="DZAI_Bor";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_151
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[11345.774, 5475.9185]";
+		NAME="DZAI_Msta";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_152
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[10126.361, 5483.3281]";
+		NAME="DZAI_Staroye";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_154
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[11281.19, 6607.8843]";
+		NAME="DZAI_Dolina";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_155
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[11457.82, 7483.894, 5.1239624]";
+		NAME="DZAI_OrlovetsFactory";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_156
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[10007.422, 10392.041, 4.4281769]";
+		NAME="DZAI_DubrovkaNW";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_157
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[10467.023, 9791.6279]";
+		NAME="DZAI_Dubrovka";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="225";
+		B="225";
+	};
+};
+class _marker_158
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[10713.679, 8045.3086]";
+		NAME="DZAI_Polana";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_159
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[7599.5488, 5169.6831]";
+		NAME="DZAI_Mogilevka";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_161
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[5850.4556, 4746.9932]";
+		NAME="DZAI_Nadezhdino";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_163
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[6548.4966, 5590.0073]";
+		NAME="DZAI_Zub";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_164
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4432.9712, 4648.2036]";
+		NAME="DZAI_Kozlovka";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_165
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[3415.1025, 4941.2129]";
+		NAME="DZAI_Drozhino";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_166
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[2743.4209, 5304.1323]";
+		NAME="DZAI_Zelenogorsk";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="225";
+		B="225";
+	};
+};
+class _marker_167
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[3720.9399, 6005.7715]";
+		NAME="DZAI_GreenMountain";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_168
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[9659.7217, 6564.8687]";
+		NAME="DZAI_Shakhovka";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_169
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[8462.3857, 6697.4175]";
+		NAME="DZAI_Guglovo";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_170
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[6538.7881, 6129.7109, 5.9794617]";
+		NAME="DZAI_Vyshnoye";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_171
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4943.1729, 5617.7466, 5.722168]";
+		NAME="DZAI_Pulkovo";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_172
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[2530.4241, 6358.1699, 0]";
+		NAME="DZAI_Sosnovka";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_173
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[1994.825, 7389.6553]";
+		NAME="DZAI_Myshkino";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_174
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[3057.0288, 7854.3584]";
+		NAME="DZAI_Pustoshka";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_175
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[3860.8384, 8891.998]";
+		NAME="DZAI_Vybor";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_176
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4523.5366, 6417.9312]";
+		NAME="DZAI_Pogorevka";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_177
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4743.606, 6770.0415, 2.3750305]";
+		NAME="DZAI_Rogovo";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_178
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[9615.8896, 8845.5264]";
+		NAME="DZAI_Gorka";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="225";
+		B="225";
+	};
+};
+class _marker_179
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[7039.3799, 7689.1279]";
+		NAME="DZAI_NovySobor";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="225";
+		B="225";
+	};
+};
+class _marker_180
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[6158.9712, 7749.9517]";
+		NAME="DZAI_StarySobor";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="225";
+		B="225";
+	};
+};
+class _marker_181
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[5380.0811, 8599.0205]";
+		NAME="DZAI_Kabanino";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_182
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[2769.7209, 9947.7793]";
+		NAME="DZAI_Lopatino";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_183
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[6894.8286, 11444.771]";
+		NAME="DZAI_DevilsCastle";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_184
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[6018.1162, 10304.021]";
+		NAME="DZAI_Grishino";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="225";
+		B="225";
+	};
+};
+class _marker_185
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4762.6807, 10202.887]";
+		NAME="DZAI_NWAF2";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_186
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[5227.6763, 9775.2021]";
+		NAME="DZAI_NWAF4";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_188
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4630.3066, 9666.2881]";
+		NAME="DZAI_NWAF3";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_189
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4087.0801, 10787.999]";
+		NAME="DZAI_NWAF6";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_190
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4616.1626, 10697.177]";
+		NAME="DZAI_NWAF5";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_191
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4670.3218, 10454.917]";
+		NAME="DZAI_NWAF1";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_192
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4216.0415, 10355.757]";
+		NAME="DZAI_NWAF7";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _postfix_0
+{
+	objectType="postfix";
+	class Arguments
+	{
+	};
+};

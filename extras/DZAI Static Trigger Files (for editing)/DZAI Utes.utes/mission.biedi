@@ -1,0 +1,146 @@
+class _prefix_0
+{
+	objectType="prefix";
+	class Arguments
+	{
+	};
+};
+class _center_0
+{
+	objectType="center";
+	class Arguments
+	{
+		SIDE="west";
+	};
+};
+class _group_0
+{
+	objectType="group";
+	class Arguments
+	{
+		CENTER="_center_0";
+	};
+};
+
+class _unit_2
+{
+	objectType="unit";
+	class Arguments
+	{
+		POSITION="[2581.2417, 3664.7471, 0]";
+		GROUP="_group_0";
+		TYPE="Dog1";
+		SKILL="0.60000002";
+		PLAYER="true";
+		LEADER="true";
+	};
+};
+
+class _trigger_0
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[3389.5076, 4330.6724]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Kamenyy";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,1,200,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_2
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[3561.8384, 3708.8481]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Airbase 1";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [2,2,175,thisTrigger,[],3] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_4
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[3798.3088, 3443.5945]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Airbase 2";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [2,2,200,thisTrigger,[],3] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_6
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[4355.46, 3207.3979, 0.34515762]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Strelka";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,1,175,thisTrigger,[],0] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_8
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[2989.5833, 4469.9492]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Kamenyy Mil Base";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,1,175,thisTrigger,[],2] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+
+class _postfix_0
+{
+	objectType="postfix";
+	class Arguments
+	{
+	};
+};

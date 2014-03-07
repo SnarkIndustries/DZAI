@@ -1,0 +1,1413 @@
+DZAI Changelog Archive
+
+Description: This file contains a complete history of all past changes and updates to DZAI.
+
+Last updated: 2:20 PM 2/23/2014
+--------------------------------
+
+
+DZAI 1.9.9 Changelog:
+============
+
+    [ADDED] Due to basement flooding as a result of user tears, added config variable DZAI_heliReinforceChance to determine the probability that dynamic AI spawns will also call for helicopter reinforcement. Default setting is 0.75 (75% chance), disable reinforcement by setting to 0.
+    [ADDED] Added DZAI_customLootTables config variable for custom loot table support. If enabled, DZAI will read from user-installed custom loot tables to find AI-usable weapon classnames (if dynamic weapon list is enabled).
+        Note that I can't provide support for installing custom loot tables.
+    [CHANGED] AI units with weapon magazine sizes smaller than 8 will be supplied with 2 magazines instead of 1.
+    [CHANGED] default_classnames.sqf config file has been renamed to global_classnames.sqf. This new file is moved one level up. For more details, see this post: http://opendayz.net/threads/explana...s-sqf-and-why-its-important.18635/#post-94351
+    [UPDATED] Dynamic weapon generation script will fall back on prebuilt weapon tables in global_classnames.sqf if it is unable to find weapon classnames from loot tables. Exception: If no HeliCrash loot tables are found, MilitarySpecial loot tables will be used instead. Failing that, prebuilt tables in global_classnames.sqf will be used instead.
+        This change prevents empty weapon tables from being generated if there are changes in DayZ's loot table structure.
+
+
+
+DZAI 1.9.8 Changelog:
+============
+
+    [ADDED] Added static spawn configs for Napf map. Further fine-tuning may be needed.
+    [CHANGED] Updated in-comment documentation for static spawn config files (only for config files using the new spawn definition format).
+    [CHANGED] Server-side object patch now checks if CfgTownGenerator exists before continuing. (Reference: http://opendayz.net/threads/cfgtowngenerator-epoch.18555/).
+    [CHANGED] Dynamic spawn system: Removed AI spawn probability limit, added minimum probability of 10% to spawn AI every cycle.
+        Highest probability of maximum possible AI group size (3 units) is reached when probability exceeds 100%.
+        Note: This change does not affect a player's likelyhood of being chosen as a target for dynamic spawns.
+    [FIXED] Static spawns: DZAI will generate a random spawn position using the trigger's position as reference point instead of the intended spawn position if an open space can't be found for spawning AI after 3 successive attempts.
+    [FIXED] AI behavior processing is disabled when the unit is knocked unconscious to prevent AI from firing weapons while knocked out. AI behavior is re-enabled after the knockout timer has completed.
+    [FIXED] Included in a previous unannounced update - Fixed waypoint generation on static AI respawn.
+
+	
+DZAI 1.9.7 Changelog:
+============
+
+    [ADDED] On-the-fly classname verification for AI loot items.Classnames that are already validated will not be checked again.
+    [ADDED] Spawning dynamic AI will now also call the first available AI helicopter (if any) to investigate the area. This helicopter will arrive in Search and Destroy patrol mode and have increased detection range.
+    [ADDED] Server admins may set the minimum amount of time required for maximum dynamic spawn probability by editing the new variable DZAI_maxSpawnTime in dzai_config.sqf.
+        By default, maximum dynamic spawn probability is reached 30 minutes (1800 seconds) since the last spawn.
+        Recommended range: 1200-1800. (Personally, I found 1200 to be a bit on the excessively frequent side).
+    [ADDED] Sauerland static spawn configs (72 spawn locations).
+    [ADDED] Epoch: Added trader area blacklist areas for the following maps: Sauerland, Napf, Caribou, Sahrani (SMD version), Ovaron.
+    [FIXED] Fixed bug with AI rearm script that occasionally caused it to become permanently stuck in the initialization stage.
+    [FIXED] Added fix to prevent AI counter variable from becoming undefined.
+    [FIXED] Fixed possible exploit that would allow players to escape from AI pursuit behaviors.
+    [FIXED] Fixed Killed EH for ground AI vehicle patrols.
+    [FIXED] Dynamic spawn will be canceled if calculated spawn position is water.
+    [FIXED] AI units that are knocked out should no longer be able to regain blood while they are unconscious.
+        Previously, AI units would be able to gain a single "tick" of healing during the 2-second window where they were knocked unconscious after the initial consciousness check, but before some blood was restored.
+    [CHANGED] Tightened AI spawn position variance from 50-200m to 25m-100m. Note: It is extremely rare for the actual spawn position to vary by more than 25m and only happens occasionally when the spawn area is unusually cluttered.
+    [CHANGED] Upon taking damage, AI health will be reset if health values are not found. Previously, default Arma2 damage handling was used if AI health values were not properly set.
+    [CHANGED] After heli AI units are ejected, helicopter ammo and fuel levels are forced to zero to prevent residual flames/explosions from happening.
+    [CHANGED] All units of an AI land vehicle patrol should now exit their vehicle upon encountering players. (unconfirmed).
+    [CHANGED] Rebalanced AI skill parameters - minimum AI spotDistance and spotTime skill settings raised slightly.
+    [CHANGED] Increased AI knockout timers from 12.5 seconds (25 sec. for headshots) to 15 seconds (30 sec. for headshots).
+    [CHANGED] Dynamic spawn system: Increased maximum selection probability from 40% to 50%.
+    [CHANGED] Dynamic spawn system: Decreased cycle frequency variance from 4 mins to 2 mins
+        Actual variance between cycles is changed from 5-9 minutes to 5-7 minutes.
+    [CHANGED] AI helicopter detection distance increased:
+        Normal patrol: 250m to 275m
+        Search-and-destroy patrol: 350m to 400m
+        Note: Detection occurs when helicopter arrives at its destination. Players may evade detection by hiding behind objects and escaping the helicopter's line of sight.
+    [CHANGED] DZAI_refreshRate now only affects reammo/refuel frequency of AI air/land vehicles. AI units have their rearm/heal frequency fixed at 15 seconds.
+    [CHANGED] AI unit initial blood level now randomized between 10,000 - 12,000 (exact numbers to be determined)
+        Note: This only affects ground AI units. Heli/vehicle AI will always start with maximum blood (12,000)
+        Plea from Buttface: Please don't ask for customization options for blood levels at this time, and certainly not specific blood levels for certain type of AI, etc. This is just an experimental change.
+    [CHANGED] Increased time required for AI to fully self-heal from 6 to 9 seconds.
+        After 9 seconds of healing, any broken bones will be healed, unless the unit is knocked out before completing the final 3 seconds of the healing process (6 second time window).
+        AI will heal 2000 blood every 3 seconds, for up to 6000 blood restored
+        Healing can be interrupted by knocking the unit unconscious.
+    [CHANGED] AI healing threshold reduced from 7200 to 5000 blood (the amount that AI blood must drop below to allow healing).
+        Note: AI self-healing may also be triggered by broken legs, in which case self-healing may begin even if AI blood is above 5000. However, broken legs are only healed if the AI unit is able to self-heal continuously for 9 seconds without being knocked unconscious.
+    [CHANGED] AI killed by collision/physics damage will have their inventories cleared.
+    [CHANGED] Dynamic spawn will be canceled if the AI spawn position is inside a blacklisted area.
+    [CHANGED] Updated trader area dynamic blacklists for Chernarus.
+    [REMOVED] Removed passive zombie aggro option.
+
+
+DZAI 1.9.6.1 Changelog:
+============
+
+    [FIXED] Fixed issues related to undefined variable errors referenced in this post: http://opendayz.net/threads/error-on-epoch-1-0-4-napf.18295/#post-91843
+    [FIXED] Minor preventative fix for Trinity Island loot tables.
+    [CHANGED] Dynamic spawn system: Decreased time required to reach maximum spawn probability from 60 minutes to 30 minutes.
+
+	
+DZAI 1.9.6 Changelog:
+============
+
+    [NEW] Added blank map/classname config files for the following maps: Napf, Caribou, Ovaron, Sauerland
+        No preset static spawns have been defined, so DZAI will attempt to generate static spawns in cities and towns (satisfaction not guaranteed).
+    [NEW] Added static spawn configs for DayZ Unleashed
+        Note: DayZ Unleashed static spawn settings will be controlled by the mod developer. I will not be modifying/balancing anything related to Unleashed.
+
+    [FIXED] Fixed an infinite-loop issue if DZAI is unable to find a free space without players nearby to spawn AI.
+    [FIXED] Fixed flies sound cleanup for AI bodies.
+    [CHANGED] Increased player distance check for dead AI body cleanup from 10m to 20m.
+        NOTE: There is the chance that DayZ's own dead body cleanup will clean up AI bodies before DZAI is able to (since player and AI bodies are indistinguishable), so AI bodies may be deleted even if a player is nearby. This is not DZAI's fault.
+    [CHANGED] Modified the player-hunting AI radio messages to transmit radio messages using the target player as the point of origin instead of the AI group leader
+        Transmit distance reduced from 125m to 50m
+        Target player must be within 125m of AI group leader to receive radio messages
+    [CHANGED] All AI vehicles are now locked from player access upon spawning.
+    [CHANGED] Updated Namalsk classname config files.
+    [CHANGED] Dynamic spawn probability cap increased from 30%/player to 40%/player.
+    [CHANGED] Dynamic spawn player selection ratio increased from 25% of online players to 30% of online players.
+    [CHANGED] Dynamic AI spawn triggers are now removed immediately after the last unit is killed. Previously, there was a 5-minute delay in place but this is no longer needed.
+    [CHANGED] world_map_configs folder renamed to world_spawn_configs for better clarity.
+    [REMOVED] Removed debug marker option from DZAI_config.sqf file.
+        DZAI_debugMarkers variable will have to be manually defined (to any value other than nil) in order to have any effect.
+        The reason behind this change is to reduce the number of people who are tempted to use this option as an easy way to reveal all AI positions - the debug markers aren't intended for constant, everyday use, and I won't give support to anyone who is using them for this purpose. They are meant strictly for debugging purposes and making sure that AI are spawning properly.
+    [REMOVED] Removed support for DayZ Civilian mod
+
+DZAI 1.9.0 - 1.9.5 Changelogs:
+============
+
+- 1.9.0 Update: 
+
+
+    [NEW] Added support for custom weapongrade definitions (from 4 to 9)
+        Custom weapongrade values can only be used with custom-defined spawns (those created using the DZAI_spawn function)
+        Custom weapon tables can be specified in \world_classname_configs\default\default_classnames.sqf
+        Custom skill settings can be specified in dzai_config.sqf
+        More details here: http://opendayz.net/threads/extra-ai-difficulty-settings.17567/#post-87672
+        AI with custom weapongrades have a maximum of 3 heal attempts.
+        Note: Pistol classnames can be added to custom rifle tables.
+    [NEW] AI units may now be equipped with launcher weapons
+        Launcher weapons must first be defined in dzai_config.sqf
+        Limit of one launcher weapon per AI group
+        Launcher weapons/ammo will be removed on death (unlootable)
+        Launcher-equipped AI unit will switch from their primary weapon to the launcher if the AI group encounters an armored vehicle
+        More details here: http://opendayz.net/threads/suggestion-rpg-options-and-behavior.15329/#post-87358
+        Specific weapongrades may be allowed to use launcher weapons. By default, only AI with weapongrade 1 or higher may use launchers (Note: this was changed from the original plan of weapongrade 2&3 only).
+        Server admins may permit individual weapongrades to use launchers
+    [NEW] Breaking AI bones will produce an audible fracture sound similar to players
+    [NEW] Added proof-of-concept version of land AI vehicle patrols
+        IMPORTANT: The definition of "proof of concept" according to Wikipedia:
+
+            A proof of concept (POC) or a proof of principle is a realization of a certain method or idea to demonstrate its feasibility,[1] or a demonstration in principle, whose purpose is to verify that some concept or theory has the potential of being used. A proof of concept is usually small and may or may not be complete.
+
+        What this means is that there will be no support for this feature because it is not a complete feature. If you experience any problems with it, disable it.
+        This version of AI land vehicle patrols is only so users can see how the actual version "may" look like. Right now, most of the scripts used are adapted from the helicopter patrol scripts, and will eventually be completely overhauled.
+        AI vehicles are immune to collision damage. This is to compensate for the AI's poor driving ability.
+    [NEW] Debugging markers for AI helicopters will also display the vehicle health (overall and engine damage)
+    [NEW] Added ability to add area blacklists for "new" dynamic AI spawn system.
+    [NEW] Air and land vehicle AI patrol min/max respawn timers can now be manually specified.
+    [NEW] AI helicopters now detect all players within a 225m/300m radius upon arriving at a patrol waypoint.
+        This means AI helicopters will open fire on players (even those on foot) without provocation if they have line of sight.
+        Maximum duration of Search and Destroy patrol mode decreased from 40 seconds to 30 seconds
+        Probability of entering Search and Destroy patrol increased from 25% to 27.5% per waypoint.
+        Detection range with "Move"-type waypoint: 225m.
+        Detection range with "Search and Destroy"-type waypoint: 300m.
+        Protip: Avoiding all contact with pursuing helicopters for 2-3 minutes should cause the AI to break off pursuit.
+    [REMOVED] Removed old trigger-based dynamic AI spawn system.
+    [FIXED] AI group leaders will reveal nearby unknown zombies (should improve AI response against zombies).
+        Before 1.9.0, zombies are only revealed if they haven't yet been marked as hostile. This change separates the "revealing" and "marking" process.
+        Now, zombies will be revealed to a group if the group does not yet recognize the zombie as hostile (even if it is marked as such)
+    [FIXED] Fixed AI animation issues caused by units being killed while unconscious.
+    [FIXED] Using "Study Body" on ejected helicopter AI units should now properly show unit name and cause of death.
+    [FIXED] AI units that suffered damage to hands/legs while inside a helicopter should have their health properly restored upon exiting the vehicle.
+    [CHANGED] Increased dynamic spawn blacklist around cities and towns to 600m.
+    [CHANGED] Player responsible for killing an AI unit will be revealed to the victim's group regardless of whether DZAI_findKiller is enabled or not (speeds up AI response time).
+    [CHANGED] AI helicopters/planes that suffer critical damage will eject all surviving units on board. The vehicle itself will explode 3 seconds after ejection.
+        The new damage handler used should fix the pre-1.9.0 issue of indestructible helicopters.
+        This will replace the pre-1.9.0 AI ejection system
+        DZAI_airLootMode option will be removed (it will essentially be combined, read more below)
+        Before 1.9.0, the surviving units were deleted and new units were spawned in parachutes. After 1.9.0, the onboard units are actually ejected.
+        If above 60m and over land, units will eject from the helicopter and patrol around the wreck area.
+        If below 60m and over land, units will "unsuccessfully" attempt to eject but will die on landing.
+        If over water, units will not be ejected at all.
+    [CHANGED] If AI unit/vehicle hitpoint values are not properly set for some reason, damage will be processed by default Arma2 damage handling instead
+        Prevents AI units from becoming invincible if a problem happens.
+    [CHANGED] AI unconsciousness timer for headshot damage increased from 25 seconds to 30 seconds.
+    [CHANGED] Setting the number of heli/land vehicle patrols above zero will enable the patrols.
+        It is no longer necessary to set the patrol value to "true" and set the number of patrolling helicopters/vehicles.
+    [CHANGED] Increased number of maximum dynamic triggers created per 10 minute cycle from 5 to 10.
+    [CHANGED] Removed unnecessary re-initialization of trigger variables after the first activation.
+    [CHANGED] Units with weapongrade 0 may now also carry small misc. items (1 slot)
+    [CHANGED] Increased default number of small misc. items in AI loot from 2 to 3
+    [CHANGED] Increased probability per small misc. item in AI loot from 50% to 60%
+    [CHANGED] AI helicopter/vehicle functions are no longer loaded if they are not enabled
+    [CHANGED] Removed Smoke Grenade (Green) and M203 Smoke/Flare ammo from AI loot tables.
+    [CHANGED] Added a few junk items to AI misc loot tables.
+    [CHANGED] Updated documentation for custom markers
+    [CHANGED] Chernarus: Reduced AI weapongrade for Castle Rog, Devil's Castle, and Castle Zub from 2 to 1.
+    [CHANGED] Initial AI helicopter flying height set at 125m.
+
+	
+- 1.9.1 Update: 
+
+	[NEW] Added line-of-sight requirements for AI helicopters to detect players at patrol waypoints
+		Players will be able evade detection from AI helicopters by running into buildings or hiding behind large objects.
+	[CHANGED] Increased AI helicopter detection radius from 225m/300m to 250m/350m (move waypoint/search-and-destroy waypoint).
+	[CHANGED] Lowered reveal level for AI helicopter detection
+		Players will be able to escape AI helicopters more easily after being detected (still need to avoid all contact)
+	[CHANGED] Large miscellaneous items will only be added to AI backpack if the backpack capacity is 10+ (reduces probability of items "spilling out")
+	[CHANGED] Weighted weapongrade probabilities are now calculated during DZAI startup instead of calculated every time a weapongrade value needs to be generated
+		Reduces the amount of time/processing needed to spawn AI units considerably
+		May increase server startup time slightly (by 0.1 seconds).
+	[CHANGED] Added equipType -1 for AI spawned near fresh-spawn locations
+		Static spawn locations with equipType -1 will spawn AI that are most likely to be equipped with pistols, and rarely rifles
+		Static spawn locations to be edited in a future update
+	[CHANGED] Epoch: Dynamic AI spawn blacklist area for trader locations increased from 100m radius to 200m radius
+	[CHANGED] Added option to enable or disable DZAI reading from dzai_settings_override.sqf file (default enabled)
+	[CHANGED] DZAI will now always try to create the maximum number of possible dynamic AI spawns per 10 minute cycle
+		Previously, DZAI only selected 10 random online players, evaluated the necessary conditions, then spawned AI if conditions were met
+		Now, DZAI will continue searching until either the maximum number of dynamic spawns is created or all online players have already been evaluated
+		Higher-population servers should see an increase in dynamic AI frequency.
+	[CHANGED] Updated hacker detection bypass functions.
+	[FIXED] Fixed death animation issues with pistol-armed AI units
+	[FIXED] Fixed minimum waypoint distance calculation for AI helicopters.
+		The distance between current and next waypoint should always be at least 300m.
+	[FIXED] DayZ Overwatch mod detection
+
+
+- 1.9.1.1 - 1.9.1.2 Hotfix: 
+
+    [FIXED] Fixed active static trigger counting.
+    [FIXED] Fixed potential problems for static spawns with fewer than 5 spawn locations.
+    [FIXED] Dynamic spawn area blacklisting now works properly.
+    [FIXED] Dynamic spawn area blacklisting now checks if the marker exists before creating the blacklist area.
+    [CHANGED] Namalsk: Reduced static AI spawns to more reasonable levels.
+    [CHANGED] Epoch Chernarus and Taviana: Updated trader area blacklists
+
+- 1.9.2 Update: 
+
+    [CHANGED] Merged core DZAI files for dayz_server and mission pbo versions.
+        The missionfile patch is now simply the version.hpp file (installation method remains the same).
+    [CHANGED] Added separate function to register bandit kills and humanity (if enabled).
+    [CHANGED] Many functions are no longer compiled and loaded if they're not required.
+    [CHANGED] Spawn area and spawn location markers are now deleted after they're no longer required (custom AI spawn markers are exempted).
+    [CHANGED] Modifications to the radio messaging system:
+        If DZAI_findKiller enabled: AI group leaders will broadcast radio text messages to players with radios within a 125m radius.
+            These changes will allow nearby players to be aware if a nearby AI group is currently hunting down another player, or allow the target player to know if a pursuing AI group is close. Currently, the Radio provides too easy of a way for players to evade pursuing AI groups by easily knowing their distance.
+            Messages will not be broadcasted if group leader is dead or unconscious
+            Messages may contain one of the following: target name, target skin, target distance, pursuit end reason (lost contact with target, target killed).
+        Dynamic AI pursuit:
+            Radio messages will be broadcasted to target player and players within a 50m radius of the target player and received for each player with a radio.
+            Radio messages contain same information as findKiller text.
+            These changes are intended to improve group gameplay by allowing a nearby friendly player with a radio to warn the group if someone is being pursued by dynamic AI.
+            Pursuit messages will not be transmitted if AI group is currently hunting for a player responsible for killing a group member.
+        For both:
+            Radio messages will only be broadcasted if there are at least 2 live units in the group (a lone AI unit will never transmit radio messages)
+    [CHANGED] FindKiller: AI group pursuit range reduced to 300m from 400m.
+    [CHANGED] FindKiller: Frequency of player position update lowered to 1 update/20 seconds from 1 update/15 seconds.
+    [CHANGED] Dynamic AI will hunt player regardless of what vehicle they're in, but will still not pursue beyond 450m of their spawn location. Frequency of player position update lowered to 1 update/20 seconds from 1 update/15 seconds.
+    [CHANGED] Dynamic AI: Frequency of player position update increased to 1 update/25 seconds from 1 update/30 seconds.
+    [CHANGED] Minimum number of AI self-heals increased by 1 (maximum is unchanged).
+        Weapongrade -1 units will have no self-heals.
+    [CHANGED] Significantly lowered AI spotTime ratings (AI will take slightly longer to recognize players as hostile).
+    [CHANGED] Very slightly lowered accuracy rating for weapongrade 0 AI units.
+    [CHANGED] Updated Chernarus static spawn definitions to new format.
+    [CHANGED] Minimum time between each dynamic AI spawn cycle reduced to 5 minutes from 8 minutes. Maximum variance reduced to 3 minutes from 4 minutes.
+        New delay range between cycles: 5-8 minutes. Old delay range: 8-12 minutes.
+    [CHANGED] Probability limit per dynamic AI spawn increased to 95% from 91%.
+    [FIXED] Fixed several bugs related to counting active AI units.
+    [FIXED] Using DZAI_setup_AI function to spawn AI units will properly update active AI count
+        Note: Using the DZAI_setup_AI function directly is not fully supported, do this at your own risk.
+    [FIXED] AI launcher weapons are now properly removed from all AI unit types.
+    [FIXED] Support for SMD version of Sahrani map.
+    [FIXED] AI helicopter and land vehicle patrols now use the more-efficient method of generating weapongrade values introduced in 1.9.1.
+    [FIXED] Abandoned AI helicopters are now properly deleted.
+    [FIXED] AI helicopters destroyed over water have crew properly deleted instead of surviving.
+    [FIXED] Namalsk: Fixed static AI spawns in north-west Vorkuta.
+
+
+- 1.9.2.1 Hotfix:
+	
+	This is hotfix is to solve issues with a small number of static triggers for certain maps. If your server is not running any of these maps, then this hotfix is not necessary. As usual, the update is available here: https://github.com/dayzai/DayZBanditAI
+
+	Affected maps and spawns:
+
+    Lingor/Hunting Grounds:
+        Sargento
+        Prison
+        Presidente Palace
+        Various military bases
+    Celle
+        ETHS
+    Namalsk
+        Seraja Army Base
+        Sebjan Mine
+        Object A2
+        Sebjan Chemical Factory
+        Sebjan
+        Lubjansk
+        C130 Crashsite
+
+- 1.9.3 Update:
+
+	
+    [NEW] Added option to use clientside method of displaying radio text messages.
+        To enable, set "DZAI_useRadioAddon = true" in dzai_config.sqf
+        Enabling this requires the DZAI client add-on to be installed into your mission pbo and the following inserted into your mission init.sqf:
+        Code:
+
+        _nul = [] execVM "DZAI_Client/dzai_initclient.sqf";
+
+        If DZAI_useRadioAddon is enabled, radio text messages will be repeated on player's screen 3 times within 3 seconds.
+        If DZAI_useRadioAddon is disabled, the radio messages will be transmitted by the normal remote execution method,
+    [CHANGED] Several changes to AI patrolling behavior
+        AI with patrol radius less than 75m will patrol walking instead of running.
+        AI with patrol radius less than 100m will not search for nearby loot piles.
+        AI with patrol radius less than 100m will tend to linger at each patrol waypoint for a longer amount of time
+    [CHANGED] AI headshots with sufficient damage are now autokills (similar to players).
+    [CHANGED] Lowered AI aimingShake and aimingSpeed values for weapongrade 0 units.
+    [CHANGED] Adjusted dynamic spawn cycle frequency:
+        Old frequency: 5-8 minutes per cycle
+        New frequency: 5-9 minutes per cycle
+        Previous time required to reach maximum % spawn probability (per person): 15-24 minutes.
+        New time required to reach maximum % spawn probability (per person): 20-36 minutes.
+    [CHANGED] Epoch: Increased blacklist radius of each trader area to 300m from 200m.
+    [CHANGED] Classnames in custom weapon tables (DZAI_Rifles4-9) are now also verified.
+    [CHANGED] Improved and simplified DZAI weapon classname verification script.
+    [CHANGED] AI units with patrol radius of 1m will no longer be assigned patrol waypoints
+        Note: For custom spawns where AI are to be standing stationary, simply create 1x1 markers. However, the AI group's direction will remain fixed.
+    [CHANGED] Integrated DZAI monitor into DZAI task scheduler.
+    [CHANGED] DZAI AI cleanup now avoids cleaning up bodies if players are within 10m of the body.
+    [CHANGED] Modified several script files to use "lazy evaluation" of boolean conditions.
+    [CHANGED] AI air/land vehicles now have cargo contents cleared.
+    [CHANGED] Server-side object patch is now enabled by default.
+    [FIXED] Fixed headshot counting for AI kills.
+    [FIXED] Fixed faulty line of radio dialogue for AI pursuits.
+    [FIXED] Fixed radio dialogue transmission for dynamic AI pursuits.
+    [FIXED] Fixed loop timing for dynamic AI pursuits.
+    [FIXED] Banned vehicle weapons will no longer be added to AI air vehicles.
+    [FIXED] Dynamic spawn blacklists are now also generated in towns/cities for unrecognized maps.
+    [FIXED] Fixed cleanup for disabled unarmed land AI vehicles.
+
+- 1.9.3.1 Hotfix:
+
+
+    [FIXED] Fixed issues with classname verification script if custom weapon tables were defined.
+    [FIXED] DZAI should now properly avoid spawning AI near players for static AI spawns if a player is within 50m of a selected spawn point.
+
+	
+- 1.9.4 Update:
+
+
+    [NEW] Added experimental support for custom loot tables by AVendettaForYou (http://opendayz.net/threads/tutorial-custom-loot-tables-and-adjusting-spawn-rates.11589/)
+        To have DZAI read from your own custom loot tables, edit /scripts/buildWeaponArrays.sqf and set DZAI_useCustomLoot = true;
+        Warning: This is an experimental feature and not guaranteed to work perfectly. If you experience problems with it, do not use it. However, please do report if this feature works for you or not. Thanks.
+        Enabling this setting will have no effect if no custom loot tables are found.
+    [CHANGED] Dynamic AI will only pursue players responsible for killing a group member once they have completed their hunting phase.
+        Dynamic AI player-killer seek range is limited to 150m (static AI seek range is unchanged at 300m).
+    [CHANGED] Optional AI gunfire noise to zombies is now fixed at player-equivalent levels.
+        DZAI_weaponNoise option is now a true/false setting, instead of a multiplier value.
+        If you have defined DZAI_weaponNoise in your dzai_settings_override file, make sure you update it to either true or false. If you leave it as a numerical value, you will experience problems.
+        AI gunfire noise will only aggro nearby zombies at most once every 5 seconds to prevent server overload.
+    [CHANGED] Breaking AI arms no longer produces audible bone-breaking sound.
+    [CHANGED] Additional script files have been updated to use lazy evaluation for Boolean conditions.
+    [CHANGED] Changes to AI skill values:
+        Decrease in maximum AI endurance values
+        Decrease in maximum AI spotTime values
+        Increase in minimum AI reloadTime values
+        Decrease in maximum AI commanding values
+        Decrease in minimum helicopter AI skill values
+        Note: for an explanation of AI skill parameters, see this link: http://community.bistudio.com/wiki/AI_Sub-skills
+    [CHANGED] If static AI triggers cannot find a suitable location to spawn AI without players within 50m, no AI will be spawned. Instead, the AI group will be inserted into the respawn queue for another try.
+        Respawn time will be half of normal respawn time.
+    [CHANGED] If a player is found within 100m of calculated dynamic AI spawn position, spawn will be cancelled entirely.
+    [CHANGED] Chernarus: Repositioned NEAF static AI patrol path and reduced patrol radius.
+    [FIXED] Headshot counting for heavy-damage gunshots. (unconfirmed)
+
+- 1.9.5 Update:
+
+
+    [NEW] Temporary dynamic spawn blacklist areas are created after a dynamic spawn area is cleared. Temporary blacklist areas will last for 15 minutes and cover the previous dynamic spawn area.
+    [NEW] Adjustments to dynamic spawn probability calculations to avoid unfairly high spawning rates if server population is very low.
+        The % chance for each player to be selected for dynamic AI spawns should remain consistent for servers with up to 40 players. (Rate will begin to gradually decrease beyond 40 players)
+        For more information, see this thread: http://opendayz.net/threads/balancing-dynamic-spawn-rates-user-input-wanted.18143/
+    [CHANGED] AI arms can no longer be broken.
+    [CHANGED] AI spawned directly using DZAI_setup_AI function use their initial spawn position as reference point for killer-seeking behavior
+        DISCLAIMER: Use of DZAI_setup_AI function directly is not supported and not guaranteed to perfectly spawn AI. Do this at your own risk. The only fully supported method of spawning AI is use of the DZAI_spawn function.
+    [CHANGED] Changed method of installing mission-file version of DZAI. Simply edit DZAI\init\DZAI_version.hpp and follow the instruction inside.
+    [CHANGED] Moved installation instruction text files into new "Guides" directory.
+    [NEW] Added blank map/classname config files for the following maps: Napf, Caribou, Ovaron, Sauerland
+        No preset static spawns have been defined, so DZAI will attempt to generate static spawns in cities and towns (satisfaction not guaranteed).
+    [NEW] Added static spawn configs for DayZ Unleashed
+        Note: DayZ Unleashed static spawn settings will be controlled by the mod developer. I will not be modifying/balancing anything related to Unleashed.
+    [FIXED] Fixed an infinite-loop issue if DZAI is unable to find a free space without players nearby to spawn AI.
+    [FIXED] Fixed flies sound cleanup for AI bodies.
+    [CHANGED] Increased player distance check for dead AI body cleanup from 10m to 20m.
+        NOTE: There is the chance that DayZ's own dead body cleanup will clean up AI bodies before DZAI is able to (since player and AI bodies are indistinguishable), so AI bodies may be deleted even if a player is nearby. This is not DZAI's fault.
+    [CHANGED] Modified the player-hunting AI radio messages to transmit radio messages using the target player as the point of origin instead of the AI group leader
+        Transmit distance reduced from 125m to 50m
+        Target player must be within 125m of AI group leader to receive radio messages
+    [CHANGED] All AI vehicles are now locked from player access upon spawning.
+    [CHANGED] Updated Namalsk classname config files.
+    [CHANGED] Dynamic spawn probability cap increased from 30%/player to 40%/player.
+    [CHANGED] Dynamic spawn player selection ratio increased from 25% of online players to 30% of online players.
+    [CHANGED] Dynamic AI spawn triggers are now removed immediately after the last unit is killed. Previously, there was a 5-minute delay in place but this is no longer needed.
+    [CHANGED] world_map_configs folder renamed to world_spawn_configs for better clarity.
+    [REMOVED] Removed debug marker option from DZAI_config.sqf file.
+        DZAI_debugMarkers variable will have to be manually defined (to any value other than nil) in order to have any effect.
+        The reason behind this change is to reduce the number of people who are tempted to use this option as an easy way to reveal all AI positions - the debug markers aren't intended for constant, everyday use, and I won't give support to anyone who is using them for this purpose. They are meant strictly for debugging purposes and making sure that AI are spawning properly.
+    [REMOVED] Removed support for DayZ Civilian mod
+
+	
+
+DZAI 1.8.0 - 1.8.1.2 Changelogs:
+============
+
+- 1.8.0 Update: 
+
+    [NEW] Overhauled AI health system to use a 12,000 blood system nearly identical to players.
+        AI units will stop to heal when their blood level drops below 7800 or suffer fractured bones.
+        AI models will not show damage until they are permanently killed or suffer fractured bones.
+        Headshots, grenades and high-caliber weapons will inflict increased damage.
+        AI bones are twice as durable compared to DZAI 1.7.x AI (same durability as players).
+    [NEW] Users may specify air vehicle weapons for unarmed AI air vehicles
+        Configuration is controlled by the DZAI_airWeapons array in dzai_config.sqf
+        The first array lists each unarmed air vehicle, while the second array defines the corresponding weapon for the vehicle.
+        By default: AN2 planes are equipped with an M240, AH6X helicopters are equipped with an M134.
+        Caution: Vehicle weapon classnames won't be verified by DZAI, so it is the user's responsibility to make sure the classnames used are valid and not banned.
+    [NEW] When an AI helicopter/plane is destroyed, live AI units will be parachuted out (default action).
+        These units will patrol a short distance around the wreck area.
+        The option to use the previous system is still available in dzai_config.sqf, where dead units are parachuted out instead by setting DZAI_airLootMode to 1.
+        Users may still choose to disable any type of loot generation after destruction of an AI air vehicle by setting DZAI_airLootMode to 0.
+    [NEW] AI helicopter/planes are now allowed to land instead of self-destructing. AI crew units will be converted to ground AI units and patrol a short distance around their landed vehicle.
+        The air vehicle will be locked from player access and will be deleted after 15 minutes.
+    [NEW] Added conversion patch for users to convert DZAI for installation into the mission pbo file.
+    [NEW] Epoch: Added several Epoch-exclusive food and drink items to Epoch classname config files. Credits: Vampire for suggesting and providing classname list.
+    [FIXED] Epoch: ItemHatchet and ItemMatchbox classnames replaced with their _DZE versions. Thanks to Vampire for reporting this issue.
+    [CHANGED] Temporary AI NVG option (DZAI_tempNVGs) now applies to all AI units with weapongrade 1 or higher (previously 2 or higher).
+        All AI with at least a military-class weapon will be eligible for temporary NVGs if this option is enabled.
+    [CHANGED] Added checks to prevent a targeted player from being spammed with multiple radio text messages if they are pursued by multiple AI groups
+        If a player is receiving radio text messages, new ones won't appear until the first pursuit is complete.
+        Pursuit messages don't "overlap" - meaning if a new pursuit begins while another is still ongoing, the second pursuit messages won't show up even if the first one ends.
+    [CHANGED] Added an eventhandler to all AI air vehicles to kick out players who attempt to board.
+    [CHANGED] Unconsciousness timers: 20 seconds for heavy damage to head, 12.5 seconds for other body locations.
+    [CHANGED] AI units receiving critical damage to their head will show "shot in the head" as their cause of death upon using Study Body.
+    [CHANGED] Modified AI behavior settings to improve AI player killer-hunting.
+        Prior to 1.8.0, AI units enter "Combat" mode after a group member is killed, causing them to move more slowly and cautiously. While this allowed AI to ambush players from around corners, this prevented them from effectively chasing the player.
+        Note: AI may appear to run away from the player after killing an AI group member instead of chasing. The unit is not actually running from the player, but attempting to regroup with their group leader. Once regrouped, the remaining units will hunt the player together. This is default Arma2 AI behavior.
+    [CHANGED] Lowered probability of equipping AI with pistol as primary weapon from 45% to 25%.
+    [CHANGED] AI findKiller behavior: Chase distance and initial detection range fixed at 400m.
+        AI group will detect first player who kills a group member from a range of 400m
+        AI group will chase targeted player a maximum distance of 400m from victim's body.
+    [CHANGED] AI findKiller behavior: Minimum chase duration in increased from 2 minutes to 3 minutes
+        Chase duration increased by 20 seconds for every additional kill by the same player until the last AI group member is killed.
+    [CHANGED] New version of dynamic AI spawn system is now default.
+        Previous trigger-based version is now optional and will be removed in DZAI 1.9.x
+    [CHANGED] Dynamic spawn AI will carry Military-grade weapons at minimum, and will not use pistols.
+    [CHANGED] AI skill settings in dzai_config are now defined by minimum and maximum skill, as opposed to minimum skill and maximum bonus amount.
+        IMPORTANT: If you have overridden these settings in your dzai_settings_override.sqf file, make sure you use this new config format, otherwise problems will happen.
+    [CHANGED] General AI skill settings tweaked and increased for better responsiveness. (Accuracy is mostly unchanged).
+    [CHANGED] DZAI will now avoid spawning static AI at a location if a player is within 50m of the chosen spawn point (increased from 40m distance).
+        Each location with a player is temporarily blacklisted so it cannot be chosen again for the same spawn attempt.
+    [CHANGED] Dynamic AI spawn cycle changed from 10 minutes/cycle to 8-12 minutes/cycle.
+    [CHANGED] AI respawn handler script modified to allow parallel-style respawning as opposed to single file, serial-style respawning. This will allow respawn timers to be variable instead of fixed.
+    [CHANGED] Dynamic AI will now tend to spawn in a forward arc from the player.
+        This means AI will tend to spawn some distance in front of the player.
+    [CHANGED] Epoch: Dynamic AI blacklist area created by Plot Poles increased from 75m radius to 100m radius.
+    [CHANGED] AI respawn time changed from 10 mins (fixed) to 5-10 minutes (variable).
+    [CHANGED] If a static spawn has no minimum amount of AI to spawn and the randomly-generated amount is zero, the next attempt to reroll the spawn will be half of the normal respawn timer (between 2.5 to 5 minutes per attempt).
+    [CHANGED] Enabling AI helicopter patrols no longer requires any server_cleanup.fsm edit.
+    [CHANGED] Changed the way AI self-heal is handled to approximately resemble DayZ-style bloodbag procedure (healing over time as opposed to instant).
+        AI blood threshold to begin healing reduced from 65% to 60% (Minimum 7800 blood to 7200 blood).
+        AI self-healing can now be interrupted by knocking the unit unconscious with heavy damage.
+        AI healing duration increased from 4 seconds to 6 seconds.
+        AI now heal gradually in increments of +2000 blood once every 2 seconds for 6 seconds (total blood recovery: 6000). Healing is limited up to 12,000 blood.
+        AI bones will only be healed if they are able to heal for at least 4 seconds without being knocked unconscious.
+        The delay between low health/broken bones and start of healing process is determined by the DZAI_refreshRate setting, which also controls AI rearm and zed aggro frequency.
+
+- 1.8.0.1 Hotfix: 
+
+
+    Helicopter AI are equipped with weapons and backpacks upon exiting their vehicle
+    Converted helicopter AI patrol a short radius (100m) around the landed vehicle
+    The abandoned vehicle should kick out players that attempt to board it.
+    The abandoned vehicle should be deleted 15 minutes after landing.
+
+
+- 1.8.1 Update: 
+
+
+    [FIXED] Fixed hacker check bypass for DZAI-spawned vehicles for servers running Epoch with other non-Chernarus maps.
+        Prevents players from being killed if they attempt to board an AI vehicle.
+    [CHANGED] AI air vehicles are locked from further player access after a player attempts to board.
+    [CHANGED] Reduced patrol range for evacuated heli AI units from 100m to 75m.
+    [CHANGED] AI air vehicles now vary their flying height after completing each waypoint, instead of randomly while traveling.
+    [CHANGED] Chernarus: Repositioned Stary Sobor static spawn area to surround the military tents area. (Note: Highly recommend DZAI_objPatch be set true in dzai_config.sqf).
+
+	
+- 1.8.1.1 Hotfix: Fix for DayZ Epoch 1.0.3 loot table structure change.
+- 1.8.1.2 Hotfix: Fix for undefined variable causing AI helicopter gunners to have maximum skill.
+
+
+DZAI 1.7.1 Changelog:
+============
+
+- [NEW] Added "passive zed aggro" option. With this enabled, zombies will tend to loiter towards the nearest AI group leader if there is one nearby (within 75m). Enable by setting DZAI_passiveAggro = true in dzai_config.sqf. Default setting is false (disabled).
+- [NEW] AI spawned from static triggers in large cities (100 or more lootable buildings within 250m) will now patrol randomly between buildings instead of patrolling in a circular pattern.
+- [NEW] Added a test version of the reworked dynamic AI spawn system. This new dynamic spawn system randomly selects online players and spawns dynamic triggers directly on their position, rather than randomly distributing triggers around the map. More info here: http://opendayz.net/threads/release-dzai-lite-dynamic-ai-package.11116/page-27#post-78863. (Enable the test version by setting DZAI_V2dynSpawns = true).
+- [NEW] Free-for-all mode for all AI units. If enabled, all AI groups will be hostile to each other, but AI in the same group will not be hostile to each other. Note: FFA mode will not include AI units spawned using the custom spawn function (DZAI_spawn) and does not include AI helicopters. Custom-spawn AI and helicopter AI will be hostile to static and dynamic AI and vice-versa.
+- [FIXED] Static triggers will now search for up to 150 buildings capable of spawning loot/zombies within a 250m radius rather than the nearest buildings.
+- [FIXED] AI air vehicles will generate loot if destroyed by players using vehicle weapons. Note: Vehicles with multiple gunners such as helicopters may have issues with this.
+- [FIXED] Fixed issue with AI helicopter spawning script that some users were experiencing.
+- [UPDATED] Updated zed aggro script to a simplified DayZ 1.8.x version.
+- [UPDATED] Radio text messages can now be disabled in dzai_config.sqf by setting DZAI_radioMsgs = false. Default setting is true (enabled).
+- [UPDATED] Dynamic AI will now use trigger position as patrol center point if player logs out or is killed during pursuit state.
+- [UPDATED] Cause of death text for Study Body action on AI units is now randomized between blood loss and head shot.
+- [CHANGED] AI-to-AI friendly fire damage reduced by 80% (same as collision damage reduction).
+- [CHANGED] Dynamic AI patrol radius decreased from 250m to 225m.
+- [CHANGED] AI unconsciousness time increased from 10 to 12.5 seconds.
+- [CHANGED] General increase in MilitarySpecial/HeliCrash weapon probability.
+- [CHANGED] Added separate weapongrade probabilities for AI helicopter crew. AI helicopters now have the best chance of generating MilitarySpecial/HeliCrash loot.
+- [CHANGED] Slight reduction in base AI aiming speed rating values.
+- [CHANGED] AI helicopter wreck cleanup delay increased from 10 to 15 minutes.
+- [CHANGED] Chernarus: Further reductions and changes in AI spawns at NWAF. Spawns around the airfield have a reduced equipType value (should allow slightly easier entry to the airfield).
+- [CHANGED] Chernarus: Northmost NWAF static spawn location shifted towards the industrial hangars.
+- [CHANGED] If an AI unit is killed by another AI unit, all magazines on the victim are removed.
+- [CHANGED] AI killer-hunting behavior and dynamic AI player-seeking behavior now continues even if the player gets on a bicycle or motorcycle.
+- [CHANGED] Weapongrade value can now be explicitly defined when using the DZAI_spawn custom spawn function (instead of specifying equipType). This value will determine which DayZ loot table to generate AI weapons from. More information can be found in the custom_spawns config files.
+- [CHANGED] Custom spawn function will now generate AI spawn points on-the-fly instead of generating a set of predetermined spawn points.
+- [CHANGED] Custom spawns can now have respawn disabled. If the entire AI group is killed, the spawn trigger will self-delete. If the spawn area is despawned and some units have survived, the number of surviving AI units is saved.
+- [CHANGED] Radio text messages now have a 0.5 second fade-in time.
+- [CHANGED] The format for calling the custom spawn function (DZAI_spawn) has changed. To see the updated format, see this link: http://opendayz.net/threads/release-dzai-lite-dynamic-ai-package.11116/page-28#post-79148.
+- [CHANGED] AI health increased very slightly.
+- [CHANGED] Reduced probability of generating pistol weapon instead of rifle for AI with weapongrade 0 from 55% to 45%.
+- [REMOVED] Removed Rocket_DZ and Survivor3_DZ skins from DZAI Epoch config file.
+
+1.7.1.1 Supplemental Update:
+------------------------------
+
+- [CHANGED] Zombies near AI group leader are once again revealed (speeds up target acquisition for zeds).
+
+1.7.1.2 Bugfix:
+------------------------------
+
+- [FIXED] Fixed typo that prevented non-respawn option in DZAI_spawn function from working properly. (Thanks to Markk311)
+
+1.7.1.3 Bugfix:
+------------------------------
+
+- [FIXED] Disabling dynamic AI spawns should not disable DZAI's map reference marker if helicopter patrols are enabled.
+
+DZAI 1.6.0 Changelog:
+============
+
+- [NEW] Radio text warnings for AI pursuit will now report direction and distance of pursuing AI group.
+- [NEW] Added support for AI plane patrols. To add planes, simply add them to the helicopter classname array (DZAI_heliTypes). Unarmed planes will be given an M240.
+- [NEW] DZAI will now auto-detect the number of available gunner seats. This means you can now use helicopters with any number of gunner seats, or no gunners at all.
+- [NEW] For new maps that DZAI does not have config files for, DZAI will now automatically generate basic static triggers at every city and town as well as spawn a certain number of dynamic triggers, depending on the number of city/town locations on the map. This is a temporary measure for newly-released maps until proper config files can be made for DZAI.
+- [NEW] Re-implemented area blacklist to prevent dynamic AI spawns from being created in marker-specified areas.
+- [NEW] DZAI will now autodetect Epoch if an unrecognized map is being used.
+- [FIXED] Helicopter patrol spawning script will now wait for helicopter classname table to finish verifying before proceeding to spawn patrols. If all classnames happen to be invalid, DZAI will default to using the UH1H_DZ instead.
+- [FIXED] Helicopter spawning script will now check if the vehicle classname is either a Helicopter or Plane type vehicle. If the vehicle is neither, it will spawn a UH1H by default instead.
+- [CHANGED] AI findKiller seek range reduced to 350/450 (min/max) from 400/500 (min/max).
+- <b>[CHANGED] dzai_variables.sqf has been renamed to dzai_config.sqf for better clarity.</b>
+- [CHANGED] Updated file/folder layout for better organization of config files.
+- [CHANGED] If a static trigger cannot find suitable building locations to use as spawn points, it will generate a random position within 220m of the trigger position. Previously, the trigger's position was used as a spawn point if no suitable locations were found.
+- [CHANGED] Static triggers will now only spawn AI near buildings that can spawn loot or zombies.
+- [CHANGED] The number of dead AI units ejected after destroying an AI air patrol now depends on the actual number of units on board. (ie: A UH1H will eject 3 units, a Camel biplane will eject 1 unit).
+- [CHANGED] Changed default respawn time for static AI to 10 minutes after the last surviving unit has been killed. (Increased delay from 5 minutes).
+- [CHANGED] Halved maximum bonus AI accuracy for ground AI units. This means that the lowest-level AI will no longer have a chance of having the same accuracy rating as the most elite-level AI.
+- [CHANGED] Removed bonus AI accuracy for AI helicopter gunners. Accuracy rating is now fixed at 50% of maximum value. Note: Previously, AI gunner accuracy could vary between 45-55% of maximum possible value.
+- [REMOVED] Removed ItemTent from AI loot tables.
+
+1.6.1 Update:
+
+- [CHANGED] Reduced maximum bonus spotDistance rating for all AI skill tiers.
+- [CHANGED] Reduced minimum spotDistance rating for AI skill tier 3 (max tier).
+- [CHANGED] Reduced NWAF AI spawns. There are now fewer groups spawned, and group sizes have been decreased slightly as well.
+
+
+DZAI 1.5.0 Changelog:
+============
+
+- [FIXED] Fixed flies sound cleanup. Fly sounds should now be cleaned up along with dead AI bodies. Note: The "take clothes" addon will interfere with the cleanup if clothes are taken from the AI body.
+- [UPDATED] AI groups now have a chance of searching for nearby lootpiles upon completing a waypoint.
+- [UPDATED] Using Study Body on a dead AI unit now shows a randomly generated name.
+- [UPDATED] Dynamic AI now spawn facing targeted player.
+- [UPDATED] DZAI now reads from CfgWorlds config file to retrieve location data.
+- [UPDATED] AI helicopters now travel directly to cities, towns, and other locations. This change helps distribute helicopter patrols more evenly around the map.
+- [UPDATED] Disabling dynamic AI spawns now also prevents related settings from being loaded.
+- [UPDATED] Preset static AI spawns can now be disabled in dzai_variables.sqf.
+- [UPDATED] Dead AI body cleanup is now performed independently of AI respawn/despawn. Minimum delay before body cleanup is defined by DZAI_cleanupDelay in dzai_variables.sqf (Default: 5 minutes after death). One cleanup cycle is performed every 15 minutes.
+- [MODIFIED] AI helicopter flying height changed from 90-130m to 100-140m.
+- [MODIFIED] Increased waypoint completion times for AI helicopter patrols.
+- [MODIFIED] Rebalanced default backpack loot tables.
+- [MODIFIED] Probability of generating GPS for low-tier loot table increased from 0% to 0.5%, probability increased for high-tier loot table from 10% to 12.5%.
+- [MODIFIED] DZAI will try to avoid spawning AI if a player is within 40m of a chosen spawn point (distance increased from 30m).
+- [MODIFIED] Increased default server monitor reporting interval from 3 minutes to 5 minutes.
+- [MODIFIED] Slight increase in accuracy for helicopter AI gunners.
+- [MODIFIED] Dynamic AI patrol radius decreased from 300m to 250m.
+
+Removed updates (to be added in a future update):
+
+- [UPDATED] Areas of the map can now be blacklisted to prevent dynamic AI spawns from being created. To specify a blacklisted area, create a marker (ellipse or rectangular) covering the area where dynamic spawns should not be created. Add these markers to the custom markers section of the appropriate file in the world_map_configs folder.
+
+1.5.1 Update:
+
+DZAI Lite has been permanently retired. Users of DZAI Lite should switch to DZAI (full) and disable static AI spawns for identical functionality.
+
+- [UPDATED] Global maximum number of dynamic triggers can now be specified in dzai_variables.sqf. Can be left at default value to use pre-determined settings. Note: Per-map dynamic trigger settings are now stored in files found in the world_map_configs folder.
+- [UPDATED] Updated dzai_variables.sqf formatting for improved readability.
+- [MODIFIED] Changed radio text warnings for findKiller and seekPlayer AI behaviors.
+
+1.5.2 Update:
+
+- [FIXED] Fixed active unit amount counting.
+- [NEW] Added support for DayZ Trinity Island.
+- [NEW] Added DZAI_static_spawn function for easily creating static AI spawn areas. Currently in testing and used for Trinity Island spawns.
+
+1.5.2.1 Minor Update:
+
+- [FIXED] When preparing to spawn dynamic AI, DZAI will now have a slight tolerance of overlapping trigger areas before considering the trigger as too close and cancelling the spawn altogether.
+
+1.5.2.2 Update (for Epoch):
+
+- [FIXED] Removed skin classnames that were responsible for causing server crashes. Thanks to iroker of the OpenDayZ forums.
+
+DZAI 1.4.0 Changelog:
+============
+
+1. Gameplay Changes
+---
+
+- [NEW] Destroying an AI helicopter now causes three dead AI units to be parachuted out. These units carry military-grade gear. (Items are generated using DZAI's highest-tier loot table). Bodies are deleted 10 minutes after they are generated.
+- [UPDATED] Changes to AI spawning functions now allow AI units to spawn in tighter quarters (ie: between buildings, inside forests, etc).
+- [UPDATED] Collision damage to AI units reduced to 10% to prevent rare cases where AI die after spawning on top of tall objects and die after falling off.
+- [UPDATED] Dynamic AI spawn triggers will relocate instead of activating if placed on water.
+- [UPDATED] Zombies around AI group leaders are no longer automatically revealed.
+- [UPDATED] Increased probability of AI to start self-heal process from 33.3% to 40% (check interval is determined by DZAI_refreshRate).
+- [UPDATED] AI helicopters have a 25% chance of entering "Seek and Destroy" mode after reaching a waypoint, where the helicopter will attempt to visually search the area for enemy units (players). S.A.D. mode lasts for 30/60/90 seconds (minimum/average/maximum).
+- [UPDATED] Custom static triggers can now have activation delay manually specified. Simply insert an array containing the minimum/average/maximum activation delay. Further instructions are provided in the map config files. (NOTE: This feature is untested. Please report any problems using the DZAI_spawn function).
+- [UPDATED] Chernarus: Updated AI spawns for Castle Rog, Devil's Castle, Castle Zub. (AI difficulty/weapon grade, spawn points, patrol radii).
+- [UPDATED] Chernarus: Stary Sobor AI spawns changed from 1 group of 2 (+2 max) units of 2 groups of 2 (+1 max) units.
+- [UPDATED] Chernarus: Novy Sobor AI spawns changed from 1 (+2 max) units to 2 (+1 max) units. Patrol radius increased from 175m to 225m.
+- [FIXED] AI patrol waypoints are no longer generated in water.
+- [FIXED] Dynamic AI now properly seeks out targeted player's position beyond the minimum 30 seconds.
+- [FIXED] Fixed bugs associated when static triggers have no minimum amount of AI units to spawn or respawn.
+
+
+2. Under-the-hood Code Changes
+----
+
+- [NEW] Debug text in RPT log now reports name of trigger (ie: Electro1, Cherno1) when reporting static trigger activity.
+- [UPDATED] Debug markers for helicopters now display text indicating helicopter type and AI group.
+- [UPDATED] Updated debug markers for static triggers. Instead of colored circular markers, red/orange/green text will indicate the activity status of the trigger. (Active/Despawning/Inactive). Debug markers for dynamic triggers are unaffected.
+- [UPDATED] DZAI_debugMarkers level 2 will allow debug markers for static triggers to refresh periodically (1 refresh/30 seconds). Inactive static triggers will not have their markers refreshed.
+- [UPDATED] Modified classname verification script to avoid usage of "call compile...".
+- [UPDATED] Reduced building search range for static triggers from 300m to 250, and restricted search criteria to objects of "HouseBase" class instead of "Building".
+- [UPDATED] Static triggers now generate a maximum of 100 building positions per trigger. Previously, no limit existed and the number of generated building positions could reach over 500/trigger in dense areas.
+- [FIXED] Debug markers for individual AI units and helicopters now check if unit/vehicle is both alive and not null. Should prevent cases where markers remain after the unit/vehicle is destroyed or despawned.
+- [FIXED] Fixed rare cases where debug markers for individual AI units and group waypoints were not properly deleted.
+
+
+1.4.1 Update (Re-release):
+
+- [FIXED] Added an optional experimental fix to prevent AI units from shooting/walking through buildings and objects spawned by DayZ's CfgTownGenerator. Enable by setting DZAI_objPatch = true in dzai_variables.sqf. Enabling this setting may be essential for DayZ Overwatch 0.2.2+.
+<b>Note</b>: Enabling DZAI_objPatch *may* cause a flood of "Ref to nonnetwork object" errors in your RPT log. This is a harmless warning message but can be annoying as it fills up the RPT log.
+
+1.4.2 Update:
+
+- [FIXED] Added fix to prevent second sidearm weapon from being added to AI after death.
+- [UPDATED] Static spawn triggers avoid spawning AI if a player is within 30m of the spawn point. Up to 5 attempts are made to search for a suitable location without players nearby.
+- [UPDATED] Chernarus: Updated default patrol radius for most static AI spawns from 125m to 200m. This should allow player encounters with AI more easy to avoid and less forced.
+- [UPDATED] Updated default AI weapon banlist. The following weapons will not be added to list of AI-usable weapons: "Crossbow_DZ","Crossbow","MeleeHatchet","MeleeCrowbar","MeleeMachete","MeleeBaseball","MeleeBaseBallBat","MeleeBaseBallBatBarbed","MeleeBaseBallBatNails"
+- [MODIFIED] Increased chance of generating pistol instead of rifle for AI with weapongrade 0 from 50% to 66%.
+- [MODIFIED] Removed classname blacklist for serverside object fix since it was ineffective at suppressing RPT log warning entries. We will have to wait until BIS releases a patch that suppresses these log warnings.
+- [MODIFIED] Chernarus: Updated Zelenogorsk static spawns from 1 group of 1 (+2 max) units to 2 groups of 1 (+1 max) units.
+- [MODIFIED] Decreased AI accuracy and aimingshake (lock-on time increased) slightly for all skill tiers.
+- [MODIFIED] Decreased probability of generating each medical item for AI from 75% to 70%.
+
+1.4.3 Update:
+
+- [MODIFIED] Dynamic triggers that intersect other active dynamic triggers will only spawn 1 AI unit instead of having total AI spawned reduced by a certain amount.
+- [MODIFIED] Increased probability of generating AI unit with weapongrade 0 for equipType 0 and 1, probability decreased accordingly for weapongrade 1.
+- [MODIFIED] AI helicopter waypoint amounts no longer depend on number of dynamic triggers. (Fixed at 15).
+- [MODIFIED] Decreased completion times for AI helicopter waypoints.
+- [MODIFIED] Removed the following small miscellaneous items from AI loot tables: ItemTankTrap, ItemSandbag, ItemWire, Handgrenade_West, 1Rnd_HE_M203.
+- [MODIFIED] Lowered probability of generating Flashlight and Watch for low-tier tools loot table.
+- [MODIFIED] AI units with weapongrade 0 no longer carry medical and miscellaneous items.
+- [MODIFIED] Epoch: AI units with weapongrade no longer have a chance of carrying metal bar currency.
+- [MODIFIED] Small edits to AI patrol script: AI units no longer move together in formation, and are fixed in combat mode Red (do not engage enemies in formation).
+
+1.4.4 Update:
+
+- [FIXED] Fixed bug where debug markers for dynamic triggers became desynchronized with their assigned trigger.
+- [FIXED] Dynamic AI player-seeking now uses AI group leader as center point for AI patrol if target player logs out during pursuit state.
+- [FIXED] Waypoints are no longer created for a wiped-out dynamic AI group.
+- [MODIFIED] Lowered AI aimingAccuracy for all skill tiers. Large increases to AI aimingShake (lock-on time decrease) and smaller increases to AI aimingSpeed. These changes are intended to increase AI effectiveness in close quarters and decrease effectiveness at long distances.
+- [MODIFIED] Lowered collision damage reduction for AI from 90% to 80%.
+- [MODIFIED] Lowered probability of generating pistol instead of rifle for weapongrade 0 AI units from 66% to 55%.
+- [MODIFIED] Dynamic AI spawn distance from target player modified from 200m-300m to 200m-250m.
+
+1.4.5 Update:
+
+- [UPDATED] seekPlayer and findKiller AI pursuit modes now explicitly order units to target and fire on target player.
+- [UPDATED] A smoke grenade is now deployed at location where dynamic AI are spawned.
+- [UPDATED] Reworked static AI spawns for Taviana and Panthera. Further fine-tuning may be needed.
+- [UPDATED] Dynamic AI spawns: A maximum of 6 players (including target player) are revealed to nearby dynamic AI. Previously there was no limit.
+- [REMOVED] Removed custom waypoint definitions files.
+- [MODIFIED] Separated modified BIS_fnc_selectRandom into its own function (BIS_fnc_selectRandom2).
+- [MODIFIED] findKiller AI behavior is now enabled by default. Pursuit distance changed from 500-600m to 400-500m.
+- [MODIFIED] Dynamic spawn trigger activation delay changed from 5/7/20 seconds to 5/7/10 seconds (min/average/max).
+
+1.4.6 Update:
+
+- [UPDATED] Reworked static AI spawns for Oring, Isladuala, Fallujah, Utes, Zargabad, Takistan. 
+- [MODIFIED] Further modifications to Taviana spawns.
+- [MODIFIED] Lowered accuracy skill for weapongrade 3 AI.
+
+1.3.0 Update:
+
+- [NEW] Unconsciousness for AI units: AI units can now be temporarily knocked unconscious when shot. Damage threshold to knock out an AI unit is identical to player units. Unconsciousness time is currently fixed at 10 seconds. (Note: Helicopter AI units cannot be knocked unconscious).
+- [NEW] Added support for DayZ Hunting Grounds. Includes new AI skin models and backpacks.
+- [NEW] Server admins can now store their custom settings in DZAI\DZAI_settings_override.sqf for reuse. Copy over the settings from DZAI\init\dzai_variables.sqf that you wish to keep to DZAI_settings_override.sqf. Keep this file when upgrading DZAI to newer versions.
+- [FIXED] DayZ Epoch: Removed player zombie classnames from AI-usable skin tables to solve loadout issues.
+- [FIXED] Dynamic triggers with active spawned AI will not have their locations randomized. Previously, a trigger was considered active if a player was present in the area.
+- [UPDATED] AI units spawned with weapongrade = 0 now have a 50% chance of being assigned a pistol or rifle.
+- [UPDATED] Static and dynamic AI now share a common Killed eventhandler. This eventhandler decides which action to take when the AI unit is killed (respawn or relocate trigger).
+- [UPDATED] AI hands and legs can now be broken in the same way as players. Damage to hands and legs is only applied when sufficient damage has accumulated to cause a fracture.
+- [UPDATED] If BIS_fnc_findSafePos can't find a suitable location to spawn/respawn static AI from building positions, exact positions of the buildings will be used instead.
+- [UPDATED] Added additional checks to unit loadout function to prevent double primary weapon issue and missing backpack issue. (Needs testing).
+- [UPDATED] AI loadout script now checks if skin classname includes weapons and other items (Map, GPS, Compass, Radio, Watch). If any items are present, they are removed. This should help server admins who wish to add custom skin classnames.
+- [UPDATED] Updated DZAI installation instructions with a simpler method that should be applicable to most/all DayZ server packages.
+- [UPDATED] Respawned AI groups now resume patrolling at a random waypoint instead of starting at the first generated waypoint.
+- [MODIFIED] Maximum AI bandages increased to 3 from 2 (maximum self-heals).
+- [MODIFIED] Time required for AI self-heal increased to 3.5 seconds from 3 seconds.
+- [MODIFIED] Debug markers for ground AI units remain black if unit's weapon or magazine cannot be detected. Once they are detected, the marker turns red (normal case).
+- [MODIFIED] Several variables are now attached to the AI group instead of each individual unit.
+- [MODIFIED] Dynamic AI spawn distance from targeted player increased to 200/300 (min/max) from 150/300 (min/max).
+- [MODIFIED] Dynamic AI spawn amount equation changed to: (number of players) + (random number 0-2), up to a maximum of 6 AI units.
+- [MODIFIED] Dynamic AI pursuit distance increased to 300m from 200m.
+
+1.2.0 Update:
+
+- [NEW] Humanity can now be awarded to players for AI unit kills. Humanity rewarded can be edited in DZAI_variables.sqf.
+- [NEW] Added DZAI Scheduler to manage all scheduled tasks.
+- [NEW] Added prototype version of AI helicopter patrols feature, which can be enabled in DZAI_variables.sqf. Helicopter patrols require edits to server_cleanup.fsm. Instructions have been provided in the Required Edits section. More details on the helicopters feature here: http://opendayz.net/threads/release-dzai-lite-dynamic-ai-package.11116/page-8#post-61128.
+- [NEW] Added debug markers for static triggers. Markers will appear after the trigger's first activation. Color codes: Yellow (inactive), Orange (active), Red (Error).
+- [FIXED] Fixed error that prevented Radio text messages from being displayed to player when dynamic AI have ended their pursuit state.
+- [FIXED] Fixed bug where static triggers would be unable to continue spawning AI units if the calculated number of AI to respawn is zero.
+- [UPDATED] SHK_pos package included with DZAI is now only initialized if it is not already started.
+- [UPDATED] All AI death loot scripts integrated into fnc_addLoot.
+- [UPDATED] Updated DZAI Server Monitor output. Text output is now separated into overall server statistics (uptime, AI count), static AI statistics, dynamic AI statistics.
+- [UPDATED] Chernarus: Repositioned patrol area and spawn points for AI units at NEAF. AI numbers increased to 2 minimum + 2 maximum additional.
+- [UPDATED] Reduced probability of generating Small-type misc items from 66% to 60%.
+- [UPDATED] Reduced probability of generating Large-type misc items from 20% to 15%.
+- [MODIFIED] Locations of debug markers for dynamic triggers are now refreshed at an interval specified by DZAI_monitorRate.
+- [MODIFIED] Renamed several script files, some added directly into DZAI_functions.sqf
+- [MODIFIED] Maximum dynamic trigger area overlap tolerance increased to 15% from 10%.
+
+1.2.1 Update:
+
+- [UPDATED] Added a check if DZAI is already running to prevent multiple instances of DZAI from starting.
+- [MODIFIED] Adjusted minimum AI helicopter flying height to 90m.
+
+1.2.2 Update:
+
+- [FIXED] AI self-healing now heals damage properly.
+- [REMOVED] Removed all AI skin loot and related loot tables. (Use Remove Clothes addon instead)
+- [REMOVED] Removed auto-detection for DayZ 2017 and Namalsk 2017 due to possibility of future false-positive detections. All 2017 mods now require manual activation in dzai_variables.sqf.
+- [UPDATED] Added probability checks for adding medical and edible loot. Default settings: 75%/medical, 85%/edible.
+- [UPDATED] Setting debugMarkers = 2 will enable debug markers for static triggers and allow continuous refreshing of dynamic trigger locations. (Setting value to 1 will disable these markers but other debug marker functionalities remain).
+- [MODIFIED] Increased AI helicopter crew skills.
+- [MODIFIED] Increased AI health. Note: Due to the differences between how AI and player health is calculated, AI units may be more or less durable than player units.
+- [MODIFIED] Chernarus: Shifted Stary Sobor AI patrol further away from military tents as AI units can see through the tent walls.
+- [MODIFIED] Chernarus: Changed Stary Sobor AI spawns from 1 min + 3 additional max to 2 min + 2 additional max.
+- [MODIFIED] Changed activation delays for all static triggers to 10/15/20 seconds.
+
+1.2.2.1 Hotfix:
+
+- [FIXED] Fixed AI HandleDamage eventhandler functionality with DDOPP Taser Mod. (AI units should have improved durability even with the Taser mod installed).
+
+1.2.2.2 Minor Update:
+
+- [UPDATED] Nearby zeds are revealed to AI groups to help reduce time required to recognize marked zeds as hostile.
+- [MODIFIED] Scaled back AI health increases slightly. (2 DMR body shots should kill an AI unit)
+
+1.2.3 Update (Changes for Lingor map)
+
+- [NEW] Added new spawn areas and spawn markers for Lingor (Skaronator) and Hunting Grounds.
+- [UPDATED] Reworked all AI spawn areas and spawn markers for Lingor
+- [UPCOMING] Mod-specific support for DayZ Hunting Grounds in the next update.
+
+1.1.10 Update:
+
+- [NEW] AI units now stop to heal when they reach 75% health. Healing process takes 3 seconds to complete and fully heals the unit, including broken legs. Each AI unit can heal up to 2 times with a 60 second cooldown in between.
+- [UPDATED] AI health increased. AI can now take damage equivalent to 12000 units of blood (headshots do 50% additional damage). AI hands modified to be immune from damage (aim cannot be impaired).
+- [UPDATED] Mod-specific features setting in dzai_variables.sqf updated to be more descriptive.
+- [MODIFIED] Only zombies close to AI group leaders will be marked as hostile, instead of any AI unit.
+- [MODIFIED] Changed activation delay for triggers created by DZAI_spawn (custom spawn function) to 10/15/20 seconds from 15/17/20 seconds.
+- [MODIFIED] Chernarus: Moved several spawn points for Cherno.
+- [MODIFIED] Chernarus: AI patrols should no longer pass by military/medical tents in Cherno. (Reason: All buildings added in mission.sqm are invisible to AI units).
+- [MODIFIED] Decreased number of medical item loot in AI backpack from 2 to 1. Decreased number of small misc item loot in AI backpack from 3 to 2 (maximum).
+
+1.1.11 Update:
+
+- [UPDATED] Separated static spawn definitions into separate files for ease of editing (triggers, markers).
+- [MODIFIED] Repositioned AI spawn areas for Balota (town) and Balota Airfield to reduce chance of AI encounters near medical tent area.
+- [MODIFIED] Combined AI damage reduction factors for bullet/non-bullet damage.
+- [MODIFIED] Adjusted AI skill ratings (Accuracy, AimingSpeed decreases).
+
+1.1.12 Update:
+
+- [NEW] AI units can now be stunned with Tasers. (DZAI will detect if Double Doppler's Taser Mod is installed).
+- [UPDATED] DZAI now automatically detects the presence of certain DayZ mods and enables extra settings. Automatically detected mods: DayZ 2017, Namalsk 2017, DayZ Epoch, DayZ Overwatch. NOTE: DayZ Civilian requires manual editing in dzai_variables.sqf to enable extra features.
+- [UPDATED] Removed setting to enable extra features for DayZ Lingor (Skaronator version) since it should be fully supported without user intervention.
+
+1.1.12.1 Hotfix:
+
+- [FIXED] Corrected typo that prevented skill-setting script from properly setting AI skills.
+- [UPDATED] Enabling Extended Debug mode (DZAI_debugLevel = 2) now reports AI unit's skill settings into RPT log on unit creation.
+- [REMOVED] Removed depreciated script files.
+
+1.1.0 Update:
+
+- [NEW] AI respawns are now processed in a queue by a single script instead of one script per individual unit. AI now respawn after the entire group is killed. Timer begins when the last surviving member dies.
+- [NEW] AI spawned from dynamic triggers now seek out the player's position at the time of trigger activation, then begin patrolling the area.
+- [NEW] Radio now issues an on-screen text warning to the player if they are being pursued by AI bandits. (Dynamically-spawned AI will pursue a randomly selected player. AI will pursue a player who killed a team member if DZAI_findKiller is set 'true' in dzai_variables.sqf)
+- [NEW] AI groups now actively pursue player responsible for killing a group member for up to 120 seconds if DZAI_findKiller is enabled. AI death will be detected if player is within 250-450m (randomized) of the killed AI. Pursuit distance is randomized between 500-700m of killed AI unit's location.
+- [REMOVED] Radio no longer prevents AI from pursuing player if the player killed a team member.
+- [MODIFIED] AI group size may now vary with each respawn. Previously, the group size was fixed at the time of the first trigger activation.
+- [MODIFIED] Large AI skill parameter increases for AI. Highest-skilled AI may now potentially reach maximum skill levels for all skills except Accuracy and AimingShake.
+- [MODIFIED] AI counts are now updated when an AI group is spawned, killed entirely, or despawned.
+- [MODIFIED] Increased rate of healing for injured AI from 5% health/15 seconds to 10% health/15 seconds. (rate determined by DZAI_refreshRate)
+- [MODIFIED] AI loot scripts are now Spawned instead of Called due to their low priority.
+- [MODIFIED] Temporary NVG feature can only be in effect (if enabled) during night time.
+- [MODIFIED] Respawn delay now controlled by a single variable (DZAI_respawnTime).
+- [MODIFIED] Dynamic trigger manager now relocates 25% of existing dynamic triggers every 15 minutes instead of relocating 1 trigger every 3 minutes. (4 triggers/15 minutes for Chernarus).
+- [MODIFIED] DZAI server monitor now also reports the current number of AI groups queued for respawning.
+- [MODIFIED] Classname verification script no longer checks if nonexistant classnames are banned.
+- [MODIFIED] AI corpse deletion is now handled by the respawn handler script.
+
+1.1.1 Update:
+
+- [FIXED] AI group is only marked as in "Pursuit" state if distance check passes. 
+- [FIXED] Waypoint patrol mode is now only restored if exiting Pursuit mode.
+
+1.1.2 Update:
+
+- [FIXED] AI will only enter Pursuit state if player is not in a vehicle, and will exit Pursuit state if player enters a vehicle.
+- [FIXED] Dynamic AI will not enter Pursuit state upon spawning if target player is in a vehicle.
+- [NEW] Dynamic AI now spawn in a "Pursuit" state where they follow the randomly-selected player for a distance of 100m from (calculated from the player's position at time of trigger activation). Player's position is updated every 30 seconds.
+- [NEW] Players with Radios now recieve on-screen text warnings if they are being pursued by dynamic AI.
+- [UPDATED] findKiller feature: Chase distance decreased to 400-600m from 500-700m. Time limit is unchanged.
+- [UPDATED] findKiller feature: AI will not pursue players in vehicles, and will exit pursuit state if player enters a vehicle (since AI do not use vehicles).
+- [UPDATED] findKiller feature: Player's position is now updated every 15 seconds.
+- [MODIFIED] Players with radios are now also notified if AI have broken off their pursuit.
+
+1.1.3 Update:
+
+- [UPDATED] fnc_spawnBandits and fnc_spawnBandits_dynamic are now "spawned" instead of "called", and handles preparatory calculations before spawning AI units. IMPORTANT: If using custom static triggers, please make this update. (call fnc_spawnBandits >> call fnc_spawnBandits)
+- [UPDATED] AI group creation is now handled by fnc_createGroups (static triggers) and fnc_createGroups_dyn (dynamic triggers). Individual AI units are created by fn_createUnit. This script is shared by fnc_createGroups and fnc_createGroups_dyn.
+- [UPDATED] Updated preset default classname tables to DayZ 1.7.7.1 version.
+- [MODIFIED] AI units revert to an "AWARE" state from "COMBAT" after pursuit state ends if DZAI_findKiller is enabled. If not enabled, AI will remain in "COMBAT" mode until the entire group is killed (this is intended).
+- [MODIFIED] Dynamic triggers no longer activate for players in Air vehicles. Note: Trigger will activate if players exit the air vehicle, but will not deactivate if players re-enter. AI stop actively tracking targeted player's position but will continue to the last known position.
+
+1.1.4 Update:
+
+- [MODIFIED] Dynamic triggers now despawn after 120 seconds if all players have left the trigger area, or after 300 seconds after all spawned AI units have been killed (previously, timer was 120 seconds for both conditions).
+- [MODIFIED] Dynamic trigger intersection warnings now appear in the RPT log if DZAI_debugLevel is set to 1 or higher. (Note: After 3 attempts, triggers are placed on the map regardless of whether or not there is overlapping with other triggers).
+- [MODIFIED] Chernarus: dynamic trigger area reduced from 6000m radius to 5500m, max. triggers reduced to 15 from 16, and trigger moved slightly NW to avoid coastal areas.
+
+1.1.5 Update:
+
+- [FIXED] Fixed active AI counter. Active AI counter is decreased for each AI unit killed, despawned, instead of being updated when the entire group is killed.
+- [FIXED] findKiller: Minimum pursuit distance increased from 400m to 500m to better match maximum detection distance (450m).
+- [FIXED] Despawn script now checks if the group exists before attempting despawn.
+
+1.1.6 Update:
+
+- [NEW] Added improved support for custom AI spawn definitions. Custom AI spawns are added in DZAI\init\world_map_configs\world_mapname, where "mapname" is the map your server is running. Basic instructions can be found here: http://img42.imageshack.us/img42/3187/5o.png. Note: You must create the marker in the ArmA2 3D editor (Alt+E to access from main menu).
+- [FIXED] Fixed rare cases where null AI groups would be generated when spawning AI.
+- [UPDATED] Updated configuration files in trig_configs folder with updated spawnBandits format.
+- [MODIFIED] Increased pursuit distance for dynamic AI from 100m to 200m of initial position of targeted player.
+- [MODIFIED] Increased Accuracy and AimingShake ratings of AI for all skill levels.
+- [MODIFIED] Chernarus: moved reference marker for dynamic AI spawns further south slightly.
+- [MODIFIED] Increased probability of dynamic AI to spawn with weapons from MilitarySpecial table from 4% to 8%, HeliCrash table from 1% to 2%. (Military weapons probability decreased accordingly).
+
+1.1.7 Update:
+
+- [FIXED] Fixed cause of null groups being created (again).
+- [UPDATED] spawnBandits/spawnBandits_dynamic now handles spawn point calculations, fn_createGroups/fn_createGroups_dyn handles group creation and trigger variable initialization, and fn_createUnit handles creation of individual AI units.
+- [UPDATED] For static triggers instructed to spawn multiple groups, each individual group's size may now vary instead of being a simple duplicate of the first group.
+- [REMOVED] Removed DZAI_spawnExtra variable.
+
+1.1.8 Update:
+
+- [NEW] Added function DZAI_createGroup to create groups for AI use. The function creates groups belonging to the East side, then when/if the number of East groups reaches 140, it will switch to Resistance.
+- [REVERTED] spawnBandits and spawnBandits_dynamic are called instead of spawned (to fix null group issue). 
+- [REVERTED] Re-integrated fn_createGroups into spawnBandits and fn_createGroups_dyn into spawnBandits_dynamic.
+
+1.1.9 Update:
+
+- [FIXED] Dynamic triggers should not spawn more AI units if they have not despawned previously created units.
+- [MODIFIED] Dynamic AI minimum/maximum spawn distance from targeted player increased to 150m/350m from 125m/300m.
+
+1.0.0 Update:
+
+- [NEW] Imported dynamic weapon list feature from DZAI Lite 0.0.7-0.0.8. This feature is enabled by default to ensure DZAI's compatibility across all DayZ maps. For more details, see the DZAI Lite patch notes (https://github.com/dayzai/DZAI-Lite).
+
+1.0.0.1 Hotfix (DayZ 1.7.7 compatibility):
+
+- [FIXED] Added fixes to dynamic weapon list feature to ensure compatibility with DayZ 1.7.7 as well as previous versions.
+
+1.0.0.2 Hotfix (DayZ 1.7.7 compatibility):
+
+- [FIXED] Implemented additional compatibility fixes to dynamic weapon list feature.
+- [NEW] Namalsk: Added compatibility with Namalsk's selectable loot table feature. DZAI will read from the user-specified loot table instead of the default. 
+- [MODIFIED] Namalsk: DZAI will now also read from the HeliCrashNamalsk table instead of HeliCrash.
+- [MODIFIED] Added MeleeBaseBallBat and MeleeMachete to AI weapon banlist.
+- [MODIFIED] User-specified weapon banlist is now added to the default weapon banlist, instead of the other way around.
+
+1.0.1 Update:
+
+- [NEW] Execution time is now reported into RPT log for DZAI initialization, dynamic weapon list generation, and classname verification.
+- [NEW] Overlapping dynamic triggers now spawn a reduced number of AI units.
+- [NEW] If a static trigger has no minimum number of AI to spawn and total AI to spawn is zero, the trigger will continue to recalculate the total number of AI to spawn every 2 minutes until a non-zero amount is reached.
+- [REMOVED] Removed M107 and AS50 from preset weapon classname table.
+- [MODIFIED] Server no longer waits for DZAI to finish initializing before continuing startup process.
+- [MODIFIED] Static and dynamic triggers are generated only after dynamic weapon list and classname verification (if enabled) are completed. This avoids possible cases where AI spawn with invalid items before the weapon list and verification steps are completed.
+- [MODIFIED] AI units will now always spawn in an "AWARE" state. When a member if an AI group is killed, the group's state is changed to "COMBAT". When all members of the group have been killed, the group's state will return to "AWARE" with the first respawning unit.
+- [MODIFIED] AI units will no longer move with "LIMITED" speed. Possible movement modes are "NORMAL" (move in formation) or "FULL" (move without regard to maintaining formation).
+- [MODIFIED] Building positions are now calculated directly instead of using interior positions (less complicated calculations).
+- [MODIFIED] Spawn points are now calculated when the trigger is first activated, and stored for re-use for subsequent activations, instead of being re-calculated with each activation.
+- [MODIFIED] AI skill parameters are now more consistent for each weapongrade value. Base values increased, bonus values decreased.
+- [MODIFIED] Pistol ammo loot is now fixed at one magazine.
+- [MODIFIED] Frequency of dynamic trigger manager script increased to every 3 minutes from 5 minutes.
+- [MODIFIED] Increased probabilities of randomizing dynamic trigger location and activation chance.
+- [MODIFIED] Modified preset dynamic trigger settings for all maps.
+- [MODIFIED] Several fixes and DayZ 1.7.7 compatibility updates to dynamic weapon list script.
+- [MODIFIED] Delay between each dynamic trigger spawn now fixed at 5 seconds.
+
+1.0.2 Update:
+
+- [FIXED] Fixed a bug where default settings for dynamic trigger settings were overwriting per-map settings.
+- [NEW] AI units with broken legs now have a 10% chance to have their legs healed (chance is evaluated every cycle determined by DZAI_refreshRate).
+- [NEW] Trigger area overlap for dynamic triggers now limited to 10% area overlap (Up to 3 locations are generated per trigger to help ensure that no two triggers overlap).
+- [MODIFIED] Radio now has a 3% rate in low-tier tools table. (Note: If DZAI_findKiller is enabled, having a radio prevents AI group from automatically detecting and investigating player's position if they have killed a member of an AI group)
+- [MODIFIED] Adjusted weapon loadout probabilities for dynamic-spawned AI.
+
+1.0.3 Update:
+
+- [FIXED] Fixed error in dynamic trigger area overlap detection.
+- [NEW] Injured AI units now slowly heal themselves in 5% increments. (Replaces chance to heal broken legs).
+- [MODIFIED] Reduced rate of Radio in low-tier tools table to 0.5% from 3%.
+- [MODIFIED] Dynamic trigger activation timings changed to 5/7/20 seconds from 5/10/30 seconds.
+
+0.9.0 Update:
+
+- [NEW] DZAI is now installed to your dayz_server.pbo instead of your mission file. This method of installation will help reduce the size of your mission file (and associated network traffic) as well as prevent prying eyes from looking into any customizations you have made.
+- [NEW] Added experimental support for custom patrol definitions. This feature has already been integrated into the normal spawn and despawn scripts. Instead of specifying a patrol distance when calling spawnBandits.sqf, you can either: 1) Specify an array of markers as waypoints, 2) Specify an array containing an array of waypoints, probability of choosing a random marker as the next waypoint, and probability of patrolling in reverse sequence.
+Example 1: ['Marker1','Marker2','Marker3']	//Default probabilities for random waypoint selection and patrol reversal will be used
+Example 2: [['Marker1','Marker2','Marker3'],0.50,0.50]	//Manually specify probabilities. To have the patrol path followed exactly (without deviations), set the second variable to zero. To have the patrol sequence followed in its specified order, set the third variable to zero.
+Note: This is a basic version for testing purposes and more features will be added later.
+
+- [REMOVED] Removed "disable zombies" option. Note: an easier method is to redefine the maximum zombie amounts in your init.sqf instead.
+- [REMOVED] Removed Safe Mode and related tables. Note: if experiencing crashes or missing config entry errors, set DZAI_verifyTables = true (if possible, send me the RPT logs with verifyTables enabled on the OpenDayZ forums, username Buttface).
+- [MODIFIED] Lingor 1.3 and Taviana 2.0 have verifyTables automatically enabled. (Note: If anyone has an RPT log using these DayZ mods with verifyTables enabled, please send me your RPT log on the OpenDayZ forums. Thanks).
+- [MODIFIED] Dynamically-spawned triggers now spawn AI groups 100m (+100m max) from a randomly selected player within the trigger area, instead of randomly spawning around the trigger center.
+- [MODIFIED] Dynamically-spawned triggers are now setPos'ed to their next location instead of being deleted and respawned. Note: If debugMarkers are enabled, the marker also moves to the new location, changing color from yellow (new) to orange (respawned).
+- [MODIFIED] Changed documentation for several script files.
+- [MODIFIED] AI loot is now generated using the same _equipType they were spawned with (note: _weapongrade value may differ).
+- [MODIFIED] Separated gadget and tool loot tables into two separate tables: low and high grade. Table for low grade tools/gadgets has probabilities for NVGs and GPS set to zero. (Note: This change means that only AI units with weapongrade 2 or 3 can carry NVGs/GPS).
+- [MODIFIED] Considerable AI skill parameter decreases for AI with weapongrade 0&1. AimingSpeed decrease and SpotDistance increase for AI with weapongrade 2. General skill increases for AI with weapongrade 3. (Note: This change means that high weapongrade AI are more skilled, and vice versa).
+- [MODIFIED] AI units are now randomly assigned to the East or Resistance side.
+- [MODIFIED] Slight decreases in AI spawns for NWAF, Cherno, and Elektro.
+
+0.9.1 Update:
+
+- [FIXED] Fixed DayZ 2017 classname tables.
+- [MODIFIED] DayZ 2017: Maximum pistol ammo fixed at 1. AI may carry a maximum of 1 edible item in their inventory, none in backpack. AI do not carry medical items other than a bandage.
+- [MODIFIED] AI spawn distance from dynamically spawned triggers increased to 150m (+100m max) from 100m (+100m max).
+
+0.9.2 Update:
+
+- [MODIFIED] Reduced rates of generating tools/gadgets for low-tier tools/gadgets table. (weapongrade 0-1).
+<table>
+<tr>
+<td>Item Name:</td><td>Old Rate</td><td>New Rate</td>
+</tr>
+<tr>
+<td>ItemFlashlight:</td><td>0.90</td><td>0.80</td>
+</tr>
+<tr>
+<td>ItemWatch:</td><td>0.90</td><td>0.80</td>
+</tr>
+<tr>
+<td>ItemKnife:</td><td>0.75</td><td>0.50</td>
+</tr>
+<tr>
+<td>ItemHatchet:</td><td>0.70</td><td>0.40</td>
+</tr>
+<tr>
+<td>ItemCompass:</td><td>0.60</td><td>0.35</td>
+</tr>
+<tr>
+<td>ItemMap:</td><td>0.50</td><td>0.25</td>
+</tr>
+<tr>
+<td>ItemToolbox:</td><td>0.20</td><td>0.10</td>
+</tr>
+<tr>
+<td>ItemMatchbox:</td><td>0.20</td><td>0.10</td>
+</tr>
+<tr>
+<td>ItemFlashlightRed:</td><td>0.10</td><td>0.05</td>
+</tr>
+</table>
+- [MODIFIED] Increased radius of all static triggers from 500m to 600m. Will test if this change affects performance.
+- [MODIFIED] Spawn radius of AI from dynamically spawned triggers reverted to 100m (+100m max) from 150m (+100m max).
+
+0.9.3 Update:
+
+- [NEW] Added support for DayZ Civilian mod. To enable DayZ Civilian support, edit DZAI_modName = "civilian" in dayz_ai_variables.sqf. Note: Weapon  parts for Civilian's ASC - Customizable Weapon Addon component have not yet been added to the DZAI loot tables.
+
+0.9.4 Update:
+
+- [FIXED] aiBrain script now waits until the AI unit's current weapon classname is found before proceeding. Fixes rare cases where script proceeds without having the weapon classname defined, resulting in AI running out of ammo.
+- [FIXED] unitSelectPistol script now waits until the AI unit's current weapon classname is found before proceeding. Fixes rare cases where a second sidearm weapon would be generated.
+- [FIXED] banditAIKilled script is now called instead of spawned, to solve cases where killing an AI would cause long delays in actions such as using items or performing actions.
+- [FIXED] Fixed several scripts that were producing undefined variable errors.
+
+0.9.5 Update:
+
+- [FIXED] aiBrain script now waits until the AI unit's magazine classname is defined before continuing.
+- [NEW] Initial release of DZAI Lite 0.0.1, a simplified version of DZAI. More details here: https://github.com/dayzai/DZAI-Lite
+- [NEW] Dead dynamically-spawned AI are now deleted after 300 seconds have elapsed. (if not already deleted by the standard despawn script).
+- [NEW] Added independent settings for dynamic triggers for each map. Each map will have varying numbers of dynamic triggers and ranges for spawning triggers.
+- [NEW] Dynamic trigger spawning script now checks for player presence before placing each trigger. If a player is present within activation range of the trigger, the script will attempt to find another location without a player. (Note: This does not apply when dynamic triggers are being relocated).
+- [REMOVED] Disabled AI fleeing option.
+- [MODIFIED] Maximum AI spawn range from dynamic triggers increased from 100m (+100m max) to 100m (+150m max).
+- [MODIFIED] Dynamic trigger radius increased from 500m to 600m.
+- [MODIFIED] Classname verification script (verifyTables.sqf) now accepts a string of array names to check, instead of having the array names hardcoded.
+- [MODIFIED] fnc_initTrigger is now called instead of spawned.
+- [MODIFIED] Renamed several directories and script files for better clarity. (NB: The DZAI variable definitions file, dayz_ai_variables.sqf has been renamed to dzai_variables.sqf)
+- [MODIFIED] Debug markers for patrol waypoints have been changed from red X's to blue dots.
+- [MODIFIED] Debug markers for custom patrol waypoints have been changed from pink X's to pink dots.
+- [MODIFIED] Debug markers indicating AI unit positions have been changed from blue X's to small red dots.
+- [MODIFIED] Debug markers for dynamic triggers have been changed from yellow X's to filled yellow circles. (Respawned: orange).
+- [MODIFIED] Debug markers for AI patrol waypoints are now also deleted when AI are despawned.
+- [MODIFIED] Added an independent reference marker for spawning dynamic triggers instead of using the standard DayZ 'center' marker. (Note: for unrecognized maps, DZAI will default to the 'center' marker instead).
+
+0.9.6 Update:
+
+- [FIXED] Fixed undefined variable issue in BIN_taskPatrol.sqf.
+- [FIXED] Imported several fixes related to dynamic triggers added in DZAI Lite 0.0.2.
+- [FIXED] Fixed bug where dynamic triggers sometimes failed to spawn AI properly.
+- [MODIFIED] Simplified several global variable names.
+- [MODIFIED] AI spawned from dynamic triggers use a separate GradeChances table (DZAI_gradeChancesDyn). Dynamically-spawned AI no longer use the equipType system.
+
+0.9.7 Update: 
+
+- [MODIFIED] Classname verification option (DZAI_verifyTables) is now enabled by default.
+- [MODIFIED] Number of AI units spawned from dynamic triggers are now dependent on the number of players present in the trigger area. (minimum of 2 to maximum of 6, +/- 1)
+
+0.9.8 Update:
+
+- [FIXED] Removed all remaining variables relating to minimum/additional AI to spawn for dynamic triggers.
+- [REMOVED] Dynamic trigger spawning script no longer avoids player positions.
+- [MODIFIED] Chernarus: adjusted spawning range of dynamic triggers from 5250m to 6000m. Increased number of dynamic triggers from 18 to 20.
+- [MODIFIED] Spawning range of AI from dynamic triggers increased from 125m (+125m max) to 125m (+175m max).
+- [MODIFIED] Increased number of dynamic triggers for all maps (+2).
+- [MODIFIED] Dynamic trigger activation timings changed to 5/10/30 seconds.
+
+0.9.9 Update (Imported from DZAI Lite 0.0.5):
+
+- [NEW] Debug markers: Added color-coding for activation state of dynamic triggers. Yellow (Ready Trigger), Green (Awaiting Despawn), Orange (Activated Trigger).
+- [NEW] Dynamic triggers now relocate to center around a random player in the trigger area when activated. (Prevents player from quickly leaving the trigger area after entering).
+- [MODIFIED] Addition of glanceAt command for AI group leader to help locate player unit.
+- [MODIFIED] Modification of dynamic trigger amounts for each map.
+- [MODIFIED] Time delay in between each dynamic trigger spawn reduced from 60 seconds to 30 seconds.
+
+0.9.10 Update:
+
+- Imported several updates and fixes to dynamic triggers from DZAI Lite 0.0.6
+- [NEW] Added Dynamic Trigger Manager script to periodically relocate dynamic triggers.
+- [FIXED] AI respawn script now checks if group exists before respawning the unit (fixes undefined variable errors).
+
+Version 0.08 Update:
+
+- [MODIFIED] DayZ Epoch config has been separated into its own file inside DZAI\init\loot_configs\mod_configs. The mod_configs folder will be used to contain config files for addons for DayZ maps (a "mod for a mod")
+- [MODIFIED] Active AI accounting has been moved entirely to the aiBrain.sqf script (a much simpler solution). When an AI unit is created, the active AI count will increase. When the AI unit is killed, the active AI count will decrease.
+
+Version 0.08 Patch 1:
+
+- [NEW] Added script to verify all DZAI weapon/skin/item tables for banned or invalid classnames.  If any invalid entries are found, they are removed and logged to the RPT log. Enable table verification by setting DZAI_verifyTables to "true" in dayz_ai_variables.sqf. Enable this setting if DZAI is causing crashes or other errors.
+- [UNRESOLVED] Triggers sometimes fail to deactivate. Added player alive check to trigger activation conditions as a test measure.
+- [MODIFIED] Another rework of the AI counter system. Active AI counter is incremented once at trigger activation and values are stored into the trigger object. When the trigger is deactivated, values are retrieved to decrease the active AI counter.
+- [MODIFIED] Changed the way map/loot config files are handled on DZAI initialization.
+- [MODIFIED] Epoch mode can now by enabled for any DayZ map (note: DayZ Epoch must still be installed and running).
+
+Version 0.08 Patch 2:
+
+- [FIXED] Removed Saiga12K and DZ_Czech_Vest_Puch from Celle loot tables.
+- [MODIFIED] Modified spawn trigger locations, area sizes for Chernarus, Celle, Namalsk.
+
+Version 0.08 Patch 3:
+
+- [FIXED] Fixed bug that caused triggers to become permanently activated and unable to despawn AI.
+- [FIXED] Fixed spawn radius of AI created from dynamic triggers.
+- [MODIFIED] Trigger variables are no longer initialized if there are no AI to spawn.
+- [MODIFIED] Table verification script now checks all tables in a single pass. Author's Note: deciding on whether to have table verification enabled by default, as a full check is completed within a second.
+
+Version 0.08 Patch 4:
+
+- [MODIFIED] Removed alive check in trigger conditions (isPlayer check should be sufficient).
+- [MODIFIED] Reduced amount of hardcoding in verifyTables script (filesize halved).
+- [MODIFIED] Moved side relations settings to initserver.sqf since AI are intended to be hostile to players anyways.
+
+Version 0.08 Patch 5:
+
+- [NEW] Added support for Sahrani (loot and map config files). AI spawns still require tweaking.
+- [FIXED] More fixes to despawn scripts.
+
+Version 0.08 Patch 6:
+
+- [FIXED] Fixed bug that prevented AI from properly respawning if numGroups was set higher than 1 for a trigger.
+- [MODIFIED] <b>IMPORTANT:</b> fnc_spawnBandits_bldgs and fnc_spawnBandits_markers combined into a single script (fnc_spawnBandits).
+
+New format: [_minAI, _addAI, _patrolRadius, thisTrigger,[],_equipType (optional),_numGroups (optional)] call fnc_spawnBandits;
+
+_minAI: Minimum number of AI units to spawn.
+_addAI: Maximum additional number of AI units to spawn.
+_patrolRadius: Patrol radius.
+thisTrigger: Leave as is.
+[]: Leave array empty if you want to use buildings within a 300m distance from trigger center as spawn points. To manually insert spawn points, insert names of markers to use as spawn points. Example: ['marker1','marker2','marker3']
+_equipType (OPTIONAL): If no value is specified, 1 is used as default. 0: Basic rifles and pistols, 1: Basic rifles and occasionally military weapons, 2: Military weapons and occasionally basic rifles, 3: Military weapons and some high-grade military weapons.
+_numGroups (OPTIONAL): If no value is specified, 1 is used as default. Number of groups to spawn using the above values.
+
+<b>Note:</b> Wrapper functions have been added so that all calls to fnc_spawnBandits_bldgs and fnc_spawnBandits_markers are transferred to fnc_spawnBandits. If you have added any custom spawns, they will still work without modification.
+
+- [MODIFIED] fnc_respawnBandits_bldgs and fnc_respawnBandits_markers have been combined into fnc_respawnBandits.
+- [MODIFIED] aiBrain and aiBrain_debug scripts are now spawned instead of execVMed. Appears to solve issue where aiBrain script did not properly run at unit creation.
+- [MODIFIED] fnc_getBuildingPositions now returns the trigger's position if it cannot find any usable building positions within a 300m radius. Note: do not use fnc_spawnBandits without a marker array if no buildings are within 300m of trigger center.
+- [MODIFIED] fnc_initTrigger now handles variable initialization for all spawn types.
+- [MODIFIED] AI now carry at least one pistol magazine upon death (changed from minimum of zero).
+- [MODIFIED] Celle: RH_HK53eot and RH_mp5a5eod added back into weapon tables.
+- [MODIFIED] All map configurations have been modified to use the new spawnBandits format. Will need to double-check if errors have been made during the conversion.
+- [REMOVED] Removed fnc_spawnBandits_random and fnc_respawnBandits_random since they are no longer used.
+
+Version 0.08 Patch 7:
+
+- [MODIFIED] Minor AI skill decreases to aimingAccuracy, aimingShake, aimingShake (~0.05). Larger decreases to spotTime (~0.20).
+- [MODIFIED] Chernarus: Disabled AI spawn at Balota Military Tents.
+- [MODIFIED] Celle: Reduced number of AI groups at Winsen (Aller) from 3 to 2. Increased size of each group from 2(+1 max) to 3(+1 max).
+- [REMOVED] Removed unused aiBrain.sqf script files.
+
+Version 0.07 Patch 1&2 Update:
+Note: Due to the number of changes added shortly after 0.06 was planned for release, 0.06 and 0.07 will be fully released together. Changes made in 0.06 and earlier are archived in changelog.txt
+
+- [NEW] Dynamically-spawned triggers are now spawned using road positions using SHK_pos. Spawn range extended from 4000m to 4500m. Patrol distance decreased from 350m to 300m/waypoint (Author's note: Watch out for road ambushes!)
+- [NEW] If an AI unit is killed, there can be a chance for the group leader to investigate the killer's last known position. (Note: Experimental feature, chance must be set manually in dayz_ai_variables)
+- [NEW] Added loot tables for DayZ Epoch metal bar currency. Loot table structure is identical to new structure used for tool items. If "Epoch" mode is enabled, AI units will have a chance to carry metal bar currency.
+- [NEW] Added "minimal configuration" setting. Overrides default config info with heavily stripped-down loot tables. If you are experiencing troubles with unsupported DayZ mods, try setting "DZAI_modName = "minimal" in dayz_ai_variables.
+- [NEW] AI units spawned with weapongrade of 2 or higher can now be configured to always spawn with temporary NVGs if the normal probability check to spawn NVGs fails. This feature is disabled for DayZ 2017 and DayZ Namalsk (Note: Experimental feature, must be enabled manually in dayz_ai_variables)
+- [NEW] AI units spawned with weapongrade of 0 may now spawn with a pistol instead of a rifle. 
+- [NEW] On AI unit death, loot generation script will not generate an additional pistol if unit is already carrying one.
+- [FIXED] Equipment Type of AI created from dynamically-spawned triggers was unintentionally hardcoded to 1.
+- [MODIFIED] AI loot table for tool items restructured. New format: [["ItemName1",Chance1],["ItemName2",Chance2],["ItemName3",Chance3]...etc]
+- [MODIFIED] Chernarus: Changes to Stary Sobor military tents - Increased maximum number of additional AI units spawned from 2 to 3. Extended patrol distance from 125 to 225m/waypoint. Disabled AI spawn centered around Stary Sobor military tents. 
+- [MODIFIED] Chernarus: Decreased minimum number of AI units spawned on Skalisty Island from 2 to 0. Increased maximum additional number of AI units spawned from 0 to 1. (0 minimum, 1 maximum). 
+- [MODIFIED] Increased maximum additional AI respawn delay from 120 to 180 seconds (Maximum delay changed from 420 seconds to 480 seconds).
+- [MODIFIED] Changed spawn distance for AI created from dynamically-spawned triggers from 50m + a maximum of 450m to a maximum of 300 (no minimum).
+- [MODIFIED] Modified activation delay time for dynamically-spawned triggers from 10/17/24 seconds to 10/15/20 seconds.
+- [MODIFIED] Renamed fnc_unitBackpack to fnc_unitInventory, and fnc_unitSelectRifle to fnc_unitSelectWeapon.
+
+Version 0.07 Patch 3 Update:
+
+- [MODIFIED] AI groups will only detect killer position within 300 meters (reduced from 500m).
+- [MODIFIED] AI Killed eventhandler changed from call to spawn.
+- [MODIFIED] Changed AI killer detection from a % chance to a true/false toggle (default setting is false).
+
+Version 0.07 Patch 4 Update
+
+- [UNRESOLVED] Current live AI count is buggy and unreliable. Therefore, do not modify DZAI_maxAIUnits from its default value until it is fixed. Setting this number too low may cause AI to stop spawning altogether.
+- [NEW] Study body now can be used on AI. Currently all AI units spawned by DZAI will have the name "DZAI Unit" and their reported cause of death is "bleeding".
+- [NEW] Separate script for spawning invisible/invincible dummy AI group placeholder unit.
+- [NEW] Separate script for determing appropriate set of weapongrade probabilities to use
+- [NEW] Server monitor script to periodically report current/maximum number of active AI units and dynamically-spawned triggers. Default interval is every 3 minutes. (Monitor is on by default)
+- [FIXED] Pistol was sometimes added to AI corpse even if AI was already carrying one.
+- [MODIFIED] Dummy AI unit should now be deleted as soon as the first dead AI unit in the group respawns. Note: Debug logging is temporarily kept on for dummy creation/deletion, will be removed at full release.
+- [MODIFIED] Live AI counter is now incremented by fnc_createAI and fnc_createAI_NR upon creation of each individual AI unit.
+- [MODIFIED] Increased Commanding AI skill parameter
+- [MODIFIED] Seperated config files into map_configs (for map-specific settings) and dzai_configs (for DZAI-specific settings). 
+- [MODIFIED] equipType 2 is now used for areas where military-grade weapons is expected of players (ie: Stary Sobor). equipType 3 is now used for areas with endgame loot (ie: NWAF for Chernarus).
+- [MODIFIED] Considerable decrease in probability of generating military-grade weapons for equipType 1 areas (ie: Cherno, Elektro for Chernarus) and increase in generating civilian-grade weapons.
+- [MODIFIED] Default debug level is now 0 (no debug logging).
+
+Version 0.07 Patch 5 Update
+
+- [UNRESOLVED] In some situations, the despawn script fails to despawn AI units properly. However, reactivating then deactivating the trigger should allow the trigger to properly reset. Will investigate further.
+- [FIXED] Several modifications to the way DZAI keeps track of active AI units. Dummy AI group placeholder unit is now also counted as an active unit. Dead units waiting to respawn also count as "active". AI only be considered "inactive" after they have been despawned.
+- [NEW] fnc_initTrigger function to initialize trigger variables. Shared between all spawnBandits scripts except spawnBandits_random_NR.
+- [MODIFIED] BIN_taskPatrol is now spawned instead of execVM'ed to eliminate repetitive compiling of the script. DZAI may take slightly longer to compile scripts, but no difference was observed while running DZAI on a low-end laptop.
+- [MODIFIED] debugLevel 2 now also reports the classname of the weapon generated for each AI unit.
+- [MODIFIED] General decreases in trigger activation delay, more for NWAF in Chernarus.
+- [MODIFIED] DZAI Server Monitor now reports: current/maximum number of active AI units, currently active static triggers, current/total number of dynamic triggers. Monitor now starts after a 60 second delay instead of 120 seconds.
+- [MODIFIED] First AI unit in a group is now set as group leader.
+- [REMOVED] Removed several options to specify the number of a specific consumable item to add to AI loot (for simplification purposes). You may still increase consumable item loot by increasing the number of item selections.
+- [REMOVED] Removed fn_spawnDummy script, re-integrated it into fn_banditAIRespawn.
+- [REMOVED] Removed M1014 shotgun from weapongrade 0 weapon selection.
+
+Version 0.07 Hotfix 1
+
+- [FIXED] Fixed config files for alternate DayZ maps with modified item probabilities.
+- [NEW] Added Namalsk 2017 support (UNTESTED)
+
+Version 0.07 Patch 6 Update
+
+- [FIXED] Additional fixes to config files.
+- [FIXED] Isla Duala config is now properly loaded if server is running Isla Duala.
+- [NEW] Added ItemRadio to AI loot table. If DZAI_findKiller is set "true" and player has a Radio in their inventory, AI will not be able to automatically detect and hunt down the player who killed a member of their group.
+- [NEW] If debugLevel is set to 1 or higher, DZAI will report the detected DayZ map into the RPT log.
+- [NEW] Minimal Mode replaced by Safe Mode. Enable Safe Mode by modifying DZAI_safeMode to "true". Safe Mode overwrites all DZAI item tables with stripped down versions to ensure compatibility.
+- [MODIFIED] Separated config files into map configs (marker and trigger configs) and loot configs.
+- [MODIFIED] Taviana and Lingor now always start in "Safe Mode" with minimal loot tables as an attempt to solve crashing issues. Note: Taviana and Lingor support will now continue beyond DZAI version 0.07, but only with Safe Mode settings.
+- [MODIFIED] Epoch mode can now only be enabled on DayZ maps with Epoch support (Chernarus, Namalsk, Lingor, Taviana). Note: DZAI does not support Dingor.
+- [MODIFIED] Combined config files for default and safe mode.
+
+Version 0.07 Hotfix 2
+
+- [FIXED] Fixed issue with BattlEye Script Restriction #241 error. Will continue investigating for BE-related issues.
+
+Version 0.07 Hotfix 3
+
+- [FIXED] BE Script Restriction #241 should be completely fixed (attempted logging in/out 10+ times without problems). Server and Client now use separate initialization scripts.
+
+<b><u>IMPORTANT!:</b></u> The steps to install DZAI have changed (slightly). In your init.sqf, you must use this line to start DZAI: <code>#include "DZAI\init\dzai_init.sqf";				//Load DayZ AI Bandit Module</code>. 
+
+Zombie spawns and AI-to-Zed hostility are now configured in dzai_init.sqf instead of dayz_ai_variables.sqf.
+
+Version 0.08 Hotfix 4
+
+- [FIXED] DZAI Server Monitor should now correctly report AI/trigger statistics. Active AI count is only incremented for new AI spawns, but not respawns. Will keep watch on Server Monitor to ensure it reports statistics accurately.
+Date ?? - Version 0.06 Patch 1, Patch 2:
+- [NEW] Experimental support for DayZ Epoch-exclusive features (Chernarus). Set DZAI_modName to "epoch" to enable Epoch skin loot, AI skins, and metal bar loot. Item probabilities still require tweaking.
+- [MODIFIED] Weapon grade probabilities can now be defined on a per-location basis (new parameter: "equipment type"). AI in "newbie" areas tend to have lower end weaponry and skills while those in high-value areas tend to have high-end weaponry and higher skills.
+- [MODIFIED] AI skill parameters are also determined by the unit's "weapon grade". AI that carry high-end weaponry tend to have higher skill parameters, and vice versa.
+- [MODIFIED] Rebalanced AI skill parameters. General increases in AI aiming speed and spotting time, general decreases in aiming shake and spotting distance.
+- [MODIFIED] Namalsk: Added marker-defined AI spawn points to Lubjansk military base instead of using building locations as spawn points. Should prevent AI from being spawned in water.
+- [MODIFIED] Several variables offloaded from invdividual AI units to the trigger object they were spawned from.
+- [MODIFIED] Cleaned up initialization script for easier reading.
+- [MODIFIED] Renamed several directories for better clarity.
+- [REMOVED] Removed Coyote backpack from second tier backpack table.
+
+May 12, 2013 - Version 0.06 Patch 3:
+- [FIXED] Fixed a bug where having debugLevel set to 0 disabled the check for active AI units in a trigger area, causing more AI units to be spawned than intended.
+- [FIXED] Added checks to mark a trigger as waiting to be cleaned up by the AI despawn script to prevent an excessive instances of the despawn script from being run.
+- [UPCOMING] Added a chance for an AI group to immediately identify a group member's killer to simulate a coordinated group of players. This code is currently commented.
+- [MODIFIED] Removed fnc_setBehavior script, merged contents with fn_createAI and fn_createAI_NR.
+- [MODIFIED] Replaced BIS_fnc_selectRandom with an altered version that should correctly calculate random values. (This may affect any DayZ scripts that use this function).
+- [MODIFIED] debugLevel 2 no longer causes aiBrain to report each zombie that has been identified as hostile (reserved for debugLevel 3+, tentatively called "Super Debug")
+- [MODIFIED] Despawn script now also cleans up variables that have been assigned to the trigger object.
+
+May 14, 2013 - Version 0.06 Patch 4
+- [FIXED] DZAI_allowFleeing variable was not used to enable/disable fleeing.
+- [FIXED] Applied fixes to despawn script for non-respawning AI that were applied to the respawning-AI despawn script in Patch 3.
+- [MODIFIED] Added chance to reveal player responsible for killing an AI unit to its group (Default: 50% chance of reveal)
+- [MODIFIED] Increased Stary Sobor military tent AI patrol distance from 125m/waypoint to 200m/waypoint to allow easier access to NPC vendor in Chernarus Epoch.
+- [MODIFIED] Triggers' GroupArray variable is now always reset to an empty array if one cannot be found.
+
+May 1, 2013 - 0.05 Update:
+- Note: As 0.05 is a huge update for DZAI, there may be bugs that have not been found or fixed. Feel free to open an Issue on GitHub or message me on the OpenDayZ forums to report issues (username: Buttface)
+- Note: Due to the large number of changes that have happened from 0.04 to 0.05, it is not recommended to reuse any 0.04 files in 0.05. Delete your old DZAI folder and replace with the 0.05 version.
+- Note: A few scripts have been adapted from Sarge AI and other sources. Credit has been given in the comments section of relevant script files.
+- Reminder: Due to the large size of the config folder, you may delete all config files that are not related to the map you will be playing on. However, you will need to comment out the switch-case block in dayz_ai_variables.sqf and add in #include "configs\(mapname)_config.sqf". An example is provided in the variables file.
+- [NEW] Bandit AI now works together in organized groups instead of being hostile to each other. After respawning, individual AI units will regroup with their team and continue patrolling.
+- [NEW] AI units will now respawn into the same group. Previously, a new group was created for every AI unit spawned, which quickly lead to the 144 group/side limit being reached.
+- [NEW] AI spawn points can now be added using markers using the function fnc_spawnBandits_markers. Useful for placing precise spawn locations or spawning AI in locations where there are too few or no buildings to use as spawn points.
+- [NEW] Syntax for fnc_spawnBandits_markers: [minimum AI,max. additional AI,distance between waypoints,thisTrigger,[array of markers],optional: number of AI groups] call fnc_spawnBandits_markers;
+- [NEW] Several variables are now attached to each AI unit for respawning purposes: respawn type, respawn location, group, trigger of origin, patrol distance.
+- [NEW] A single fn_banditAIRespawn.sqf script now handles AI respawning, instead of one per respawn type.
+- [NEW] aiBrain.sqf background script for each AI unit. Automatically adds a new magazine to AI when depleted, and sets hostility to nearby zombies. (Credits: Sarge of SARGE AI).
+- [NEW]	despawnBandits.sqf to handle despawning AI when all players have left a trigger area. By default, AI are deleted from a trigger area after 120 seconds of no player presence. (Adapted from SARGE AI).
+- [NEW] Markers to track AI positions can be enabled by setting debug level to 2 (extended debug mode). Positions are updated every 15 seconds by default.
+- [NEW] Zombie-to-AI aggro is now optional (disable by reducing DZAI_weaponNoise to 0.00 in dayz_ai_variables.sqf). By default, zombies do not aggro to AI.
+- [NEW] AI-to-Zombie aggro is now optional (enable/disable by modifying the DZAI_zombieEnemy variable in dayz_ai_variables.sqf). By default, AI are hostile to nearby zombies. Hostility distance is configurable by modifying the DZAI_zDetectRange variable)
+- [NEW] Adjustable health system implemented for AI units. AI durability to bullet/non-bullet damage is now configurable in dayz_ai_variables.sqf. (Credits: Celery, Nullkigan)
+- [NEW] Side relations between AI and players are now configurable. East: Randomly-spawned AI, Resistance: Building/Marker-spawned AI. By default, all AI are friendly to each other, and hostile to players.
+- [NEW] createAI.sqf script to handle individual AI unit spawns and respawns. Initalizes several AI variables, sets up unit loadout, adds eventhandlers, etc.
+- [NEW] Modified several AI spawns from default settings for the following maps: Panthera, Takistan, Zargabad. (Note: Military loot areas tend to have much higher AI spawns)
+- [NEW] Added AI spawn locations at NWAF, Balota Tents.
+- [FIXED] Replaced patrol script (BIN_taskPatrol v1.4) with BIN_taskPatrol v1.3 (last edited by ArmaIIholic) to fix an issue where AI units would randomly travel far beyond their intended patrol area.
+- [MODIFIED] Trigger radius increased from 325m to 500m to prevent excessive cycling of AI spawn/despawns from passing players.
+- [MODIFIED] Triggers have been changed to Repeating type with the introduction of the AI despawn system. (Note: The number of total AI with each spawn cycle may vary).
+- [MODIFIED] Large increases in AI numbers in large cities and certain high value military areas in Chernarus and other maps. (NWAF has a maximum of 20 patrolling AI units). AI spawns will be adjusted further if needed.
+- [MODIFIED] Removed unnecessary code in ai_alertzombies.sqf left over from original player_alertzombies.sqf
+- [MODIFIED] Modified default number of randomly-spawned AI units to zero. This may be changed in dayz_ai_variables.sqf.
+- [MODIFIED] Some debug output now includes name of the script responsible for generating the output.
+- [MODIFIED] Overall increase in AI spawns with the introduction of grouped AI units. Noticeable increase in difficulty of AI encounters.
+- [MODIFIED] Randomly-spawned AI are now spawned 4000m from the center marker, down from 4500m. (original settings)
+- [MODIFIED] AI flee probability is now configurable in dayz_ai_variables.sqf. AI fleeing may also be enabled/disabled.
+- [MODIFIED] Overall increase in AI skill parameters (AI are now much more dangerous than before).
+- [MODIFIED] Adjusted minimum number of AI sidearm ammunition to zero. Increased maximum number to 2.
+- [MODIFIED] AI rifle ammunition now fixed at one magazine.
+- [MODIFIED] wild_spawnZombies.sqf and zombie_generate.sqf replaced with empty dummy scripts to disable zombie spawns if DZAI_zombiesEnabled is set to false. If set to true (enable zombies), the default DayZ files are used instead.
+- [MODIFIED] Scripts for AI weapon noise and Zombie-to-AI aggro are no longer loaded if Z-to-AI aggro is disabled.
+- [MODIFIED] New syntax for fnc_spawnBandits_random. [Number of AI, marker, distance between waypoints, max distance from marker to spawn] spawn fnc_spawnBandits_random;
+- [MODIFIED] New syntax for fnc_spawnBandits_bldgs. [minimum AI,max. additional AI,distance between waypoints,thisTrigger,optional: number of AI groups] call fnc_spawnBandits_bldgs;
+- [MODIFIED] Increased probability of spawning small misc. loot in AI inventory from 0.50 to 0.66 per item (max 3, configurable).
+- [MODIFIED] Lowered probability of spawning large misc. loot in AI inventory from 0.25 to 0.20 per item (max 1). Note: It's not recommended to raise the max number since items that can't fit in the backpack will drop on the ground instead.
+- [MODIFIED] Lowered probability of spawning Compass, Map, Toolbox, Matchbox.
+- [MODIFIED] Relocated default DZAI loot tables to default_config.sqf in the config folder. This file is essential for DZAI to function, so do not remove it.
+- [MODIFIED] Increased minimum respawn time to 180 seconds and reduced maximum additional respawn time to 120 seconds. (180 seconds minimum, 300 seconds maximum). These values may need further rebalancing due the introduction of grouped AI.
+- [MODIFIED] Decreased probability of generating MilitarySpecial weapons from 20% to 15% (Probabilities for Namalsk and Utes remain unchanged)
+- [MODIFIED] Increased probability of generating Farm/Residential weapons from 25% to 30% (Probabilities for Namalsk and Utes remain unchanged)
+- [MODIFIED] AI units may now spawn with NVGoggles instead of having them added as loot after death. 
+- [MODIFIED] NVGoggles and Binoculars are now classified as Gadgets, have their own loot table with configurable chances.
+
+May 1, 2013 - 0.05 Patch 1 Update:
+
+- [NEW] Debug markers for AI patrol waypoints, AI positions, and randomly placed triggers (more info below) can be enabled/disabled by modifying DZAI_debugMarkers in dayz_ai_variables.sqf
+- [NEW] Reworked random AI spawn system. Instead of spawning individual AI units at server start, triggers are randomly placed around the map through spawnTriggers_random. These triggers have a radius of 400m and spawn a group of 3-5 AI units per spawn. You will have to manually set the number of triggers to create.
+- [FIXED] Fixed a bug that affected the AI respawn scripts when the last unit of a group is killed. Now, a temporary dummy unit is created when the last unit of a group is killed to prevent the group from becoming empty and deleted.
+- [MODIFIED] Reworked spawnBandits_random/respawnBandits_random scripts to generate random patrol waypoints around a central trigger position instead of using markers. spawnBandits_random may be called directly, or called indirectly through spawnTriggers_random
+- [MODIFIED] More AI skill parameter tweaks. In general, minimum skill parameters have been decreased slightly while maximum skill parameters have been increased. (Wider range of AI skill levels)
+- [REMOVED] Satchel Charges have been removed from AI loot tables.
+
+May 2, 2013 - 0.05 Patch 2 Update:
+
+- [FIXED] Panthera, Lingor: Fixed a couple of typos in trigger activation fields that would have prevented AI from properly spawning.
+- [FIXED] Namalsk: Trigger for Object A2 AI spawns was calling the wrong AI spawn script.
+- [MODIFIED] Lingor: Repositioned several spawn markers for Prison and Palace locations
+- [MODIFIED] Taviana: Increased AI spawns in several areas, with a focus on areas that spawn Military-grade loot.
+- [MODIFIED] Namalsk: Reduced the number of spawn positions for Object A2 from 9 to 5
+- [MODIFIED] In a previous update, marker-spawned groups now all spawn at the same location. Previously, each group member was spawned at separate locations.
+- [MODIFIED] Increased minimum and maximum distance from building positions for building-spawned AI in an attempt to solve an issue where AI were being spawned at the map center due to a lack of clear space to spawn.
+- [MODIFIED] Added author credits to several scripts were credit was previously missing.
+- [MODIFIED] Celle: Shifted Celle city AI trigger to include the east firestation. Added a new AI trigger to the buildings west of Celle city.
+
+May 3, 2013 - 0.05 Patch 3 Update:
+
+- [MODIFIED] Weapongrade value is now also used to determine type of backpack added to AI (For example, Coyote backpack should be rarer than a Patrol Backpack)
+- [MODIFIED] Increased chance of generating Military-grade weapon from 50% to 55, decreased chance of generating MilitarySpecial-grade weapon from 15% to 12%, decreased chance of generating HeliCrash-grade weapon from 5% to 3%.
+- [MODIFIED] Chernarus: Updated several AI spawn triggers for Berezino. Spawn areas now encompass the city center and military tents.
+
+May 3, 2013 - 0.05 Patch 4 Update:
+
+- [NEW] Added a conditional check to ensure that groups always have patrol waypoints.
+- [FIXED] Temporary dummy unit is now created when there are no units alive in a group. Previous script was only called when the number of total units decreased below 2.
+- [FIXED] Added loot tables for AI backpacks that were supposed to be added in Patch 3.
+- [FIXED] Chernarus: AI spawns for Castle Rog, Devil's Castle, and Castle Zub.
+- [MODIFIED] The last respawned unit is now set as group leader. Should fix the issue where group members would stand inactive until the dummy unit is deleted.
+- [MODIFIED] Added conditional checks to delete a dummy unit only if one exists.
+- [MODIFIED] Increased trigger radius for random AI spawns from 400 to 500m. Decreased random AI spawn patrol distances from 400m to 350m/WP.
+- [MODIFIED] Changed activation delays for random AI spawn triggers from 10/15/20 seconds to 20/30/40 seconds (min/med/max).
+- [MODIFIED] Chernarus: Repositioned two AI spawn points for Balota Military Tents further away from the road.
+- [MODIFIED] Chernarus: Respositioned all Balota Airfield spawn points for more variability.
+- [MODIFIED] Chernarus: Repositioned western Cherno building AI spawn trigger, so that AI threat is distributed more towards the Firestation and Supermarket than the Apartment area.
+- [MODIFIED] Chernarus: Repositioned eastern Elektro spawn marker so that the enterable house east of the hospital is less of a death trap.
+- [MODIFIED] Chernarus: Decreased number of spawn markers for Skalisty Island from 5 to 3, repositioned the remaining 3 triggers for more variability.
+
+April 20, 2013 - 0.04 Update:
+
+- [NEW] Namalsk: Added modified weapongrade chances for Namalsk. Military and MilitarySpecial weapons are slightly more common, while Residential-type weapons are slightly less common.
+- [NEW] Namalsk: Added several Namalsk-specific items to Namalsk tool tables: BrokenGPS, BrokenRadio, BrokenNVGoggles, ItemSolder, APSI.
+- [NEW] DZAI can now support multiple DayZ mods that use the same map. Currently supported alternate mods: Skaronator Lingor, DayZ 2017.
+- [FIXED] Fixed script responsible for updating current number of live AI units. Previously, killing an AI unit did not decrease the current live AI unit count, causing AI to stop spawning/respawning if the limit is reached.
+- [FIXED] AI units are now also hostile to zombies spawned in the wilderness.
+- [FIXED] Namalsk: Fixed several spawn triggers for Namalsk.
+- [FIXED] Namalsk: DZAI now reads from Namalsk-specific loot tables for generating zombie loot.
+- [FIXED] Taviana: Removed several weapons that were added in DayZ 1.7.6.1 that are not present in Taviana 2.0, which caused client crashes when looting AI bodies.
+- [MODIFIED] AI units now spawn only with a primary weapon, ammunition, backpack, and possibly binoculars.
+- [MODIFIED] AI units will have additional gear added to their inventory (sidearm, skin, tools, gadget, etc.) when they are killed by a player. An AI unit killed by another AI will not have additional gear added.
+- [MODIFIED] Slight increases in AI spawns for Cherno, Elektro, and Zelenogorsk.
+- [MODIFIED] Random AI spawn radius increased from 4000 meters to 4500 meters.
+- [MODIFIED] Weapongrade is no longer used to influence consumable/tool item generation (for fnc_unitConsumables, fnc_unitTools).
+- [MODIFIED] Slight increases in maximum aimingShake/aimingSpeed parameters for AI.
+- [MODIFIED] Miscellaneous items recategorized into Small (1 inventory space) and Large (>1 inventory space) items. An AI may carry up to 3 Small items and 1 Large item. Note: If AI unit's backpack is full, extra items may appear on the ground nearby.
+- [MODIFIED] Pistol ammunition is again added to AI unit's inventory instead of backpack, since the pistol is now added to the AI after death.
+- [MODIFIED] Lingor config file now supports both Lingor 1.3 and Skaronator Lingor 2.1. To enable Skaronator Lingor support, edit "DZAI_modName" in dayz_ai_variables.sqf to "skarolingor".
+- [MODIFIED] Chernarus config file now supports both original DayZ and DayZ 2017. To enable DayZ 2017 support, edit "DZAI_modName" in dayz_ai_variables.sqf to "2017".
+- [MODIFIED] Namalsk: Lowered number of selections and number of edible items in AI backpack to zero, as food is intended to be rare on Namalsk.
+- [MODIFIED] Namalsk: Lowered chance of generating functional GPS and NVGoggles from 3% to 1%.
+- [MODIFIED] Namalsk: Labeled spawn triggers with names of their locations for easier editing. Note: Spawn triggers for other maps will be also labeled in the near future.
+- [MODIFIED] Taviana: Adjusted spawn numbers for nearly all triggers. Larger cities/towns will have more AI spawned, while less dense areas will have less AI. Several small AI spawns were also added.
+- [MODIFIED] DZAI debugging settings now grouped into a single variable (DZAI_debug). Possible settings: 0 (no debug logging), 1 (basic debug logging), 2 (extended debug logging).
+- [MODIFIED] Tool items (ie: Map, Compass, etc) are now generated individually on a probability basis instead of being generated as a set. Gadgets such as NVGoggles and GPS are now also categorized as tools.
+- [MODIFIED] Improved documentation in several script files.
+- [MODIFIED] Removed fnc_unitBackpackTools function, split into fnc_unitBackpack and fnc_unitTools functions.
+- [REMOVED] Removed unnecessary fnc_selectRandomGrade function. Weapongrades are now generated directly using the fnc_selectRandomWeighted function instead.
+
+April 8, 2013 - 0.03 Update:
+- Implemented new random AI spawn system that spawns AI in the same manner that DayZ spawns heli crashes. This feature works with any DayZ mission file that contains a "center" marker. By default, a total of 15 AI units will be spawned randomly around the map, but the number can be edited in dayz_ai_variables.sqf
+- Increased all AI skill parameters, decreased minimum endurance slightly.
+- AI pistol ammo is now added to backpack instead of inventory, to prevent AI from switching to sidearm and causing issues.
+- Removed chance to not generate any rifle for AI.
+- Lowered AI spawns for Utes due to introduction of new random AI spawn system. (Author's recommendation: try out Utes with at least 15 random AI spawns! Be sure to set a default loadout with weapons.)
+- Cleaned up code for several spawn/respawn scripts (no functional changes)
+- Reverted minimum delay for AI respawn to 120 seconds, maximum additional delay changed to 150 seconds. (120 seconds minimum, 270 seconds maximum).
+
+April 3, 2013 - 0.02 Update:
+- Modified patrol script to include variances in AI behavior and speed settings.
+- Enabled variable logging for several script files. To enable event logging, modify DZAI_debug or DZAI_extdebug variables in \DZAI\init\dayz_ai_variables.sqf.
+- Reduced number of input parameters for AI spawn scripts
+- Reduced maximum spawn distance for random-location AI spawn script from 400m to 350m. (note: random spawns have not yet been added)
+- Reduced maximum spawn distance for building-location AI spawn script from 450m to 400m.
+- Slight increases in minimum aimingAccuracy, aimingShake, aimingSpeed for AI.
+- AI loadout generation: weapongrade variable is now also used to determine whether a gadget item or skin item may be generated.
+- Modified several script files to use BIS_fnc_selectRandom to select random elements from arrays instead of the previous lengthy method.
+- Lumped zombie spawns and wilderness zombie spawn toggle variables into a single variable. Now all zombie spawns can be turned on or off with one setting in dayz_ai_variables.sqf.
+- Modified Chenarus AI spawn triggers from default settings. There is now some variance in the number of AI spawned per trigger depending on the location.
+- AI spawn trigger locations have been slightly adjusted for several maps.
+- Removed AI spawn multiplier variable (DZAI_spawnMultiplier) and replaced with a variable (DZAI_spawnExtra) to add a specific number of AI to each trigger. For example, if you want 1 additional AI to spawn for every trigger, set DZAI_spawnExtra to 1 in dayz_ai_variables.sqf.
+- Reduced default probability of AI spawning without a rifle (if weapongrade = 0) to 0.00. This probability may be changed in dayz_ai_variables.sqf.
+- Reduced minimum spawn delay and minimum additional spawn delay by 30 seconds each. (Maximum potential spawn delay reduced from 300 seconds to 240 seconds, minimum potential spawn delay reduced from 120 seconds to 90 seconds).
+- Reduced maximum types of inventory medical items generated for AI from 2 to 1.
+- Increased chance of generating a random misc item (ie: vehicle parts) from 50% to 60%.
+- Added Colt1911 to third-tier pistol weapon array.
+- Reduced rate of generating Morphine Autoinjector for AI.
+- Reduced maximum distance between waypoints for AI patrol from 100m to 90m (building-spawn AI only). This is to keep them from wandering too far away from the towns they are generated from.
+
+March 25, 2013 - 0.01 Release:
+- Complete revision of previous AI package to ensure multiplayer compatibility.

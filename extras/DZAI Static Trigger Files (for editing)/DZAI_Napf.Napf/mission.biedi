@@ -1,0 +1,861 @@
+class _prefix_0
+{
+	objectType="prefix";
+	class Arguments
+	{
+	};
+};
+class _center_0
+{
+	objectType="center";
+	class Arguments
+	{
+		SIDE="west";
+	};
+};
+class _group_0
+{
+	objectType="group";
+	class Arguments
+	{
+		CENTER="_center_0";
+	};
+};
+class _unit_7
+{
+	objectType="unit";
+	class Arguments
+	{
+		POSITION="[14246.129, 2849.6973, 0]";
+		GROUP="_group_0";
+		TYPE="Bandit1_DZ";
+		SKILL="0.60000002";
+		PLAYER="true";
+		LEADER="true";
+	};
+};
+class _marker_114
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[8876.1641, 16260.472]";
+		NAME="DZAI_Lenzburg";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_115
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[7587.0171, 14221.998]";
+		NAME="DZAI_Trueb";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_116
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[5789.9204, 15317.989]";
+		NAME="DZAI_Seltisberg";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_117
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[5984.3174, 13589.515]";
+		NAME="DZAI_Neue_Welt";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_118
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[3936.8379, 14387.571]";
+		NAME="DZAI_Bubendorf";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_120
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4691.8608, 12267.877]";
+		NAME="DZAI_Huttwil";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_121
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[6291.979, 12740.054]";
+		NAME="DZAI_Ruchfeld";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_123
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[5794.8022, 11695.465]";
+		NAME="DZAI_Oberdorf";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_125
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[6253.1118, 10445.891]";
+		NAME="DZAI_Muttenz";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_133
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[6489.9155, 9683.1045]";
+		NAME="DZAI_Muenchenstein";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_134
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[7808.2021, 9318.6074]";
+		NAME="DZAI_Chatzbach";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_135
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[9832.37,9853.36]";
+		NAME="DZAI_Bruderholz";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_139
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[8444.5938, 17123.244]";
+		NAME="DZAI_Freidorf";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_140
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[10049.203, 16467.189]";
+		NAME="DZAI_Olten";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_141
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[10686.2,15883.3]";
+		NAME="DZAI_Ruemlingen";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_144
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[10575.794, 14068.857]";
+		NAME="DZAI_Hirsegg";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_146
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[12085.853, 15345.522]";
+		NAME="DZAI_Lausen";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_151
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[5051.2803, 11196.765]";
+		NAME="DZAI_Unterdorf";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_152
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[14726.621, 14107.868]";
+		NAME="DZAI_Luzern";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_154
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[15486.882, 13346.097]";
+		NAME="DZAI_Emmen";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_155
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[14245.889, 12714.578]";
+		NAME="DZAI_Wolhusen";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_156
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[17220.289, 13905.854]";
+		NAME="DZAI_Horw";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_157
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[12913.013, 11756.14]";
+		NAME="DZAI_Romoos";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_158
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[16410.053, 15302.249]";
+		NAME="DZAI_Meggen";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_159
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[12791.802, 9626.2422]";
+		NAME="DZAI_Liestal";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_161
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[14931.782, 10882.149]";
+		NAME="DZAI_Sachseln";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_163
+{
+	objectType="marker";
+	class Arguments
+	{
+		NAME="DZAI_Sissach";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_165
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[7383.05,6598.69]";
+		NAME="DZAI_Eggwil";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_166
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[18306.078, 17137.08]";
+		NAME="DZAI_Pfeffikon";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_168
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[5990.39,8893.48]";
+		NAME="DZAI_Signau";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_169
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[9048.1934, 5428.6768]";
+		NAME="DZAI_Schangen";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_170
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[3603.1506, 9727.3291]";
+		NAME="DZAI_Hasle";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_171
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[2180.1565, 7626.7544]";
+		NAME="DZAI_Worb";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_172
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[3654.7224, 7928.7563]";
+		NAME="DZAI_Munsingen";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_173
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[2072.7058, 9780.8652]";
+		NAME="DZAI_Ittingen";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_174
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[2411.7112, 11241.985]";
+		NAME="DZAI_Hindelbank";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_175
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[2877.75,6243.71]";
+		NAME="DZAI_Homburg";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_181
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[13515.016, 5313.1172]";
+		NAME="DZAI_Sorenberg";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_188
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[18249.895, 2206.3149]";
+		NAME="DZAI_South_Airstrip";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_189
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[17203.361, 3525.9858]";
+		NAME="DZAI_Froburg";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_190
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[14448.045, 2914.2048]";
+		NAME="DZAI_Brienz";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_193
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[2557.7725, 7784.0161]";
+		NAME="DZAI_WorbE";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_194
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[2560.0894, 8248.7227]";
+		NAME="DZAI_WorbN";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_195
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[3200.5864, 7428.8589]";
+		NAME="DZAI_WorbIndustrial";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_197
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[6349.5601, 9400.2988]";
+		NAME="DZAI_MuenchensteinS";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_199
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[6850.7959, 9643.5898]";
+		NAME="DZAI_MuenchensteinE";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_201
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[6334.1348, 10818.069, 7.1861682]";
+		NAME="DZAI_MuttenzN";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_207
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[5475.4829, 16026.354]";
+		NAME="DZAI_Seltishafen";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_209
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[16431.096, 18415.654]";
+		NAME="DZAI_SuhrenfeldMilitary";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_210
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[17051.783, 18746.586]";
+		NAME="DZAI_SuhrenfeldBarracks";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="125";
+		B="125";
+	};
+};
+class _marker_214
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[7410.8555, 14823.762, 12.371061]";
+		NAME="DZAI_TruebN";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_216
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[9191.4619, 17585.988]";
+		NAME="DZAI_Harbour";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="125";
+		B="125";
+	};
+};
+class _marker_217
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[10656.134, 17037.621, 0]";
+		NAME="DZAI_Magden";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_218
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[8659.707, 15989.149, 0.17934036]";
+		NAME="DZAI_LenzburgW";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_219
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[8930.8291, 15925.417]";
+		NAME="DZAI_LenzburgE";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_220
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[9175.3018, 15692.503]";
+		NAME="DZAI_LenzburgIndustrial";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_221
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[14259.116, 14121.588]";
+		NAME="DZAI_LuzernW";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_222
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[14481.524, 13712.073, 5.4349804]";
+		NAME="DZAI_LuzernS";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_223
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[14352.377, 16932.207]";
+		NAME="DZAI_Airport";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_224
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[14993.102, 16172.912, 7.9194927]";
+		NAME="DZAI_AirportE";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_225
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[5193.6675, 4471.2915]";
+		NAME="DZAI_Airbase";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_226
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4967.4429, 4845.4639]";
+		NAME="DZAI_AirbaseHangars";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_227
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[10725.096, 9339.918, 0]";
+		NAME="DZAI_centerMarker";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="8500";
+		B="8500";
+	};
+};
+class _postfix_0
+{
+	objectType="postfix";
+	class Arguments
+	{
+	};
+};

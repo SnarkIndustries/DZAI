@@ -1,0 +1,1204 @@
+class _prefix_0
+{
+	objectType="prefix";
+	class Arguments
+	{
+	};
+};
+class _center_0
+{
+	objectType="center";
+	class Arguments
+	{
+		SIDE="west";
+	};
+};
+class _group_0
+{
+	objectType="group";
+	class Arguments
+	{
+		CENTER="_center_0";
+	};
+};
+class _unit_3
+{
+	objectType="unit";
+	class Arguments
+	{
+		POSITION="[7671.4326, 1380.4917, 0]";
+		GROUP="_group_0";
+		TYPE="Survivor2_DZ";
+		SKILL="0.60000002";
+		PLAYER="true";
+		LEADER="true";
+	};
+};
+class _trigger_0
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[1999.8049, 333.89359, 0.68896484]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Landay";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [0,2,175,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_2
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[3599.5557, 1262.9868, 0]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Ahmaday";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [0,2,175,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_4
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[4440.0664, 667.60712]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="ChakChak";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [2,1,175,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_6
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[3752.6982, 4460.8936]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Sakhe";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [2,1,175,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_8
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[3284.1165, 3675.4705]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Sakhe2";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,2,175,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_10
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[2565.6787, 5079.543]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Jilavur";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [2,2,150,thisTrigger,[],3] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_12
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[1538.7018, 5681.293, 0]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Khushab";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,2,175,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_14
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[1475.2213, 3576.6296, 5.2146301]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Shukurkalay";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [2,1,175,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_16
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[548.4129, 2759.2986]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Chaman";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,2,175,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_18
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[1009.7563, 3189.5881, 1.3997345]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Chaman2";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [0,2,150,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_20
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[2005.9639, 7654.5181]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Mulladost";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,2,175,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_22
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[3662.0393, 8584.4795]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Gospandi";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,1,175,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_26
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[4497.4453, 9376.4346, 4.9902496]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Lalezar";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [2,1,250,thisTrigger,[],1,2] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_28
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[3025.105, 9925.2148, -3.8146973e-006]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Nagara";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,1,200,thisTrigger,[],1,2] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_30
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[4191.394, 10836.333, 1.1444092e-005]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Nagara OilfieldEast";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,1,200,thisTrigger,[],1,2] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_32
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[4165.9824, 11759.761, 3.8146973e-006]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Shamali";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,1,150,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_34
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[5799.0752, 11206.194, 7.6293945e-006]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Rasman Military1";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [3,2,250,thisTrigger,[],3,2] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_36
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[6288.9844, 11246.689, -7.6293945e-006]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Rasman";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,2,250,thisTrigger,[],2,2] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_38
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[6045.0684, 11653.766, 7.6293945e-006]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Rasman Military2";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [2,2,250,thisTrigger,[],3,2] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_40
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[6842.2051, 12252.953, 1.1444092e-005]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Safid Ab";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,1,150,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_42
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[6037.6655, 10469.76, 7.6293945e-006]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Rasman South";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [2,2,175,thisTrigger,[],2] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_44
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[5741.624, 9899.874, 6.8212051]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Rasman-Bastam";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,1,250,thisTrigger,[],1,2] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_46
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[5602.1592, 9325.6768, 7.6293945e-006]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Bastam North";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,1,150,thisTrigger,[],2] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_48
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[5640.9932, 8909.7793, -1.5258789e-005]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Bastam";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,2,150,thisTrigger,[],2] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_50
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[6788.7056, 8918.7549, -7.6293945e-006]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Bastam East";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,1,150,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_54
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[9167.0332, 6688.6724]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Garmarud";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,1,150,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_56
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[10846.38, 6323.3657]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Garmsar";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [2,1,175,thisTrigger,[],2] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_60
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[10432.103, 6378.3984]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="GarmsarMilitary";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [3,2,175,thisTrigger,[],3] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_62
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[11830.018, 2589.0579, 0]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Hazar Bagh";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,1,175,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_64
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[10974.319, 2452.8206]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Chardarakht East";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,1,175,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_66
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[10201.649, 2379.0244, 0]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Chardarakht West";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [2,1,175,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_68
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[9237.1113, 1841.6443, 0]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Jaza East";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,1,150,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_70
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[8752.9492, 1864.3501, 0]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Jaza West";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,1,150,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_72
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[8464.0469, 2413.1255]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Loy Manara";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [2,1,175,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_74
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[8215.832, 2114.9724]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Airfield";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [3,2,175,thisTrigger,[],2] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_76
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[7556.0806, 1802.1805, -3.0517578e-005]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Airfield East";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,1,175,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_78
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[7095.9995, 1070.2653]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Loy Manara Oilfield Town";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [0,2,150,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_80
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[6506.8423, 2019.0903]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Sultansafe";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [2,1,175,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_82
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[6079.6367, 1155.9662]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Huzrutimam";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [2,1,175,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_84
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[8919.7119, 5345.1431, 3.7972412]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Timurkalay";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [2,1,175,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_86
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[5964.4966, 5669.4463]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Anar";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,2,250,thisTrigger,[],1,2] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_88
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[6816.8599, 6055.4316]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Anar East";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,1,175,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_90
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[5258.0444, 6120.1489]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Feruz Abad";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [2,2,125,thisTrigger,[],3,2] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_92
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[5325.3687, 4722.5317]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Kakaru";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,1,150,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_94
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[1810.3278, 11795.336, 0.42770386]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Nur";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,2,250,thisTrigger,[],2,2] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_96
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[9853.1455, 11435.367, 7.6293945e-006]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Zavarak";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [2,1,175,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_98
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[10476.996, 11003.627]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Zavarak2";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,2,175,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_100
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[12258.796, 11098.416, 1.5258789e-005]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="KarachinarNorth";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,2,175,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_102
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[12312.442, 10419.859]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Karachinar";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [2,1,150,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_104
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[11510.062, 8340.0977]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Ravanay";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,1,175,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_106
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[8016.6895, 2954.416]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Airfield North Town";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,1,175,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_109
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[8283.3564, 7785.1221, 0]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Imarat";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [0,1,150,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_112
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[7038.3872, 11500.55, 0]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Rasman East";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,1,250,thisTrigger,[],1,2] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_115
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[3246.991, 8140.3496, 0]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Gospandi2";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,1,175,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_118
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[5105.1289, 5353.0151]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Daryache";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,1,175,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_123
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[5976.4209, 7275.0044, 7.6293945e-006]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Falar";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,2,175,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_126
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[12202.271, 9978.0322, 0]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Karachinar SW";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [0,1,125,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+class _trigger_128
+{
+	objectType="trigger";
+	class Arguments
+	{
+		POSITION="[12538.564, 9980.1094, 0]";
+		A="600";
+		B="600";
+		ACTIVATION_BY="ANY";
+		REPEATING="true";
+		TIMEOUT_MIN="10";
+		TIMEOUT_MID="15";
+		TIMEOUT_MAX="20";
+		INTERRUPTABLE="true";
+		TEXT="Karachinar SE";
+		EXP_COND="{isPlayer _x} count thisList > 0;";
+		EXP_ACTIV="nul = [1,1,150,thisTrigger,[],1] call fnc_spawnBandits;";
+		EXP_DESACTIV="nul = [thisTrigger] spawn fnc_despawnBandits;";
+	};
+};
+
+class _postfix_0
+{
+	objectType="postfix";
+	class Arguments
+	{
+	};
+};

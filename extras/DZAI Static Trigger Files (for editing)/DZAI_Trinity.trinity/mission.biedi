@@ -1,0 +1,696 @@
+class _prefix_0
+{
+	objectType="prefix";
+	class Arguments
+	{
+	};
+};
+class _center_0
+{
+	objectType="center";
+	class Arguments
+	{
+		SIDE="west";
+	};
+};
+class _group_0
+{
+	objectType="group";
+	class Arguments
+	{
+		CENTER="_center_0";
+	};
+};
+class _unit_0
+{
+	objectType="unit";
+	class Arguments
+	{
+		POSITION="[4826.1787, 3056.0708, 0]";
+		GROUP="_group_0";
+		TYPE="Bandit1_DZ";
+		SKILL="0.60000002";
+		PLAYER="true";
+		LEADER="true";
+	};
+};
+class _marker_1
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[377.94009, 5956.3296]";
+		NAME="DZAI_StansfieldAirport";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_2
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[2715.6921, 5574.0586]";
+		NAME="DZAI_FarmArea";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_3
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[3048.7012, 5894.7764]";
+		NAME="DZAI_HouseArea1";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_4
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[2589.0259, 6134.1221]";
+		NAME="DZAI_HouseArea2";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_5
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[1807.6942, 7508.3716]";
+		NAME="DZAI_Edan";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_6
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[2213.583, 7993.7998]";
+		NAME="DZAI_Barracks1";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_7
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[1858.1975, 8314.2549]";
+		NAME="DZAI_ChapelHill";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_8
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[2320.7437, 8803.9746, 0]";
+		NAME="DZAI_SarasotaS";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_9
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[2662.2263, 9050.0859]";
+		NAME="DZAI_Sarasota";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_10
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[6595.3408, 3487.4436]";
+		NAME="DZAI_CoastalHouse";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+
+class _marker_11
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[7435.1494, 4468.4858, 0]";
+		NAME="DZAI_Rivlin";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_12
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[6465.2407, 4322.9292]";
+		NAME="DZAI_RivlinChurch";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_13
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[6876.9243, 4920.5176]";
+		NAME="DZAI_MilBase";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_14
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[6984.0972, 5303.7788]";
+		NAME="DZAI_Ellesmere";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_15
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[7646.998, 5745.5977]";
+		NAME="DZAI_Bree";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_16
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[8513.667, 5912.8975]";
+		NAME="DZAI_Helm";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_17
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[9037.8516, 5844.4868]";
+		NAME="DZAI_HelmE";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_18
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[8280.9502, 6697.5918]";
+		NAME="DZAI_MilBase2";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_19
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[5634.4678, 6045.0474]";
+		NAME="DZAI_MilBase3";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_20
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[7190.1333, 6840.3481]";
+		NAME="DZAI_Abbeyfield";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_21
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[5239.6465, 6406.9961]";
+		NAME="DZAI_StFrances";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_22
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4865.9854, 6732.2983]";
+		NAME="DZAI_StFrancesW";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_23
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[5842.4111, 6835.1309]";
+		NAME="DZAI_Contra";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_24
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[5395.5996, 7354.2979]";
+		NAME="DZAI_ContraNW";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_25
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[6066.2344, 7619.0737]";
+		NAME="DZAI_Richmond";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_26
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[7930.9561, 8097.8682]";
+		NAME="DZAI_Totley";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="250";
+		B="250";
+	};
+};
+class _marker_27
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[7142.6621, 8779.5381]";
+		NAME="DZAI_Koul";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_28
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[9433.5381, 8128.8408]";
+		NAME="DZAI_DurrasHights";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_29
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[10243.755, 8979.751]";
+		NAME="DZAI_LodgeMoor";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_30
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[10779.331, 9189.5186]";
+		NAME="DZAI_MilBase4";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_31
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[11816.232, 9328.6699]";
+		NAME="DZAI_MilBase5";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_32
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[11395.864, 9729.5137]";
+		NAME="DZAI_Deepcut";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_33
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[12148.192, 9881.8115, 0.082328796]";
+		NAME="DZAI_FarmArea2";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_34
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[8902.5127, 10503.782]";
+		NAME="DZAI_LibertyAirport";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_35
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[7097.4717, 9886.125, 10.648094]";
+		NAME="DZAI_Maine";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_36
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[7922.1646, 11228.662]";
+		NAME="DZAI_Eastwick";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_38
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4737.9854, 10906.981]";
+		NAME="DZAI_HessIsland";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_39
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[10296.095, 6075.8755]";
+		NAME="DZAI_StattonPort";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_41
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[10934.944, 5839.958]";
+		NAME="DZAI_HarleyW";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_42
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[11386.157, 5979.8125]";
+		NAME="DZAI_Harley";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="200";
+		B="200";
+	};
+};
+class _marker_43
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[11208.166, 6582.667]";
+		NAME="DZAI_MilBarracks";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_44
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[12072.798, 6257.0752]";
+		NAME="DZAI_Yale";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_45
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[12065.385, 5875.689, 7.7468491]";
+		NAME="DZAI_YaleS";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_46
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[11995.574, 5379.6797]";
+		NAME="DZAI_Madison";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_47
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[10672.873, 4401.5894]";
+		NAME="DZAI_MilBase6";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="125";
+		B="125";
+	};
+};
+class _marker_48
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[11815.874, 4850.7017]";
+		NAME="DZAI_Lavayette";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_50
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[10928.018, 2759.8992]";
+		NAME="DZAI_TimberlandN";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_51
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[10320.668, 1697.3518]";
+		NAME="DZAI_MilBase7";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_52
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[10692.135, 1718.3403]";
+		NAME="DZAI_TimberlandIndustrial";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="125";
+		B="125";
+	};
+};
+class _postfix_0
+{
+	objectType="postfix";
+	class Arguments
+	{
+	};
+};
