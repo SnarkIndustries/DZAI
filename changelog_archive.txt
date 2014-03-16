@@ -11,8 +11,8 @@ DZAI 2.0.0 (Final) Changelog:
     [FIXED] Epoch: Fixed trader menus not appearing. You should not have to resort to using right-click zoom to bring up the trader menus anymore (tested with 100% success rate).
     [FIXED] Epoch: Fixed issue of AI attacking trader units.
     [FIXED] Rewrote dynamic AI despawning procedure to fix an issue where AI would not despawn under certain circumstances.
-    [REMOVED] Epoch: Removed ItemSodaR4z0r from AI loot tables.
     [ADDED] Epoch (Napf): Added high-skill AI spawn at Milan military base (weapongrade 3).
+	[REMOVED] Epoch: Removed ItemSodaR4z0r from AI loot tables.
 	[CHANGED] Epoch (Napf): Moved an AI patrol area away from the Hero Vendor at the southern Airbase.
     [CHANGED] Epoch (Napf): Several minor reductions in AI spawn numbers.
     [CHANGED] DZAI will now default to using Survivor2_DZ as AI skin type if no skin types are available (all user-specified skins are invalid/banned).
