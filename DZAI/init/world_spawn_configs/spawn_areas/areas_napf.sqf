@@ -486,12 +486,20 @@ _this setMarkerAlpha 0;
 _this setMarkerSize [150, 150];
 _marker_225 = _this;
 
-_this = createMarker ["DZAI_AirbaseHangars", [4967.4429, 4845.4639]];
+_this = createMarker ["DZAI_AirbaseHangars", [4783.3022, 4828.5498]];
 _this setMarkerShape "ELLIPSE";
 _this setMarkerType "Flag";
 _this setMarkerBrush "Solid";
 _this setMarkerAlpha 0;
 _this setMarkerSize [175, 175];
 _marker_226 = _this;
+
+_this = createMarker ["DZAI_MilanMilitary", [9990.627, 7592.1777, -4.5776367e-005]];
+_this setMarkerShape "ELLIPSE";
+_this setMarkerType "Flag";
+_this setMarkerBrush "Solid";
+_this setMarkerAlpha 0;
+_this setMarkerSize [175, 175];
+_marker_229 = _this;
 
 diag_log "Napf spawn areas loaded.";

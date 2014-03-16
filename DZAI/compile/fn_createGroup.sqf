@@ -57,7 +57,7 @@ for "_i" from 1 to _totalAI do {
 
 	if (DZAI_weaponNoise) then {
 		_unit addEventHandler ["Fired", {_this call ai_fired;}];};						// Unit firing causes zombie aggro in the area, like player.
-	if (DZAI_taserAI) then {
+	if (!isNil "DDOPP_taser_handleHit") then {
 		_unit addEventHandler ["HandleDamage",{_this call DDOPP_taser_handleHit;_this call DZAI_AI_handledamage}];
 	} else {
 		_unit addEventHandler ["HandleDamage",{_this call DZAI_AI_handledamage}];};

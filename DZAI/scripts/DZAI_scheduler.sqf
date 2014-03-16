@@ -27,6 +27,7 @@ if (DZAI_dynamicWeaponList) then {
 if (DZAI_verifyTables) then {
 	_verify = [] execVM format ["%1\scripts\verifyTables.sqf",DZAI_directory];
 	waitUntil {sleep 0.005; scriptDone _verify}; //wait for verification to complete before proceeding
+	if ((count DZAI_BanditTypes) == 0) then {DZAI_BanditTypes = ["Survivor2_DZ"]}; //Failsafe in case all AI skin classnames are invalid.
 } else {
 	DZAI_classnamesVerified = true;	//skip classname verification if disabled
 };
@@ -37,6 +38,10 @@ sleep 0.1;
 
 if (_vehiclesEnabled) then {
 	_nul = [] execVM format ['%1\scripts\setup_veh_patrols.sqf',DZAI_directory];
+};
+
+if (DZAI_staticAI) then {
+	DZAI_ignoredObjects = missionNamespace getVariable ["dayz_allowedObjects",[]];	//Object types to never use as potential static spawn positions.
 };
 
 if (DZAI_dynAISpawns) then {

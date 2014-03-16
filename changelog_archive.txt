@@ -2,8 +2,21 @@ DZAI Changelog Archive
 
 Description: This file contains a complete history of all past changes and updates to DZAI.
 
-Last updated: 2:20 PM 2/23/2014
+Last updated: 10:27 PM 3/15/2014
 --------------------------------
+
+DZAI 2.0.0 (Final) Changelog:
+============
+
+    [FIXED] Epoch: Fixed trader menus not appearing. You should not have to resort to using right-click zoom to bring up the trader menus anymore (tested with 100% success rate).
+    [FIXED] Epoch: Fixed issue of AI attacking trader units.
+    [FIXED] Rewrote dynamic AI despawning procedure to fix an issue where AI would not despawn under certain circumstances.
+    [REMOVED] Epoch: Removed ItemSodaR4z0r from AI loot tables.
+    [ADDED] Epoch (Napf): Added high-skill AI spawn at Milan military base (weapongrade 3).
+	[CHANGED] Epoch (Napf): Moved an AI patrol area away from the Hero Vendor at the southern Airbase.
+    [CHANGED] Epoch (Napf): Several minor reductions in AI spawn numbers.
+    [CHANGED] DZAI will now default to using Survivor2_DZ as AI skin type if no skin types are available (all user-specified skins are invalid/banned).
+    [CHANGED] DZAI will now use all building types as possible spawn points for static AI spawns, as opposed to only buildings that can spawn zombies/loot. Note: Epoch buildables are ignored.
 
 
 DZAI 1.9.9 Changelog:
@@ -16,7 +29,6 @@ DZAI 1.9.9 Changelog:
     [CHANGED] default_classnames.sqf config file has been renamed to global_classnames.sqf. This new file is moved one level up. For more details, see this post: http://opendayz.net/threads/explana...s-sqf-and-why-its-important.18635/#post-94351
     [UPDATED] Dynamic weapon generation script will fall back on prebuilt weapon tables in global_classnames.sqf if it is unable to find weapon classnames from loot tables. Exception: If no HeliCrash loot tables are found, MilitarySpecial loot tables will be used instead. Failing that, prebuilt tables in global_classnames.sqf will be used instead.
         This change prevents empty weapon tables from being generated if there are changes in DayZ's loot table structure.
-
 
 
 DZAI 1.9.8 Changelog:

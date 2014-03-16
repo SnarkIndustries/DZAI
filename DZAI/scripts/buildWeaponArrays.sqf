@@ -36,12 +36,9 @@ for "_i" from 0 to ((count _unwantedWeapons) - 1) do {
 //Compatibility with Namalsk's selectable loot table feature.
 if (isNil "dayzNam_buildingLoot") then {
 	_cfgBuildingLoot = "cfgBuildingLoot";
-	/*if (((toLower worldName) == "trinity")&&{(DZAI_modName != "epoch")}) then {
-		//Fix for Trinity Island's Barracks loot table.
-		_bldgClasses set [2,["Barracks"]];
-	};*/
 	if ((!isClass (_lootConfigFile >> _cfgBuildingLoot >> "MilitarySpecial")) && {(isClass _lootConfigFile >> _cfgBuildingLoot >> "Barracks")}) then {
-		_bldgClasses set [2,["Barracks"]];
+		//_bldgClasses set [2,["Barracks"]];
+		(_bldgClasses select 2) set [((_bldgClasses select 2) find "MilitarySpecial"),"Barracks"];
 	};
 } else {
 	_cfgBuildingLoot = dayzNam_buildingLoot;

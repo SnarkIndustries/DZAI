@@ -100,7 +100,7 @@ while {(alive _unit)&&{(!(isNull _unit))}} do {													//Run script for as 
 			if ((_unit ammo (_unitWeapons select _i) == 0) || {!(((_unitMagazines select _i) in magazines _unit))})  then {		//If active weapon has no ammunition, or AI has no magazines, remove empty magazines and add a new magazine.
 				_unit removeMagazines (_unitMagazines select _i);
 				_unit addMagazine (_unitMagazines select _i);
-				if ((getNumber (configFile >> "CfgMagazines" >> (_unitMagazines select _i) >> "count")) < 8) then {_unit addMagazine (_unitMagazines select _i)};
+				if ((getNumber (configFile >> "CfgMagazines" >> (_unitMagazines select _i) >> "count")) <= 8) then {_unit addMagazine (_unitMagazines select _i)};
 				if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: AI ammo depleted, added magazine %1 to AI %2.",(_unitMagazines select _i),_unit];};
 			};
 		};

@@ -47,6 +47,7 @@ _getWeightedIndices = {
 	_gradeChances = missionNamespace getVariable (_x select 0);
 	_weightedTable = [DZAI_weaponGrades,_gradeChances] call _getWeightedIndices;
 	missionNamespace setVariable [_x select 1,_weightedTable];
+	missionNamespace setVariable [_x select 0,nil];
 } forEach [
 			//Input variable - Gradechances array, Output variable - Gradeindices array
 			["DZAI_gradeChancesNewbie","DZAI_gradeIndicesNewbie"],

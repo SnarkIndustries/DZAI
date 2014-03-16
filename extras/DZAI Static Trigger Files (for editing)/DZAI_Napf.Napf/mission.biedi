@@ -831,7 +831,7 @@ class _marker_226
 	objectType="marker";
 	class Arguments
 	{
-		POSITION="[4967.4429, 4845.4639]";
+		POSITION="[4783.3022, 4828.5498]";
 		NAME="DZAI_AirbaseHangars";
 		MARKER_TYPE="ELLIPSE";
 		FILL="Solid";
@@ -850,6 +850,19 @@ class _marker_227
 		FILL="Solid";
 		A="8500";
 		B="8500";
+	};
+};
+class _marker_229
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[9990.627, 7592.1777, -4.5776367e-005]";
+		NAME="DZAI_MilanMilitary";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
 	};
 };
 class _postfix_0

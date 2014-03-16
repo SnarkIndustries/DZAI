@@ -122,9 +122,6 @@ if (_worldname in ["chernarus","utes","zargabad","fallujah","takistan","tavi","l
 	if (DZAI_staticAI) then {[] execVM format ["%1\scripts\setup_autoStaticSpawns.sqf",DZAI_directory];};
 };
 
-//Detect DDOPP Taser Addon
-DZAI_taserAI = (!isNil "DDOPP_taser_handleHit");
-
 //Continue loading required DZAI script files
 [] execVM format ['%1\scripts\DZAI_scheduler.sqf',DZAI_directory];
 

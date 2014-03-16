@@ -34,7 +34,7 @@ if (DZAI_staticAI) then {
 
 if (DZAI_dynAISpawns) then {
 	fnc_spawnBandits_dynamic = compile preprocessFileLineNumbers format ["%1\spawn_functions\spawnBandits_dynamicV2.sqf",DZAI_directory];
-	fnc_despawnBandits_dynamic = compile preprocessFileLineNumbers format ["%1\spawn_functions\despawnBandits_dynamicV2.sqf",DZAI_directory];
+	fnc_despawnBandits_dynamic = compile preprocessFileLineNumbers format ["%1\spawn_functions\despawnBandits_dynamic.sqf",DZAI_directory];
 	DZAI_dyn_huntPlayer = compile preprocessFileLineNumbers format ["%1\compile\fn_seekPlayer.sqf",DZAI_directory];
 	DZAI_AI_killed_dynamic = compile preprocessFileLineNumbers format ["%1\compile\ai_killed_dynamic.sqf",DZAI_directory];
 };
@@ -185,25 +185,6 @@ DZAI_deathFlies = {
 	sleep 3;
 	_this enableSimulation false;
 };
-
-//Returns probabilities of generating different grades of weapons based on equipType value
-/*
-DZAI_getGradeChances = {
-	private ["_equipType", "_gradeChances"];
-	_equipType = _this select 0;
-
-	_gradeChances = switch (_equipType) do {
-		case -1: {DZAI_gradeChancesNewbie};
-		case 0: {DZAI_gradeChances0};
-		case 1: {DZAI_gradeChances1};
-		case 2: {DZAI_gradeChances2};
-		case 3: {DZAI_gradeChances3};
-		case default {DZAI_gradeChancesDyn};
-	};
-	
-	_gradeChances
-};
-*/
 
 //Convert server uptime in seconds to formatted time (days/hours/minutes/seconds)
 DZAI_getUptime = {
