@@ -44,7 +44,7 @@ switch (_unitType) do {
 	{
 	};
 	case default {
-		if ((!isNil "DZAI_debugMarkers") && {DZAI_debugMarkers}) then {
+		if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
 			if (({alive _x} count (units _unitGroup)) == 0) then {
 				{
 					deleteMarker (str _x);

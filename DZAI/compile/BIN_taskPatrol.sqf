@@ -48,7 +48,7 @@ if (isServer) then
 	_max_dist = _this select 2;
 	//_debug = if ((count _this) > 3) then {if ((typeName (_this select 3)) != "") then {1} else {0}} else {0};
 	//_blacklist = if ((count _this) > 4) then {_blacklist = _this select 4} else {[]};
-	_debug = ((!isNil "DZAI_debugMarkers") && {DZAI_debugMarkers});
+	_debug = ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled});
 
 	_grp setBehaviour "AWARE";
 	if (_max_dist > 75) then {_grp setSpeedMode "FULL"} else {_grp setSpeedMode "LIMITED"};

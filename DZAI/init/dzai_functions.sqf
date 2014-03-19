@@ -43,7 +43,7 @@ if (DZAI_findKiller) then {
 	DZAI_huntKiller = compile preprocessFileLineNumbers format ["%1\compile\fn_findKiller.sqf",DZAI_directory];
 };
 
-if ((!isNil "DZAI_debugMarkers") && {DZAI_debugMarkers}) then {
+if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
 	DZAI_autoRearm_unit = compile preprocessFileLineNumbers format ["%1\compile\unit_resupply.sqf",DZAI_directory];
 } else {
 	DZAI_autoRearm_unit = compile preprocessFileLineNumbers format ["%1\compile\unit_resupply_debug.sqf",DZAI_directory];
@@ -58,7 +58,7 @@ if (DZAI_zombieEnemy && {DZAI_weaponNoise}) then { // Optional Zed-to-AI aggro f
 
 //Helicopter patrol scripts
 if (DZAI_maxHeliPatrols > 0) then {
-	if ((!isNil "DZAI_debugMarkers") && {DZAI_debugMarkers}) then {
+	if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
 		DZAI_autoRearm_heli = compile preprocessFileLineNumbers format ["%1\compile\heli_resupply.sqf",DZAI_directory];
 	} else {
 		DZAI_autoRearm_heli = compile preprocessFileLineNumbers format ["%1\compile\heli_resupply_debug.sqf",DZAI_directory];
@@ -74,7 +74,7 @@ if (DZAI_maxHeliPatrols > 0) then {
 
 //Land vehicle patrol scripts
 if (DZAI_maxLandPatrols > 0) then {
-	if ((!isNil "DZAI_debugMarkers") && {DZAI_debugMarkers}) then {
+	if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
 		DZAI_autoRearm_veh = compile preprocessFileLineNumbers format ["%1\compile\veh_autorearm.sqf",DZAI_directory];
 	} else {
 		DZAI_autoRearm_veh = compile preprocessFileLineNumbers format ["%1\compile\veh_autorearm_debug.sqf",DZAI_directory];
@@ -357,7 +357,7 @@ DZAI_shuffleWP = {
 	_newWPPos = _locationArray call BIS_fnc_selectRandom2;
 	//diag_log format ["DEBUG :: Chosen position: %1.",_newWPPos];
 	_wp = (currentWaypoint _unitGroup);
-	if ((!isNil "DZAI_debugMarkers") && {DZAI_debugMarkers}) then {
+	if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
 		private["_markername"];
 		_markername = format ["[%1,%2]",_unitGroup,_wp];
 		//diag_log format ["DEBUG :: Relocating marker %1.",_markername];
@@ -505,7 +505,7 @@ DZAI_abortDynSpawn = {
 	DZAI_dynTriggerArray = DZAI_dynTriggerArray - [_trigger];
 	//DZAI_actDynTrigs = DZAI_actDynTrigs - 1;
 	//DZAI_curDynTrigs = DZAI_curDynTrigs - 1;
-	if ((!isNil "DZAI_debugMarkers") && {DZAI_debugMarkers}) then {deleteMarker format["trigger_%1",_trigger]};
+	if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {deleteMarker format["trigger_%1",_trigger]};
 
 	deleteVehicle _trigger;
 	

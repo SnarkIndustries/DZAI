@@ -23,7 +23,7 @@ _triggerExists = true;
 if !(_isForceDespawn) then {
 	if (DZAI_debugLevel > 1) then {diag_log format["DZAI Extended Debug: No players remain in %1 %2. Deleting spawned AI in %3 seconds.",triggerText _trigger,mapGridPosition _trigger,DZAI_dynDespawnWait];};
 	
-	if ((!isNil "DZAI_debugMarkers") && {DZAI_debugMarkers}) then {
+	if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
 		private["_marker"];
 		_marker = format["trigger_%1",_trigger];
 		_marker setMarkerColor "ColorGreenAlpha";
@@ -46,7 +46,7 @@ if (_canDespawn) then {
 	
 	if !(_isForceDespawn) then {
 		{
-			if ((!isNil "DZAI_debugMarkers") && {DZAI_debugMarkers}) then {
+			if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
 				{
 					deleteMarker (str _x);
 				} forEach (waypoints _x);
@@ -66,7 +66,7 @@ if (_canDespawn) then {
 	} else {
 		_grpArray = _grpArray - [grpNull];
 		{
-			if ((!isNil "DZAI_debugMarkers") && {DZAI_debugMarkers}) then {
+			if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
 				{
 					deleteMarker (str _x);
 				} forEach (waypoints _x);
@@ -78,7 +78,7 @@ if (_canDespawn) then {
 	
 	//Remove dynamic trigger from global dyn trigger array and clean up trigger
 	DZAI_dynTriggerArray = DZAI_dynTriggerArray - [_trigger];
-	if ((!isNil "DZAI_debugMarkers") && {DZAI_debugMarkers}) then {deleteMarker format["trigger_%1",_trigger]};
+	if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {deleteMarker format["trigger_%1",_trigger]};
 
 	//Begin deletion timer for temporary blacklist area and add it to global dyn location array to allow deletion
 	_triggerLocation = _trigger getVariable "triggerLocation";
@@ -91,7 +91,7 @@ if (_canDespawn) then {
 } else {
 	if (DZAI_debugLevel > 1) then {diag_log "DZAI Extended Debug: A player has entered the trigger area. Cancelling despawn script.";}; //Exit script if trigger has been reactivated since DZAI_dynDespawnWait seconds has passed.
 	_trigger setVariable ["isCleaning",false];	//Allow next despawn request.
-	if ((!isNil "DZAI_debugMarkers") && {DZAI_debugMarkers}) then {
+	if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
 		private["_marker"];
 		_marker = format["trigger_%1",_trigger];
 		_marker setMarkerColor "ColorOrange";

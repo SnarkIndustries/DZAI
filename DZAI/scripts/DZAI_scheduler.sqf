@@ -54,7 +54,7 @@ if (DZAI_dynAISpawns) then {
 	_dynManagerV2 = [] execVM format ['%1\scripts\dynamicSpawn_manager.sqf',DZAI_directory];
 };
 
-_refreshMarkers = ((!isNil "DZAI_debugMarkers") && {DZAI_debugMarkers});
+_refreshMarkers = ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled});
 _cleanDead = time;
 _monitorReport = time;
 _deleteObjects = time;

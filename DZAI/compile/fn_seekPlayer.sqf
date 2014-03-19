@@ -21,7 +21,7 @@ deleteWaypoint [_unitGroup,0];
 
 _targetName = name _targetPlayer;
 
-//_statement = format ["deleteWaypoint[(group this),0]; 0 = [(group this),%1,%2,%3] spawn fnc_BIN_taskPatrol;",_spawnPos,_patrolDist,DZAI_debugMarkers];
+//_statement = format ["deleteWaypoint[(group this),0]; 0 = [(group this),%1,%2,%3] spawn fnc_BIN_taskPatrol;",_spawnPos,_patrolDist,DZAI_debugMarkersEnabled];
 _waypoint = _unitGroup addWaypoint [_spawnPos,0];
 _waypoint setWaypointType "MOVE";
 _waypoint setWaypointCompletionRadius 30;
