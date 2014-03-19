@@ -44,10 +44,10 @@ if (DZAI_findKiller) then {
 };
 
 if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
-	DZAI_autoRearm_unit = compile preprocessFileLineNumbers format ["%1\compile\unit_resupply.sqf",DZAI_directory];
-} else {
 	DZAI_autoRearm_unit = compile preprocessFileLineNumbers format ["%1\compile\unit_resupply_debug.sqf",DZAI_directory];
 	DZAI_updateSpawnMarker = compile preprocessFileLineNumbers format ["%1\compile\fn_refreshmarker.sqf",DZAI_directory];
+} else {
+	DZAI_autoRearm_unit = compile preprocessFileLineNumbers format ["%1\compile\unit_resupply.sqf",DZAI_directory];
 };
 
 //Compile zombie aggro functions
@@ -59,9 +59,9 @@ if (DZAI_zombieEnemy && {DZAI_weaponNoise}) then { // Optional Zed-to-AI aggro f
 //Helicopter patrol scripts
 if (DZAI_maxHeliPatrols > 0) then {
 	if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
-		DZAI_autoRearm_heli = compile preprocessFileLineNumbers format ["%1\compile\heli_resupply.sqf",DZAI_directory];
-	} else {
 		DZAI_autoRearm_heli = compile preprocessFileLineNumbers format ["%1\compile\heli_resupply_debug.sqf",DZAI_directory];
+	} else {
+		DZAI_autoRearm_heli = compile preprocessFileLineNumbers format ["%1\compile\heli_resupply.sqf",DZAI_directory];
 	};
 	DZAI_spawnHeliPatrol = compile preprocessFileLineNumbers format ["%1\spawn_functions\spawn_heliPatrol.sqf",DZAI_directory];
 	DZAI_airLanding = compile preprocessFileLineNumbers format ["%1\compile\heli_airlanding.sqf",DZAI_directory];
@@ -75,9 +75,9 @@ if (DZAI_maxHeliPatrols > 0) then {
 //Land vehicle patrol scripts
 if (DZAI_maxLandPatrols > 0) then {
 	if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
-		DZAI_autoRearm_veh = compile preprocessFileLineNumbers format ["%1\compile\veh_autorearm.sqf",DZAI_directory];
-	} else {
 		DZAI_autoRearm_veh = compile preprocessFileLineNumbers format ["%1\compile\veh_autorearm_debug.sqf",DZAI_directory];
+	} else {
+		DZAI_autoRearm_veh = compile preprocessFileLineNumbers format ["%1\compile\veh_autorearm.sqf",DZAI_directory];
 	};
 	DZAI_spawnVehPatrol	= compile preprocessFileLineNumbers format ["%1\spawn_functions\spawn_vehpatrol.sqf",DZAI_directory];
 	DZAI_vehGetOut = compile preprocessFileLineNumbers format ["%1\compile\veh_getout.sqf",DZAI_directory];
