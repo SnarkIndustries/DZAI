@@ -63,7 +63,7 @@ _totalAI = switch (true) do {
 	case default {1 + floor(random 3)};
 };
 
-if (!isNil "DZAI_debugMarkers") then {
+if ((!isNil "DZAI_debugMarkers") && {DZAI_debugMarkers}) then {
 	private["_marker"];
 	_marker = format["trigger_%1",_trigger];
 	//_marker setMarkerPos _playerPos;

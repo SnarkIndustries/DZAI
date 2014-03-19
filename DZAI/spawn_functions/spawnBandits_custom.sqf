@@ -26,7 +26,7 @@ if (count _grpArray > 0) exitWith {if (DZAI_debugLevel > 0) then {diag_log forma
 _triggerPos = getPosATL _trigger;
 if (_totalAI == 0) then {_totalAI = 1};
 
-if (!isNil "DZAI_debugMarkers") then {
+if ((!isNil "DZAI_debugMarkers") && {DZAI_debugMarkers}) then {
 	_tMarker = str (_trigger);
 	if ((getMarkerColor _tMarker) == "") then {
 		_tMarker = createMarker [_tMarker, (getPosATL _trigger)];

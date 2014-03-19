@@ -43,10 +43,10 @@ if (_unitsAlive == 0) then {
 		
 		0 = [_trigger,_unitGroup] spawn fnc_respawnHandler;
 	} else {
-		if (!isNil "DZAI_debugMarkers") then {deleteMarker str(_trigger)};
+		if ((!isNil "DZAI_debugMarkers") && {DZAI_debugMarkers}) then {deleteMarker str(_trigger)};
 		if (DZAI_debugLevel > 0) then {diag_log format["DZAI Debug: Deleting custom-defined AI spawn %1 at %2. (fnc_staticAIDeath)",triggerText _trigger, mapGridPosition _trigger];};
 		{
-			if (!isNil "DZAI_debugMarkers") then {
+			if ((!isNil "DZAI_debugMarkers") && {DZAI_debugMarkers}) then {
 				{
 					private["_markername"];
 					_markername = (str _x);

@@ -24,7 +24,7 @@ if ((_grpCount == 0) or {_isCleaning}) exitWith {if (DZAI_debugLevel > 1) then {
 _trigger setVariable["isCleaning",true];		//Mark the trigger as being in a cleanup state so that subsequent requests to despawn for the same trigger will not run.
 if (DZAI_debugLevel > 1) then {diag_log format["DZAI Extended Debug: No players remain in trigger area at %3. Deleting %1 AI groups in %2 seconds.",_grpCount, DZAI_despawnWait,(triggerText _trigger)];};
 
-if (!isNil "DZAI_debugMarkers") then {
+if ((!isNil "DZAI_debugMarkers") && {DZAI_debugMarkers}) then {
 	private["_tMarker"];
 	_tMarker = str (_trigger);
 	_tMarker setMarkerText "STATIC TRIGGER (DESPAWNING)";
@@ -35,7 +35,7 @@ sleep DZAI_despawnWait;								//Wait some time before deleting units. (amount o
 
 if (triggerActivated _trigger) exitWith {			//Exit script if trigger has been reactivated since DZAI_despawnWait seconds has passed.
 	if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: A player has entered the trigger area at %1. Cancelling despawn script.",(triggerText _trigger)];};
-	if (!isNil "DZAI_debugMarkers") then {
+	if ((!isNil "DZAI_debugMarkers") && {DZAI_debugMarkers}) then {
 	private["_tMarker"];
 		_tMarker = str (_trigger);
 		_tMarker setMarkerText "STATIC TRIGGER (ACTIVE)";
@@ -45,7 +45,7 @@ if (triggerActivated _trigger) exitWith {			//Exit script if trigger has been re
 };			
 
 {
-	if (!isNil "DZAI_debugMarkers") then {
+	if ((!isNil "DZAI_debugMarkers") && {DZAI_debugMarkers}) then {
 		{
 			deleteMarker (str _x);
 		} forEach (waypoints _x);
@@ -66,14 +66,14 @@ if !(_trigger getVariable ["permadelete",false]) then {
 	_trigger setVariable ["GroupArray",[]];
 	_trigger setVariable ["isCleaning",nil];
 
-	if (!isNil "DZAI_debugMarkers") then {
+	if ((!isNil "DZAI_debugMarkers") && {DZAI_debugMarkers}) then {
 		private["_tMarker"];
 		_tMarker = str (_trigger);
 		_tMarker setMarkerText "STATIC TRIGGER (INACTIVE)";
 		_tMarker setMarkerColor "ColorGreen";
 	};
 } else {
-	if (!isNil "DZAI_debugMarkers") then {
+	if ((!isNil "DZAI_debugMarkers") && {DZAI_debugMarkers}) then {
 		deleteMarker (str (_trigger));
 	};
 	deleteMarker (_trigger getVariable ["spawnmarker",""]);

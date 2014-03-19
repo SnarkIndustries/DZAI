@@ -90,7 +90,7 @@ while {true} do {
 						_trigger setVariable ["targetplayer",_player];
 						_trigActStatements = format ["0 = [225,thisTrigger,%1] call fnc_spawnBandits_dynamic;",_spawnChance];
 						_trigger setTriggerStatements ["{isPlayer _x} count thisList > 0;",_trigActStatements, "[thisTrigger] spawn fnc_despawnBandits_dynamic;"];
-						if (!isNil "DZAI_debugMarkers") then {
+						if ((!isNil "DZAI_debugMarkers") && {DZAI_debugMarkers}) then {
 							private ["_markername","_marker"];
 							_markername = format["trigger_%1",_trigger];
 							_marker = createMarker[_markername,(getPosATL _trigger)];

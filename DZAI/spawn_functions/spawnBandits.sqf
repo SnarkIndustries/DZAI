@@ -32,7 +32,7 @@ _triggerPos = getPosATL _trigger;
 _locationArray = _trigger getVariable ["locationArray",[]];	
 if ((count _locationArray) == 0) then {
 	_spawnPositions = [];
-	if (!isNil "DZAI_debugMarkers") then {
+	if ((!isNil "DZAI_debugMarkers") && {DZAI_debugMarkers}) then {
 		_tMarker = createMarker [str(_trigger), (getPosATL _trigger)];
 		_tMarker setMarkerText "STATIC TRIGGER (ACTIVE)";
 		_tMarker setMarkerType "Defend";
@@ -66,7 +66,7 @@ if ((count _locationArray) == 0) then {
 		if (DZAI_debugLevel > 1) then {diag_log "DZAI Extended Debug: Spawning AI from marker positions (spawnBandits).";};
 	};
 } else {
-	if (!isNil "DZAI_debugMarkers") then {
+	if ((!isNil "DZAI_debugMarkers") && {DZAI_debugMarkers}) then {
 		_tMarker = str (_trigger);
 		if ((getMarkerColor _tMarker) == "") then {
 			_tMarker = createMarker [_tMarker, (getPosATL _trigger)];

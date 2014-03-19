@@ -13,7 +13,7 @@ for "_i" from 1 to 5 do {
 	_wp setWaypointCompletionRadius 35;
 	_wp setWaypointTimeout [0,2,15];
 	_wp setWaypointStatements ["true", "if ((random 3) > 2) then {_nul = [(group this)] spawn DZAI_shuffleWP;} else {_nul = [(group this),100] spawn DZAI_findLootPile;};"];
-	if (!isNil "DZAI_debugMarkers") then {
+	if ((!isNil "DZAI_debugMarkers") && {DZAI_debugMarkers}) then {
 		private["_markername","_marker"];
 		_markername = str (_wp);
 		if ((getMarkerColor _markername) != "") then {deleteMarker _markername};

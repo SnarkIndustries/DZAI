@@ -126,7 +126,7 @@ if (_worldname in ["chernarus","utes","zargabad","fallujah","takistan","tavi","l
 [] execVM format ['%1\scripts\DZAI_scheduler.sqf',DZAI_directory];
 
 //Report DZAI startup settings to RPT log
-diag_log format ["[DZAI] DZAI settings: Debug Level: %1. DebugMarkers: %2. ModName: %3. DZAI_dynamicWeaponList: %4. VerifyTables: %5.",DZAI_debugLevel,(!isNil "DZAI_debugMarkers"),DZAI_modName,DZAI_dynamicWeaponList,DZAI_verifyTables];
+diag_log format ["[DZAI] DZAI settings: Debug Level: %1. DebugMarkers: %2. ModName: %3. DZAI_dynamicWeaponList: %4. VerifyTables: %5.",DZAI_debugLevel,((!isNil "DZAI_debugMarkers") && {DZAI_debugMarkers}),DZAI_modName,DZAI_dynamicWeaponList,DZAI_verifyTables];
 diag_log format ["[DZAI] AI spawn settings: Static: %1. Dynamic: %2. Air: %3. Land: %4.",DZAI_staticAI,DZAI_dynAISpawns,(DZAI_maxHeliPatrols>0),(DZAI_maxLandPatrols>0)];
 diag_log format ["[DZAI] AI behavior settings: DZAI_findKiller: %1. DZAI_tempNVGs: %2. DZAI_weaponNoise: %3. DZAI_zombieEnemy: %4. DZAI_freeForAll: %5",DZAI_findKiller,DZAI_tempNVGs,DZAI_weaponNoise,DZAI_zombieEnemy,DZAI_freeForAll];
 diag_log format ["[DZAI] DZAI loading completed in %1 seconds.",(diag_tickTime - _startTime)];
