@@ -48,10 +48,11 @@ if (DZAI_dynAISpawns) then {
 	if ((count DZAI_dynAreaBlacklist) > 0) then {
 		_nul = DZAI_dynAreaBlacklist execVM format ['%1\scripts\setup_blacklist_areas.sqf',DZAI_directory];
 	};
-	if (DZAI_modName == "epoch") then {
-		_nul = [] execVM format ['%1\scripts\setup_trader_areas.sqf',DZAI_directory];
-	};
 	_dynManagerV2 = [] execVM format ['%1\scripts\dynamicSpawn_manager.sqf',DZAI_directory];
+};
+
+if (DZAI_modName == "epoch") then {
+	_nul = [] execVM format ['%1\scripts\setup_trader_areas.sqf',DZAI_directory];
 };
 
 _refreshMarkers = ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled});
