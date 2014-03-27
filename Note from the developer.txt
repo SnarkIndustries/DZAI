@@ -1,0 +1,4 @@
+Word from the developer: After working on the DZAI project since August 2012, I have decided to stop further development. Thanks to a small number of overly-entitled individuals who demand entire features to be implemented
+according to their specifications without taking a few seconds to make a few simple edits to their config files, I am no longer willing to continue development. To these people: Go fuck yourselves. 
+
+To the majority of DZAI users who have continued to be supportive of the project in many different ways, thanks for sticking with DZAI for all this time. This Github repository is here for you as a reference and a download source.
