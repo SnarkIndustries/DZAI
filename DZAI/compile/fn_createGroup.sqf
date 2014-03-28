@@ -4,19 +4,17 @@
 	Description: Spawns a group of AI units. Used for spawning of DZAI's static, dynamic, and custom AI units.
 	
 	_totalAI = Number of AI units to spawn in the group
-	_unitGroup: Group to spawn AI unit.
 	_spawnPos: Position to create AI unit.
 	_trigger: The trigger object responsible for spawning the AI unit.
 	_weapongrade: weapongrade to be used for generating equipment. Influences weapon quality and skill level.
 	
-	Last updated: 9:57 AM 1/12/2014
+	Last updated: 6:20 PM 3/28/2014
 	
 */
 private ["_totalAI","_spawnPos","_unitGroup","_trigger","_attempts","_baseDist","_dummy","_weapongrade"];
 if (!isServer) exitWith {};
 	
 _totalAI = _this select 0;
-//_unitGroup = if (isNull (_this select 1)) then {createGroup (call DZAI_getFreeSide)} else {_this select 1};
 _spawnPos = _this select 2;
 _trigger = _this select 3;
 _weapongrade = _this select 4;
@@ -29,7 +27,8 @@ while {((count _pos) < 1) && {(_attempts < 3)}} do {
 	_pos = _spawnPos findEmptyPosition [0.5,_baseDist,"Misc_cargo_cont_small_EP1"];
 	if ((count _pos) > 1) then {
 		_pos = _pos isFlatEmpty [0,0,0.75,5,0,false,ObjNull];
-	} else {
+	}; 
+	if ((count _pos) < 1) then {
 		_baseDist = (_baseDist + 25);	_attempts = (_attempts + 1);
 	};
 };
@@ -57,10 +56,11 @@ for "_i" from 1 to _totalAI do {
 
 	if (DZAI_weaponNoise) then {
 		_unit addEventHandler ["Fired", {_this call ai_fired;}];};						// Unit firing causes zombie aggro in the area, like player.
-	if (!isNil "DDOPP_taser_handleHit") then {
-		_unit addEventHandler ["HandleDamage",{_this call DDOPP_taser_handleHit;_this call DZAI_AI_handledamage}];
+	if (isNil "DDOPP_taser_handleHit") then {
+		_unit addEventHandler ["HandleDamage",{_this call DZAI_AI_handledamage}];
 	} else {
-		_unit addEventHandler ["HandleDamage",{_this call DZAI_AI_handledamage}];};
+		_unit addEventHandler ["HandleDamage",{_this call DDOPP_taser_handleHit;_this call DZAI_AI_handledamage}];
+	};
 
 	0 = [_unit, _weapongrade] call DZAI_setupLoadout;									// Assign unit loadout
 	0 = [_unit, _weapongrade] call DZAI_setSkills;										// Set AI skill
