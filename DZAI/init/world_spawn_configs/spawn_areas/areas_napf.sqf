@@ -374,14 +374,6 @@ _this setMarkerAlpha 0;
 _this setMarkerSize [150, 150];
 _marker_201 = _this;
 
-_this = createMarker ["DZAI_Seltishafen", [5475.4829, 16026.354]];
-_this setMarkerShape "ELLIPSE";
-_this setMarkerType "Flag";
-_this setMarkerBrush "Solid";
-_this setMarkerAlpha 0;
-_this setMarkerSize [150, 150];
-_marker_207 = _this;
-
 _this = createMarker ["DZAI_SuhrenfeldMilitary", [16431.096, 18415.654]];
 _this setMarkerShape "ELLIPSE";
 _this setMarkerType "Flag";
@@ -501,5 +493,21 @@ _this setMarkerBrush "Solid";
 _this setMarkerAlpha 0;
 _this setMarkerSize [175, 175];
 _marker_229 = _this;
+
+_this = createMarker ["DZAI_Nordstern", [10057.302, 18093.361]];
+_this setMarkerShape "ELLIPSE";
+_this setMarkerType "Flag";
+_this setMarkerBrush "Solid";
+_this setMarkerAlpha 0;
+_this setMarkerSize [175, 175];
+_marker_231 = _this;
+
+_this = createMarker ["DZAI_SouthAirbaseBarracks", [18076.391, 2579.5398, 0]];
+_this setMarkerShape "ELLIPSE";
+_this setMarkerType "Flag";
+_this setMarkerBrush "Solid";
+_this setMarkerAlpha 0;
+_this setMarkerSize [150, 150];
+_marker_232 = _this;
 
 diag_log "Napf spawn areas loaded.";

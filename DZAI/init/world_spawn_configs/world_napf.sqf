@@ -18,7 +18,7 @@ if (DZAI_staticAI) then {
 	#include "spawn_areas\areas_napf.sqf"		//Load spawn area definitions file.
 	
 	if (DZAI_modName == "unleashed") then {
-		//Unleashed-specific spawns
+		//DayZ Unleashed-specific spawns (Generic Napf spawns are further below in this file)
 		_this = createTrigger ["EmptyDetector", [16404.818, 18407.805]];
 		_this setTriggerArea [900, 900, 0, false];
 		_this setTriggerActivation ["ANY", "PRESENT", false];
@@ -611,6 +611,7 @@ if (DZAI_staticAI) then {
 		_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "nul = [0,2,250,thisTrigger,[],1,1] call fnc_spawnBandits;", "nul = [thisTrigger] spawn fnc_despawnBandits;"];
 		_trigger_160 = _this;
 	} else {
+		//Generic Napf static spawns begin here
 		//marker name, [minimum AI, max additional AI], [markers for manual spawn points] (leave as empty array to use nearby buildings as spawn points), equipType (optional, required if number of AI groups is defined), number of AI groups (optional)
 		//Auto Generated
 		['DZAI_Lenzburg',[1,1],[],1] call DZAI_static_spawn;
@@ -660,7 +661,6 @@ if (DZAI_staticAI) then {
 		['DZAI_MuenchensteinS',[0,1],[],0] call DZAI_static_spawn;
 		['DZAI_MuenchensteinE',[1,1],[],0] call DZAI_static_spawn;
 		['DZAI_MuttenzN',[1,1],[],0] call DZAI_static_spawn;
-		['DZAI_Seltishafen',[0,2],[],0] call DZAI_static_spawn;
 		['DZAI_SuhrenfeldMilitary',[2,1],[],3,2] call DZAI_static_spawn;
 		['DZAI_SuhrenfeldBarracks',[1,1],[],3] call DZAI_static_spawn;
 		['DZAI_TruebN',[1,1],[],0] call DZAI_static_spawn;
@@ -676,6 +676,8 @@ if (DZAI_staticAI) then {
 		['DZAI_Airbase',[2,1],[],3] call DZAI_static_spawn;
 		['DZAI_AirbaseHangars',[1,1],[],2] call DZAI_static_spawn;
 		['DZAI_MilanMilitary',[2,0],[],3] call DZAI_static_spawn;
+		['DZAI_Nordstern',[0,1],[],0] call DZAI_static_spawn;
+		['DZAI_SouthAirbaseBarracks',[2,0],[],3] call DZAI_static_spawn;
 	};
 };
 
