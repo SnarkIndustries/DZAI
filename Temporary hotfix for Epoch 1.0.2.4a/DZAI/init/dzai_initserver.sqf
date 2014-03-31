@@ -121,7 +121,7 @@ if (_worldname in ["chernarus","utes","zargabad","fallujah","takistan","tavi","l
 	"DZAI_centerMarker" setMarkerSize [7000, 7000];
 	if (DZAI_modName == "epoch") then {
 		call compile preprocessFileLineNumbers format ["%1\init\world_classname_configs\epoch\dayz_epoch.sqf",DZAI_directory];
-		DZAI_banditTypes = DZAI_banditTypes - ["Bandit1_DZ"];
+		DZAI_banditTypes = DZAI_banditTypes - ["Bandit1_DZ","Bandit2_DZ"];
 	};
 	if (DZAI_staticAI) then {[] execVM format ["%1\scripts\setup_autoStaticSpawns.sqf",DZAI_directory];};
 };
