@@ -1,4 +1,4 @@
-Temporary Hotfix for DZAI with Epoch 1.0.2.4a
+Temporary Hotfix for DZAI with Epoch 1.0.4.2.a
 ---
 
 About:

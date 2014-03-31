@@ -1,4 +1,6 @@
 /*
+	NOTE: HOTFIXED FILE, INTENDED FOR USE WITH EPOCH 1.0.4.2a ONLY.
+
 	spawn_heliPatrol
 	
 	Description:
