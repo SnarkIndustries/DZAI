@@ -461,21 +461,21 @@ DZAI_checkClassname = {
 
 	switch (toLower _checkType) do {
 		case "weapon": {
-			if !(_classname in DZAI_checkedClassnames) then {
+			if !(_classname in (DZAI_checkedClassnames select 0)) then {
 				_config = "CfgWeapons";
 				_banString = "bin\config.bin/CfgWeapons/FakeWeapon";
 				_configIndex = 0;
 			};
 		};
 		case "magazine": {
-			if !(_classname in DZAI_checkedClassnames) then {
+			if !(_classname in (DZAI_checkedClassnames select 1)) then {
 				_config = "CfgMagazines";
 				_banString = "bin\config.bin/CfgMagazines/FakeMagazine";
 				_configIndex = 1;
 			};
 		};
 		case "vehicle": {
-			if !(_classname in DZAI_checkedClassnames) then {
+			if !(_classname in (DZAI_checkedClassnames select 2)) then {
 				_config = "CfgVehicles";
 				_banString = "bin\config.bin/CfgVehicles/Banned";
 				_configIndex = 2;
