@@ -158,12 +158,12 @@ _this setMarkerAlpha 0;
 _this setMarkerSize [200, 200];
 _marker_152 = _this;
 
-_this = createMarker ["DZAI_Emmen", [15486.882, 13346.097]];
+_this = createMarker ["DZAI_Emmen", [15495.981, 13431.276]];
 _this setMarkerShape "ELLIPSE";
 _this setMarkerType "Flag";
 _this setMarkerBrush "Solid";
 _this setMarkerAlpha 0;
-_this setMarkerSize [200, 200];
+_this setMarkerSize [150, 150];
 _marker_154 = _this;
 
 _this = createMarker ["DZAI_Wolhusen", [14245.889, 12714.578]];
