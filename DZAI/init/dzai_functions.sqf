@@ -319,7 +319,7 @@ DZAI_findSpawnPos = {
 	while {_continue && {(_attempts < _maxAttempts)}} do {
 		_index = floor (random (count _spawnpool));
 		_spawnPos = _spawnpool select _index;
-		if (({isPlayer _x} count (_spawnPos nearEntities [["AllVehicles","CAManBase"],50])) == 0) then {
+		if (({isPlayer _x} count (_spawnPos nearEntities [["CAManBase","Land"],75])) == 0) then {
 			_continue = false;
 		} else {
 			_spawnpool set [_index,objNull]; 
