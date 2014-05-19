@@ -71,7 +71,7 @@ while {true} do {
 			_deathTime = _x getVariable "DZAI_deathTime";
 			if (!isNil "_deathTime") then {
 				if (time > _deathTime) then {
-					if (({isPlayer _x} count (_x nearEntities ["CAManBase", 20])) == 0) then {
+					if (({isPlayer _x} count (_x nearEntities [["CAManBase","Land"], 20])) == 0) then {
 						_soundFlies = _x getVariable "sound_flies";
 						if (!isNil "_soundFlies") then {
 							detach _soundFlies;

@@ -45,7 +45,7 @@ _playerPos = getPosATL _vehPlayer;
 _playerDir = getDir _vehPlayer;
 
 _spawnPos = [_playerPos,(_baseDist + random (_distVariance)),[(_playerDir-_dirVariance),(_playerDir+_dirVariance)],false] call SHK_pos;
-if ((surfaceIsWater _spawnPos) or {({isPlayer _x} count (_spawnPos nearEntities [["CAManBase"],75])) > 0} or {(_spawnPos in (nearestLocation [_spawnPos,"Strategic"]))}) exitWith {
+if ((surfaceIsWater _spawnPos) or {({isPlayer _x} count (_spawnPos nearEntities [["CAManBase","Land"],125])) > 0} or {(_spawnPos in (nearestLocation [_spawnPos,"Strategic"]))}) exitWith {
 	if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Canceling dynamic spawn for target player %1.",name _targetPlayer]};
 	_nul = _trigger call DZAI_abortDynSpawn;
 	

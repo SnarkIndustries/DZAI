@@ -3,7 +3,7 @@ _unitGroup = _this select 0;
 
 _heli = vehicle (leader _unitGroup);
 _detectRange = if (_unitGroup getVariable ["DetectPlayersWide",false]) then {_unitGroup setVariable ["DetectPlayersWide",false]; 400} else {275};
-_detected = (waypointPosition [_unitGroup,(currentWaypoint _unitGroup)]) nearEntities [["AllVehicles","CAManBase"],_detectRange];
+_detected = (waypointPosition [_unitGroup,(currentWaypoint _unitGroup)]) nearEntities [["Land","CAManBase"],_detectRange];
 
 private ["_nearPlayerUnits","_heliAimPos","_playerAimPos"];
 {
