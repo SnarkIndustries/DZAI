@@ -28,7 +28,6 @@ fnc_despawnBandits = compile preprocessFileLineNumbers format ["%1\spawn_functio
 
 if (DZAI_staticAI) then {
 	fnc_spawnBandits = compile preprocessFileLineNumbers format ["%1\spawn_functions\spawnBandits.sqf",DZAI_directory];
-	DZAI_bldgPatrol = compile preprocessFileLineNumbers format ["%1\compile\ai_buildingpatrol.sqf",DZAI_directory];
 	DZAI_static_spawn = compile preprocessFileLineNumbers format ["%1\compile\fn_createStaticSpawn.sqf",DZAI_directory];
 };
 
