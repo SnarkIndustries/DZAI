@@ -5,6 +5,6 @@
 	
 */
 
-DZAI_BanditTypes = ["BRT_Commander_DZ", "BRT_Officer_DZ", "BRT_Pilot_DZ", "BRT_Scout_DZ", "BRT_Looter_DZ", "BRT_Grunt_DZ"];
+DZAI_BanditTypesNew = ["BRT_Commander_DZ", "BRT_Officer_DZ", "BRT_Pilot_DZ", "BRT_Scout_DZ", "BRT_Looter_DZ", "BRT_Grunt_DZ"];
 
 diag_log "[DZAI] DayZ Unleashed classnames loaded.";

@@ -1,0 +1,12 @@
+DZAI 1.9.8 Changelog:
+============
+
+    [ADDED] Added static spawn configs for Napf map. Further fine-tuning may be needed.
+    [CHANGED] Updated in-comment documentation for static spawn config files (only for config files using the new spawn definition format).
+    [CHANGED] Server-side object patch now checks if CfgTownGenerator exists before continuing. (Reference: http://opendayz.net/threads/cfgtowngenerator-epoch.18555/).
+    [CHANGED] Dynamic spawn system: Removed AI spawn probability limit, added minimum probability of 10% to spawn AI every cycle.
+        Highest probability of maximum possible AI group size (3 units) is reached when probability exceeds 100%.
+        Note: This change does not affect a player's likelyhood of being chosen as a target for dynamic spawns.
+    [FIXED] Static spawns: DZAI will generate a random spawn position using the trigger's position as reference point instead of the intended spawn position if an open space can't be found for spawning AI after 3 successive attempts.
+    [FIXED] AI behavior processing is disabled when the unit is knocked unconscious to prevent AI from firing weapons while knocked out. AI behavior is re-enabled after the knockout timer has completed.
+    [FIXED] Included in a previous unannounced update - Fixed waypoint generation on static AI respawn.

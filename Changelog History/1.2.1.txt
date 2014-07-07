@@ -1,0 +1,4 @@
+1.2.1 Update:
+
+- [UPDATED] Added a check if DZAI is already running to prevent multiple instances of DZAI from starting.
+- [MODIFIED] Adjusted minimum AI helicopter flying height to 90m.

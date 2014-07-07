@@ -1,0 +1,5 @@
+1.1.8 Update:
+
+- [NEW] Added function DZAI_createGroup to create groups for AI use. The function creates groups belonging to the East side, then when/if the number of East groups reaches 140, it will switch to Resistance.
+- [REVERTED] spawnBandits and spawnBandits_dynamic are called instead of spawned (to fix null group issue). 
+- [REVERTED] Re-integrated fn_createGroups into spawnBandits and fn_createGroups_dyn into spawnBandits_dynamic.

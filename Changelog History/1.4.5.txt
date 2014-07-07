@@ -1,0 +1,10 @@
+1.4.5 Update:
+
+- [UPDATED] seekPlayer and findKiller AI pursuit modes now explicitly order units to target and fire on target player.
+- [UPDATED] A smoke grenade is now deployed at location where dynamic AI are spawned.
+- [UPDATED] Reworked static AI spawns for Taviana and Panthera. Further fine-tuning may be needed.
+- [UPDATED] Dynamic AI spawns: A maximum of 6 players (including target player) are revealed to nearby dynamic AI. Previously there was no limit.
+- [REMOVED] Removed custom waypoint definitions files.
+- [MODIFIED] Separated modified BIS_fnc_selectRandom into its own function (BIS_fnc_selectRandom2).
+- [MODIFIED] findKiller AI behavior is now enabled by default. Pursuit distance changed from 500-600m to 400-500m.
+- [MODIFIED] Dynamic spawn trigger activation delay changed from 5/7/20 seconds to 5/7/10 seconds (min/average/max).

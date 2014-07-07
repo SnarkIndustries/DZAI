@@ -11,7 +11,7 @@ _road = if (count _this > 4) then {_this select 4} else {[0,200]};
 
 
 // Object instead of position array given
-if (typename _org == "OBJECT") then {_org = getpos _org};
+if (typename _org == "OBJECT") then {_org = getPos _org};
 
 // Distance given as an array of min and max. Pick a random between them.
 if (typename _dst == "ARRAY") then {
@@ -66,12 +66,12 @@ if ((_road select 0) > 0) then {
 
   // Road position(s) found.
   if (_cnt > 0) then {
-    _p = getpos (_roads select 0);
+    _p = getPos (_roads select 0);
     
     // Found more than one road position, return closest.
     if (_cnt > 1) then {
       for "_i" from 1 to (_cnt - 1) do {
-        _p2 = getpos (_roads select _i);
+        _p2 = getPos (_roads select _i);
         if ((_p2 distance _pos) < (_p distance _pos)) then {
           _p = _p2;
         };

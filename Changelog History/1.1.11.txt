@@ -1,0 +1,6 @@
+1.1.11 Update:
+
+- [UPDATED] Separated static spawn definitions into separate files for ease of editing (triggers, markers).
+- [MODIFIED] Repositioned AI spawn areas for Balota (town) and Balota Airfield to reduce chance of AI encounters near medical tent area.
+- [MODIFIED] Combined AI damage reduction factors for bullet/non-bullet damage.
+- [MODIFIED] Adjusted AI skill ratings (Accuracy, AimingSpeed decreases).

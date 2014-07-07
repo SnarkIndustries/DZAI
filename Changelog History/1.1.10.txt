@@ -1,0 +1,10 @@
+1.1.10 Update:
+
+- [NEW] AI units now stop to heal when they reach 75% health. Healing process takes 3 seconds to complete and fully heals the unit, including broken legs. Each AI unit can heal up to 2 times with a 60 second cooldown in between.
+- [UPDATED] AI health increased. AI can now take damage equivalent to 12000 units of blood (headshots do 50% additional damage). AI hands modified to be immune from damage (aim cannot be impaired).
+- [UPDATED] Mod-specific features setting in dzai_variables.sqf updated to be more descriptive.
+- [MODIFIED] Only zombies close to AI group leaders will be marked as hostile, instead of any AI unit.
+- [MODIFIED] Changed activation delay for triggers created by DZAI_spawn (custom spawn function) to 10/15/20 seconds from 15/17/20 seconds.
+- [MODIFIED] Chernarus: Moved several spawn points for Cherno.
+- [MODIFIED] Chernarus: AI patrols should no longer pass by military/medical tents in Cherno. (Reason: All buildings added in mission.sqm are invisible to AI units).
+- [MODIFIED] Decreased number of medical item loot in AI backpack from 2 to 1. Decreased number of small misc item loot in AI backpack from 3 to 2 (maximum).

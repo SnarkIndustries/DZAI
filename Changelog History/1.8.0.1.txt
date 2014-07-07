@@ -1,0 +1,7 @@
+- 1.8.0.1 Hotfix: 
+
+
+    Helicopter AI are equipped with weapons and backpacks upon exiting their vehicle
+    Converted helicopter AI patrol a short radius (100m) around the landed vehicle
+    The abandoned vehicle should kick out players that attempt to board it.
+    The abandoned vehicle should be deleted 15 minutes after landing.

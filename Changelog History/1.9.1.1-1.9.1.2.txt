@@ -1,0 +1,8 @@
+- 1.9.1.1 - 1.9.1.2 Hotfix: 
+
+    [FIXED] Fixed active static trigger counting.
+    [FIXED] Fixed potential problems for static spawns with fewer than 5 spawn locations.
+    [FIXED] Dynamic spawn area blacklisting now works properly.
+    [FIXED] Dynamic spawn area blacklisting now checks if the marker exists before creating the blacklist area.
+    [CHANGED] Namalsk: Reduced static AI spawns to more reasonable levels.
+    [CHANGED] Epoch Chernarus and Taviana: Updated trader area blacklists

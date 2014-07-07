@@ -1,0 +1,9 @@
+- 1.8.1 Update: 
+
+
+    [FIXED] Fixed hacker check bypass for DZAI-spawned vehicles for servers running Epoch with other non-Chernarus maps.
+        Prevents players from being killed if they attempt to board an AI vehicle.
+    [CHANGED] AI air vehicles are locked from further player access after a player attempts to board.
+    [CHANGED] Reduced patrol range for evacuated heli AI units from 100m to 75m.
+    [CHANGED] AI air vehicles now vary their flying height after completing each waypoint, instead of randomly while traveling.
+    [CHANGED] Chernarus: Repositioned Stary Sobor static spawn area to surround the military tents area. (Note: Highly recommend DZAI_objPatch be set true in dzai_config.sqf).

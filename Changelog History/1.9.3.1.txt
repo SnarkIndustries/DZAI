@@ -1,0 +1,5 @@
+- 1.9.3.1 Hotfix:
+
+
+    [FIXED] Fixed issues with classname verification script if custom weapon tables were defined.
+    [FIXED] DZAI should now properly avoid spawning AI near players for static AI spawns if a player is within 50m of a selected spawn point.

@@ -1,0 +1,5 @@
+1.1.5 Update:
+
+- [FIXED] Fixed active AI counter. Active AI counter is decreased for each AI unit killed, despawned, instead of being updated when the entire group is killed.
+- [FIXED] findKiller: Minimum pursuit distance increased from 400m to 500m to better match maximum detection distance (450m).
+- [FIXED] Despawn script now checks if the group exists before attempting despawn.

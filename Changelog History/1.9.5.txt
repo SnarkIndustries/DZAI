@@ -1,0 +1,33 @@
+- 1.9.5 Update:
+
+
+    [NEW] Temporary dynamic spawn blacklist areas are created after a dynamic spawn area is cleared. Temporary blacklist areas will last for 15 minutes and cover the previous dynamic spawn area.
+    [NEW] Adjustments to dynamic spawn probability calculations to avoid unfairly high spawning rates if server population is very low.
+        The % chance for each player to be selected for dynamic AI spawns should remain consistent for servers with up to 40 players. (Rate will begin to gradually decrease beyond 40 players)
+        For more information, see this thread: http://opendayz.net/threads/balancing-dynamic-spawn-rates-user-input-wanted.18143/
+    [CHANGED] AI arms can no longer be broken.
+    [CHANGED] AI spawned directly using DZAI_setup_AI function use their initial spawn position as reference point for killer-seeking behavior
+        DISCLAIMER: Use of DZAI_setup_AI function directly is not supported and not guaranteed to perfectly spawn AI. Do this at your own risk. The only fully supported method of spawning AI is use of the DZAI_spawn function.
+    [CHANGED] Changed method of installing mission-file version of DZAI. Simply edit DZAI\init\DZAI_version.hpp and follow the instruction inside.
+    [CHANGED] Moved installation instruction text files into new "Guides" directory.
+    [NEW] Added blank map/classname config files for the following maps: Napf, Caribou, Ovaron, Sauerland
+        No preset static spawns have been defined, so DZAI will attempt to generate static spawns in cities and towns (satisfaction not guaranteed).
+    [NEW] Added static spawn configs for DayZ Unleashed
+        Note: DayZ Unleashed static spawn settings will be controlled by the mod developer. I will not be modifying/balancing anything related to Unleashed.
+    [FIXED] Fixed an infinite-loop issue if DZAI is unable to find a free space without players nearby to spawn AI.
+    [FIXED] Fixed flies sound cleanup for AI bodies.
+    [CHANGED] Increased player distance check for dead AI body cleanup from 10m to 20m.
+        NOTE: There is the chance that DayZ's own dead body cleanup will clean up AI bodies before DZAI is able to (since player and AI bodies are indistinguishable), so AI bodies may be deleted even if a player is nearby. This is not DZAI's fault.
+    [CHANGED] Modified the player-hunting AI radio messages to transmit radio messages using the target player as the point of origin instead of the AI group leader
+        Transmit distance reduced from 125m to 50m
+        Target player must be within 125m of AI group leader to receive radio messages
+    [CHANGED] All AI vehicles are now locked from player access upon spawning.
+    [CHANGED] Updated Namalsk classname config files.
+    [CHANGED] Dynamic spawn probability cap increased from 30%/player to 40%/player.
+    [CHANGED] Dynamic spawn player selection ratio increased from 25% of online players to 30% of online players.
+    [CHANGED] Dynamic AI spawn triggers are now removed immediately after the last unit is killed. Previously, there was a 5-minute delay in place but this is no longer needed.
+    [CHANGED] world_map_configs folder renamed to world_spawn_configs for better clarity.
+    [REMOVED] Removed debug marker option from DZAI_config.sqf file.
+        DZAI_debugMarkers variable will have to be manually defined (to any value other than nil) in order to have any effect.
+        The reason behind this change is to reduce the number of people who are tempted to use this option as an easy way to reveal all AI positions - the debug markers aren't intended for constant, everyday use, and I won't give support to anyone who is using them for this purpose. They are meant strictly for debugging purposes and making sure that AI are spawning properly.
+    [REMOVED] Removed support for DayZ Civilian mod

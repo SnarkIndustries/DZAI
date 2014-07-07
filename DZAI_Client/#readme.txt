@@ -14,8 +14,23 @@ DZAI Client Optional Addon
 	3. Repack your mission pbo file.
 	4. In your dzai_config.sqf, ensure DZAI_useRadioAddon is set to "true";
 
-
-2. What it's used for
+2. How to configure
 ------------------
 
-	At this time, the DZAI client addon is only used to display radio text messages to players if they have a Radio in their inventory, and if the DZAI_radioMsgs option is enabled.
+Add these parameters inside the empty array [] to the left of execVM.
+
+"clientradio" - Enable client-side radio messages
+"zombieenemy" - Enable AI-to-zombie hostility
+
+Example: 
+
+	_nul = ["clientradio","zombieenemy"] execVM "DZAI_Client\dzai_initclient.sqf";
+	
+	This will enable both client-side radio and AI-to-zombie hostility.
+
+
+3. What it's used for
+------------------
+
+	- Display radio text messages to players if they have a Radio in their inventory
+	- AI-to Zombie hostility

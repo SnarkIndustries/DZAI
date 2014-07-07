@@ -1,0 +1,5 @@
+1.6.1 Update:
+
+- [CHANGED] Reduced maximum bonus spotDistance rating for all AI skill tiers.
+- [CHANGED] Reduced minimum spotDistance rating for AI skill tier 3 (max tier).
+- [CHANGED] Reduced NWAF AI spawns. There are now fewer groups spawned, and group sizes have been decreased slightly as well.

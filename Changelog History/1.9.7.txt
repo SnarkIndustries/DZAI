@@ -1,0 +1,44 @@
+DZAI 1.9.7 Changelog:
+============
+
+    [ADDED] On-the-fly classname verification for AI loot items.Classnames that are already validated will not be checked again.
+    [ADDED] Spawning dynamic AI will now also call the first available AI helicopter (if any) to investigate the area. This helicopter will arrive in Search and Destroy patrol mode and have increased detection range.
+    [ADDED] Server admins may set the minimum amount of time required for maximum dynamic spawn probability by editing the new variable DZAI_maxSpawnTime in dzai_config.sqf.
+        By default, maximum dynamic spawn probability is reached 30 minutes (1800 seconds) since the last spawn.
+        Recommended range: 1200-1800. (Personally, I found 1200 to be a bit on the excessively frequent side).
+    [ADDED] Sauerland static spawn configs (72 spawn locations).
+    [ADDED] Epoch: Added trader area blacklist areas for the following maps: Sauerland, Napf, Caribou, Sahrani (SMD version), Ovaron.
+    [FIXED] Fixed bug with AI rearm script that occasionally caused it to become permanently stuck in the initialization stage.
+    [FIXED] Added fix to prevent AI counter variable from becoming undefined.
+    [FIXED] Fixed possible exploit that would allow players to escape from AI pursuit behaviors.
+    [FIXED] Fixed Killed EH for ground AI vehicle patrols.
+    [FIXED] Dynamic spawn will be canceled if calculated spawn position is water.
+    [FIXED] AI units that are knocked out should no longer be able to regain blood while they are unconscious.
+        Previously, AI units would be able to gain a single "tick" of healing during the 2-second window where they were knocked unconscious after the initial consciousness check, but before some blood was restored.
+    [CHANGED] Tightened AI spawn position variance from 50-200m to 25m-100m. Note: It is extremely rare for the actual spawn position to vary by more than 25m and only happens occasionally when the spawn area is unusually cluttered.
+    [CHANGED] Upon taking damage, AI health will be reset if health values are not found. Previously, default Arma2 damage handling was used if AI health values were not properly set.
+    [CHANGED] After heli AI units are ejected, helicopter ammo and fuel levels are forced to zero to prevent residual flames/explosions from happening.
+    [CHANGED] All units of an AI land vehicle patrol should now exit their vehicle upon encountering players. (unconfirmed).
+    [CHANGED] Rebalanced AI skill parameters - minimum AI spotDistance and spotTime skill settings raised slightly.
+    [CHANGED] Increased AI knockout timers from 12.5 seconds (25 sec. for headshots) to 15 seconds (30 sec. for headshots).
+    [CHANGED] Dynamic spawn system: Increased maximum selection probability from 40% to 50%.
+    [CHANGED] Dynamic spawn system: Decreased cycle frequency variance from 4 mins to 2 mins
+        Actual variance between cycles is changed from 5-9 minutes to 5-7 minutes.
+    [CHANGED] AI helicopter detection distance increased:
+        Normal patrol: 250m to 275m
+        Search-and-destroy patrol: 350m to 400m
+        Note: Detection occurs when helicopter arrives at its destination. Players may evade detection by hiding behind objects and escaping the helicopter's line of sight.
+    [CHANGED] DZAI_refreshRate now only affects reammo/refuel frequency of AI air/land vehicles. AI units have their rearm/heal frequency fixed at 15 seconds.
+    [CHANGED] AI unit initial blood level now randomized between 10,000 - 12,000 (exact numbers to be determined)
+        Note: This only affects ground AI units. Heli/vehicle AI will always start with maximum blood (12,000)
+        Plea from Buttface: Please don't ask for customization options for blood levels at this time, and certainly not specific blood levels for certain type of AI, etc. This is just an experimental change.
+    [CHANGED] Increased time required for AI to fully self-heal from 6 to 9 seconds.
+        After 9 seconds of healing, any broken bones will be healed, unless the unit is knocked out before completing the final 3 seconds of the healing process (6 second time window).
+        AI will heal 2000 blood every 3 seconds, for up to 6000 blood restored
+        Healing can be interrupted by knocking the unit unconscious.
+    [CHANGED] AI healing threshold reduced from 7200 to 5000 blood (the amount that AI blood must drop below to allow healing).
+        Note: AI self-healing may also be triggered by broken legs, in which case self-healing may begin even if AI blood is above 5000. However, broken legs are only healed if the AI unit is able to self-heal continuously for 9 seconds without being knocked unconscious.
+    [CHANGED] AI killed by collision/physics damage will have their inventories cleared.
+    [CHANGED] Dynamic spawn will be canceled if the AI spawn position is inside a blacklisted area.
+    [CHANGED] Updated trader area dynamic blacklists for Chernarus.
+    [REMOVED] Removed passive zombie aggro option.

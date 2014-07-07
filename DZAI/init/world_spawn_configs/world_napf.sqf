@@ -617,12 +617,12 @@ if (DZAI_staticAI) then {
 		['DZAI_Lenzburg',[1,1],[],1] call DZAI_static_spawn;
 		['DZAI_Trueb',[2,1],[],0] call DZAI_static_spawn;
 		['DZAI_Seltisberg',[1,1],[],0] call DZAI_static_spawn;
-		['DZAI_Neue_Welt',[1,1],[],0,2] call DZAI_static_spawn;
+		['DZAI_Neue_Welt',[1,1],[],0] call DZAI_static_spawn;
 		['DZAI_Bubendorf',[1,1],[],0] call DZAI_static_spawn;
 		['DZAI_Huttwil',[1,1],[],0] call DZAI_static_spawn;
 		['DZAI_Ruchfeld',[0,2],[],0] call DZAI_static_spawn;
 		['DZAI_Oberdorf',[1,1],[],0] call DZAI_static_spawn;
-		['DZAI_Muttenz',[1,1],[],1,2] call DZAI_static_spawn;
+		['DZAI_Muttenz',[1,1],[],1] call DZAI_static_spawn;
 		['DZAI_Muenchenstein',[1,1],[],1] call DZAI_static_spawn;
 		['DZAI_Chatzbach',[2,1],[],1] call DZAI_static_spawn;
 		['DZAI_Bruderholz',[1,1],[],0] call DZAI_static_spawn;
@@ -631,7 +631,7 @@ if (DZAI_staticAI) then {
 		['DZAI_Ruemlingen',[1,1],[],0] call DZAI_static_spawn;
 		['DZAI_Hirsegg',[1,1],[],0] call DZAI_static_spawn;
 		['DZAI_Lausen',[1,1],[],0] call DZAI_static_spawn;
-		['DZAI_Unterdorf',[1,1],[],0] call DZAI_static_spawn;
+		['DZAI_Unterdorf',[0,1],[],0] call DZAI_static_spawn;
 		['DZAI_Luzern',[2,1],[],1,2] call DZAI_static_spawn;
 		['DZAI_Emmen',[1,1],[],1] call DZAI_static_spawn;
 		['DZAI_Wolhusen',[1,1],[],0] call DZAI_static_spawn;
@@ -678,6 +678,7 @@ if (DZAI_staticAI) then {
 		['DZAI_MilanMilitary',[2,0],[],3] call DZAI_static_spawn;
 		['DZAI_Nordstern',[0,1],[],0] call DZAI_static_spawn;
 		['DZAI_SouthAirbaseBarracks',[2,0],[],3] call DZAI_static_spawn;
+		['DZAI_SuhrenfeldHotels',[1,1],[],2] call DZAI_static_spawn;
 	};
 };
 

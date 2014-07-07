@@ -1,0 +1,2 @@
+- 1.8.1.1 Hotfix: Fix for DayZ Epoch 1.0.3 loot table structure change.
+- 1.8.1.2 Hotfix: Fix for undefined variable causing AI helicopter gunners to have maximum skill.

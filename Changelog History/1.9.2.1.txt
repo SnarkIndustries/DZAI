@@ -1,0 +1,21 @@
+- 1.9.2.1 Hotfix:
+	
+	This is hotfix is to solve issues with a small number of static triggers for certain maps. If your server is not running any of these maps, then this hotfix is not necessary. As usual, the update is available here: https://github.com/dayzai/DayZBanditAI
+
+	Affected maps and spawns:
+
+    Lingor/Hunting Grounds:
+        Sargento
+        Prison
+        Presidente Palace
+        Various military bases
+    Celle
+        ETHS
+    Namalsk
+        Seraja Army Base
+        Sebjan Mine
+        Object A2
+        Sebjan Chemical Factory
+        Sebjan
+        Lubjansk
+        C130 Crashsite

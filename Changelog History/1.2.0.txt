@@ -1,0 +1,17 @@
+1.2.0 Update:
+
+- [NEW] Humanity can now be awarded to players for AI unit kills. Humanity rewarded can be edited in DZAI_variables.sqf.
+- [NEW] Added DZAI Scheduler to manage all scheduled tasks.
+- [NEW] Added prototype version of AI helicopter patrols feature, which can be enabled in DZAI_variables.sqf. Helicopter patrols require edits to server_cleanup.fsm. Instructions have been provided in the Required Edits section. More details on the helicopters feature here: http://opendayz.net/threads/release-dzai-lite-dynamic-ai-package.11116/page-8#post-61128.
+- [NEW] Added debug markers for static triggers. Markers will appear after the trigger's first activation. Color codes: Yellow (inactive), Orange (active), Red (Error).
+- [FIXED] Fixed error that prevented Radio text messages from being displayed to player when dynamic AI have ended their pursuit state.
+- [FIXED] Fixed bug where static triggers would be unable to continue spawning AI units if the calculated number of AI to respawn is zero.
+- [UPDATED] SHK_pos package included with DZAI is now only initialized if it is not already started.
+- [UPDATED] All AI death loot scripts integrated into fnc_addLoot.
+- [UPDATED] Updated DZAI Server Monitor output. Text output is now separated into overall server statistics (uptime, AI count), static AI statistics, dynamic AI statistics.
+- [UPDATED] Chernarus: Repositioned patrol area and spawn points for AI units at NEAF. AI numbers increased to 2 minimum + 2 maximum additional.
+- [UPDATED] Reduced probability of generating Small-type misc items from 66% to 60%.
+- [UPDATED] Reduced probability of generating Large-type misc items from 20% to 15%.
+- [MODIFIED] Locations of debug markers for dynamic triggers are now refreshed at an interval specified by DZAI_monitorRate.
+- [MODIFIED] Renamed several script files, some added directly into DZAI_functions.sqf
+- [MODIFIED] Maximum dynamic trigger area overlap tolerance increased to 15% from 10%.

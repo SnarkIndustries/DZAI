@@ -152,11 +152,11 @@ _this setMarkerBrush "Solid";
 _this setMarkerSize [200, 200];
 _marker_152 = _this;
 
-_this = createMarker ["DZAI_Emmen", [15486.882, 13346.097]];
+_this = createMarker ["DZAI_Emmen", [15495.981, 13431.276]];
 _this setMarkerShape "ELLIPSE";
 _this setMarkerType "Flag";
 _this setMarkerBrush "Solid";
-_this setMarkerSize [200, 200];
+_this setMarkerSize [150, 150];
 _marker_154 = _this;
 
 _this = createMarker ["DZAI_Wolhusen", [14245.889, 12714.578]];
@@ -404,7 +404,7 @@ _this setMarkerBrush "Solid";
 _this setMarkerSize [175, 175];
 _marker_219 = _this;
 
-_this = createMarker ["DZAI_LenzburgIndustrial", [9175.3018, 15692.503]];
+_this = createMarker ["DZAI_LenzburgIndustrial", [9149.332, 15644.616]];
 _this setMarkerShape "ELLIPSE";
 _this setMarkerType "Flag";
 _this setMarkerBrush "Solid";
@@ -466,6 +466,27 @@ _this setMarkerType "Flag";
 _this setMarkerBrush "Solid";
 _this setMarkerSize [175, 175];
 _marker_229 = _this;
+
+_this = createMarker ["DZAI_Nordstern", [10057.302, 18093.361]];
+_this setMarkerShape "ELLIPSE";
+_this setMarkerType "Flag";
+_this setMarkerBrush "Solid";
+_this setMarkerSize [175, 175];
+_marker_231 = _this;
+
+_this = createMarker ["DZAI_SoutAirbaseBarracks", [18076.391, 2579.5398, 0]];
+_this setMarkerShape "ELLIPSE";
+_this setMarkerType "Flag";
+_this setMarkerBrush "Solid";
+_this setMarkerSize [150, 150];
+_marker_232 = _this;
+
+_this = createMarker ["DZAI_SuhrenfeldHotels", [16577.482, 18223.15]];
+_this setMarkerShape "ELLIPSE";
+_this setMarkerType "Empty";
+_this setMarkerBrush "Solid";
+_this setMarkerSize [100, 100];
+_marker_233 = _this;
 
 processInitCommands;
 runInitScript;

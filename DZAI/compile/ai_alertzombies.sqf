@@ -8,19 +8,19 @@ _pos = 		_this select 3;
 _listTalk = _pos nearEntities ["zZombie_Base",_distance];
 
 {
-private["_localtargets","_remotetargets","_targets","_dis"];
-
-	_zombie = _x;
+	private ["_targets"];
 	if (_doRun) then {
 		_localtargets = _x getVariable ["localtargets",[]];
 		_remotetargets = _x getVariable ["remotetargets",[]];
-		_targets = _localtargets + _remotetargets;
+		_epochtargets = _x getVariable ["targets",[]];
+		_targets = _localtargets + _remotetargets + _epochtargets;
 		if (!(_unit in _targets)) then {
 			_remotetargets set [count _remotetargets,_unit];
 			_x setVariable ["remotetargets",_remotetargets,true];
+			_x setVariable ["targets",_remotetargets,true];
 		};
 	} else {
-		_zombie setVariable ["myDest",_pos,true];
+		_x setVariable ["myDest",_pos,true];
 	};
 
-} forEach _listTalk;
+} count _listTalk;

@@ -1,0 +1,9 @@
+1.1.6 Update:
+
+- [NEW] Added improved support for custom AI spawn definitions. Custom AI spawns are added in DZAI\init\world_map_configs\world_mapname, where "mapname" is the map your server is running. Basic instructions can be found here: http://img42.imageshack.us/img42/3187/5o.png. Note: You must create the marker in the ArmA2 3D editor (Alt+E to access from main menu).
+- [FIXED] Fixed rare cases where null AI groups would be generated when spawning AI.
+- [UPDATED] Updated configuration files in trig_configs folder with updated spawnBandits format.
+- [MODIFIED] Increased pursuit distance for dynamic AI from 100m to 200m of initial position of targeted player.
+- [MODIFIED] Increased Accuracy and AimingShake ratings of AI for all skill levels.
+- [MODIFIED] Chernarus: moved reference marker for dynamic AI spawns further south slightly.
+- [MODIFIED] Increased probability of dynamic AI to spawn with weapons from MilitarySpecial table from 4% to 8%, HeliCrash table from 1% to 2%. (Military weapons probability decreased accordingly).

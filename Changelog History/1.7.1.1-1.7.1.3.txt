@@ -1,0 +1,14 @@
+1.7.1.1 Supplemental Update:
+------------------------------
+
+- [CHANGED] Zombies near AI group leader are once again revealed (speeds up target acquisition for zeds).
+
+1.7.1.2 Bugfix:
+------------------------------
+
+- [FIXED] Fixed typo that prevented non-respawn option in DZAI_spawn function from working properly. (Thanks to Markk311)
+
+1.7.1.3 Bugfix:
+------------------------------
+
+- [FIXED] Disabling dynamic AI spawns should not disable DZAI's map reference marker if helicopter patrols are enabled.

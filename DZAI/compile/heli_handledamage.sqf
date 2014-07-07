@@ -7,27 +7,36 @@ _ammo = 		_this select 4;				//Classname of the projectile that caused inflicted
 
 _durability = _unit getVariable "durability";
 
-if ((_ammo != "")&&(!isNil "_durability")) then {
-	switch (_hit) do {
-		case "": {	//Structural damage
+if ((_ammo != "")&&{!isNil "_durability"}) then {
+	call {
+		if (_hit == "") exitWith {
+			//Structural damage
 			_partdamage = (_durability select 0) + _damage;
 			_durability set [0,_partdamage];
 			if (((_partdamage >= 0.9) or {((_durability select 1) >= 0.9)}) && {(alive _unit)}) then {
-				0 = [_unit] call DZAI_heliGetOut; 
+				0 = [_unit] call DZAI_parachuteOut; 
 				_nul = _unit spawn {
-					sleep 3;
+					uiSleep 3;
 					_this setVehicleAmmo 0;
 					_this setFuel 0;
 					_this setDamage 1;
 				};
-				_unit removeAllEventHandlers "HandleDamage"; _unit removeAllEventHandlers "GetOut"; _unit removeAllEventHandlers "Killed";
+				{_unit removeAllEventHandlers _x} forEach ["HandleDamage","GetOut","Killed"];
 			};
 		};
-		case "motor": {	//Engine damage
+		if (_hit == "motor") exitWith {
 			_partdamage = (_durability select 1) + _damage;
 			_durability set [1,_partdamage];
-			if ((_partdamage > 0.88) && (alive _unit)) then {
+			if ((_partdamage > 0.88) && {alive _unit}) then {
 				_damage = 0.88;	//Intercept fatal damage to helicopter engine - next hit will destroy the helicopter.
+			};
+		};
+		if (_hit == "mala vrtule") exitWith {
+			_partdamage = (_durability select 2) + _damage;
+			_durability set [2,_partdamage];
+			if ((_partdamage >= 0.9) && {_unit getVariable ["tailRotorFunctional",true]}) then {
+				_unit setHit ["mala vrtule",1];	//Knock out helicopter tail rotor when sufficiently damaged
+				_unit setVariable ["tailRotorFunctional",false];
 			};
 		};
 	};

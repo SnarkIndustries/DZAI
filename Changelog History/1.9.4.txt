@@ -1,0 +1,27 @@
+- 1.9.4 Update:
+
+
+    [NEW] Added experimental support for custom loot tables by AVendettaForYou (http://opendayz.net/threads/tutorial-custom-loot-tables-and-adjusting-spawn-rates.11589/)
+        To have DZAI read from your own custom loot tables, edit /scripts/buildWeaponArrays.sqf and set DZAI_useCustomLoot = true;
+        Warning: This is an experimental feature and not guaranteed to work perfectly. If you experience problems with it, do not use it. However, please do report if this feature works for you or not. Thanks.
+        Enabling this setting will have no effect if no custom loot tables are found.
+    [CHANGED] Dynamic AI will only pursue players responsible for killing a group member once they have completed their hunting phase.
+        Dynamic AI player-killer seek range is limited to 150m (static AI seek range is unchanged at 300m).
+    [CHANGED] Optional AI gunfire noise to zombies is now fixed at player-equivalent levels.
+        DZAI_weaponNoise option is now a true/false setting, instead of a multiplier value.
+        If you have defined DZAI_weaponNoise in your dzai_settings_override file, make sure you update it to either true or false. If you leave it as a numerical value, you will experience problems.
+        AI gunfire noise will only aggro nearby zombies at most once every 5 seconds to prevent server overload.
+    [CHANGED] Breaking AI arms no longer produces audible bone-breaking sound.
+    [CHANGED] Additional script files have been updated to use lazy evaluation for Boolean conditions.
+    [CHANGED] Changes to AI skill values:
+        Decrease in maximum AI endurance values
+        Decrease in maximum AI spotTime values
+        Increase in minimum AI reloadTime values
+        Decrease in maximum AI commanding values
+        Decrease in minimum helicopter AI skill values
+        Note: for an explanation of AI skill parameters, see this link: http://community.bistudio.com/wiki/AI_Sub-skills
+    [CHANGED] If static AI triggers cannot find a suitable location to spawn AI without players within 50m, no AI will be spawned. Instead, the AI group will be inserted into the respawn queue for another try.
+        Respawn time will be half of normal respawn time.
+    [CHANGED] If a player is found within 100m of calculated dynamic AI spawn position, spawn will be cancelled entirely.
+    [CHANGED] Chernarus: Repositioned NEAF static AI patrol path and reduced patrol radius.
+    [FIXED] Headshot counting for heavy-damage gunshots. (unconfirmed)

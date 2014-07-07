@@ -1,0 +1,10 @@
+DZAI 1.9.9 Changelog:
+============
+
+    [ADDED] Due to basement flooding as a result of user tears, added config variable DZAI_heliReinforceChance to determine the probability that dynamic AI spawns will also call for helicopter reinforcement. Default setting is 0.75 (75% chance), disable reinforcement by setting to 0.
+    [ADDED] Added DZAI_customLootTables config variable for custom loot table support. If enabled, DZAI will read from user-installed custom loot tables to find AI-usable weapon classnames (if dynamic weapon list is enabled).
+        Note that I can't provide support for installing custom loot tables.
+    [CHANGED] AI units with weapon magazine sizes smaller than 8 will be supplied with 2 magazines instead of 1.
+    [CHANGED] default_classnames.sqf config file has been renamed to global_classnames.sqf. This new file is moved one level up. For more details, see this post: http://opendayz.net/threads/explana...s-sqf-and-why-its-important.18635/#post-94351
+    [UPDATED] Dynamic weapon generation script will fall back on prebuilt weapon tables in global_classnames.sqf if it is unable to find weapon classnames from loot tables. Exception: If no HeliCrash loot tables are found, MilitarySpecial loot tables will be used instead. Failing that, prebuilt tables in global_classnames.sqf will be used instead.
+        This change prevents empty weapon tables from being generated if there are changes in DayZ's loot table structure.

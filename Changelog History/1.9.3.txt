@@ -1,0 +1,40 @@
+- 1.9.3 Update:
+
+	
+    [NEW] Added option to use clientside method of displaying radio text messages.
+        To enable, set "DZAI_useRadioAddon = true" in dzai_config.sqf
+        Enabling this requires the DZAI client add-on to be installed into your mission pbo and the following inserted into your mission init.sqf:
+        Code:
+
+        _nul = [] execVM "DZAI_Client/dzai_initclient.sqf";
+
+        If DZAI_useRadioAddon is enabled, radio text messages will be repeated on player's screen 3 times within 3 seconds.
+        If DZAI_useRadioAddon is disabled, the radio messages will be transmitted by the normal remote execution method,
+    [CHANGED] Several changes to AI patrolling behavior
+        AI with patrol radius less than 75m will patrol walking instead of running.
+        AI with patrol radius less than 100m will not search for nearby loot piles.
+        AI with patrol radius less than 100m will tend to linger at each patrol waypoint for a longer amount of time
+    [CHANGED] AI headshots with sufficient damage are now autokills (similar to players).
+    [CHANGED] Lowered AI aimingShake and aimingSpeed values for weapongrade 0 units.
+    [CHANGED] Adjusted dynamic spawn cycle frequency:
+        Old frequency: 5-8 minutes per cycle
+        New frequency: 5-9 minutes per cycle
+        Previous time required to reach maximum % spawn probability (per person): 15-24 minutes.
+        New time required to reach maximum % spawn probability (per person): 20-36 minutes.
+    [CHANGED] Epoch: Increased blacklist radius of each trader area to 300m from 200m.
+    [CHANGED] Classnames in custom weapon tables (DZAI_Rifles4-9) are now also verified.
+    [CHANGED] Improved and simplified DZAI weapon classname verification script.
+    [CHANGED] AI units with patrol radius of 1m will no longer be assigned patrol waypoints
+        Note: For custom spawns where AI are to be standing stationary, simply create 1x1 markers. However, the AI group's direction will remain fixed.
+    [CHANGED] Integrated DZAI monitor into DZAI task scheduler.
+    [CHANGED] DZAI AI cleanup now avoids cleaning up bodies if players are within 10m of the body.
+    [CHANGED] Modified several script files to use "lazy evaluation" of boolean conditions.
+    [CHANGED] AI air/land vehicles now have cargo contents cleared.
+    [CHANGED] Server-side object patch is now enabled by default.
+    [FIXED] Fixed headshot counting for AI kills.
+    [FIXED] Fixed faulty line of radio dialogue for AI pursuits.
+    [FIXED] Fixed radio dialogue transmission for dynamic AI pursuits.
+    [FIXED] Fixed loop timing for dynamic AI pursuits.
+    [FIXED] Banned vehicle weapons will no longer be added to AI air vehicles.
+    [FIXED] Dynamic spawn blacklists are now also generated in towns/cities for unrecognized maps.
+    [FIXED] Fixed cleanup for disabled unarmed land AI vehicles.

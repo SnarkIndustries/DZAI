@@ -5,5 +5,6 @@
 	
 */
 
-[DZAI_BanditTypes,["Coach_DZT","SF_Survivor_DZT","Merc_GasMask_DZT","Merc_Balaclava_DZT","Bandit_1_1_DZT","Bandit_1_2_DZT","Bandit_1_3_DZT"]] call DZAI_append;
+DZAI_BanditTypesNew = ["Coach_DZT","SF_Survivor_DZT","Merc_GasMask_DZT","Merc_Balaclava_DZT","Bandit_1_1_DZT","Bandit_1_2_DZT","Bandit_1_3_DZT"];
+
 diag_log "[DZAI] Trinity Island classnames loaded.";

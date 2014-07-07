@@ -1,9 +1,17 @@
-private ["_trigger","_markername","_marker"];
+private ["_trigger","_marker"];
 _trigger = _this select 0;
 
 _marker = str (_trigger);
+if ((getMarkerColor _marker) == "") then {
+	_marker = createMarker [_marker, (getPosASL _trigger)];
+	_marker setMarkerType "Defend";
+	_marker setMarkerBrush "Solid";
+};
 
+_marker setMarkerText "STATIC TRIGGER (ACTIVE)";
+_marker setMarkerColor "ColorRed";
+	
 while {(getMarkerColor _marker) != "ColorGreen"} do {
 	_marker setMarkerPos (getMarkerPos _marker);
-	sleep 30;
+	uiSleep 30;
 };

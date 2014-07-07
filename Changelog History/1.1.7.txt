@@ -1,0 +1,6 @@
+1.1.7 Update:
+
+- [FIXED] Fixed cause of null groups being created (again).
+- [UPDATED] spawnBandits/spawnBandits_dynamic now handles spawn point calculations, fn_createGroups/fn_createGroups_dyn handles group creation and trigger variable initialization, and fn_createUnit handles creation of individual AI units.
+- [UPDATED] For static triggers instructed to spawn multiple groups, each individual group's size may now vary instead of being a simple duplicate of the first group.
+- [REMOVED] Removed DZAI_spawnExtra variable.

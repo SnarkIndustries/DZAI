@@ -1,7 +1,7 @@
 
 _areas = _this;
 
-waitUntil {sleep 1; !isNil "DZAI_locations_ready"};
+waitUntil {uiSleep 1; !isNil "DZAI_locations_ready"};
 
 for "_i" from 0 to ((count _areas) -1) do {
 	private ["_area"];
@@ -17,5 +17,5 @@ for "_i" from 0 to ((count _areas) -1) do {
 			_blacklist setRectangular true;
 		};
 	};
-	sleep 0.001;
+	uiSleep 0.001;
 };

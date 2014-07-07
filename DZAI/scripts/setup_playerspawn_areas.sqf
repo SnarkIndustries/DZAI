@@ -1,9 +1,9 @@
 
-
-{
-	if ((getMarkerColor _x) != "") then {
-		_blacklist = createLocation ["Strategic",getMarkerPos _x,600,600];
-		//diag_log format ["DEBUG :: Created fresh spawn protection area at %1.",getMarkerPos _x];
-	};
-} forEach ["spawn0","spawn1","spawn2","spawn3","spawn4"];
-	
+_index = 0;
+while {(getMarkerColor ("spawn" + (str _index))) != ""} do {
+	_markerPos = getMarkerPos ("spawn" + (str _index));
+	_blacklist = createLocation ["Strategic",_markerPos,600,600];
+	_index = _index + 1;
+	uiSleep 0.5;
+};
+if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Created %1 dynamic spawn blacklist areas for new player spawn areas.",_index]};

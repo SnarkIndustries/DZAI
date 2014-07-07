@@ -1,0 +1,64 @@
+DZAI 1.8.0 - 1.8.1.2 Changelogs:
+============
+
+- 1.8.0 Update: 
+
+    [NEW] Overhauled AI health system to use a 12,000 blood system nearly identical to players.
+        AI units will stop to heal when their blood level drops below 7800 or suffer fractured bones.
+        AI models will not show damage until they are permanently killed or suffer fractured bones.
+        Headshots, grenades and high-caliber weapons will inflict increased damage.
+        AI bones are twice as durable compared to DZAI 1.7.x AI (same durability as players).
+    [NEW] Users may specify air vehicle weapons for unarmed AI air vehicles
+        Configuration is controlled by the DZAI_airWeapons array in dzai_config.sqf
+        The first array lists each unarmed air vehicle, while the second array defines the corresponding weapon for the vehicle.
+        By default: AN2 planes are equipped with an M240, AH6X helicopters are equipped with an M134.
+        Caution: Vehicle weapon classnames won't be verified by DZAI, so it is the user's responsibility to make sure the classnames used are valid and not banned.
+    [NEW] When an AI helicopter/plane is destroyed, live AI units will be parachuted out (default action).
+        These units will patrol a short distance around the wreck area.
+        The option to use the previous system is still available in dzai_config.sqf, where dead units are parachuted out instead by setting DZAI_airLootMode to 1.
+        Users may still choose to disable any type of loot generation after destruction of an AI air vehicle by setting DZAI_airLootMode to 0.
+    [NEW] AI helicopter/planes are now allowed to land instead of self-destructing. AI crew units will be converted to ground AI units and patrol a short distance around their landed vehicle.
+        The air vehicle will be locked from player access and will be deleted after 15 minutes.
+    [NEW] Added conversion patch for users to convert DZAI for installation into the mission pbo file.
+    [NEW] Epoch: Added several Epoch-exclusive food and drink items to Epoch classname config files. Credits: Vampire for suggesting and providing classname list.
+    [FIXED] Epoch: ItemHatchet and ItemMatchbox classnames replaced with their _DZE versions. Thanks to Vampire for reporting this issue.
+    [CHANGED] Temporary AI NVG option (DZAI_tempNVGs) now applies to all AI units with weapongrade 1 or higher (previously 2 or higher).
+        All AI with at least a military-class weapon will be eligible for temporary NVGs if this option is enabled.
+    [CHANGED] Added checks to prevent a targeted player from being spammed with multiple radio text messages if they are pursued by multiple AI groups
+        If a player is receiving radio text messages, new ones won't appear until the first pursuit is complete.
+        Pursuit messages don't "overlap" - meaning if a new pursuit begins while another is still ongoing, the second pursuit messages won't show up even if the first one ends.
+    [CHANGED] Added an eventhandler to all AI air vehicles to kick out players who attempt to board.
+    [CHANGED] Unconsciousness timers: 20 seconds for heavy damage to head, 12.5 seconds for other body locations.
+    [CHANGED] AI units receiving critical damage to their head will show "shot in the head" as their cause of death upon using Study Body.
+    [CHANGED] Modified AI behavior settings to improve AI player killer-hunting.
+        Prior to 1.8.0, AI units enter "Combat" mode after a group member is killed, causing them to move more slowly and cautiously. While this allowed AI to ambush players from around corners, this prevented them from effectively chasing the player.
+        Note: AI may appear to run away from the player after killing an AI group member instead of chasing. The unit is not actually running from the player, but attempting to regroup with their group leader. Once regrouped, the remaining units will hunt the player together. This is default Arma2 AI behavior.
+    [CHANGED] Lowered probability of equipping AI with pistol as primary weapon from 45% to 25%.
+    [CHANGED] AI findKiller behavior: Chase distance and initial detection range fixed at 400m.
+        AI group will detect first player who kills a group member from a range of 400m
+        AI group will chase targeted player a maximum distance of 400m from victim's body.
+    [CHANGED] AI findKiller behavior: Minimum chase duration in increased from 2 minutes to 3 minutes
+        Chase duration increased by 20 seconds for every additional kill by the same player until the last AI group member is killed.
+    [CHANGED] New version of dynamic AI spawn system is now default.
+        Previous trigger-based version is now optional and will be removed in DZAI 1.9.x
+    [CHANGED] Dynamic spawn AI will carry Military-grade weapons at minimum, and will not use pistols.
+    [CHANGED] AI skill settings in dzai_config are now defined by minimum and maximum skill, as opposed to minimum skill and maximum bonus amount.
+        IMPORTANT: If you have overridden these settings in your dzai_settings_override.sqf file, make sure you use this new config format, otherwise problems will happen.
+    [CHANGED] General AI skill settings tweaked and increased for better responsiveness. (Accuracy is mostly unchanged).
+    [CHANGED] DZAI will now avoid spawning static AI at a location if a player is within 50m of the chosen spawn point (increased from 40m distance).
+        Each location with a player is temporarily blacklisted so it cannot be chosen again for the same spawn attempt.
+    [CHANGED] Dynamic AI spawn cycle changed from 10 minutes/cycle to 8-12 minutes/cycle.
+    [CHANGED] AI respawn handler script modified to allow parallel-style respawning as opposed to single file, serial-style respawning. This will allow respawn timers to be variable instead of fixed.
+    [CHANGED] Dynamic AI will now tend to spawn in a forward arc from the player.
+        This means AI will tend to spawn some distance in front of the player.
+    [CHANGED] Epoch: Dynamic AI blacklist area created by Plot Poles increased from 75m radius to 100m radius.
+    [CHANGED] AI respawn time changed from 10 mins (fixed) to 5-10 minutes (variable).
+    [CHANGED] If a static spawn has no minimum amount of AI to spawn and the randomly-generated amount is zero, the next attempt to reroll the spawn will be half of the normal respawn timer (between 2.5 to 5 minutes per attempt).
+    [CHANGED] Enabling AI helicopter patrols no longer requires any server_cleanup.fsm edit.
+    [CHANGED] Changed the way AI self-heal is handled to approximately resemble DayZ-style bloodbag procedure (healing over time as opposed to instant).
+        AI blood threshold to begin healing reduced from 65% to 60% (Minimum 7800 blood to 7200 blood).
+        AI self-healing can now be interrupted by knocking the unit unconscious with heavy damage.
+        AI healing duration increased from 4 seconds to 6 seconds.
+        AI now heal gradually in increments of +2000 blood once every 2 seconds for 6 seconds (total blood recovery: 6000). Healing is limited up to 12,000 blood.
+        AI bones will only be healed if they are able to heal for at least 4 seconds without being knocked unconscious.
+        The delay between low health/broken bones and start of healing process is determined by the DZAI_refreshRate setting, which also controls AI rearm and zed aggro frequency.

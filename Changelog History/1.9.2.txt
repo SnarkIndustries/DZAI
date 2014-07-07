@@ -1,0 +1,40 @@
+- 1.9.2 Update: 
+
+    [CHANGED] Merged core DZAI files for dayz_server and mission pbo versions.
+        The missionfile patch is now simply the version.hpp file (installation method remains the same).
+    [CHANGED] Added separate function to register bandit kills and humanity (if enabled).
+    [CHANGED] Many functions are no longer compiled and loaded if they're not required.
+    [CHANGED] Spawn area and spawn location markers are now deleted after they're no longer required (custom AI spawn markers are exempted).
+    [CHANGED] Modifications to the radio messaging system:
+        If DZAI_findKiller enabled: AI group leaders will broadcast radio text messages to players with radios within a 125m radius.
+            These changes will allow nearby players to be aware if a nearby AI group is currently hunting down another player, or allow the target player to know if a pursuing AI group is close. Currently, the Radio provides too easy of a way for players to evade pursuing AI groups by easily knowing their distance.
+            Messages will not be broadcasted if group leader is dead or unconscious
+            Messages may contain one of the following: target name, target skin, target distance, pursuit end reason (lost contact with target, target killed).
+        Dynamic AI pursuit:
+            Radio messages will be broadcasted to target player and players within a 50m radius of the target player and received for each player with a radio.
+            Radio messages contain same information as findKiller text.
+            These changes are intended to improve group gameplay by allowing a nearby friendly player with a radio to warn the group if someone is being pursued by dynamic AI.
+            Pursuit messages will not be transmitted if AI group is currently hunting for a player responsible for killing a group member.
+        For both:
+            Radio messages will only be broadcasted if there are at least 2 live units in the group (a lone AI unit will never transmit radio messages)
+    [CHANGED] FindKiller: AI group pursuit range reduced to 300m from 400m.
+    [CHANGED] FindKiller: Frequency of player position update lowered to 1 update/20 seconds from 1 update/15 seconds.
+    [CHANGED] Dynamic AI will hunt player regardless of what vehicle they're in, but will still not pursue beyond 450m of their spawn location. Frequency of player position update lowered to 1 update/20 seconds from 1 update/15 seconds.
+    [CHANGED] Dynamic AI: Frequency of player position update increased to 1 update/25 seconds from 1 update/30 seconds.
+    [CHANGED] Minimum number of AI self-heals increased by 1 (maximum is unchanged).
+        Weapongrade -1 units will have no self-heals.
+    [CHANGED] Significantly lowered AI spotTime ratings (AI will take slightly longer to recognize players as hostile).
+    [CHANGED] Very slightly lowered accuracy rating for weapongrade 0 AI units.
+    [CHANGED] Updated Chernarus static spawn definitions to new format.
+    [CHANGED] Minimum time between each dynamic AI spawn cycle reduced to 5 minutes from 8 minutes. Maximum variance reduced to 3 minutes from 4 minutes.
+        New delay range between cycles: 5-8 minutes. Old delay range: 8-12 minutes.
+    [CHANGED] Probability limit per dynamic AI spawn increased to 95% from 91%.
+    [FIXED] Fixed several bugs related to counting active AI units.
+    [FIXED] Using DZAI_setup_AI function to spawn AI units will properly update active AI count
+        Note: Using the DZAI_setup_AI function directly is not fully supported, do this at your own risk.
+    [FIXED] AI launcher weapons are now properly removed from all AI unit types.
+    [FIXED] Support for SMD version of Sahrani map.
+    [FIXED] AI helicopter and land vehicle patrols now use the more-efficient method of generating weapongrade values introduced in 1.9.1.
+    [FIXED] Abandoned AI helicopters are now properly deleted.
+    [FIXED] AI helicopters destroyed over water have crew properly deleted instead of surviving.
+    [FIXED] Namalsk: Fixed static AI spawns in north-west Vorkuta.

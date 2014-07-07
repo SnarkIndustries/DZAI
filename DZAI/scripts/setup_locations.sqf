@@ -33,9 +33,9 @@ for "_i" from 0 to ((count _cfgWorldName) -1) do {
 		_locCount = _locCount + 1;
 		//diag_log format ["DEBUG :: Found a location at %1 (%2, %3).",_placeName,_placeType,_placePos];
 	};
-	if ((_forEachIndex % 25) == 0) then {sleep 0.01;};
+	if ((_forEachIndex % 20) == 0) then {uiSleep 0.01;};
 } forEach _allPlaces;
 
 DZAI_locations_ready = true;
 
-diag_log format ["[DZAI] %1 locations gathered in %2 seconds.",_locCount,(diag_tickTime - _startTime)];
+if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: %1 locations gathered in %2 seconds.",_locCount,(diag_tickTime - _startTime)]};

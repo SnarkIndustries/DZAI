@@ -1,0 +1,11 @@
+1.4.2 Update:
+
+- [FIXED] Added fix to prevent second sidearm weapon from being added to AI after death.
+- [UPDATED] Static spawn triggers avoid spawning AI if a player is within 30m of the spawn point. Up to 5 attempts are made to search for a suitable location without players nearby.
+- [UPDATED] Chernarus: Updated default patrol radius for most static AI spawns from 125m to 200m. This should allow player encounters with AI more easy to avoid and less forced.
+- [UPDATED] Updated default AI weapon banlist. The following weapons will not be added to list of AI-usable weapons: "Crossbow_DZ","Crossbow","MeleeHatchet","MeleeCrowbar","MeleeMachete","MeleeBaseball","MeleeBaseBallBat","MeleeBaseBallBatBarbed","MeleeBaseBallBatNails"
+- [MODIFIED] Increased chance of generating pistol instead of rifle for AI with weapongrade 0 from 50% to 66%.
+- [MODIFIED] Removed classname blacklist for serverside object fix since it was ineffective at suppressing RPT log warning entries. We will have to wait until BIS releases a patch that suppresses these log warnings.
+- [MODIFIED] Chernarus: Updated Zelenogorsk static spawns from 1 group of 1 (+2 max) units to 2 groups of 1 (+1 max) units.
+- [MODIFIED] Decreased AI accuracy and aimingshake (lock-on time increased) slightly for all skill tiers.
+- [MODIFIED] Decreased probability of generating each medical item for AI from 75% to 70%.

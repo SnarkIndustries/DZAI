@@ -15,7 +15,7 @@
 	
 	_this = createMarker ["dzaicustomspawntest", [6650.9883, 9411.541, -6.1035156e-005]];
 	_this setMarkerShape "ELLIPSE";
-	_this setMarkerType "Flag";
+	_this setMarkerType "Empty";
 	_this setMarkerBrush "Solid";
 	_this setMarkerSize [200, 200];
 	_this setMarkerAlpha 0;
@@ -25,5 +25,4 @@
 */
 
 //----------------------------Add your custom markers below this line ----------------------------
-
 

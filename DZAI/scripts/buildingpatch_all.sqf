@@ -10,7 +10,7 @@ if (_configExists) then {
 	if ((count _cfgLocation) < 1) then {_generatorStr = "CfgTownGenerator";_cfgLocation = configFile >> "CfgTownGenerator";};
 	_locationArray = [];
 
-	diag_log format ["OBJECT PATCH :: Spawning in serverside objects... Reading from file %1.",_generatorStr];
+	if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Spawning in serverside objects... Reading from file %1.",_generatorStr];};
 
 	for "_i" from 0 to ((count _cfgLocation) - 1) do {
 		_locationArray set [count _locationArray,configName (_cfgLocation select _i)];
@@ -34,7 +34,7 @@ if (_configExists) then {
 				_object setPosATL [_objPos select 0,_objPos select 1,0];
 				_object allowDamage false;
 				_object enableSimulation false;
-				if ((_i % 25) == 0) then {sleep 0.01;};
+				if ((_i % 25) == 0) then {uiSleep 0.01;};
 			};
 		};
 	};
@@ -43,10 +43,10 @@ if (_configExists) then {
 	{
 		_config = configFile >> _generatorStr >> _x;
 		_config call _spawnServerObj;
-		sleep 0.001;
+		uiSleep 0.001;
 	} forEach _locationArray;
 
-	diag_log format ["[DZAI] OBJECT PATCH :: Serverside object patch completed in %1 seconds.",(diag_tickTime - _startTime)];
+	if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Serverside object patch completed in %1 seconds.",(diag_tickTime - _startTime)]};
 } else {
-	diag_log "[DZAI] OBJECT PATCH :: CfgTownGenerator not found. Aborting serverside object patch. (This is not an error)";
+	if (DZAI_debugLevel > 0) then {diag_log "DZAI Debug: CfgTownGenerator not found. Aborting serverside object patch. (This is not an error)";};
 };

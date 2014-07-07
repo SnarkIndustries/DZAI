@@ -48,25 +48,16 @@ _getWeightedIndices = {
 	_weightedTable = [DZAI_weaponGrades,_gradeChances] call _getWeightedIndices;
 	missionNamespace setVariable [_x select 1,_weightedTable];
 	missionNamespace setVariable [_x select 0,nil];
-} forEach [
+} count [
 			//Input variable - Gradechances array, Output variable - Gradeindices array
-			["DZAI_gradeChancesNewbie","DZAI_gradeIndicesNewbie"],
 			["DZAI_gradeChances0","DZAI_gradeIndices0"],
 			["DZAI_gradeChances1","DZAI_gradeIndices1"],
 			["DZAI_gradeChances2","DZAI_gradeIndices2"],
 			["DZAI_gradeChances3","DZAI_gradeIndices3"],
-			["DZAI_gradeChancesDyn","DZAI_gradeIndicesDyn"],
-			["DZAI_gradeChancesHeli","DZAI_gradeIndicesHeli"]
+			["DZAI_gradeChancesDyn","DZAI_gradeIndicesDyn"]
 		];
-		
-//diag_log format ["DEBUG :: DZAI_gradeIndicesNewbie %1",DZAI_gradeIndicesNewbie];
-//diag_log format ["DEBUG :: DZAI_gradeIndices0 %1",DZAI_gradeIndices0];
-//diag_log format ["DEBUG :: DZAI_gradeIndices1 %1",DZAI_gradeIndices1];
-//diag_log format ["DEBUG :: DZAI_gradeIndices2 %1",DZAI_gradeIndices2];
-//diag_log format ["DEBUG :: DZAI_gradeIndices3 %1",DZAI_gradeIndices3];
-//diag_log format ["DEBUG :: DZAI_gradeIndicesDyn %1",DZAI_gradeIndicesDyn];
-//diag_log format ["DEBUG :: DZAI_gradeIndicesHeli %1",DZAI_gradeIndicesHeli];
-diag_log format ["[DZAI] DZAI finished building weighted weapongrade tables in %1 seconds.",(diag_tickTime - _startTime)];
+
+if (DZAI_debugLevel > 0) then {diag_log format ["[DZAI] DZAI finished building weighted weapongrade tables in %1 seconds.",(diag_tickTime - _startTime)]};
 
 true
 

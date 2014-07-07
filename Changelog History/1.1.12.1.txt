@@ -1,0 +1,5 @@
+1.1.12.1 Hotfix:
+
+- [FIXED] Corrected typo that prevented skill-setting script from properly setting AI skills.
+- [UPDATED] Enabling Extended Debug mode (DZAI_debugLevel = 2) now reports AI unit's skill settings into RPT log on unit creation.
+- [REMOVED] Removed depreciated script files.

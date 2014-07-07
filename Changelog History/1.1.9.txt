@@ -1,0 +1,4 @@
+1.1.9 Update:
+
+- [FIXED] Dynamic triggers should not spawn more AI units if they have not despawned previously created units.
+- [MODIFIED] Dynamic AI minimum/maximum spawn distance from targeted player increased to 150m/350m from 125m/300m.

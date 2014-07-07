@@ -7,18 +7,28 @@
 			] call DZAI_static_spawn;
 */
 
-private ["_spawnMarker","_minAI","_addAI","_positionArray","_equipType","_numGroups","_patrolDist","_trigStatements","_trigger"];
+private ["_spawnMarker","_minAI","_addAI","_positionArray","_equipType","_numGroups","_patrolDist","_trigStatements","_trigger","_abort"];
 
 _spawnMarker = _this select 0;
 if ((getMarkerColor _spawnMarker) == "") exitWith {diag_log format ["DZAI Error: Static spawn marker %1 does not exist!",_spawnMarker];};
 if ((markerAlpha _spawnMarker) > 0) then {_spawnMarker setMarkerAlpha 0};
 
+_abort = false;
 if ((count _this) > 1) then {
 	_minAI = (_this select 1) select 0;
 	_addAI = (_this select 1) select 1;
+	if ((_minAI + _addAI) < 1) then {
+		_abort = true;
+	};
 } else {
 	_minAI = 1;
 	_addAI = 1;
+};
+
+if (_abort) exitWith {
+	diag_log format ["DZAI Error: Zero AI amount for spawn area %1. Spawn area not created.",_spawnMarker];
+	
+	objNull
 };
 
 _positionArray = if ((count _this) > 2) then {_this select 2} else {[]};
@@ -37,7 +47,6 @@ _trigger setTriggerStatements ["{isPlayer _x} count thisList > 0;",_trigStatemen
 
 //Pre-initialize trigger if all variables already provided
 if ((count _positionArray) > 0) then {
-	private ["_spawnPositions"];
 	_spawnPositions = [];
 	{
 		//if ((((getMarkerPos _x) select 0) != 0)&&{(((getMarkerPos _x) select 1) != 0)}) then {

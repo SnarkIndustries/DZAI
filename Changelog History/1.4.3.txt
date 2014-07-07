@@ -1,0 +1,11 @@
+1.4.3 Update:
+
+- [MODIFIED] Dynamic triggers that intersect other active dynamic triggers will only spawn 1 AI unit instead of having total AI spawned reduced by a certain amount.
+- [MODIFIED] Increased probability of generating AI unit with weapongrade 0 for equipType 0 and 1, probability decreased accordingly for weapongrade 1.
+- [MODIFIED] AI helicopter waypoint amounts no longer depend on number of dynamic triggers. (Fixed at 15).
+- [MODIFIED] Decreased completion times for AI helicopter waypoints.
+- [MODIFIED] Removed the following small miscellaneous items from AI loot tables: ItemTankTrap, ItemSandbag, ItemWire, Handgrenade_West, 1Rnd_HE_M203.
+- [MODIFIED] Lowered probability of generating Flashlight and Watch for low-tier tools loot table.
+- [MODIFIED] AI units with weapongrade 0 no longer carry medical and miscellaneous items.
+- [MODIFIED] Epoch: AI units with weapongrade no longer have a chance of carrying metal bar currency.
+- [MODIFIED] Small edits to AI patrol script: AI units no longer move together in formation, and are fixed in combat mode Red (do not engage enemies in formation).

@@ -1,0 +1,25 @@
+- 1.9.1 Update: 
+
+	[NEW] Added line-of-sight requirements for AI helicopters to detect players at patrol waypoints
+		Players will be able evade detection from AI helicopters by running into buildings or hiding behind large objects.
+	[CHANGED] Increased AI helicopter detection radius from 225m/300m to 250m/350m (move waypoint/search-and-destroy waypoint).
+	[CHANGED] Lowered reveal level for AI helicopter detection
+		Players will be able to escape AI helicopters more easily after being detected (still need to avoid all contact)
+	[CHANGED] Large miscellaneous items will only be added to AI backpack if the backpack capacity is 10+ (reduces probability of items "spilling out")
+	[CHANGED] Weighted weapongrade probabilities are now calculated during DZAI startup instead of calculated every time a weapongrade value needs to be generated
+		Reduces the amount of time/processing needed to spawn AI units considerably
+		May increase server startup time slightly (by 0.1 seconds).
+	[CHANGED] Added equipType -1 for AI spawned near fresh-spawn locations
+		Static spawn locations with equipType -1 will spawn AI that are most likely to be equipped with pistols, and rarely rifles
+		Static spawn locations to be edited in a future update
+	[CHANGED] Epoch: Dynamic AI spawn blacklist area for trader locations increased from 100m radius to 200m radius
+	[CHANGED] Added option to enable or disable DZAI reading from dzai_settings_override.sqf file (default enabled)
+	[CHANGED] DZAI will now always try to create the maximum number of possible dynamic AI spawns per 10 minute cycle
+		Previously, DZAI only selected 10 random online players, evaluated the necessary conditions, then spawned AI if conditions were met
+		Now, DZAI will continue searching until either the maximum number of dynamic spawns is created or all online players have already been evaluated
+		Higher-population servers should see an increase in dynamic AI frequency.
+	[CHANGED] Updated hacker detection bypass functions.
+	[FIXED] Fixed death animation issues with pistol-armed AI units
+	[FIXED] Fixed minimum waypoint distance calculation for AI helicopters.
+		The distance between current and next waypoint should always be at least 300m.
+	[FIXED] DayZ Overwatch mod detection

@@ -1,0 +1,6 @@
+DZAI 1.9.6.1 Changelog:
+============
+
+    [FIXED] Fixed issues related to undefined variable errors referenced in this post: http://opendayz.net/threads/error-on-epoch-1-0-4-napf.18295/#post-91843
+    [FIXED] Minor preventative fix for Trinity Island loot tables.
+    [CHANGED] Dynamic spawn system: Decreased time required to reach maximum spawn probability from 60 minutes to 30 minutes.

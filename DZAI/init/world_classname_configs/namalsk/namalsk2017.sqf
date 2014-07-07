@@ -6,7 +6,8 @@
 */
 
 
-//Reduce gadget probabilities
+
+//Do not edit below lines. These settings adjust DZAI to fit in with Namalsk 2017 gameplay style.
 DZAI_gadgets0 set [0,["binocular",0.50]];
 DZAI_gadgets0 set [1,["NVGoggles",0.000]];	//Reduce probability of functional NVGs
 DZAI_gadgets1 set [0,["binocular",0.50]];

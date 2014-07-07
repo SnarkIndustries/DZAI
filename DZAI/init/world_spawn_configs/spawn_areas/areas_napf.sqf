@@ -430,7 +430,7 @@ _this setMarkerAlpha 0;
 _this setMarkerSize [175, 175];
 _marker_219 = _this;
 
-_this = createMarker ["DZAI_LenzburgIndustrial", [9175.3018, 15692.503]];
+_this = createMarker ["DZAI_LenzburgIndustrial", [9149.332, 15644.616]];
 _this setMarkerShape "ELLIPSE";
 _this setMarkerType "Flag";
 _this setMarkerBrush "Solid";
@@ -509,5 +509,13 @@ _this setMarkerBrush "Solid";
 _this setMarkerAlpha 0;
 _this setMarkerSize [150, 150];
 _marker_232 = _this;
+
+_this = createMarker ["DZAI_SuhrenfeldHotels", [16577.482, 18223.15]];
+_this setMarkerShape "ELLIPSE";
+_this setMarkerType "Empty";
+_this setMarkerBrush "Solid";
+_this setMarkerAlpha 0;
+_this setMarkerSize [100, 100];
+_marker_233 = _this;
 
 diag_log "Napf spawn areas loaded.";

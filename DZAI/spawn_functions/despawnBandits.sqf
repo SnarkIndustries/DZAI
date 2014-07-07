@@ -1,85 +1,97 @@
 /*
 	despawnBandits
 	
-	Description: Deletes all AI units spawned by a trigger once all players leave the trigger area. Basic script concept adapted from Sarge AI.
+	Description: Deletes all AI units spawned by a trigger once all players leave the trigger area.
 	
 	Usage: Called by a static trigger when all players have left the trigger area.
 	
-	Last updated: 12:53 AM 2/17/2014
+	Last updated: 10:16 PM 5/26/2014
 	
 */
-private ["_trigger","_grpArray","_isCleaning","_grpCount"];
+private ["_trigger","_grpArray","_isCleaning","_grpCount","_debugMarkers","_triggerStatements","_deactStatements","_permDelete"];
 if (!isServer) exitWith {};							//Execute script only on server.
 
 _trigger = _this select 0;							//Get the trigger object
 
 _grpArray = _trigger getVariable ["GroupArray",[]];	//Find the groups spawned by the trigger.
-_isCleaning = _trigger getVariable ["isCleaning",false];	//Find whether or not the trigger has been marked for cleanup, otherwise assume a cleanup has already happened.
-
+_isCleaning = _trigger getVariable ["isCleaning",true];	//Find whether or not the trigger has been marked for cleanup. Triggers will flag themselves for cleaning after a successful spawn/respawn with setVariable ["isCleaning",false];
+_triggerStatements = triggerStatements _trigger;
 _grpCount = count _grpArray;
 
-if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: _grpArray is %1. _isCleaning is %2.",_grpArray,_isCleaning];};
-if ((_grpCount == 0) or {_isCleaning}) exitWith {if (DZAI_debugLevel > 1) then {diag_log "DZAI Extended Debug: Trigger's group array is empty, or a despawn script is already running. Exiting despawn script.";};};	
+if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Trigger %1 Group Array: %2. isCleaning: %3. In static trigger array: %4",triggerText _trigger,_grpArray,_isCleaning,(_trigger in DZAI_staticTriggerArray)];};
+if (!(_trigger in DZAI_staticTriggerArray) or {_isCleaning}) exitWith {if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Trigger %1 has a despawn script already running. Exiting despawn script.",triggerText _trigger];};};	
 
 _trigger setVariable["isCleaning",true];		//Mark the trigger as being in a cleanup state so that subsequent requests to despawn for the same trigger will not run.
+_deactStatements = _triggerStatements select 2;
+_triggerStatements set [2,""];
+_trigger setTriggerStatements _triggerStatements;
+_debugMarkers = ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled});
+
 if (DZAI_debugLevel > 1) then {diag_log format["DZAI Extended Debug: No players remain in trigger area at %3. Deleting %1 AI groups in %2 seconds.",_grpCount, DZAI_despawnWait,(triggerText _trigger)];};
 
-if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
-	private["_tMarker"];
-	_tMarker = str (_trigger);
-	_tMarker setMarkerText "STATIC TRIGGER (DESPAWNING)";
-	_tMarker setMarkerColor "ColorOrange";
+if (_debugMarkers) then {
+	_nul = _trigger spawn {
+		_tMarker = str (_this);
+		_tMarker setMarkerText "STATIC TRIGGER (DESPAWNING)";
+		_tMarker setMarkerColor "ColorOrange";
+	};
 };
 
-sleep DZAI_despawnWait;								//Wait some time before deleting units. (amount of time to allow units to exist when the trigger area has no players)
+if (({isNull _x} count _grpArray) < _grpCount) then {uiSleep DZAI_despawnWait};
 
-if (triggerActivated _trigger) exitWith {			//Exit script if trigger has been reactivated since DZAI_despawnWait seconds has passed.
-	if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: A player has entered the trigger area at %1. Cancelling despawn script.",(triggerText _trigger)];};
-	if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
-	private["_tMarker"];
-		_tMarker = str (_trigger);
-		_tMarker setMarkerText "STATIC TRIGGER (ACTIVE)";
-		_tMarker setMarkerColor "ColorRed";
-	};
+if (isNull _trigger) exitWith {_trigger call DZAI_updStaticSpawnCount};
+
+if ((triggerActivated _trigger) && {({isNull _x} count _grpArray) < _grpCount}) exitWith {			//Exit script if trigger has been reactivated since DZAI_despawnWait seconds has passed.
 	_trigger setVariable ["isCleaning",false];	//Allow next despawn request.
+	_triggerStatements set [2,_deactStatements];
+	_trigger setTriggerStatements _triggerStatements;
+	if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: A player has entered the trigger area at %1. Cancelling despawn script.",(triggerText _trigger)];};
+	if (_debugMarkers) then {
+		_nul = _trigger spawn {
+			_tMarker = str (_this);
+			_tMarker setMarkerText "STATIC TRIGGER (ACTIVE)";
+			_tMarker setMarkerColor "ColorRed";
+		};
+	};
 };			
 
+_trigger setTriggerStatements ["this","true","false"]; //temporarily disable trigger from activating or deactivating while cleanup is performed
+_permDelete = _trigger getVariable ["permadelete",false];
 {
-	if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
-		{
-			deleteMarker (str _x);
-		} forEach (waypoints _x);
-		sleep 0.1;
+	if (!isNull _x) then {
+		_groupSize = (_x getVariable ["groupSize",0]);
+		if ((_groupSize > 0) or {_permDelete}) then { //If trigger is not set to permanently despawn, then ignore empty groups.
+			(DZAI_numAIUnits - _groupSize) call DZAI_updateUnitCount;
+			{deleteVehicle _x} count (units _x); //Delete all units in group
+			if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Despawned group %1 with %2 active units.",_x,(_x getVariable ["groupSize",0])];};
+			uiSleep 0.25;
+			deleteGroup _x;									//Delete the group after its units are deleted.
+		};
 	};
-	//DZAI_numAIUnits = DZAI_numAIUnits - (_x getVariable ["groupSize",0]); //Update active AI count
-	(DZAI_numAIUnits - (_x getVariable ["groupSize",0])) call DZAI_updateUnitCount;
-	{deleteVehicle _x} forEach (units _x); //Delete live units
-	if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Group %1 has group size %2.",_x,(_x getVariable ["groupSize",0])];};
-	sleep 0.5;
-	deleteGroup _x;									//Delete the group after its units are deleted.
 } forEach _grpArray;
 
-if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Despawned AI units at %1. Resetting trigger's group array.",(triggerText _trigger)];};
-
-if !(_trigger getVariable ["permadelete",false]) then {
+_trigger call DZAI_updStaticSpawnCount;
+if !(_permDelete) then {
 	//Cleanup variables attached to trigger
-	_trigger setVariable ["GroupArray",[]];
-	_trigger setVariable ["isCleaning",nil];
-
-	if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
-		private["_tMarker"];
-		_tMarker = str (_trigger);
-		_tMarker setMarkerText "STATIC TRIGGER (INACTIVE)";
-		_tMarker setMarkerColor "ColorGreen";
+	_trigger setVariable ["GroupArray",_grpArray - [grpNull]];
+	_trigger setVariable ["isCleaning",false];
+	_trigger setTriggerArea [600,600,0,false];
+	_trigger setTriggerStatements (_trigger getVariable "triggerStatements"); //restore original trigger statements
+	if (_debugMarkers) then {
+			_nul = _trigger spawn {
+			_tMarker = str (_this);
+			_tMarker setMarkerText "STATIC TRIGGER (INACTIVE)";
+			_tMarker setMarkerColor "ColorGreen";
+		};
 	};
+	if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Despawned AI units at %1. Reset trigger's group array to: %2.",(triggerText _trigger),_trigger getVariable "GroupArray"];};
 } else {
-	if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
+	if (_debugMarkers) then {
 		deleteMarker (str (_trigger));
 	};
 	deleteMarker (_trigger getVariable ["spawnmarker",""]);
+	if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Permanently deleting a static spawn at %1.",triggerText _trigger]};
 	deleteVehicle _trigger;
 };
-
-DZAI_actTrigs = (DZAI_actTrigs - 1);
 
 true

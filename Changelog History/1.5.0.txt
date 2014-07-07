@@ -1,0 +1,25 @@
+DZAI 1.5.0 Changelog:
+============
+
+- [FIXED] Fixed flies sound cleanup. Fly sounds should now be cleaned up along with dead AI bodies. Note: The "take clothes" addon will interfere with the cleanup if clothes are taken from the AI body.
+- [UPDATED] AI groups now have a chance of searching for nearby lootpiles upon completing a waypoint.
+- [UPDATED] Using Study Body on a dead AI unit now shows a randomly generated name.
+- [UPDATED] Dynamic AI now spawn facing targeted player.
+- [UPDATED] DZAI now reads from CfgWorlds config file to retrieve location data.
+- [UPDATED] AI helicopters now travel directly to cities, towns, and other locations. This change helps distribute helicopter patrols more evenly around the map.
+- [UPDATED] Disabling dynamic AI spawns now also prevents related settings from being loaded.
+- [UPDATED] Preset static AI spawns can now be disabled in dzai_variables.sqf.
+- [UPDATED] Dead AI body cleanup is now performed independently of AI respawn/despawn. Minimum delay before body cleanup is defined by DZAI_cleanupDelay in dzai_variables.sqf (Default: 5 minutes after death). One cleanup cycle is performed every 15 minutes.
+- [MODIFIED] AI helicopter flying height changed from 90-130m to 100-140m.
+- [MODIFIED] Increased waypoint completion times for AI helicopter patrols.
+- [MODIFIED] Rebalanced default backpack loot tables.
+- [MODIFIED] Probability of generating GPS for low-tier loot table increased from 0% to 0.5%, probability increased for high-tier loot table from 10% to 12.5%.
+- [MODIFIED] DZAI will try to avoid spawning AI if a player is within 40m of a chosen spawn point (distance increased from 30m).
+- [MODIFIED] Increased default server monitor reporting interval from 3 minutes to 5 minutes.
+- [MODIFIED] Slight increase in accuracy for helicopter AI gunners.
+- [MODIFIED] Dynamic AI patrol radius decreased from 300m to 250m.
+
+
+Removed updates (to be added in a future update):
+
+- [UPDATED] Areas of the map can now be blacklisted to prevent dynamic AI spawns from being created. To specify a blacklisted area, create a marker (ellipse or rectangular) covering the area where dynamic spawns should not be created. Add these markers to the custom markers section of the appropriate file in the world_map_configs folder.

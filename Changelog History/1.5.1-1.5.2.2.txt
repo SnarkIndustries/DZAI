@@ -1,0 +1,21 @@
+1.5.1 Update:
+
+DZAI Lite has been permanently retired. Users of DZAI Lite should switch to DZAI (full) and disable static AI spawns for identical functionality.
+
+- [UPDATED] Global maximum number of dynamic triggers can now be specified in dzai_variables.sqf. Can be left at default value to use pre-determined settings. Note: Per-map dynamic trigger settings are now stored in files found in the world_map_configs folder.
+- [UPDATED] Updated dzai_variables.sqf formatting for improved readability.
+- [MODIFIED] Changed radio text warnings for findKiller and seekPlayer AI behaviors.
+
+1.5.2 Update:
+
+- [FIXED] Fixed active unit amount counting.
+- [NEW] Added support for DayZ Trinity Island.
+- [NEW] Added DZAI_static_spawn function for easily creating static AI spawn areas. Currently in testing and used for Trinity Island spawns.
+
+1.5.2.1 Minor Update:
+
+- [FIXED] When preparing to spawn dynamic AI, DZAI will now have a slight tolerance of overlapping trigger areas before considering the trigger as too close and cancelling the spawn altogether.
+
+1.5.2.2 Update (for Epoch):
+
+- [FIXED] Removed skin classnames that were responsible for causing server crashes. Thanks to iroker of the OpenDayZ forums.

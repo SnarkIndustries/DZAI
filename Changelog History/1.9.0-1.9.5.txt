@@ -1,0 +1,73 @@
+DZAI 1.9.0 - 1.9.5 Changelogs:
+============
+
+- 1.9.0 Update: 
+
+
+    [NEW] Added support for custom weapongrade definitions (from 4 to 9)
+        Custom weapongrade values can only be used with custom-defined spawns (those created using the DZAI_spawn function)
+        Custom weapon tables can be specified in \world_classname_configs\default\default_classnames.sqf
+        Custom skill settings can be specified in dzai_config.sqf
+        More details here: http://opendayz.net/threads/extra-ai-difficulty-settings.17567/#post-87672
+        AI with custom weapongrades have a maximum of 3 heal attempts.
+        Note: Pistol classnames can be added to custom rifle tables.
+    [NEW] AI units may now be equipped with launcher weapons
+        Launcher weapons must first be defined in dzai_config.sqf
+        Limit of one launcher weapon per AI group
+        Launcher weapons/ammo will be removed on death (unlootable)
+        Launcher-equipped AI unit will switch from their primary weapon to the launcher if the AI group encounters an armored vehicle
+        More details here: http://opendayz.net/threads/suggestion-rpg-options-and-behavior.15329/#post-87358
+        Specific weapongrades may be allowed to use launcher weapons. By default, only AI with weapongrade 1 or higher may use launchers (Note: this was changed from the original plan of weapongrade 2&3 only).
+        Server admins may permit individual weapongrades to use launchers
+    [NEW] Breaking AI bones will produce an audible fracture sound similar to players
+    [NEW] Added proof-of-concept version of land AI vehicle patrols
+        IMPORTANT: The definition of "proof of concept" according to Wikipedia:
+
+            A proof of concept (POC) or a proof of principle is a realization of a certain method or idea to demonstrate its feasibility,[1] or a demonstration in principle, whose purpose is to verify that some concept or theory has the potential of being used. A proof of concept is usually small and may or may not be complete.
+
+        What this means is that there will be no support for this feature because it is not a complete feature. If you experience any problems with it, disable it.
+        This version of AI land vehicle patrols is only so users can see how the actual version "may" look like. Right now, most of the scripts used are adapted from the helicopter patrol scripts, and will eventually be completely overhauled.
+        AI vehicles are immune to collision damage. This is to compensate for the AI's poor driving ability.
+    [NEW] Debugging markers for AI helicopters will also display the vehicle health (overall and engine damage)
+    [NEW] Added ability to add area blacklists for "new" dynamic AI spawn system.
+    [NEW] Air and land vehicle AI patrol min/max respawn timers can now be manually specified.
+    [NEW] AI helicopters now detect all players within a 225m/300m radius upon arriving at a patrol waypoint.
+        This means AI helicopters will open fire on players (even those on foot) without provocation if they have line of sight.
+        Maximum duration of Search and Destroy patrol mode decreased from 40 seconds to 30 seconds
+        Probability of entering Search and Destroy patrol increased from 25% to 27.5% per waypoint.
+        Detection range with "Move"-type waypoint: 225m.
+        Detection range with "Search and Destroy"-type waypoint: 300m.
+        Protip: Avoiding all contact with pursuing helicopters for 2-3 minutes should cause the AI to break off pursuit.
+    [REMOVED] Removed old trigger-based dynamic AI spawn system.
+    [FIXED] AI group leaders will reveal nearby unknown zombies (should improve AI response against zombies).
+        Before 1.9.0, zombies are only revealed if they haven't yet been marked as hostile. This change separates the "revealing" and "marking" process.
+        Now, zombies will be revealed to a group if the group does not yet recognize the zombie as hostile (even if it is marked as such)
+    [FIXED] Fixed AI animation issues caused by units being killed while unconscious.
+    [FIXED] Using "Study Body" on ejected helicopter AI units should now properly show unit name and cause of death.
+    [FIXED] AI units that suffered damage to hands/legs while inside a helicopter should have their health properly restored upon exiting the vehicle.
+    [CHANGED] Increased dynamic spawn blacklist around cities and towns to 600m.
+    [CHANGED] Player responsible for killing an AI unit will be revealed to the victim's group regardless of whether DZAI_findKiller is enabled or not (speeds up AI response time).
+    [CHANGED] AI helicopters/planes that suffer critical damage will eject all surviving units on board. The vehicle itself will explode 3 seconds after ejection.
+        The new damage handler used should fix the pre-1.9.0 issue of indestructible helicopters.
+        This will replace the pre-1.9.0 AI ejection system
+        DZAI_airLootMode option will be removed (it will essentially be combined, read more below)
+        Before 1.9.0, the surviving units were deleted and new units were spawned in parachutes. After 1.9.0, the onboard units are actually ejected.
+        If above 60m and over land, units will eject from the helicopter and patrol around the wreck area.
+        If below 60m and over land, units will "unsuccessfully" attempt to eject but will die on landing.
+        If over water, units will not be ejected at all.
+    [CHANGED] If AI unit/vehicle hitpoint values are not properly set for some reason, damage will be processed by default Arma2 damage handling instead
+        Prevents AI units from becoming invincible if a problem happens.
+    [CHANGED] AI unconsciousness timer for headshot damage increased from 25 seconds to 30 seconds.
+    [CHANGED] Setting the number of heli/land vehicle patrols above zero will enable the patrols.
+        It is no longer necessary to set the patrol value to "true" and set the number of patrolling helicopters/vehicles.
+    [CHANGED] Increased number of maximum dynamic triggers created per 10 minute cycle from 5 to 10.
+    [CHANGED] Removed unnecessary re-initialization of trigger variables after the first activation.
+    [CHANGED] Units with weapongrade 0 may now also carry small misc. items (1 slot)
+    [CHANGED] Increased default number of small misc. items in AI loot from 2 to 3
+    [CHANGED] Increased probability per small misc. item in AI loot from 50% to 60%
+    [CHANGED] AI helicopter/vehicle functions are no longer loaded if they are not enabled
+    [CHANGED] Removed Smoke Grenade (Green) and M203 Smoke/Flare ammo from AI loot tables.
+    [CHANGED] Added a few junk items to AI misc loot tables.
+    [CHANGED] Updated documentation for custom markers
+    [CHANGED] Chernarus: Reduced AI weapongrade for Castle Rog, Devil's Castle, and Castle Zub from 2 to 1.
+    [CHANGED] Initial AI helicopter flying height set at 125m.

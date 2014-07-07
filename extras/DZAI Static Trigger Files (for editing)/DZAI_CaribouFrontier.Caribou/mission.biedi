@@ -1,0 +1,337 @@
+class _prefix_0
+{
+	objectType="prefix";
+	class Arguments
+	{
+	};
+};
+class _center_0
+{
+	objectType="center";
+	class Arguments
+	{
+		SIDE="west";
+	};
+};
+class _group_0
+{
+	objectType="group";
+	class Arguments
+	{
+		CENTER="_center_0";
+	};
+};
+class _unit_0
+{
+	objectType="unit";
+	class Arguments
+	{
+		POSITION="[6377.5146, 3519.6084, 0]";
+		GROUP="_group_0";
+		TYPE="BAF_Soldier_AA_W";
+		SKILL="0.60000002";
+		PLAYER="true";
+		LEADER="true";
+	};
+};
+class _marker_0
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[5416.1958, 1479.9331, 9.478056]";
+		NAME="DZAI_EastsidePort";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_1
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4743.0142, 1878.2212]";
+		NAME="DZAI_Hightower";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="125";
+		B="125";
+	};
+};
+class _marker_4
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[3089.8665, 3129.3867, 7.5976486]";
+		NAME="DZAI_NorthStation";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_5
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[3227.7844, 2431.2456, 0]";
+		NAME="DZAI_EastStation";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_6
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[2638.4548, 2757.9063]";
+		NAME="DZAI_WestStationBarracks";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_7
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[1801.0226, 3510.9883]";
+		NAME="DZAI_MountRageAFB_N";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="100";
+		B="100";
+	};
+};
+class _marker_8
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[1801.6139, 3344.8667]";
+		NAME="DZAI_MountRageAFB_S";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="100";
+		B="100";
+	};
+};
+class _marker_9
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[997.00989, 3828.0405]";
+		NAME="DZAI_FortCrassus_N";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="100";
+		B="100";
+	};
+};
+class _marker_10
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[954.55841, 3696.3979]";
+		NAME="DZAI_FortCrassus_S";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="100";
+		B="100";
+	};
+};
+class _marker_11
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[2575.0391, 3881.188]";
+		NAME="DZAI_CosytonSaw";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="125";
+		B="125";
+	};
+};
+class _marker_12
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[4208.7847, 4055.5879]";
+		NAME="DZAI_BrigadeHalls";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="125";
+		B="125";
+	};
+};
+class _marker_13
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[5251.5288, 3615.0811]";
+		NAME="DZAI_CommunicationsStation";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_14
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[5619.79, 2887.3618]";
+		NAME="DZAI_Valleypoint";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="125";
+		B="125";
+	};
+};
+class _marker_15
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[5001.042, 5095.2754]";
+		NAME="DZAI_BlaiseEnd";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="125";
+		B="125";
+	};
+};
+class _marker_16
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[5882.4219, 5654.4341]";
+		NAME="DZAI_SklonHolma";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_17
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[5682.2114, 4224.3804]";
+		NAME="DZAI_OutpostEast";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="125";
+		B="125";
+	};
+};
+class _marker_18
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[5105.7979, 6752.8726]";
+		NAME="DZAI_SevernojNasosnoj";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="50";
+		B="50";
+	};
+};
+class _marker_19
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[3537.7351, 5625.4648]";
+		NAME="DZAI_PointRocksBarracks";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="100";
+		B="100";
+	};
+};
+class _marker_20
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[3418.6262, 5936.686]";
+		NAME="DZAI_OutpostWest";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="100";
+		B="100";
+	};
+};
+class _marker_21
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[1784.5085, 7438.2578]";
+		NAME="DZAI_WintryStation";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="100";
+		B="100";
+	};
+};
+class _marker_22
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[1056.7444, 3290.873]";
+		NAME="DZAI_ShootingRange";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _postfix_0
+{
+	objectType="postfix";
+	class Arguments
+	{
+	};
+};

@@ -1,10 +1,10 @@
 Load order of classname config files:
 -----------------------------------
 
-1. global_classnames.sqf
+1. dzai_config.sqf
 2. <mapname>/default.sqf OR <mapname>/dayz_<modname>.sqf OR epoch/dayz_epoch.sqf (if running Epoch)
 
-**IMPORTANT**: If removing classnames, be sure to check global_classnames.sqf for other classnames you want to remove.
+**IMPORTANT**: If removing classnames, be sure to check dzai_config.sqf for other classnames you want to remove.
 
 
 Explanation for world_classname_configs directory

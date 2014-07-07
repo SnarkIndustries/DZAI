@@ -1,4 +1,4 @@
-DZAI (Final Version) - AI Addon for DayZ
+DZAI 2.1.0 - AI Addon for DayZ
 ============
 
 
@@ -31,7 +31,7 @@ Basic Installation Guide (with cpbo):
 
 	Change the line to this:
 
-		call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\init\dzai_initserver.sqf";
+		[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\init\dzai_initserver.sqf";
 		allowConnection = true;
 	
 5. Optionally, you may edit DZAI's settings in DZAI\init\dzai_config.sqf
@@ -53,7 +53,7 @@ Basic Installation Guide (with PBO Manager):
 
 	Change the line to this:
 
-		call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\init\dzai_initserver.sqf";
+		[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\init\dzai_initserver.sqf";
 		allowConnection = true;
 		
 4. Right click the DZAI folder inside the download package and click "Copy".

@@ -286,12 +286,12 @@ class _marker_154
 	objectType="marker";
 	class Arguments
 	{
-		POSITION="[15486.882, 13346.097]";
+		POSITION="[15495.981, 13431.276]";
 		NAME="DZAI_Emmen";
 		MARKER_TYPE="ELLIPSE";
 		FILL="Solid";
-		A="200";
-		B="200";
+		A="150";
+		B="150";
 	};
 };
 class _marker_155
@@ -753,7 +753,7 @@ class _marker_220
 	objectType="marker";
 	class Arguments
 	{
-		POSITION="[9175.3018, 15692.503]";
+		POSITION="[9149.332, 15644.616]";
 		NAME="DZAI_LenzburgIndustrial";
 		MARKER_TYPE="ELLIPSE";
 		FILL="Solid";
@@ -863,6 +863,46 @@ class _marker_229
 		FILL="Solid";
 		A="175";
 		B="175";
+	};
+};
+class _marker_231
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[10057.302, 18093.361]";
+		NAME="DZAI_Nordstern";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="175";
+		B="175";
+	};
+};
+class _marker_232
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[18076.391, 2579.5398, 0]";
+		NAME="DZAI_SoutAirbaseBarracks";
+		MARKER_TYPE="ELLIPSE";
+		FILL="Solid";
+		A="150";
+		B="150";
+	};
+};
+class _marker_233
+{
+	objectType="marker";
+	class Arguments
+	{
+		POSITION="[16577.482, 18223.15]";
+		NAME="DZAI_SuhrenfeldHotels";
+		MARKER_TYPE="ELLIPSE";
+		TYPE="Empty";
+		FILL="Solid";
+		A="100";
+		B="100";
 	};
 };
 class _postfix_0

@@ -5,14 +5,11 @@
 	
 */
 
-DZAI_invmedicals = 0; 										//Number of selections of medical items (Inventory)
-DZAI_invedibles = 0;										//Number of selections of edible items (Inventory)
-DZAI_bpmedicals = 0; 										//Number of selections of medical items (Backpack)
-DZAI_bpedibles = 1;											//Number of selections of edible items (Backpack)
-DZAI_BanditTypes = DZAI_BanditTypes - ["Bandit1_DZ", "BanditW1_DZ", "Camo1_DZ", "Sniper1_DZ"];
-DZAI_BanditTypes = [DZAI_BanditTypes,["Beard_DZ","Dimitry_DZ","Alexej_DZ","Stanislav_DZ","Czech_Norris"]] call DZAI_append;
-DZAI_Edibles = DZAI_Edibles - ["FoodCanPasta","ItemWaterbottleBoiled","FoodmuttonCooked","FoodchickenCooked","FoodBaconCooked","FoodRabbitCooked","FoodbaconRaw","FoodchickenRaw","FoodmuttonRaw","foodrabbitRaw","FoodCanUnlabeled","FoodPistachio","FoodNutmix","FoodMRE"] + ["HumanFleshCooked","RawHumanFlesh","RawInfectedFlesh","InfectedFleshCooked","FoodSteakCooked","FoodSteakRaw","FoodCanDogFood"];
-DZAI_MiscItemS = DZAI_MiscItemS - ["HandGrenade_West","FlareGreen_M203","HandGrenade_West","FlareGreen_M203"];
+DZAI_BanditTypesNew = ["Beard_DZ","Dimitry_DZ","Alexej_DZ","Stanislav_DZ","Czech_Norris"];
+DZAI_EdiblesNew = ["FoodCanPasta","ItemWaterbottleBoiled","FoodmuttonCooked","FoodchickenCooked","FoodBaconCooked","FoodRabbitCooked","FoodbaconRaw","FoodchickenRaw","FoodmuttonRaw","foodrabbitRaw","FoodCanUnlabeled","FoodPistachio","FoodNutmix","FoodMRE"] + ["HumanFleshCooked","RawHumanFlesh","RawInfectedFlesh","InfectedFleshCooked","FoodSteakCooked","FoodSteakRaw","FoodCanDogFood"];
+DZAI_MiscItemSNew = ["HandGrenade_West","FlareGreen_M203","HandGrenade_West","FlareGreen_M203"];
+
+//Customized settings for DayZ 2017 to match the "nitty-gritty" gameplay.
 DZAI_gradeChances0 = [0.90,0.10,0.00,0.00];
 DZAI_gradeChances1 = [0.65,0.30,0.05,0.00];
 DZAI_gradeChances2 = [0.30,0.45,0.15,0.00];
@@ -40,5 +37,5 @@ DZAI_Backpacks0 = ["ice_apo_pack3"];
 DZAI_Backpacks1 = ["ice_apo_pack3","ice_apo_pack1"];
 DZAI_Backpacks2 = ["ice_apo_pack1","ice_apo_pack4","ice_apo_pack2"];
 DZAI_Backpacks3 = ["ice_apo_pack4","ice_apo_pack2"];
-if (DZAI_tempNVGs) then {DZAI_tempNVGs = false;};	//Disable temporary NVG chance for DayZ 2017.
+
 diag_log "DayZ 2017 classnames loaded.";
