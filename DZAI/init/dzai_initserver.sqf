@@ -2,25 +2,24 @@
 	DZAI Server Initialization File
 	
 	Description: Handles startup process for DZAI. Does not contain any values intended for modification.
-	
-	Last updated: 3:28 PM 5/18/2014
 */
-private ["_startTime"];
+private ["_startTime","_directoryAsArray"];
 
 if (!isServer || !isNil "DZAI_isActive") exitWith {};
 DZAI_isActive = true;
 
 _startTime = diag_tickTime;
 
+_directoryAsArray = toArray __FILE__;
+_directoryAsArray resize ((count _directoryAsArray) - 25);
+DZAI_directory = toString _directoryAsArray;
 if ((count _this) > 0) then {
 	//diag_log "DEBUG :: Startup parameters found!";
 	if ("readoverridefile" in _this) then {DZAI_overrideEnabled = true} else {DZAI_overrideEnabled = nil};
-	if ("missionpboinstall" in _this) then {DZAI_directory = "DZAI"} else {DZAI_directory = "\z\addons\dayz_server\DZAI"};
 	if ("enabledebugmarkers" in _this) then {DZAI_debugMarkersEnabled = true} else {DZAI_debugMarkersEnabled = nil};
 } else {
 	//diag_log "DEBUG :: Startup parameters not found!";
 	DZAI_overrideEnabled = nil;
-	DZAI_directory = "\z\addons\dayz_server\DZAI";
 	DZAI_debugMarkersEnabled = nil;
 };
 
