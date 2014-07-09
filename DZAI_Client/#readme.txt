@@ -19,8 +19,8 @@ DZAI Client Optional Addon
 
 Add these parameters inside the empty array [] to the left of execVM.
 
-"clientradio" - Enable client-side radio messages
-"zombieenemy" - Enable AI-to-zombie hostility
+"clientradio" - Enable client-side radio messages. DZAI_clientRadio and DZAI_radioMsgs needs to be enabled in your dzai_config.sqf.
+"zombieenemy" - Enable AI-to-zombie hostility. DZAI_zombieEnemy needs to be enabled in your dzai_config.sqf.
 
 Example: 
 
