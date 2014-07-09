@@ -20,16 +20,10 @@ Basic Installation Guide:
 
 1. Unpack your mission pbo. If using cpbo, right click the .pbo file and click "Extract".
 2. Copy the downloaded DZAI folder from the download package inside your unpacked mission folder. In this folder, you should also see init.sqf, mission.sqm, description.ext.
-3. Edit DZAI\init\DZAI_version.hpp with a text editor. Remove the double slashes on Line 9 as instructed in the file. The line should now look like this:
+3. Edit your mission init.sqf with a text editor. Add this line at the end of your init.sqf:
 
-	#define DZAI_MISSIONFILE_INSTALL 1
+    if (isServer) then {[] call compile preprocessFileLineNumbers "DZAI\dzai_initserver.sqf";};
 
-4. Edit your mission init.sqf with a text editor. Add this line at the end of your init.sqf:
+4. Optionally, you may edit DZAI's settings in DZAI\init\dzai_config.sqf
 
-    if (isServer) then {call compile preprocessFileLineNumbers "DZAI\dzai_initserver.sqf";};
-
-5. Optionally, you may edit DZAI's settings in DZAI\init\dzai_config.sqf
-
-6. Repack your mission pbo by right-clicking the unpacked folder, then click on "create PBO". If prompted to overwrite, click "Yes".
-
-Note: You may store your custom settings changes in DZAI\DZAI_settings_override.sqf. This file is a convenient way to store and transfer your custom settings when upgrading to a newer version of DZAI. Further instructions are provided inside this file.
+5. Repack your mission pbo by right-clicking the unpacked folder, then click on "create PBO". If prompted to overwrite, click "Yes".

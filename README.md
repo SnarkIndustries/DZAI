@@ -67,3 +67,4 @@ Contribute
 If you enjoy using DZAI and would like to show your support with a small donation, thank you. Contributions are always appreciated but never required.
 
 <iframe src="http://imraising.com/dzai/widgets/imraising/dzai+tip+jar" width="320px" height="200px" frameBorder="0" allowTransparency="true" ></iframe>
+http://imraising.com/dzai/widgets/imraising/dzai+tip+jar
