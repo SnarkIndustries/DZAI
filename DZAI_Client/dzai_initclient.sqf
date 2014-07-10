@@ -1,9 +1,5 @@
 if (isServer) exitWith {};
 
-if ((count _this) == 0) then {
-	_this = ["clientradio","zombieenemy"];
-};
-
 if ("clientradio" in _this) then {
 	"DZAI_SMS" addPublicVariableEventHandler {
 		if (isNil "DZAI_noRadio") then {
