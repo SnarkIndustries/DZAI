@@ -119,9 +119,22 @@ if (DZAI_radioMsgs) then {
 };
 
 //DZAI group side assignment function. Detects when East side has too many groups, then switches to Resistance side.
-DZAI_getFreeSide = {
+DZAI_getGroupSide = {
 	private["_groupSide"];
-	_groupSide = (if (({(side _x) == east} count allGroups) <= 140) then {east} else {resistance});
+	_groupSide = (if (({(side _x) == east} count allGroups) < 141) then {
+		east
+	} else {
+		//If there are 140 East groups, set West/Resistance hostility and assign a Resistance group instead.
+		if ((resistance getFriend west) > 0) then {
+			createCenter resistance;
+			resistance setFriend [west,0];
+			west setFriend [resistance,0];
+			east setFriend [resistance, 1];
+			resistance setFriend [east, 1];
+			diag_log "DZAI Warning: Group maximum reached for East side! Modifying Resistance side for DZAI use.";
+		};
+		resistance
+	});
 	//diag_log format ["Assigned side %1 to AI group",_groupSide];
 	
 	_groupSide

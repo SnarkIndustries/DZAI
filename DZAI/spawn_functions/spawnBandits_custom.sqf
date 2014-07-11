@@ -36,7 +36,7 @@ if !(_trigger getVariable ["respawn",true]) then {
 	if (_totalAINew > 0) then {_totalAI = _totalAINew};	//Retrieve AI amount if it was updated from initial value (for non-respawning custom spawns only)
 };
 _spawnPos = [(ASLtoATL getPosASL _trigger),random (_patrolDist),random(360),false] call SHK_pos;
-_unitGroup = [_totalAI,(createGroup resistance),_spawnPos,_trigger,_weapongrade] call DZAI_setup_AI;
+_unitGroup = [_totalAI,grpNull,_spawnPos,_trigger,_weapongrade] call DZAI_setup_AI;
 
 //Set group variables
 _unitGroup setVariable ["unitType","static"];

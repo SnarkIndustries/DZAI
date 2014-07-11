@@ -72,10 +72,6 @@ DZAI_lowBloodLevel = 5000;
 //Note: AI cannot be attacked or damaged by zombies.(Default: false)		
 DZAI_weaponNoise = false;
 
-//Enable or disable "Free For All" mode. If FFA mode is enabled, all AI groups will be hostile to each other. (default: false)
-//WARNING: This option will affect ALL AI spawned, including those spawned from other addons that create AI units. Not recommended to enable if using other addons with AI.
-DZAI_freeForAll = false;
-
 //If enabled, AI group will attempt to track down player responsible for killing a group member. Players with radios will be given text warnings if they are being pursued (Default: true)
 DZAI_findKiller = true;	
 

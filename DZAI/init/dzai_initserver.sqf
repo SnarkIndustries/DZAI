@@ -13,6 +13,7 @@ _startTime = diag_tickTime;
 _directoryAsArray = toArray __FILE__;
 _directoryAsArray resize ((count _directoryAsArray) - 25);
 DZAI_directory = toString _directoryAsArray;
+if (isNil "_this") then {_this = []};
 if ((count _this) > 0) then {
 	//diag_log "DEBUG :: Startup parameters found!";
 	if ("readoverridefile" in _this) then {DZAI_overrideEnabled = true} else {DZAI_overrideEnabled = nil};
@@ -34,21 +35,8 @@ call compile preprocessFileLineNumbers format ["%1\init\dzai_config.sqf",DZAI_di
 call compile preprocessFileLineNumbers format ["%1\init\dzai_functions.sqf",DZAI_directory];
 
 //Set side relations
-createcenter east;
-createcenter resistance;
-if (DZAI_freeForAll) then {
-        //Free For All mode - All AI groups are hostile to each other.
-        east setFriend [resistance, 0];
-        resistance setFriend [east, 0];        
-        east setFriend [east, 0];        //East is hostile to self (free-for-all between static and dynamic AI. Custom AI will fight static and dynamic AI but not each other.)
-} else {
-        //Normal settings - All AI groups are friendly to each other.
-        east setFriend [resistance, 1];
-        resistance setFriend [east, 1];        
-};
+createCenter east;
 east setFriend [west, 0];        
-resistance setFriend [west, 0];
-west setFriend [resistance, 0];
 west setFriend [east, 0];
 
 //Detect DayZ mod variant being used.
@@ -102,5 +90,5 @@ if (_worldname in [
 //Report DZAI startup settings to RPT log
 diag_log format ["[DZAI] DZAI settings: Debug Level: %1. DebugMarkers: %2. WorldName: %3. ModName: %4. DZAI_dynamicWeaponList: %5. VerifyTables: %6.",DZAI_debugLevel,((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}),_worldname,DZAI_modName,DZAI_dynamicWeaponList,DZAI_verifyTables];
 diag_log format ["[DZAI] AI spawn settings: Static: %1. Dynamic: %2. Air: %3. Land: %4.",DZAI_staticAI,DZAI_dynAISpawns,(DZAI_maxHeliPatrols>0),(DZAI_maxLandPatrols>0)];
-diag_log format ["[DZAI] AI settings: DZAI_findKiller: %1. DZAI_useHealthSystem: %2. DZAI_weaponNoise: %3. DZAI_zombieEnemy: %4. DZAI_freeForAll: %5",DZAI_findKiller,DZAI_useHealthSystem,DZAI_weaponNoise,DZAI_zombieEnemy,DZAI_freeForAll];
+diag_log format ["[DZAI] AI settings: DZAI_findKiller: %1. DZAI_useHealthSystem: %2. DZAI_weaponNoise: %3. DZAI_zombieEnemy: %4.",DZAI_findKiller,DZAI_useHealthSystem,DZAI_weaponNoise,DZAI_zombieEnemy];
 diag_log format ["[DZAI] DZAI loading completed in %1 seconds.",(diag_tickTime - _startTime)];

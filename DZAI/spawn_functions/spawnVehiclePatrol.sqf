@@ -38,7 +38,7 @@ if (_isAirVehicle) then {
 	};
 };
 
-_unitGroup = createGroup resistance;
+_unitGroup = createGroup (call DZAI_getGroupSide);
 _driver = _unitGroup createUnit [(DZAI_BanditTypes call BIS_fnc_selectRandom2), [0,0,0], [], 1, "NONE"];
 [_driver] joinSilent _unitGroup;
 

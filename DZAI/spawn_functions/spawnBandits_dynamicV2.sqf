@@ -8,9 +8,6 @@
 	Last updated: 10:58 PM 6/6/2014
 */
 
-//#define CHANCE_LOW 0.50
-//#define CHANCE_HIGH 1.00
-
 private ["_patrolDist","_trigger","_totalAI","_unitGroup","_targetPlayer","_playerPos","_playerDir","_spawnPos","_startTime","_baseDist","_distVariance","_dirVariance","_vehPlayer","_behavior","_triggerStatements","_spawnDist"];
 if (!isServer) exitWith {};
 
@@ -18,9 +15,6 @@ _startTime = diag_tickTime;
 
 _patrolDist = _this select 0;
 _trigger = _this select 1;
-//_spawnChance = _this select 2;
-
-if (count (_trigger getVariable ["GroupArray",[]]) > 0) exitWith {if (DZAI_debugLevel > 0) then {diag_log "DZAI Debug: Active groups found. Exiting spawn script (spawnBandits_dynamic)";};};	
 
 _targetPlayer = _trigger getVariable ["targetplayer",objNull];
 if (isNull _targetPlayer) exitWith {
@@ -31,12 +25,12 @@ if (isNull _targetPlayer) exitWith {
 };
 
 _vehPlayer = vehicle _targetPlayer;
-_baseDist = 200;		//On foot distance: 200-300m
-_distVariance = 100;
+_baseDist = 200;		//On foot distance: 200-275
+_distVariance = 75;
 _dirVariance = 90;
 if !(_vehPlayer isKindOf "Man") then {
-	_baseDist = 150;	//In vehicle distance: 150-225m
-	_distVariance = 75;
+	_baseDist = _baseDist - 50;	//In vehicle distance: 150-225m
+	//_distVariance = 75;
 	_dirVariance = 67.5;
 };
 

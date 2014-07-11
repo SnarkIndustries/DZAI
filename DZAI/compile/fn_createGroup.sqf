@@ -41,7 +41,7 @@ _pos set [2,0];
 
 if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Found spawn position at %3 meters away at position %1 after %2 retries.",_pos,_attempts,(_pos distance _spawnPos)]};
 
-_unitGroup = if (isNull (_this select 1)) then {createGroup (call DZAI_getFreeSide)} else {_this select 1};
+_unitGroup = if (isNull (_this select 1)) then {createGroup (call DZAI_getGroupSide)} else {_this select 1};
 _unitGroup setCombatMode "BLUE";
 
 for "_i" from 1 to _totalAI do {

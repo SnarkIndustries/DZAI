@@ -105,7 +105,7 @@ for "_j" from 1 to (_numGroups - _groupsActive) do {
 		};
 		if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Spawned group %1 (weapongrade: %2) with %3 units.",_unitGroup,_weapongrade,_totalAI];};
 	} else {
-		_unitGroup = createGroup (call DZAI_getFreeSide);
+		_unitGroup = createGroup (call DZAI_getGroupSide);
 		_dummy = _unitGroup call DZAI_protectGroup;
 		_unitGroup setVariable ["GroupSize",0];
 		_unitGroup setVariable ["trigger",_trigger];
