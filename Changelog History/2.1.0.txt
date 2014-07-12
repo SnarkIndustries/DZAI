@@ -1,0 +1,86 @@
+DZAI 2.1.0 Changelog
+
+New settings added:
+
+    [ADDED] Configurable AI blood level. This will affect all AI spawned by DZAI and will not be on a tiered scale. By default, AI may be spawned with blood level between 10,000 and 12,000 (same as current default in 2.0)
+    [ADDED] Added configurable blood threshold at which AI will consider it necessary to begin healing process. By default, AI will consider healing when below 6,000 blood.
+        Note: AI may self-heal if their legs are broken, regardless of this setting.
+    [ADDED] Added configurable blood healing amount. By default, AI will heal up to 6000 units of blood (2000 every 3 seconds, with 3 cycles).
+    [ADDED] "Last man standing" mode for grouped AI. Last surviving unit will have 10% boosted skills, about equivalent of being promoted by one level of difficulty. By default, this is disabled.
+    [ADDED] Added optional respawn limits to static spawns. Once the spawn trigger has run out of "respawns" it is permanently deleted. By default, there is unlimited respawning (same behavior as in 2.0)
+    [ADDED] Added setting to determine the probability of whether dynamic AI will actively hunt the targeted player or simply patrol the area around the player. By default, there is a 50% chance the AI will hunt vs. patrol.
+    [ADDED] Added option to enable dynamic spawn blacklisted areas (600m radius) around player spawning areas. By default, this is disabled.
+    [ADDED] Added option to set number of gunner and cargo units for air and land vehicle patrols. The maximum number of gunner/cargo units is limited by the actual number of available positions in the vehicle. So, if you set the maximum number of helicopter gunners to 3, all 3 gunner positions of a CH-47 will be filled, but only 2 gunner positions of a UH-1H will be filled. If you set the maximum gunners to 2, only 2 gunner positions of the CH-47 will be filled, same with the UH-1H.
+        Note: Some helicopters with cargo units tend to land during their patrols, which triggers the despawning process. This is not intended behavior, so use this option with caution!
+    [ADDED] Maximum number of launcher weapons per AI group is now configurable. AI groups cannot have more launcher weapons than their weapongrade value. (ie: weapongrade level 0 units cannot have launchers, weapongrade level 3 units can have up to 3 launchers). By default, there is a limit of 1 launcher per group (same behavior as in 2.0)
+
+General changelog:
+
+    [CHANGED] Probability of dynamic spawns now has a cyclic pattern and resets every hour. A setting has been added to determine how long the maximum spawn probability can be retained by a player. By default, a player can retain maximum spawn probability (100%) for 1 hour, after which it is reset to 0%.
+    [CHANGED] Air and land AI mapwide vehicle patrols can now have a limit of each vehicle type spawned. For example, you can choose to have up to 1 CH-47 spawn, up to 1 UH-1Y spawn, up to 5 UH-1H spawn. You can also limit the total number of vehicles spawned, so if you limit the number of helicopters to 3, you could have: 3 UH-1H spawn, or 1 CH-47 and 2 UH-1H spawn, or 1 UH-1Y and 2 UH-1H spawn, etc.
+    [CHANGED] AI air vehicle patrols no longer use their own equipment type, they now use the normal equipment type levels.
+    [CHANGED] Equipment type levels for AI air and land vehicle patrols are now configurable to change overall difficulty of patrols.
+    [CHANGED] General rebalancing of AI skill levels.
+    [CHANGED] Global classname config file has been merged with dzai_config.sqf for easier editing.
+    [NEW] Custom AI land and air vehicle patrols can now be added
+        Supported vehicle types: All air types and land vehicle types. Not supported: Static weapons and boats
+        Vehicle AI will carry temporary NVGs to be removed on death
+        Land vehicles are immune to physics/collision damage to compensate for poor AI driving ability
+        AI vehicles will patrol in a randomized circular pattern similar to infantry AI patrol
+        AI air vehicles will detect players every 20 seconds within a ~200m radius starting from ~200m in front of the vehicle. Players with line-of-sight to the vehicle will be detected.
+        Respawns can be enabled or disabled on a per-vehicle basis
+        Equipment type can be defined on a per-vehicle basis
+        Crew amount (cargo/gunner) can be defined on a per-vehicle basis
+        AI vehicles will not spawn if there is a player within 300m of the calculated spawn point. DZAI will retry spawning every 10,15,20 ... 60 seconds (scaling up by 5 seconds per attempt). This is intended to prevent AI vehicles from spawning too close to players.
+        Unarmed air vehicles can have user-defined weapons added in the same way as mapwide air/land AI vehicle patrols.
+    [NEW] Added map support for Podagorsk map
+    [NEW] Added map support for Caribou Frontier map
+    [FIXED] AI land vehicle patrol gunners are now able to use vehicle weapons correctly.
+    [FIXED] DZAI cleanup now correctly purges cleaned vehicles from the server object monitor.
+    [FIXED] Fixed bug that allowed air AI unit death handling to be fired more than once.
+    [CHANGED] AI air vehicles destroyed by collision damage now also eject crew and generate loot.
+    [CHANGED] Players in vehicles will be able to receive radio messages if the driver has a radio. (Unconfirmed)
+    [CHANGED] Land vehicle AI respawn is now started when the vehicle is destroyed or the AI group is completely killed (whichever happens first). Respawn of new vehicle patrol and despawn of old AI group are independent.
+    [CHANGED] All air/land AI vehicles now have ammo/fuel reloaded every 3 minutes instead of detecting low ammo/fuel, since low ammo can't be reliably read for vehicles with multiple weapons. This should make AI jets (ie: the A10) less overpowered since they won't be constantly ammo-loaded.
+    [CHANGED] AI air vehicle patrols now detect players in within a certain radius in front of the vehicle, instead of having 360 degree vision. This means that you are generally safe if you are on either side of behind the helicopter/air vehicle. If you're in front, you will most likely be detected.
+    [CHANGED] Client-side radio addon now outputs text into SystemChat in addition to middle of screen.
+    [CHANGED] AI-to-Zed hostility has been moved to the DZAI client addon since server-side hostility is very unreliable. By moving it to the client-side, AI will kill zombies with ruthless efficiency. Note: You can choose to avoid having to install the client-side addon by modifying your zombie_generate.sqf, but this method doesn't require any DayZ files to be edited, and only marks zombies that are near AI as hostile as opposed to every single zombie spawned
+    [CHANGED] AI respawning is now independent of despawning procedures. What this means is that if a group is waiting to be respawned and the spawn area is despawned before the respawn is supposed to happen, the group doesn't get immediately respawned as a new group when the spawn trigger is reactivated. The group only respawns once the respawn timer has passed.
+    [CHANGED] Number of dynamic AI spawned now depends on the weapongrade level (difficulty) generated. Weapongrade 0&1: 2-3 units, Weapongrade 2&3: 1-2 units.
+    [CHANGED] Per-map classname config files now use separate variable names for additional classnames.
+        For example, you can modify DZAI_BanditTypesNew in dayz_epoch.sqf to define what types of AI skins to add to the default classname selections, or rename DZAI_BanditTypesNew to DZAI_BanditTypes to completely override the default classname selections.
+    [CHANGED] Additional AI death types supported: "explosion" and "high caliber". You will be able to see these death types upon using Study Body if the AI is killed by the appropriate weapon. This change also allows explosive and high-caliber weapon damage to cause auto-kills the same way DayZ does with player damage.
+    [CHANGED] AI will now only self-heal when they feel "safe" - when no known enemies are close by.
+    [CHANGED] Radio messages caused by player killing AI will now appear even if there is only one surviving unit, but no useful information will be displayed. You'll know if you're being pursued, however.
+    [CHANGED] As a survivor living in the harsh zombie apocalypse, your sharp survival instincts now allow you to rarely sense imminent ambushes even without using a radio.
+    [CHANGED] Spawn trigger activation/deactivation statements are now modified according to their activation state. Prevents AI spawning scripts from being unnecessarily called and subsequently cancelled if the AI haven't been despawned yet.
+    [CHANGED] All instances of "sleep" replaced with "uiSleep" in all sqf files for better execution suspension.
+    [CHANGED] All static infantry-type AI units now spawn with 5-second non-hostility. This will help make situations where AI units spawn too close to players less "instant death" and give players time for reaction if they're quick.
+    [FIXED] Fixed bug where parachuted AI units were unable to despawn properly under certain circumstances.
+    [FIXED] Custom spawns (non-respawn type) now correctly keep track of current number of live units. Example, if you kill 3 of 4 units and leave the spawn area, causing a despawn, only 1 unit will spawn once you re-enter the spawn area.
+    [FIXED] Fixed dynamic weapon list for Epoch 1.0.5. Cross-mod compatibility should be retained for other DayZ mods. More info: http://opendayz.net/threads/all-dzai-2-1-related-news-last-updated-6-25-2014.20060/#post-105149
+    [FIXED] Despawn scripts now properly handle null (deleted) groups caused by improper deletion (ie: third-party scripts that delete AI) to avoid AI spawns being becoming permanently stuck and inactive.
+    [FIXED] AI weapon noise compatibility with Epoch (untested)
+    [ADDED] Added option to enable/disable DZAI's enhanced health system. With the enhanced health system, AI units will use DayZ's blood health system, can be knocked out or Tasered, and can self-bloodbag/morphine. Without the health system, the default Arma 2 handling will be used and AI units will be less durable as a result.
+    [CHANGED] Added waypoint checks for all vehicle-type AI to prevent AI drivers/pilots from being stuck on unreachable waypoints. The groups current waypoint is periodically checked and forced to a random waypoint if it is not reached within a time limit.
+    [CHANGED] Static-type AI are now restricted to a 600m distance from their initial spawn point. Units that exceed this distance are instructed to move back to a random waypoint.
+    [CHANGED] Static AI infantry spawn areas now expand to a 750m radius upon activation and revert to 600m radius upon deactivation. This will help reduce instances of rapid activation/deactivation of spawn triggers if players are traveling along the border of an inactive spawn.
+    [CHANGED] Slightly reduced tracking ability of dynamic AI. The player's current position is only updated if they have moved 25m from their last known location.
+    [CHANGED] Mapwide AI air patrols now check every 30 seconds if dynamic AI have requested air support, and will immediately redirect themselves to their new destinations.
+    [CHANGED] AI air reinforcement for dynamic AI now have knowledge of the target player's location upon summoning.
+    [CHANGED] Mapwide land AI vehicle patrols are now spawned only on road positions. If a road position cannot be found, repeat attempts will be made until a position is found.
+    [CHANGED] Redesigned entire respawn logic for improved modularity and ease of future modification.
+    [CHANGED] Unconscious AI units now use same wake-up animation as players. AI should no longer stand straight up and retrieve their weapon before being able to move.
+    [CHANGED] Dynamic weapon banlist now includes all toolbelt and binocular-type items.
+    [CHANGED] DZAI now uses command "diag_tickTime" instead of "time" for more accurate timekeeping.
+    [CHANGED] Knocking AI unconscious will also permanently remove any launcher-type weapons from their inventory.
+    [CHANGED] Replaced unit-level manager with group-level manager for rearming/healing functions. Improved server resource efficiency as one script is run for each AI group as opposed to each individual unit.
+    [CHANGED] DZAI will now auto-detect the folder it's installed in. For users installing DZAI into their mission pbo, no special edits will be required. Just install the DZAI folder and edit the server_monitor.sqf (if installing to dayz_server.pbo) or init.sqf (if installing to mission pbo) and run your server.
+    [CHANGED] All DZAI units are now spawned using the East side.
+    [CHANGED] DZAI will now only use the Resistance side as a last resort if and when the East side has reached the maximum of 140 groups.
+        For 95+% of users, this should not be something you have to worry about. The largest map (Taviana?) has about 80 preset static spawns, which leaves you approximately 60 groups free for vehicle or custom AI.
+        Keep in mind that up to 5 dynamic AI groups may be active at once, if dynamic AI is enabled.
+        Side relations involving the Resistance side will not be touched at all until the 141st AI group needs to be created.
+        This should resolve any issues for Overwatch/Overpoch users involving Stalker skins and vehicles. If it doesn't, then it's out of my control.
+    [REMOVED] Removed Free For All mode because of the extreme side effects it causes with other AI and mission addons. Since most servers that use AI usually use more than one addon (not just DZAI), enabling this option would cause huge problems.
+

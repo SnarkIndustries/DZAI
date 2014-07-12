@@ -8,13 +8,6 @@ _maxUnits = _this select 2;
 _weapongrade = _this select 3;
 //_respawnSelect = _this select 4; //Value not used in this script. Holds respawn settings.
 
-//diag_log format ["DEBUG :: Spawning custom vehicle with parameters: %1",_this];
-
-//Input sanitation
-//if ((getMarkerColor _marker) == "") exitWith {diag_log format ["DZAI Error: Provided marker %1 not valid.",_marker]};
-//if (!([_vehicleType,"vehicle"] call DZAI_checkClassname)) exitWith {diag_log format ["DZAI Error: Provided vehicle type %1 not valid.",_vehicleType]};
-//if (!(_weapongrade in DZAI_weaponGradesAll)) then {_weapongrade = 1};
-
 //Calculate needed values
 _markerPos = (getMarkerPos _marker);
 if ((markerAlpha _marker) > 0) then {_marker setMarkerAlpha 0};
@@ -34,6 +27,7 @@ if (_isAirVehicle) then {
 	_spawnMode = "FLY"; //set flying mode for air vehicles
 	_vehSpawnPos set [2,180]; //spawn air vehicles in air
 	_markerPos set [2,125]; //set marker height in air
+	if (_maxCargoUnits != 0) then {_maxCargoUnits = 0}; //disable cargo units for air vehicles
 };
 
 _keepLooking = true;

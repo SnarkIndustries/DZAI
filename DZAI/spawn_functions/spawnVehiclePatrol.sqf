@@ -13,8 +13,8 @@ _spawnMode = "NONE";
 _keepLooking = true;
 
 if (_vehicleType isKindOf "Air") then {
+	//Note: no cargo units for air vehicles
 	_maxGunnerUnits = DZAI_heliGunnerUnits;
-	_maxCargoUnits = DZAI_heliCargoUnits;
 	_weapongrade = DZAI_heliUnitLevel call DZAI_getWeapongrade;
 } else {
 	_maxGunnerUnits = DZAI_vehGunnerUnits;

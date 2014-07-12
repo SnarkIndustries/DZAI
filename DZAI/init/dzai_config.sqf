@@ -170,10 +170,6 @@ DZAI_heliUnitLevel = 3;
 //Maximum number of gunner units per air vehicle. Limited by actual number of available gunner positions. (Default: 2)
 DZAI_heliGunnerUnits = 3;
 
-//Maximum number of cargo units per air vehicle. Limited by actual number of available cargo positions. (Default: 0)
-//Note: Helicopters with added cargo units will tend to land upon engaging enemies and begin despawn process. To have helicopters stay in the air until critically damaged, leave DZAI_heliCargoUnits = 0;
-DZAI_heliCargoUnits = 0;
-
 //Specify vehicle weapon for air vehicles that are unarmed by default. DZAI will arm these air vehicles with the specified weapons upon spawning each vehicle.
 //Weapon classnames are verified. If the classname is invalid (banned or nonexistent), it will not be added to the vehicle.
 //Format: Each row containing a vehicle classname will be equipped with the weapon from the corresponding row in weapon classnames section. DZAI will automatically select ammo type.
