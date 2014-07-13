@@ -23,7 +23,7 @@ if (isPlayer _killer) then {
 		_unitGroup setFormDir ([(leader _unitGroup),_killer] call BIS_fnc_dirTo);
 		(units _unitGroup) doTarget (vehicle _killer);
 		(units _unitGroup) doFire (vehicle _killer);
-		if (DZAI_findKiller) then {0 = [_trigger,_killer,_unitGroup,300] spawn DZAI_huntKiller};
+		if (DZAI_findKiller) then {0 = [_killer,_unitGroup] spawn DZAI_huntKiller};
 		if (DZAI_lastManStanding && {_unitsAlive == 1}) then {0 = _unitGroup spawn DZAI_skillBoost;}; //"Last man standing" mode on
 		if (DZAI_debugLevel > 0) then {diag_log format["DZAI Debug: AI group %1 killed, %2 units left alive in group.",_unitGroup,_unitsAlive];};
 	};

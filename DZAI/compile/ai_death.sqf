@@ -33,19 +33,19 @@ _unitType = _unitGroup getVariable ["unitType",""];
 call {
 	if (_unitType == "static") exitWith {
 		[_victim,_killer,_unitGroup,_unitsAlive] call DZAI_AI_killed_static;
-		0 = [_victim,_killer,_unitGroup,_unitType] call DZAI_AI_killed_all;
+		0 = [_victim,_killer,_unitGroup,_unitType,_unitsAlive] call DZAI_AI_killed_all;
 		DZAI_numAIUnits = DZAI_numAIUnits - 1;
 	};
 	if (_unitType == "dynamic") exitWith {
 		[_victim,_killer,_unitGroup,_unitsAlive] call DZAI_AI_killed_dynamic;
-		0 = [_victim,_killer,_unitGroup,_unitType] call DZAI_AI_killed_all;
+		0 = [_victim,_killer,_unitGroup,_unitType,_unitsAlive] call DZAI_AI_killed_all;
 		DZAI_numAIUnits = DZAI_numAIUnits - 1;
 	};
 	if (_unitType in ["air","aircustom"]) exitWith {
 		[_victim,_unitGroup] call DZAI_AI_killed_air;
 	};
 	if (_unitType in ["land","landcustom"]) exitWith {
-		0 = [_victim,_killer,_unitGroup,_unitType,_unitsAlive] call DZAI_AI_killed_all;
+		0 = [_victim,_killer,_unitGroup,_unitType] call DZAI_AI_killed_all;
 		if (_unitsAlive == 0) then {
 			[_unitGroup] call DZAI_AI_killed_land;
 		};

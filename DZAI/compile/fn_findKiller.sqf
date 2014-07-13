@@ -5,12 +5,10 @@
 	
 	Last updated: 2:00 AM 7/1/2014
 */
-private ["_unitGroup","_targetPlayer","_startPos","_chaseDist"];
+private ["_unitGroup","_targetPlayer","_startPos"];
 
-_startPos = _this select 0;
-_targetPlayer = _this select 1;
-_unitGroup = _this select 2;
-_chaseDist = _this select 3;
+_targetPlayer = _this select 0;
+_unitGroup = _this select 1;
 
 //Disable killer-finding for dynamic AI in hunting mode
 if (_unitGroup getVariable ["seekActive",false]) exitWith {};
@@ -21,13 +19,13 @@ if (((_unitGroup getVariable ["pursuitTime",0]) > 0) && {((_unitGroup getVariabl
 	if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Pursuit time +20 sec for Group %1 (Target: %2) to %3 seconds (fn_findKiller).",_unitGroup,name _targetPlayer,(_unitGroup getVariable ["pursuitTime",0]) - diag_tickTime]};
 };
 
-_startPos = _unitGroup getVariable ["trigger",DZAI_defaultTrigger];
-if ((isNull _startPos) or (isNil "_startPos")) then {_startPos = _unitGroup getVariable ["spawnPos", getPosASL (leader _unitGroup)]};
+_startPos = _unitGroup getVariable ["trigger",(getPosASL (leader _unitGroup))];
 
 #define TRANSMIT_RANGE 50 //distance to broadcast radio text around target player
 #define RECEIVE_DIST 150 //distance requirement to receive message from AI group leader
+#define CHASE_DISTANCE 250	//distance to chase target from trigger position
 
-if ((_startPos distance _targetPlayer) < _chaseDist) then {
+if ((_startPos distance _targetPlayer) < CHASE_DISTANCE) then {
 	private ["_targetPlayerPos","_leader","_ableToChase","_debugMarkers","_marker"];
 	if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Group %1 has entered pursuit state for 180 seconds. Target: %2. (fn_findKiller)",_unitGroup,_targetPlayer];};
 	
@@ -55,7 +53,7 @@ if ((_startPos distance _targetPlayer) < _chaseDist) then {
 		(!isNull _targetPlayer) &&
 		{(alive _targetPlayer)} && 
 		{_ableToChase} &&
-		{((_startPos distance _targetPlayer) < _chaseDist)} &&
+		{((_startPos distance _targetPlayer) < CHASE_DISTANCE)} &&
 		{(!((vehicle _targetPlayer) isKindOf "Air"))}
 	} do {
 		if ((_unitGroup knowsAbout _targetPlayer) < 4) then {_unitGroup reveal [_targetPlayer,4]};
