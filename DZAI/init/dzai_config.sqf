@@ -57,15 +57,15 @@ DZAI_modName = "";
 DZAI_useHealthSystem = true;
 
 //Minimum and maximum AI blood level to spawn each unit with. Each individual unit will have a randomized blood level within this range. Upper limit: 12000 blood (Default: [10000,12000])
-//Note: No effect if DZAI_unitBloodLevel is false
+//Note: No effect if DZAI_useHealthSystem is false
 DZAI_unitBloodLevel = [10000,12000];
 
 //Amount of blood restored from a full self-heal. One-third of the total amount is restored 3 times every 3 seconds. Note: Applies to infantry-type AI units. (Default: 6000)
-//Note: No effect if DZAI_unitBloodLevel is false
+//Note: No effect if DZAI_useHealthSystem is false
 DZAI_unitHealAmount = 6000;
 
 //Below this blood level, AI may decide to heal themselves for amount specified by DZAI_unitHealAmount. Healing requires 9 seconds to fully complete and can be interrupted by knocking the unit unconscious. (Default: 5000)
-//Note: No effect if DZAI_unitBloodLevel is false
+//Note: No effect if DZAI_useHealthSystem is false
 DZAI_lowBloodLevel = 5000;
 
 //Enable or disable zombie attraction to AI weapon sounds. No effect if DZAI_zombieEnemy is set to false. Enabling this option may impact server performance as a script is run for each AI bullet fired.
@@ -451,10 +451,10 @@ DZAI_MiscItemL = ["ItemJerrycan", "PartWheel", "PartEngine", "PartFueltank", "Pa
 
 //AI toolbelt item types. Toolbelt items are added to AI inventory upon death. Format: [item classname, item probability]
 //Weapongrade level 0-1 AI will use DZAI_tools0 table, weapongrade level 2-3 AI will use DZAI_tools1 table. Custom-spawned AI will use DZAI_tools1 table.
-//NOTE: To remove an item, set its chance to 0, don't delete it from the array. To add a toolbelt item as loot, add it to the end of the array.
+//NOTE: Do not delete any elements from this list, set its chance to zero intead. Only add elements to the end of the array, not in the middle.
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DZAI_tools0 = [["ItemFlashlight",0.65],["ItemWatch",0.65],["ItemKnife",0.50],["ItemHatchet",0.40],["ItemCompass",0.40],["ItemMap",0.35],["ItemToolbox",0.125],["ItemMatchbox",0.15],["ItemFlashlightRed",0.05],["ItemGPS",0.005],["ItemRadio",0.005]];
-DZAI_tools1 = [["ItemFlashlight",0.75],["ItemWatch",0.75],["ItemKnife",0.75],["ItemHatchet",0.70],["ItemCompass",0.75],["ItemMap",0.70],["ItemToolbox",0.35],["ItemMatchbox",0.40],["ItemFlashlightRed",0.10],["ItemGPS",0.10],["ItemRadio",0.075]];
+DZAI_tools0 = [["ItemFlashlight",0.65],["ItemWatch",0.65],["ItemKnife",0.50],["ItemHatchet",0.40],["ItemCompass",0.40],["ItemMap",0.35],["ItemToolbox",0.15],["ItemMatchbox",0.15],["ItemFlashlightRed",0.05],["ItemGPS",0.005],["ItemRadio",0.005],["ItemCrowbar",0.15]];
+DZAI_tools1 = [["ItemFlashlight",0.75],["ItemWatch",0.75],["ItemKnife",0.75],["ItemHatchet",0.70],["ItemCompass",0.75],["ItemMap",0.70],["ItemToolbox",0.35],["ItemMatchbox",0.40],["ItemFlashlightRed",0.10],["ItemGPS",0.10],["ItemRadio",0.075],["ItemCrowbar",0.35]];
 
 
 //AI-useable toolbelt item types. These items are added to AI inventory at unit creation and may be used by AI. Format: [item classname, item probability]
