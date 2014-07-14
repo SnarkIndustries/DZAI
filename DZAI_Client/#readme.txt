@@ -10,9 +10,11 @@ DZAI Client Optional Addon
 	2. Edit your mission file's init.sqf and insert this near the bottom OR inside of any "if (!isDedicated) then { " bracket. (this file will not be run on the server).
 
 		_nul = [] execVM "DZAI_Client\dzai_initclient.sqf";
-		
-	3. Repack your mission pbo file.
-	4. In your dzai_config.sqf, ensure DZAI_useRadioAddon is set to "true";
+
+	3. Enable your wanted features. Check Section 2 - How to configure below, then proceed to step 4.
+	4. Repack your mission pbo file.
+	5. You are done. Run your server.
+
 
 2. How to configure
 ------------------
