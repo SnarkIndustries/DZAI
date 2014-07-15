@@ -208,7 +208,7 @@ DZAI_vehCargoUnits = 3;
 /*	AI weapon selection settings
 --------------------------------------------------------------------------------------------------------------------*/
 
-//True: Dynamically generate AI weapon list from CfgBuildingLoot (DayZ loot tables). False: Use preset weapon list located in world_classname_configs/global_classnames.sqf. (Default: true).
+//True: Dynamically generate AI weapon list from CfgBuildingLoot (DayZ loot tables). False: Use preset weapon tables located near the end of this file. (Default: true).
 //Highly recommended to enable DZAI_verifyTables if this option is set to false. 
 DZAI_dynamicWeaponList = true;
 
@@ -383,14 +383,12 @@ DZAI_skill9 = nil;
 
 
 /*
-	Global AI weapon, loot, and equipment settings
+	AI weapon, loot, and equipment settings
 	
-	DZAI will first load global classname tables defined below, then load the map/mod-specific file to modify global settings.
+	DZAI will first load the classname tables defined below, the modify the settings according to the DayZ map/mod being run.
 	
-	Example: DZAI will always first load the classname tables defined below, then if DayZ Epoch is detected, DZAI will append or overwrite settings specified by \world_classname_configs\epoch\dayz_epoch.sqf. 
-
-	In this case, you may also need to edit \world_classname_configs\epoch\dayz_epoch.sqf to make your wanted classname changes.
-		
+	Example: DZAI will always first load the classname tables defined below, then if DayZ Epoch is detected, DZAI will add or overwrite settings specified by \world_classname_configs\epoch\dayz_epoch.sqf. 
+	
 */
 
 //Default weapon classname tables - DZAI will ONLY use these tables if the dynamic weapon list (DZAI_dynamicWeaponList) is disabled, otherwise they are ignored and overwritten if it is enabled.
