@@ -62,11 +62,11 @@ if (!(_trigger getVariable ["initialized",false])) then {
 } else {
 	_trigger setVariable ["isCleaning",false];
 	_trigger setVariable ["maxUnits",[_totalAI,0]];
-	_trigger call DZAI_updStaticSpawnCount;
 	if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Trigger group array updated to: %1.",_grpArray]};
 };
 _triggerStatements set [1,""];
 _trigger setTriggerStatements _triggerStatements;
+_trigger call DZAI_updStaticSpawnCount;
 
 if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
 	_nul = [_trigger] spawn DZAI_updateSpawnMarker;
