@@ -64,8 +64,9 @@ _permDelete = _trigger getVariable ["permadelete",false];
 			(DZAI_numAIUnits - _groupSize) call DZAI_updateUnitCount;
 			{deleteVehicle _x} count (units _x); //Delete all units in group
 			if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Despawned group %1 with %2 active units.",_x,(_x getVariable ["groupSize",0])];};
-			uiSleep 0.25;
-			deleteGroup _x;									//Delete the group after its units are deleted.
+			uiSleep 0.1;
+			//deleteGroup _x;									//Delete the group after its units are deleted.
+			_x call DZAI_deleteGroup;
 		};
 	};
 } forEach _grpArray;

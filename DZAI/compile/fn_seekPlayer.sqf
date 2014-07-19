@@ -9,7 +9,7 @@
 #define TRANSMIT_RANGE 50 //distance to broadcast radio text around target player (target player will also recieve messages)
 #define SEEK_RANGE 450 //distance to chase player from initial group spawn location
 
-private ["_unitGroup","_spawnPos","_waypoint","_patrolDist","_statement","_targetPlayer","_triggerPos","_leader","_nearbyUnits","_radioSpeech","_radioText"];
+private ["_unitGroup","_spawnPos","_waypoint","_patrolDist","_statement","_targetPlayer","_triggerPos","_leader","_nearbyUnits","_radioSpeech","_radioText","_ableToChase"];
 
 _unitGroup = _this select 0;
 _spawnPos = _this select 1;
@@ -32,7 +32,7 @@ if (DZAI_radioMsgs) then {
 		_nearbyUnits = (getPosASL _targetPlayer) nearEntities [["LandVehicle","CAManBase"],TRANSMIT_RANGE];
 		{
 			if (isPlayer _x) then {
-				if ((driver _x) hasWeapon "ItemRadio") then {
+				if ((driver (vehicle _x)) hasWeapon "ItemRadio") then {
 					_radioSpeech = [
 						"[RADIO] You hear static coming from your Radio...",
 						"[RADIO] Your Radio is picking up a signal..."
@@ -55,10 +55,11 @@ if (DZAI_radioMsgs) then {
 uiSleep 10;
 
 //Begin hunting phase
+_ableToChase = true;
 while {
-	((_unitGroup getVariable ["GroupSize",0]) > 0) &&
-	{((_targetPlayer distance _triggerPos) < SEEK_RANGE)} &&
-	{(alive _targetPlayer)}
+	_ableToChase &&
+	{alive _targetPlayer} && 
+	{((_targetPlayer distance _triggerPos) < SEEK_RANGE)}
 } do {
 	if !(_unitGroup getVariable ["inPursuit",false]) then {
 		_leader = (leader _unitGroup);
@@ -76,7 +77,7 @@ while {
 				_nearbyUnits = (ASLtoATL getPosASL _targetPlayer) nearEntities [["LandVehicle","CAManBase"],TRANSMIT_RANGE];
 				
 				{
-					if ((isPlayer _x)&&{((driver _x) hasWeapon "ItemRadio")}) then {
+					if ((isPlayer _x)&&{((driver (vehicle _x)) hasWeapon "ItemRadio")}) then {
 						_index = (floor (random 10));
 						_radioSpeech = call {
 							if (_index == 0) exitWith {format ["[RADIO] %1 (Bandit Leader): Target's name is %2. Find him!",(name _leader),(name _targetPlayer)]};
@@ -92,10 +93,11 @@ while {
 			};
 		};
 	};
-	uiSleep 20;
-	if (isNull _targetPlayer) then {
-		if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Group %1 is attempting to re-establish contact with target.",_unitGroup];};
-		_nearUnits = _targetPlayerPos nearEntities ["CAManBase",150];
+	uiSleep 19.5;
+	_ableToChase = ((!isNull _unitGroup) && {(_unitGroup getVariable ["GroupSize",0]) > 0});
+	if (_ableToChase && {isNull _targetPlayer}) then {
+		if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Group %1 is attempting to search for a new target.",_unitGroup];};
+		_nearUnits = _targetPlayerPos nearEntities ["CAManBase",200];
 		{
 			if (isPlayer _x) exitWith {
 				_targetPlayer = _x;
@@ -103,9 +105,10 @@ while {
 			};
 		} forEach _nearUnits;
 	};
+	uiSleep 0.5;
 };
 
-if (((_unitGroup getVariable ["GroupSize",0]) < 1) or (isNull _unitGroup)) exitWith {};
+if ((isNull _unitGroup) or {(_unitGroup getVariable ["GroupSize",0]) < 1}) exitWith {};
 if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Group %1 has exited hunting phase. Moving to patrol phase. (fn_seekPlayer)",_unitGroup];};
 
 //Begin patrol phase
@@ -120,7 +123,7 @@ if (DZAI_radioMsgs) then {
 	if (((_unitGroup getVariable ["GroupSize",0]) > 1) && {!(_leader getVariable ["unconscious",false])} && {!(isNull _targetPlayer)}) then {
 		_nearbyUnits = (getPosASL _targetPlayer) nearEntities [["LandVehicle","CAManBase"],TRANSMIT_RANGE];
 		{
-			if ((isPlayer _x)&&{((driver _x) hasWeapon "ItemRadio")}) then {
+			if ((isPlayer _x)&&{((driver (vehicle _x)) hasWeapon "ItemRadio")}) then {
 				_radioText = if (alive _targetPlayer) then {"%1 (Bandit Leader): We've lost contact with the target. Let's move out."} else {"%1 (Bandit Leader): The target has been killed."};
 				_radioSpeech = format [_radioText,(name _leader)];
 				[_x,_radioSpeech] call DZAI_radioSend;

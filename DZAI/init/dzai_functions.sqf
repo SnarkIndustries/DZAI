@@ -276,7 +276,8 @@ DZAI_deleteGroupTimed = {
 		
 		uiSleep _wait;
 		{deleteVehicle _x} forEach (units _unitGroup);
-		deleteGroup _unitGroup;
+		_unitGroup call DZAI_deleteGroup;
+		//deleteGroup _unitGroup;
 	};
 };
 
@@ -337,6 +338,30 @@ DZAI_updDynSpawnCount = {
 	} else {
 		DZAI_dynTriggerArray = DZAI_dynTriggerArray - [objNull];
 	};
+};
+
+DZAI_startGroupManager = {
+	private ["_script"];
+	
+	_script = [(_this select 0),(_this select 1)] spawn DZAI_autoRearm_group;
+	(_this select 0) setVariable ["GroupManager",_script];
+	
+	true
+};
+
+DZAI_deleteGroup = {
+	private ["_groupManager"];
+	
+	_groupManager = (_this getVariable ["GroupManager",DZAI_nullScript]);
+	
+	if !(scriptDone _groupManager) then {
+		terminate _groupManager;
+		//diag_log ("DEBUG :: Success - DZAI_deleteGroup is terminating group manager and deleting group : " + str(_this));
+	};
+	
+	deleteGroup _this;
+	
+	true
 };
 
 diag_log "[DZAI] DZAI functions compiled.";

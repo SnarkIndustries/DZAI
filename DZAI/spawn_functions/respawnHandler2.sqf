@@ -55,7 +55,9 @@ while {(count DZAI_respawnQueue) > 0} do {
 							};
 							*/
 							{deleteVehicle _x} count (units _unitGroup); //Delete all units in group (don't assume the only unit is dummy).
-							deleteGroup _unitGroup;
+							//deleteGroup _unitGroup;
+							_unitGroup call DZAI_deleteGroup;
+							
 							if (!isNull _trigger) then {
 								_trigger setVariable ["GroupArray",_grpArray - [grpNull]];
 							};

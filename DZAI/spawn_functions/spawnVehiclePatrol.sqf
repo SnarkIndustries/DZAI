@@ -146,7 +146,7 @@ if (_isAirVehicle && {!_isArmed}) then {
 	};
 };
 
-_rearm = [_unitGroup,_weapongrade] spawn DZAI_autoRearm_group;	//start group-level manager
+_rearm = [_unitGroup,_weapongrade] call DZAI_startGroupManager;	//start group-level manager
 
 if (_isAirVehicle) then {
 	//Set initial waypoint and begin patrol

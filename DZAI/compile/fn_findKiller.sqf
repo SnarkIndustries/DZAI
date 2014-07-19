@@ -50,9 +50,8 @@ if ((_startPos distance _targetPlayer) < CHASE_DISTANCE) then {
 	//Begin pursuit state.
 	_ableToChase = true;
 	while { 
-		(!isNull _targetPlayer) &&
-		{(alive _targetPlayer)} && 
-		{_ableToChase} &&
+		_ableToChase &&
+		{alive _targetPlayer} && 
 		{((_startPos distance _targetPlayer) < CHASE_DISTANCE)} &&
 		{(!((vehicle _targetPlayer) isKindOf "Air"))}
 	} do {
@@ -75,7 +74,7 @@ if ((_startPos distance _targetPlayer) < CHASE_DISTANCE) then {
 				_nearbyUnits = _targetPlayerPos nearEntities [["LandVehicle","CAManBase"],TRANSMIT_RANGE];
 				if ((_unitGroup getVariable ["GroupSize",0]) > 1) then {
 					{
-						if ((isPlayer _x)&& {((driver _x) hasWeapon "ItemRadio")}) then {
+						if ((isPlayer _x)&& {((driver (vehicle _x)) hasWeapon "ItemRadio")}) then {
 							_speechIndex = (floor (random 3));
 							_radioSpeech = call {
 								if (_speechIndex == 0) exitWith {
@@ -95,7 +94,7 @@ if ((_startPos distance _targetPlayer) < CHASE_DISTANCE) then {
 				} else {
 					_radioSpeech = "[RADIO] Your radio is picking up a signal nearby.";
 					{
-						if ((isPlayer _x)&& {((driver _x) hasWeapon "ItemRadio")}) then {
+						if ((isPlayer _x)&& {((driver (vehicle _x)) hasWeapon "ItemRadio")}) then {
 							[_x,_radioSpeech] call DZAI_radioSend;
 						};
 					} count _nearbyUnits;
@@ -105,16 +104,16 @@ if ((_startPos distance _targetPlayer) < CHASE_DISTANCE) then {
 		if (_debugMarkers) then {
 			_marker setMarkerPos (getPosASL _targetPlayer);
 		};
-		uiSleep 19;
+		uiSleep 19.5;
 		_ableToChase = ((!isNull _unitGroup) && {diag_tickTime < (_unitGroup getVariable ["pursuitTime",0])} && {(_unitGroup getVariable ["GroupSize",0]) > 0});
 		if (_ableToChase && {isNull _targetPlayer}) then {
 			if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Group %1 is attempting to re-establish contact with target %2.",_unitGroup,_unitGroup getVariable "targetKiller"];};
-			_nearUnits = _targetPlayerPos nearEntities ["CAManBase",150];
+			_nearUnits = _targetPlayerPos nearEntities ["CAManBase",100];
 			{
 				if ((isPlayer _x) && {((name _x) == _unitGroup getVariable "targetKiller")}) exitWith {_targetPlayer = _x};
 			} forEach _nearUnits;
 		};
-		uiSleep 1;
+		uiSleep 0.5;
 	};
 
 	//End of pursuit state. Re-enable patrol state.
@@ -132,7 +131,7 @@ if ((_startPos distance _targetPlayer) < CHASE_DISTANCE) then {
 			_radioSpeech = format [_radioText,(name (leader _unitGroup))];
 			_nearbyUnits = (getPosASL _targetPlayer) nearEntities [["LandVehicle","CAManBase"],TRANSMIT_RANGE];
 			{
-				if ((isPlayer _x)&&{((driver _x) hasWeapon "ItemRadio")}) then {
+				if ((isPlayer _x)&&{((driver (vehicle _x)) hasWeapon "ItemRadio")}) then {
 					[_x,_radioSpeech] call DZAI_radioSend;
 				};
 			} count _nearbyUnits;

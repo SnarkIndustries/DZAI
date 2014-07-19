@@ -60,9 +60,10 @@ if (_canDespawn) then {
 					[_x] joinSilent grpNull;
 				};
 			} count (units _x);							//Delete live units
-			uiSleep 0.25;
+			uiSleep 0.1;
 			if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Deleted group %1 with %2 active units.",_x,(_x getVariable ["groupSize",0])];};
-			deleteGroup _x;													//Delete the group after its units are deleted.
+			//deleteGroup _x;													//Delete the group after its units are deleted.
+			_x call DZAI_deleteGroup;
 		} forEach _grpArray;	
 	} else {
 		//Force despawn procedure
@@ -77,7 +78,8 @@ if (_canDespawn) then {
 				};
 			} count (units _x);
 			uiSleep 0.1;
-			deleteGroup _x;
+			//deleteGroup _x;
+			_x call DZAI_deleteGroup;
 		} forEach _grpArray;
 	};
 	

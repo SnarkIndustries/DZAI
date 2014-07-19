@@ -20,10 +20,6 @@ if ((_weapongrade == 0) && {(random 1) < 0.25}) then {
 	_weapons = missionNamespace getVariable ("DZAI_Pistols" + str(floor(random 2)));
 };
 _backpacks = missionNamespace getVariable ["DZAI_Backpacks"+str(_weapongrade),DZAI_Backpacks1+DZAI_Backpacks2+DZAI_Backpacks3];
-_gadgetsArray = DZAI_gadgets0;
-if (_weapongrade > 1) then {
-	_gadgetsArray = DZAI_gadgets1;
-};
 
 //Select weapon and backpack
 _weapon = _weapons call BIS_fnc_selectRandom2;
@@ -38,15 +34,11 @@ _unit addBackpack _backpack;
 if ((getNumber (configFile >> "CfgWeapons" >> _weapon >> "type")) == 2) then {_unit setVariable ["CanGivePistol",false]};
 if ((getNumber (configFile >> "CfgMagazines" >> _magazine >> "count")) < 8) then {_unit addMagazine _magazine};
 
-//diag_log format ["DEBUG :: Counted %1 tools in _gadgetsArray.",(count _gadgetsArray)];
+_gadgetsArray = if (_weapongrade > 1) then {DZAI_gadgets1} else {DZAI_gadgets0};
 for "_i" from 0 to ((count _gadgetsArray) - 1) do {
-	private["_chance"];
-	_chance = ((_gadgetsArray select _i) select 1);
-	//diag_log format ["DEBUG :: %1 chance to add gadget.",_chance];
-	if ((random 1) < _chance) then {
+	if ((random 1) < ((_gadgetsArray select _i) select 1)) then {
 		_gadget = ((_gadgetsArray select _i) select 0);
 		_unit addWeapon _gadget;
-		//diag_log format ["DEBUG :: Added gadget %1 as loot to AI inventory.",_gadget];
 	};
 };
 

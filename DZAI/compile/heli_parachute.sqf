@@ -75,15 +75,15 @@ if (!surfaceIsWater _vehPos) then {
 			_unitGroup setBehaviour "AWARE";
 		};
 	} else {
-		//_unitGroup setVariable ["unitType","aircrashed"]; //aircrashed unitType now set in ai_death.sqf for "air","aircustom" case
+		//_unitGroup setVariable ["unitType","aircrashed"]; //aircrashed unitType now set in ai_killed_air.sqf
 		{
 			_x action ["eject",_helicopter];
 			_nul = [_x,_x] call DZAI_unitDeath;
 			0 = [_x,_weapongrade] spawn DZAI_addLoot;
 		} forEach _units;
 		_units joinSilent grpNull;
-		deleteGroup _unitGroup;
-		//_nul = [_unitGroup,30] spawn DZAI_deleteGroupTimed;
+		//deleteGroup _unitGroup;
+		_unitGroup call DZAI_deleteGroup;
 	};
 } else {
 	{
@@ -93,10 +93,10 @@ if (!surfaceIsWater _vehPos) then {
 			 [_x] joinSilent grpNull;
 		};
 	} forEach (units _unitGroup);
-	deleteGroup _unitGroup;
+	//deleteGroup _unitGroup;
+	_unitGroup call DZAI_deleteGroup;
 };
 
-//_helicopter setVariable ["DZAI_deathTime",diag_tickTime+900];
 if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: AI helicopter %1 evacuated at %2.",typeOf _helicopter,mapGridPosition _helicopter];};
 
 true

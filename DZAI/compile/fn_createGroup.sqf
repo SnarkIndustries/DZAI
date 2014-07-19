@@ -36,13 +36,20 @@ while {((count _pos) < 1) && {(_attempts < 3)}} do {
 		};
 	};
 };
-
 _pos set [2,0];
 
 if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Found spawn position at %3 meters away at position %1 after %2 retries.",_pos,_attempts,(_pos distance _spawnPos)]};
 
 _unitGroup = if (isNull (_this select 1)) then {createGroup (call DZAI_getGroupSide)} else {_this select 1};
-_unitGroup setCombatMode "BLUE";
+if (({isPlayer _x} count (_pos nearEntities ["CAManBase",100])) == 0) then {
+	_unitGroup setCombatMode "RED";	
+} else {
+	_unitGroup setCombatMode "BLUE"; //If there are players within 100m of spawn location, set 10 seconds non-hostility.
+	_nul = _unitGroup spawn {
+		uiSleep 10;
+		_this setCombatMode "RED";	//Activate AI group hostility after 5 seconds
+	};
+};
 
 for "_i" from 1 to _totalAI do {
 	private ["_type","_unit"];
@@ -57,7 +64,6 @@ for "_i" from 1 to _totalAI do {
 	_unit addEventHandler [DZAI_healthType, DZAI_healthStatements];
 	0 = [_unit, _weapongrade] call DZAI_setupLoadout;									// Assign unit loadout
 	0 = [_unit, _weapongrade] call DZAI_setSkills;										// Set AI skill
-	//0 = [_unit, _weapongrade] spawn DZAI_autoRearm_unit;
 	if (DZAI_weaponNoise) then {_unit addEventHandler ["Fired", {_this call DZAI_aiFired;}];}; // Unit firing causes zombie aggro in the area, like player.
 	if (DZAI_debugLevel > 1) then {diag_log format["DZAI Extended Debug: Spawned AI Type %1 with weapongrade %2 for group %3 (fnc_createGroup).",_type,_weapongrade,_unitGroup];};
 };
@@ -76,12 +82,6 @@ _unitGroup setVariable ["GroupSize",_totalAI];
 _unitGroup setVariable ["weapongrade",_weapongrade];
 if (isNull _trigger) then {_unitGroup setVariable ["spawnPos",_spawnPos]}; 	//If group was spawned directly by scripting instead of a trigger object, record spawn position instead of trigger position as anchoring point
 (DZAI_numAIUnits + _totalAI) call DZAI_updateUnitCount;
-0 = [_unitGroup,_weapongrade] spawn DZAI_autoRearm_group;	//start group-level manager
-
-
-_nul = _unitGroup spawn {
-	uiSleep 5;
-	_this setCombatMode "RED";	//Activate AI group hostility after 5 seconds
-};
+0 = [_unitGroup,_weapongrade] call DZAI_startGroupManager;	//start group-level manager
 
 _unitGroup

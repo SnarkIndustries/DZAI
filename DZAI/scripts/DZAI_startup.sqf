@@ -34,6 +34,7 @@ DZAI_bonusBlood = ((DZAI_unitBloodLevel select 1) - (DZAI_unitBloodLevel select 
 DZAI_customSpawnQueue = [];
 DZAI_serverObjectMonitorArray = [];	//dummy array in case DayZ's server object monitor can't be found
 DZAI_monitoredObjects = []; //used to cleanup AI vehicles that may not be destroyed.
+DZAI_nullScript = 0 spawn {};
 
 //Create gamelogic to act as default trigger object if AI is spawned without trigger object specified (ie: for custom vehicle AI groups)
 _nul = [] spawn {

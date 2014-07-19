@@ -141,7 +141,7 @@ _unitGroup setVariable ["isArmed",_isArmed];
 _unitGroup setVariable ["spawnParams",_this];
 [_unitGroup,0] setWaypointPosition [_markerPos,0];		//Move group's initial waypoint position away from [0,0,0] (initial spawn position).
 
-0 = [_unitGroup,_weapongrade] spawn DZAI_autoRearm_group;
+0 = [_unitGroup,_weapongrade] call DZAI_startGroupManager;
 0 = [_unitGroup,_markerPos,_markerSize,false] spawn DZAI_BIN_taskPatrol;
 
 if (_isAirVehicle) then {
