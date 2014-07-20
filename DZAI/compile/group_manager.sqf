@@ -53,7 +53,7 @@ _antistuckTime = diag_tickTime + 600;
 
 if (_debugMarkers) then {
 	if (isNull _vehicle) then {
-		_markername = format ["%1 (AI L.%2)",_unitGroup,_weapongrade];
+		_markername = format ["%1 1",_unitGroup];
 		if ((getMarkerColor _markername) != "") then {deleteMarker _markername; uiSleep 0.5;};	//Delete the previous marker if it wasn't deleted for some reason.
 		_marker = createMarker [_markername,getPosASL (leader _unitGroup)];
 		_marker setMarkerText format ["%1 (AI L.%2)",_unitGroup,_weapongrade];
@@ -77,7 +77,7 @@ if (_debugMarkers) then {
 			uiSleep 0.1;
 		} count _units;
 	} else {
-		_markername = format ["%1 (AI %2)",_unitGroup,(typeOf (vehicle (leader _unitGroup)))];
+		_markername = format ["%1 1",_unitGroup];
 		if ((getMarkerColor _markername) != "") then {deleteMarker _markername; uiSleep 0.5;};	//Delete the previous marker if it wasn't deleted for some reason.
 		_marker = createMarker [_markername,getPosASL (leader _unitGroup)];
 		_marker setMarkerText format ["%1 (AI %2)",_unitGroup,(typeOf (vehicle (leader _unitGroup)))];
@@ -86,7 +86,7 @@ if (_debugMarkers) then {
 		_marker setMarkerBrush "Solid";
 	};
 	
-	_markername2 = format ["%1 waypoint",_unitGroup];
+	_markername2 = format ["%1 2",_unitGroup];
 	if ((getMarkerColor _markername2) != "") then {deleteMarker _markername2; uiSleep 0.5;};	//Delete the previous marker if it wasn't deleted for some reason.
 	_marker2 = createMarker [_markername2,(getWPPos [_unitGroup,(currentWaypoint _unitGroup)])];
 	_marker2 setMarkerText format ["%1 WP",_unitGroup];

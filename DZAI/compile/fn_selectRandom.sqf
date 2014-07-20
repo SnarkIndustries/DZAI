@@ -1,4 +1,4 @@
-scriptName "Functions\arrays\fn_selectRandom.sqf";
+//scriptName "Functions\arrays\fn_selectRandom.sqf";
 /************************************************************
     Random Select
     By Andrew Barron

@@ -1,4 +1,4 @@
-scriptName "Functions\arrays\fn_selectRandomWeighted.sqf";
+//scriptName "Functions\arrays\fn_selectRandomWeighted.sqf";
 /*
 	File: fn_selectRandomWeighted.sqf
 	Author: Joris-Jan van 't Land
