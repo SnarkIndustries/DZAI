@@ -71,6 +71,8 @@ if (_victim getVariable ["removeNVG",true]) then {
 	_victim removeWeapon "NVGoggles";
 };
 
+if (_unitGroup getVariable ["CombatModeBlue",false]) then {_unitGroup setCombatMode "RED"};
+
 _victim spawn DZAI_deathFlies;
 _victim setVariable ["bodyName",_victim getVariable ["bodyName","unknown"],true];		//Broadcast the unit's name (was previously a private variable).
 _victim setVariable ["deathType",_deathType,true];

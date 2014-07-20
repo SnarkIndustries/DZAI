@@ -28,7 +28,6 @@ if (_groupIsEmpty) then {
 		} else {
 			_trigger setVariable ["permadelete",true];	//deny respawn and delete trigger on next despawn.
 		};
-		if (DZAI_debugLevel > 1) then {diag_log format["DZAI Extended Debug: All units in group %1 killed, spawned 1 dummy AI unit for group.",_unitGroup];};
 	} else {
 		if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {deleteMarker str(_trigger)};
 		{

@@ -256,12 +256,15 @@ DZAI_spawn_vehicle = {
 
 DZAI_protectGroup = {
 	private ["_dummy"]; //_this = group
+	
 	_dummy = _this createUnit ["Logic",[0,0,0],[],0,"FORM"];
 	[_dummy] joinSilent _this;
 	_dummy disableAI "MOVE";
 	_dummy setVariable ["unconscious",true];
 	if ((behaviour _dummy) != "AWARE") then {_this setBehaviour "AWARE"};
 	_this setVariable ["dummyUnit",_dummy];
+	
+	if (DZAI_debugLevel > 1) then {diag_log format["DZAI Extended Debug: All units in group %1 killed, spawned 1 dummy AI unit for group.",_this];};
 	
 	_dummy
 };
@@ -351,6 +354,8 @@ DZAI_startGroupManager = {
 
 DZAI_deleteGroup = {
 	private ["_groupManager"];
+	
+	if (isNil "_this") exitWith {};
 	
 	_groupManager = (_this getVariable ["GroupManager",DZAI_nullScript]);
 	

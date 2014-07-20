@@ -1,4 +1,4 @@
-/*
+	/*
 	fnc_createGroup
 	
 	Description: Spawns a group of AI units. Used for spawning of DZAI's static, dynamic, and custom AI units.
@@ -44,10 +44,12 @@ _unitGroup = if (isNull (_this select 1)) then {createGroup (call DZAI_getGroupS
 if (({isPlayer _x} count (_pos nearEntities ["CAManBase",100])) == 0) then {
 	_unitGroup setCombatMode "RED";	
 } else {
-	_unitGroup setCombatMode "BLUE"; //If there are players within 100m of spawn location, set 10 seconds non-hostility.
+	_unitGroup setCombatMode "BLUE";
 	_nul = _unitGroup spawn {
+		_this setVariable ["CombatModeBlue",true];
 		uiSleep 10;
 		_this setCombatMode "RED";	//Activate AI group hostility after 5 seconds
+		_this setVariable ["CombatModeBlue",false];
 	};
 };
 

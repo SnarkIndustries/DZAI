@@ -18,7 +18,7 @@ _groupIsEmpty = _this select 3;
 _trigger = _unitGroup getVariable ["trigger",DZAI_defaultTrigger];
 if (_groupIsEmpty) then {
 	[_trigger,true] spawn fnc_despawnBandits_dynamic;	//force despawning even if players are present in trigger area.
-	if (DZAI_debugLevel > 0) then {diag_log format["DZAI Debug: Group %1 spawned by trigger %1 are dead. Starting force despawn. (fnc_dynAIDeath).",_unitGroup,_trigger];};
+	if (DZAI_debugLevel > 0) then {diag_log format["DZAI Debug: Group %1 spawned by trigger %2 are dead. Starting force despawn. (fnc_dynAIDeath).",_unitGroup,_trigger];};
 };
 
 true
