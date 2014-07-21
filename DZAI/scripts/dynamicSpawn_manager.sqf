@@ -33,7 +33,7 @@ _maxSpawnTime = DZAI_maxSpawnTime; //Time required for maximum % spawn probabili
 _retainMaxSpawnTime = DZAI_maxSpawnTime + DZAI_keepMaxSpawnTime;
 //_maxSpawnTime = 1; //FOR DEBUGGING
 
-while {0 == 0} do {
+while {true} do {
 	if (({isPlayer _x} count playableUnits) > 0) then {
 		_allPlayers = [];		//Do not edit
 		{

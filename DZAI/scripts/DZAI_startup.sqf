@@ -156,7 +156,7 @@ _nul = [] spawn {
 	_reportDynOrVehicles = (DZAI_dynAISpawns || _vehiclesEnabled);
 	uiSleep 60;
 
-	while {0 == 0} do {
+	while {true} do {
 		if ((time - _cleanDead) >= 300) then {	//Check every 5 minutes if any dead objects (units or vehicles) can be removed
 			_deadCleaned = 0;
 			{
