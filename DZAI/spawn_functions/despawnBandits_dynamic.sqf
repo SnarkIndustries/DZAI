@@ -49,39 +49,12 @@ if (_canDespawn) then {
 	_trigger setTriggerStatements ["this","",""]; //temporarily disable trigger from activating or deactivating while cleanup is performed
 	if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Cleaning up expired dynamic trigger at %1.",mapGridPosition _trigger];};
 	
-	if !(_isForceDespawn) then {
-		//Normal despawn procedure
-		{
-			(DZAI_numAIUnits - (_x getVariable ["groupSize",0])) call DZAI_updateUnitCount;
-			{
-				if (alive _x) then {
-					deleteVehicle _x;
-				} else {
-					[_x] joinSilent grpNull;
-				};
-			} count (units _x);							//Delete live units
-			uiSleep 0.1;
-			if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Deleted group %1 with %2 active units.",_x,(_x getVariable ["groupSize",0])];};
-			//deleteGroup _x;													//Delete the group after its units are deleted.
-			_x call DZAI_deleteGroup;
-		} forEach _grpArray;	
-	} else {
-		//Force despawn procedure
-		_grpArray = _grpArray - [grpNull];
-		{
-			(DZAI_numAIUnits - (_x getVariable ["groupSize",0])) call DZAI_updateUnitCount;
-			{
-				if (alive _x) then {
-					deleteVehicle _x;
-				} else {
-					[_x] joinSilent grpNull;
-				};
-			} count (units _x);
-			uiSleep 0.1;
-			//deleteGroup _x;
-			_x call DZAI_deleteGroup;
-		} forEach _grpArray;
-	};
+	_grpArray = _grpArray - [grpNull];
+	{
+		if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Deleting group %1 with %2 active units.",_x,(_x getVariable ["groupSize",0])];};
+		(DZAI_numAIUnits - (_x getVariable ["groupSize",0])) call DZAI_updateUnitCount;
+		_x call DZAI_deleteGroup;
+	} forEach _grpArray;
 	
 	//Remove dynamic trigger from global dyn trigger array and clean up trigger
 	_trigger call DZAI_updDynSpawnCount;

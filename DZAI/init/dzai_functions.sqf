@@ -358,12 +358,11 @@ DZAI_deleteGroup = {
 	if (isNil "_this") exitWith {};
 	
 	_groupManager = (_this getVariable ["GroupManager",DZAI_nullScript]);
-	
 	if !(scriptDone _groupManager) then {
 		terminate _groupManager;
 		//diag_log ("DEBUG :: Success - DZAI_deleteGroup is terminating group manager and deleting group : " + str(_this));
 	};
-	
+	{deleteVehicle _x} count (units _this);
 	deleteGroup _this;
 	
 	true

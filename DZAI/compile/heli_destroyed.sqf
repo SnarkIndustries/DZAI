@@ -25,12 +25,7 @@ if !(surfaceIsWater (getPosASL _helicopter)) then {
 		0 = [_x,_weapongrade] spawn DZAI_addLoot;
 	} count _units;
 	_units joinSilent grpNull;
-} else {
-	{
-		deleteVehicle _x;
-	} count _units;
 };
-//deleteGroup _unitGroup;
 _unitGroup call DZAI_deleteGroup;
 
 //_helicopter setVariable ["DZAI_deathTime",diag_tickTime+900];

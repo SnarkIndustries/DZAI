@@ -197,7 +197,7 @@ _nul = [] spawn {
 				uiSleep 0.005;
 			} count DZAI_monitoredObjects;
 
-			if (_purgeCounter >= 5) then {
+			if (_purgeCounter > 4) then {
 				missionNamespace setVariable [DZAI_serverObjectMonitor,((missionNamespace getVariable DZAI_serverObjectMonitor) - [objNull])];
 				DZAI_monitoredObjects = DZAI_monitoredObjects - [objNull];
 				if (_deadCleaned > 0) then {diag_log format ["DZAI Cleanup: Cleaned up %1 null objects from server object monitor.",_purgeCounter]};

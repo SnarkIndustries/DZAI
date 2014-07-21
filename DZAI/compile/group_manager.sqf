@@ -208,7 +208,7 @@ while {(!isNull _unitGroup) && {(_unitGroup getVariable "GroupSize") > 0}} do {
 				_nextWP = _currentWP + 1;
 				if ((count _allWP) == _nextWP) then {_nextWP = 1}; //Cycle back to first added waypoint if group is currently on last waypoint.
 				_unitGroup setCurrentWaypoint [_unitGroup,_nextWP];
-				if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Antistuck prevention triggered for AI group %1. Forcing next waypoint.",_unitGroup];};
+				if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Antistuck prevention triggered for AI %1 (group %1). Forcing next waypoint.",(typeOf _vehicle),_unitGroup];};
 			} else {
 				_antistuckPos = _wpPos;
 			};

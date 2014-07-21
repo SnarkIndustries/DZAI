@@ -72,7 +72,7 @@ if (_damage > 0.4) then {
 	
 	if (_newbloodlevel < 0) then {
 		_nul = [_unit,_source,_deathType] call DZAI_unitDeath;
-		diag_log format ["DEBUG :: %1 was killed by %2 from %3m. Cause: %4.",_unit,_source,(_unit distance _source),_deathType];
+		//diag_log format ["DEBUG :: %1 was killed by %2 from %3m. Cause: %4.",_unit,_source,(_unit distance _source),_deathType];
 	} else {
 		if (!(_unit getVariable ["unconscious",false]) && {((_damage > 2) || {((_damage > 0.5) && (_hit == "head_hit"))})}) then {_nul = [_unit,_hit] spawn DZAI_unconscious; _unit setVariable ["unconscious",true];};
 	};

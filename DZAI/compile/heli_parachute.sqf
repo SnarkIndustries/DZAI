@@ -86,14 +86,6 @@ if (!surfaceIsWater _vehPos) then {
 		_unitGroup call DZAI_deleteGroup;
 	};
 } else {
-	{
-		if (alive _x) then {
-			deleteVehicle _x;
-		} else {
-			 [_x] joinSilent grpNull;
-		};
-	} forEach (units _unitGroup);
-	//deleteGroup _unitGroup;
 	_unitGroup call DZAI_deleteGroup;
 };
 

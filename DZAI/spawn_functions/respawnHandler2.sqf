@@ -46,18 +46,7 @@ while {(count DZAI_respawnQueue) > 0} do {
 						} else {
 							//Trigger is inactive (despawned or deleted) so clean up group instead
 							if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Spawn area %1 has already been despawned. Cleaning up group %2.",triggerText _trigger,_unitGroup]};
-							/*
-							if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
-								{
-									deleteMarker (str _x);
-								} count (waypoints _unitGroup);
-								uiSleep 0.1;
-							};
-							*/
-							{deleteVehicle _x} count (units _unitGroup); //Delete all units in group (don't assume the only unit is dummy).
-							//deleteGroup _unitGroup;
 							_unitGroup call DZAI_deleteGroup;
-							
 							if (!isNull _trigger) then {
 								_trigger setVariable ["GroupArray",_grpArray - [grpNull]];
 							};
