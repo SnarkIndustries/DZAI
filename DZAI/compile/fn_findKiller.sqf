@@ -116,30 +116,33 @@ if ((_startPos distance _targetPlayer) < CHASE_DISTANCE) then {
 		uiSleep 0.5;
 	};
 
-	//End of pursuit state. Re-enable patrol state.
-	_unitGroup setVariable ["pursuitTime",0];
-	_unitGroup setVariable ["targetKiller",""];
-	_unitGroup lockWP false;
-	_unitGroup setCurrentWaypoint ((waypoints _unitGroup) call BIS_fnc_selectRandom2);
-	if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Pursuit state ended for group %1. Returning to patrol state. (fn_findKiller)",_unitGroup];};
-	
-	if (DZAI_radioMsgs) then {
-		_leader = (leader _unitGroup);
-		if (((_targetPlayer distance _leader) <= RECEIVE_DIST) && {((_unitGroup getVariable ["GroupSize",0]) > 1)} && {!(_leader getVariable ["unconscious",false])} && {!(isNull _targetPlayer)}) then {
-			private ["_nearbyUnits","_radioSpeech","_radioText"];
-			_radioText = if (alive _targetPlayer) then {"%1 (Bandit Leader): Lost contact with target. Breaking off pursuit."} else {"%1 (Bandit Leader): Target has been eliminated."};
-			_radioSpeech = format [_radioText,(name (leader _unitGroup))];
-			_nearbyUnits = (getPosASL _targetPlayer) nearEntities [["LandVehicle","CAManBase"],TRANSMIT_RANGE];
-			{
-				if ((isPlayer _x)&&{((driver (vehicle _x)) hasWeapon "ItemRadio")}) then {
-					[_x,_radioSpeech] call DZAI_radioSend;
+	if !(isNull _unitGroup) then {
+		//End of pursuit state. Re-enable patrol state.
+		_unitGroup setVariable ["pursuitTime",0];
+		_unitGroup setVariable ["targetKiller",""];
+		_unitGroup lockWP false;
+		
+		if ((_unitGroup getVariable ["GroupSize",0]) > 0) then {
+			_unitGroup setCurrentWaypoint ((waypoints _unitGroup) call BIS_fnc_selectRandom2);
+			if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Pursuit state ended for group %1. Returning to patrol state. (fn_findKiller)",_unitGroup];};
+			
+			if (DZAI_radioMsgs) then {
+				_leader = (leader _unitGroup);
+				if (((_targetPlayer distance _leader) <= RECEIVE_DIST) && {((_unitGroup getVariable ["GroupSize",0]) > 1)} && {!(_leader getVariable ["unconscious",false])} && {!(isNull _targetPlayer)}) then {
+					private ["_nearbyUnits","_radioSpeech","_radioText"];
+					_radioText = if (alive _targetPlayer) then {"%1 (Bandit Leader): Lost contact with target. Breaking off pursuit."} else {"%1 (Bandit Leader): Target has been eliminated."};
+					_radioSpeech = format [_radioText,(name (leader _unitGroup))];
+					_nearbyUnits = (getPosASL _targetPlayer) nearEntities [["LandVehicle","CAManBase"],TRANSMIT_RANGE];
+					{
+						if ((isPlayer _x)&&{((driver (vehicle _x)) hasWeapon "ItemRadio")}) then {
+							[_x,_radioSpeech] call DZAI_radioSend;
+						};
+					} count _nearbyUnits;
 				};
-			} count _nearbyUnits;
+			};
 		};
 	};
 	if (_debugMarkers) then {
 		deleteMarker _marker;
 	};
 };
-
-//_unitGroup setBehaviour "COMBAT";
