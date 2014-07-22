@@ -11,7 +11,7 @@ if ((getMarkerColor _marker) == "") then {
 _marker setMarkerText "STATIC TRIGGER (ACTIVE)";
 _marker setMarkerColor "ColorRed";
 	
-while {(getMarkerColor _marker) != "ColorGreen"} do {
+while {!((getMarkerColor _marker) in ["ColorGreen",""])} do {
 	_marker setMarkerPos (getMarkerPos _marker);
 	uiSleep 30;
 };

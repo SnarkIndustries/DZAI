@@ -274,13 +274,9 @@ DZAI_deleteGroupTimed = {
 	_unitGroup = _this select 0;
 	
 	if (!isNull _unitGroup) then {
-		_wait = _this select 1;
-		_dummy = _unitGroup call DZAI_protectGroup;
-		
+		_wait = _this select 1;	
 		uiSleep _wait;
-		{deleteVehicle _x} forEach (units _unitGroup);
 		_unitGroup call DZAI_deleteGroup;
-		//deleteGroup _unitGroup;
 	};
 };
 
@@ -360,7 +356,10 @@ DZAI_deleteGroup = {
 	_groupManager = (_this getVariable ["GroupManager",DZAI_nullScript]);
 	if !(scriptDone _groupManager) then {
 		terminate _groupManager;
-		//diag_log ("DEBUG :: Success - DZAI_deleteGroup is terminating group manager and deleting group : " + str(_this));
+		if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
+			deleteMarker (format ["%1-1",_this]);
+			deleteMarker (format ["%1-2",_this]);
+		};
 	};
 	{deleteVehicle _x} count (units _this);
 	deleteGroup _this;

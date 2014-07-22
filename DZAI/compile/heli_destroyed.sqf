@@ -24,9 +24,10 @@ if !(surfaceIsWater (getPosASL _helicopter)) then {
 		_nul = [_x,_x] call DZAI_unitDeath;
 		0 = [_x,_weapongrade] spawn DZAI_addLoot;
 	} count _units;
-	_units joinSilent grpNull;
+	_nul = [_unitGroup,30] spawn DZAI_deleteGroupTimed;
+} else {
+	_unitGroup call DZAI_deleteGroup;
 };
-_unitGroup call DZAI_deleteGroup;
 
 //_helicopter setVariable ["DZAI_deathTime",diag_tickTime+900];
 if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: AI helicopter patrol destroyed at %1",mapGridPosition _helicopter];};

@@ -40,7 +40,7 @@ call {
 	if (_unitType in ["land","landcustom"]) exitWith {
 		0 = [_victim,_killer,_unitGroup,_unitType] call DZAI_AI_killed_all;
 		if (_groupIsEmpty) then {
-			[_unitGroup] call DZAI_AI_killed_land;
+			[_unitGroup] call DZAI_AI_killed_land; //Only run this if entire group has been killed
 		};
 	};
 	if (_unitType == "aircrashed") exitWith {};
@@ -49,34 +49,33 @@ call {
 	};
 };
 
-_launchWeapon = (secondaryWeapon _victim);
-if (_launchWeapon in DZAI_launcherTypes) then {
-	_launchAmmo = getArray (configFile >> "CfgWeapons" >> _launchWeapon >> "magazines") select 0;
-	_victim removeWeapon _launchWeapon;
-	_victim removeMagazines _launchAmmo;
-	//if (_launchWeapon in (weapons _victim)) then {diag_log format ["Warning: Unable to remove launcher weapon %1 from unit %2.",_launchWeapon,_victim]};
-	//if (_launchAmmo in (magazines _victim)) then {diag_log format ["Warning: Unable to remove launcher ammo %1 from unit %2.",_launchWeapon,_victim]};
-	//if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Removed launcher weapon %1 and ammo %2 from unit %3.",_launchWeapon,_launchAmmo,_victim]};
-};
-
-if (_deathType == "shothead") then { //no need for isplayer check since "shothead" is only possible if killer is a player
-	_nul = _killer spawn {
-		_headshots = _this getVariable["headShots",0];
-		_headshots = _headshots + 1;
-		_this setVariable["headShots",_headshots,true];
+if !(isNull _victim) then {
+	_launchWeapon = (secondaryWeapon _victim);
+	if (_launchWeapon in DZAI_launcherTypes) then {
+		_launchAmmo = getArray (configFile >> "CfgWeapons" >> _launchWeapon >> "magazines") select 0;
+		_victim removeWeapon _launchWeapon;
+		_victim removeMagazines _launchAmmo;
 	};
+
+	if (_deathType == "shothead") then { //no need for isplayer check since "shothead" is only possible if killer is a player
+		_nul = _killer spawn {
+			_headshots = _this getVariable["headShots",0];
+			_headshots = _headshots + 1;
+			_this setVariable["headShots",_headshots,true];
+		};
+	};
+
+	if (_victim getVariable ["removeNVG",true]) then {
+		_victim removeWeapon "NVGoggles";
+	};
+
+	if (_unitGroup getVariable ["CombatModeBlue",false]) then {_unitGroup setCombatMode "RED"};
+
+	_victim spawn DZAI_deathFlies;
+	_victim setVariable ["bodyName",_victim getVariable ["bodyName","unknown"],true];		//Broadcast the unit's name (was previously a private variable).
+	_victim setVariable ["deathType",_deathType,true];
+	_victim setVariable ["DZAI_deathTime",(diag_tickTime + DZAI_cleanupDelay)];
+	_victim setVariable ["unconscious",true];
 };
-
-if (_victim getVariable ["removeNVG",true]) then {
-	_victim removeWeapon "NVGoggles";
-};
-
-if (_unitGroup getVariable ["CombatModeBlue",false]) then {_unitGroup setCombatMode "RED"};
-
-_victim spawn DZAI_deathFlies;
-_victim setVariable ["bodyName",_victim getVariable ["bodyName","unknown"],true];		//Broadcast the unit's name (was previously a private variable).
-_victim setVariable ["deathType",_deathType,true];
-_victim setVariable ["DZAI_deathTime",(diag_tickTime + DZAI_cleanupDelay)];
-_victim setVariable ["unconscious",true];
 
 _victim

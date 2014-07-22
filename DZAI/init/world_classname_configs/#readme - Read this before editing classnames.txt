@@ -1,6 +1,5 @@
 Load order of classname config files:
 -----------------------------------
-
 1. dzai_config.sqf
 2. <mapname>/default.sqf OR <mapname>/dayz_<modname>.sqf OR epoch/dayz_epoch.sqf (if running Epoch)
 
@@ -17,4 +16,3 @@ Do not edit the <mapname>_classnames.sqf files! They are only used to direct DZA
 Inside each mapname folder, there is a default.sqf file. This config file is read if other mods for the map aren't detected.
 
 Example: If running vanilla DayZ, /Chernarus/default.sqf will be read. If running DayZ Epoch, /epoch/dayz_epoch.sqf will be read instead.
-

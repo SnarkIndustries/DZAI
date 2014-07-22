@@ -19,7 +19,6 @@ if (!(_vehicle isKindOf "ParachuteBase") && {alive _vehicle}) then {
 		};
 	} else {
 		0 = [_victim,(_unitGroup getVariable ["weapongrade",1])] spawn DZAI_addLoot;
-		[_victim] joinSilent grpNull;
 	};
 };
 

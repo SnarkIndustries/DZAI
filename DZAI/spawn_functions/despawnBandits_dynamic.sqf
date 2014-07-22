@@ -23,9 +23,12 @@ _canDespawn = true;
 _triggerExists = true;
 _debugMarkers = ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled});
 
-if !(_isForceDespawn) then {
+if (_isForceDespawn) then {
+	_trigger setTriggerStatements ["this","",""];
+	if (DZAI_debugLevel > 1) then {diag_log format["DZAI Extended Debug: All units of dynamic AI group spawned by trigger %1 have been killed. Starting force despawn in 30 seconds.",triggerText _trigger];};
+	uiSleep 30;
+} else {
 	if (DZAI_debugLevel > 1) then {diag_log format["DZAI Extended Debug: No players remain in %1. Deleting spawned AI in %2 seconds.",triggerText _trigger,DZAI_dynDespawnWait];};
-	
 	if (_debugMarkers) then {
 		_nul = _trigger spawn {
 			_marker = str(_this);
@@ -33,7 +36,6 @@ if !(_isForceDespawn) then {
 			_marker setMarkerAlpha 0.7;							//Light green: Active trigger awaiting despawn.
 		};
 	};
-	
 	uiSleep DZAI_dynDespawnWait;								//Wait some time before deleting units. (amount of time to allow units to exist when the trigger area has no players)
 
 	if !(isNull _trigger) then {							//Check if dynamic spawn area has been force-despawned (deleted). Force despawn will happen when all units have been killed.
@@ -47,8 +49,6 @@ if !(_triggerExists) exitWith {};							//Cancel despawn process if it has alrea
 
 if (_canDespawn) then {
 	_trigger setTriggerStatements ["this","",""]; //temporarily disable trigger from activating or deactivating while cleanup is performed
-	if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Cleaning up expired dynamic trigger at %1.",mapGridPosition _trigger];};
-	
 	_grpArray = _grpArray - [grpNull];
 	{
 		if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Deleting group %1 with %2 active units.",_x,(_x getVariable ["groupSize",0])];};
@@ -65,8 +65,9 @@ if (_canDespawn) then {
 	_triggerLocation setVariable ["deletetime",(diag_tickTime + 900)];
 	DZAI_dynLocations set [(count DZAI_dynLocations),_triggerLocation];
 
+	if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Removing expired dynamic trigger at %1.",mapGridPosition _trigger];};
 	deleteVehicle _trigger;
-
+	
 	true
 } else {
 	if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: A player has entered the trigger area at %1. Cancelling despawn script.",(triggerText _trigger)];}; //Exit script if trigger has been reactivated since DZAI_dynDespawnWait seconds has passed.

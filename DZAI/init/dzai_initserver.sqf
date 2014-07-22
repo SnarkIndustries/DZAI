@@ -39,11 +39,12 @@ createCenter east;
 east setFriend [west, 0];        
 west setFriend [east, 0];
 
-//Detect DayZ mod variant being used.
+//Detect DayZ mod variant and version being used.
 if (isNil "DZAI_modName") then {DZAI_modName = ""};
+if (isNil "DZAI_modVersion") then {DZAI_modVersion = toLower (getText (configFile >> "CfgMods" >> "DayZ" >> "version"))};
 if (DZAI_modName == "") then {
 	private["_modVariant"];
-	_modVariant = toLower(getText (configFile >> "CfgMods" >> "DayZ" >> "dir"));
+	_modVariant = toLower (getText (configFile >> "CfgMods" >> "DayZ" >> "dir"));
 	if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Detected mod variant %1.",_modVariant];};
 	DZAI_modName = call {
 		if (_modVariant == "@dayz_epoch") exitWith {"epoch"};
@@ -88,7 +89,7 @@ if (_worldname in [
 [] execVM format ['%1\scripts\DZAI_startup.sqf',DZAI_directory];
 
 //Report DZAI startup settings to RPT log
-diag_log format ["[DZAI] DZAI settings: Debug Level: %1. DebugMarkers: %2. WorldName: %3. ModName: %4. DZAI_dynamicWeaponList: %5. VerifyTables: %6.",DZAI_debugLevel,((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}),_worldname,DZAI_modName,DZAI_dynamicWeaponList,DZAI_verifyTables];
+diag_log format ["[DZAI] DZAI settings: Debug Level: %1. DebugMarkers: %2. WorldName: %3. ModName: %4 (Ver: %5). DZAI_dynamicWeaponList: %6. VerifyTables: %7.",DZAI_debugLevel,((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}),_worldname,DZAI_modName,DZAI_modVersion,DZAI_dynamicWeaponList,DZAI_verifyTables];
 diag_log format ["[DZAI] AI spawn settings: Static: %1. Dynamic: %2. Air: %3. Land: %4.",DZAI_staticAI,DZAI_dynAISpawns,(DZAI_maxHeliPatrols>0),(DZAI_maxLandPatrols>0)];
 diag_log format ["[DZAI] AI settings: DZAI_findKiller: %1. DZAI_useHealthSystem: %2. DZAI_weaponNoise: %3. DZAI_zombieEnemy: %4.",DZAI_findKiller,DZAI_useHealthSystem,DZAI_weaponNoise,DZAI_zombieEnemy];
 diag_log format ["[DZAI] DZAI loading completed in %1 seconds.",(diag_tickTime - _startTime)];

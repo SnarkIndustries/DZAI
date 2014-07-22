@@ -77,7 +77,7 @@ if (_debugMarkers) then {
 			uiSleep 0.1;
 		} count _units;
 	} else {
-		_markername = format ["%1 1",_unitGroup];
+		_markername = format ["%1-1",_unitGroup];
 		if ((getMarkerColor _markername) != "") then {deleteMarker _markername; uiSleep 0.5;};	//Delete the previous marker if it wasn't deleted for some reason.
 		_marker = createMarker [_markername,getPosASL (leader _unitGroup)];
 		_marker setMarkerText format ["%1 (AI %2)",_unitGroup,(typeOf (vehicle (leader _unitGroup)))];
@@ -86,7 +86,7 @@ if (_debugMarkers) then {
 		_marker setMarkerBrush "Solid";
 	};
 	
-	_markername2 = format ["%1 2",_unitGroup];
+	_markername2 = format ["%1-2",_unitGroup];
 	if ((getMarkerColor _markername2) != "") then {deleteMarker _markername2; uiSleep 0.5;};	//Delete the previous marker if it wasn't deleted for some reason.
 	_marker2 = createMarker [_markername2,(getWPPos [_unitGroup,(currentWaypoint _unitGroup)])];
 	_marker2 setMarkerText format ["%1 WP",_unitGroup];
@@ -208,7 +208,7 @@ while {(!isNull _unitGroup) && {(_unitGroup getVariable "GroupSize") > 0}} do {
 				_nextWP = _currentWP + 1;
 				if ((count _allWP) == _nextWP) then {_nextWP = 1}; //Cycle back to first added waypoint if group is currently on last waypoint.
 				_unitGroup setCurrentWaypoint [_unitGroup,_nextWP];
-				if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Antistuck prevention triggered for AI %1 (group %1). Forcing next waypoint.",(typeOf _vehicle),_unitGroup];};
+				if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Antistuck prevention triggered for AI %1 (group %2). Forcing next waypoint.",(typeOf _vehicle),_unitGroup];};
 			} else {
 				_antistuckPos = _wpPos;
 			};
@@ -232,7 +232,7 @@ while {(!isNull _unitGroup) && {(_unitGroup getVariable "GroupSize") > 0}} do {
 					_vehicle doMove _wpSelect;
 				};
 				_antistuckPos = _wpSelect;
-				if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Antistuck prevention triggered for AI vehicle %1 (Group: %2). Forcing next waypoint.",_vehicle,_unitGroup];};
+				if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Antistuck prevention triggered for AI vehicle %1 (Group: %2). Forcing next waypoint.",(typeOf _vehicle),_unitGroup];};
 			} else {
 				_antistuckPos = _wpPos;
 			};

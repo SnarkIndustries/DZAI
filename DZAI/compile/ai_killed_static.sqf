@@ -30,14 +30,18 @@ if (_groupIsEmpty) then {
 		};
 	} else {
 		if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {deleteMarker str(_trigger)};
-		{
-			//deleteGroup _x
-			_x call DZAI_deleteGroup;
-		} forEach (_trigger getVariable ["GroupArray",[]]);
-		deleteMarker (_trigger getVariable ["spawnmarker",""]);
-		_trigger call DZAI_updStaticSpawnCount;
-		if (DZAI_debugLevel > 0) then {diag_log format["DZAI Debug: Deleting custom-defined AI spawn %1 at %2.",triggerText _trigger, mapGridPosition _trigger];};
-		deleteVehicle _trigger;
+		_nul = _trigger spawn {
+			_trigger = _this;
+			_trigger setTriggerStatements ["this","true","false"]; //Disable trigger from activating or deactivating while cleanup is performed
+			if (DZAI_debugLevel > 0) then {diag_log format["DZAI Debug: Deleting custom-defined AI spawn %1 at %2 in 30 seconds.",triggerText _trigger, mapGridPosition _trigger];};
+			uiSleep 30;
+			{
+				_x call DZAI_deleteGroup;
+			} forEach (_trigger getVariable ["GroupArray",[]]);
+			deleteMarker (_trigger getVariable ["spawnmarker",""]);
+			_trigger call DZAI_updStaticSpawnCount;
+			deleteVehicle _trigger;
+		};
 	};
 } else {
 	if (!(_trigger getVariable ["respawn",true])) then {
