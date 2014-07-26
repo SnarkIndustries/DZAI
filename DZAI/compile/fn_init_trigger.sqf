@@ -14,7 +14,7 @@ if ((count _this) > 3) then {
 	_location = createLocation ["Strategic",(getPosASL _trigger),600,600]; //Create temporary dynamic spawn blacklist area
 	_trigger setVariable ["triggerLocation",_location];
 };
-_trigger setVariable ["triggerStatements",(triggerStatements _trigger)];
+_trigger setVariable ["triggerStatements",+(triggerStatements _trigger)];
 _trigger setVariable ["initialized",true];
 
 true

@@ -121,7 +121,6 @@ for "_j" from 1 to (_numGroups - _groupsActive) do {
 _triggerStatements = (triggerStatements _trigger);
 if (!(_trigger getVariable ["initialized",false])) then {
 	0 = [_trigger,_grpArray,_patrolDist,_equipType,_locationArray,[_minAI,_addAI]] call DZAI_setTrigVars;
-	_trigger setVariable ["triggerStatements",+_triggerStatements];
 	_trigger setVariable ["respawnLimit",_respawnLimit];
 } else {
 	if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Trigger group array updated to: %1.",_trigger getVariable "GroupArray"]};
