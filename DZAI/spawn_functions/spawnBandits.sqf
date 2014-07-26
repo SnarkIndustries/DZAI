@@ -65,7 +65,6 @@ if ((count _locationArray) == 0) then {
 		if (DZAI_debugLevel > 1) then {diag_log "DZAI Extended Debug: Spawning AI from building positions (spawnBandits).";};
 	} else {
 		{
-			_pos = ASLtoATL getPosASL _x;
 			if (((getMarkerColor _x) != "") && {!(surfaceIsWater _pos)}) then {
 				_locationArray set [(count _locationArray),_pos];
 				deleteMarker _x;
