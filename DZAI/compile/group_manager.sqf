@@ -48,7 +48,7 @@ _antistuckTime = diag_tickTime + 600;
 			_x addWeapon _launchWeapon; (_loadout select 0) set [1,_launchWeapon];
 		};
 	};
-	if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Unit %1 loadout: %2. Weapongrade %3. Blood: %4.",_x,_x getVariable ["loadout",[]],_weapongrade,((_x getVariable ["unithealth",[12000,0,false]]) select 0)];};
+	if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Unit %1 loadout: %2. Weapongrade %3. Blood: %4.",_x,_x getVariable ["loadout",[]],_weapongrade,((_x getVariable "unithealth") select 0)];};
 } forEach _units;
 
 if (_debugMarkers) then {
@@ -99,7 +99,7 @@ if (_debugMarkers) then {
 };
 
 //Main loop
-while {(!isNull _unitGroup) && {(_unitGroup getVariable ["GroupSize",0]) > 0}} do {
+while {(!isNull _unitGroup) && {(_unitGroup getVariable "GroupSize") > 0}} do {
 	_leader = leader _unitGroup;
 	if (alive _vehicle) then {	//If _vehicle is objNull (if no vehicle was assigned to the group) then nothing in this bracket should be executed
 		if ((_isArmed) && {someAmmo _vehicle}) then {	//Note: someAmmo check is not reliable for vehicles with multiple turrets
@@ -153,9 +153,9 @@ while {(!isNull _unitGroup) && {(_unitGroup getVariable ["GroupSize",0]) > 0}} d
 					};
 				};
 				
-				_bandages = _unit getVariable ["bandageAmount",0];
+				_bandages = _unit getVariable "bandageAmount";
 				if (_bandages > 0) then {
-					_health = _unit getVariable ["unithealth",[12000,0,false]];
+					_health = _unit getVariable "unithealth";
 					if (_unit getVariable ["needsHeal",false]) then {
 						_nearestEnemy = _unit findNearestEnemy _unit;
 						_isSafe = ((_unit distance _nearestEnemy) > 35);
@@ -208,7 +208,7 @@ while {(!isNull _unitGroup) && {(_unitGroup getVariable ["GroupSize",0]) > 0}} d
 				_nextWP = _currentWP + 1;
 				if ((count _allWP) == _nextWP) then {_nextWP = 1}; //Cycle back to first added waypoint if group is currently on last waypoint.
 				_unitGroup setCurrentWaypoint [_unitGroup,_nextWP];
-				if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Antistuck prevention triggered for AI group %1. Forcing next waypoint.",_unitGroup];};
+				if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Antistuck prevention triggered for AI %1 (group %2). Forcing next waypoint.",(typeOf _vehicle),_unitGroup];};
 			} else {
 				_antistuckPos = _wpPos;
 			};
@@ -243,7 +243,7 @@ while {(!isNull _unitGroup) && {(_unitGroup getVariable ["GroupSize",0]) > 0}} d
 		_marker setMarkerPos (getPosASL _leader);
 		_marker2 setMarkerPos (getWPPos [_unitGroup,(currentWaypoint _unitGroup)]);
 	};
-	if ((_unitGroup getVariable ["GroupSize",0]) > 0) then {uiSleep 15};
+	if ((_unitGroup getVariable "GroupSize") > 0) then {uiSleep 15};
 };
 
 if (isEngineOn _vehicle) then {_vehicle engineOn false};
