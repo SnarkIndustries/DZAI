@@ -26,6 +26,7 @@ DZAI_dynEquipType = 4;
 DZAI_dynLocations = [];										//Queue of temporary dynamic spawn area blacklists for deletion
 DZAI_reinforcePlaces = [];									//AI helicopter patrols will periodically check this array for dynamic trigger objects to use as reinforcement positions.
 DZAI_checkedClassnames = [[],[],[]];						//Classnames verified - Weapons/Magazines/Vehicles
+DZAI_invalidClassnames = [[],[],[]];						//Classnames known as invalid - Weapons/Magazines/Vehicles
 DZAI_respawnTimeVariance = (abs (DZAI_respawnTimeMax - DZAI_respawnTimeMin));
 DZAI_respawnTimeVarAir = (abs (DZAI_respawnTMaxA - DZAI_respawnTMinA));
 DZAI_respawnTimeVarLand = (abs (DZAI_respawnTMaxL - DZAI_respawnTMinL));
@@ -35,6 +36,8 @@ DZAI_customSpawnQueue = [];
 DZAI_serverObjectMonitorArray = [];	//dummy array in case DayZ's server object monitor can't be found
 DZAI_monitoredObjects = []; //used to cleanup AI vehicles that may not be destroyed.
 DZAI_nullScript = 0 spawn {};
+DZAI_heliListFinal = [];
+DZAI_vehListFinal = [];
 
 //Create gamelogic to act as default trigger object if AI is spawned without trigger object specified (ie: for custom vehicle AI groups)
 _nul = [] spawn {
@@ -52,7 +55,6 @@ _nul = [] spawn {
 	if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Default trigger gamelogic spawn check result: %1",(!isNull _logicGroup) && {(typeName DZAI_defaultTrigger) == "OBJECT"}]};
 };
 
-
 //Configure AI health system
 if (isNil "DZAI_useHealthSystem") then {DZAI_useHealthSystem = true};
 if (DZAI_useHealthSystem) then {
@@ -69,8 +71,6 @@ DZAI_serverObjectMonitor = call {
 	if (!isNil "PVDZE_serverObjectMonitor") exitWith {"PVDZE_serverObjectMonitor"};
 	"DZAI_serverObjectMonitorArray"
 };
-
-_vehiclesEnabled = ((DZAI_maxHeliPatrols > 0) or {(DZAI_maxLandPatrols > 0)});
 
 [] call compile preprocessFileLineNumbers format ["%1\scripts\buildWeightedTables.sqf",DZAI_directory];
 
@@ -125,7 +125,7 @@ if (DZAI_modName == "epoch") then {
 	_nul = [] execVM format ['%1\scripts\setup_trader_areas.sqf',DZAI_directory];
 };
 
-if (_vehiclesEnabled) then {
+if ((DZAI_maxHeliPatrols > 0) or {(DZAI_maxLandPatrols > 0)}) then {
 	_nul = [] execVM format ['%1\scripts\setup_veh_patrols.sqf',DZAI_directory];
 };
 
