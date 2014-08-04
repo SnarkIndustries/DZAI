@@ -3,8 +3,6 @@ waitUntil {uiSleep 0.1; !isNil "DZAI_locations_ready"};
 
 if (DZAI_maxHeliPatrols > 0) then {
 	_nul = [] spawn {
-		DZAI_heliListFinal = [];
-		
 		for "_i" from 0 to ((count DZAI_heliList) - 1) do {
 			_heliType = (DZAI_heliList select _i) select 0;
 			_amount = (DZAI_heliList select _i) select 1;
@@ -35,8 +33,6 @@ if (DZAI_maxHeliPatrols > 0) then {
 
 if (DZAI_maxLandPatrols > 0) then {
 	_nul = [] spawn {
-		DZAI_vehListFinal = [];
-		
 		for "_i" from 0 to ((count DZAI_vehList) - 1) do {
 			_vehType = (DZAI_vehList select _i) select 0;
 			_amount = (DZAI_vehList select _i) select 1;
