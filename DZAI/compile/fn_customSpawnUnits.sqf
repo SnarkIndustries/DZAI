@@ -25,6 +25,6 @@ if ((markerAlpha _spawnMarker) > 0) then {
 	_spawnMarker setMarkerAlpha 0;
 };
 
-if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Created custom spawn area %1 at %2 with %3 AI units, weapongrade %4, respawn %5.",_spawnMarker,mapGridPosition _trigger,_totalAI,_weapongrade,_respawn];};
+if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Created custom spawn area %1 at %2 with %3 AI units, weapongrade %4, respawn %5, respawn time %6.",_spawnMarker,mapGridPosition _trigger,_totalAI,_weapongrade,_respawn,_respawnTime];};
 
 _trigger

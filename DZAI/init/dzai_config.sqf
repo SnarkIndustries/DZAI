@@ -26,9 +26,9 @@ DZAI_verifyTables = true;
 //If running DayZ Mod ("vanilla DayZ") or DayZ Overwatch, it is highly recommended to enable this option, as many added buildings are handled by the CfgTownGenerator. Not used with Epoch.							
 DZAI_objPatch = true;
 
-//Minimum seconds to pass until each dead AI body or destroyed vehicle can be cleaned up by DZAI's task scheduler. DZAI will not clean up a body/vehicle if there is a player close by (Default: 600).	
+//Minimum seconds to pass until each dead AI body or destroyed vehicle can be cleaned up by DZAI's task scheduler. DZAI will not clean up a body/vehicle if there is a player close by (Default: 900).	
 //Note: Other cleanup scripts might interfere by cleaning up dead AI bodies/vehicles!									
-DZAI_cleanupDelay = 600;									
+DZAI_cleanupDelay = 900;									
 
 
 /*
@@ -95,10 +95,10 @@ DZAI_lastManStanding = false;
 //Enable to use client-side radio addon for radio messages instead of remote execution method. (Default: false)
 DZAI_clientRadio = false;
 
-//Enable or disable AI hostility to zombies. If enabled, AI will attack zombies. (Default: false)
+//Enable or disable AI hostility to zombies. If enabled, AI units spawned by DZAI will attack nearby zombies. (Default: false)
 DZAI_zombieEnemy = false;	
 
-//Maximum distance for AI group leader to detect zombies. Increasing range beyond default may impact server performance. (Default: 150)							
+//Maximum distance (in meters) for AI group leader to detect zombies. Increasing range beyond default may negatively impact server performance. (Default: 150)							
 DZAI_zDetectRange = 150;									
 
 
@@ -203,6 +203,14 @@ DZAI_vehGunnerUnits = 2;
 
 //Maximum number of cargo units per land vehicle. Limited by actual number of available cargo positions. (Default: 3)
 DZAI_vehCargoUnits = 3;
+
+
+/*	AI Vehicle (Air & Land) Settings
+--------------------------------------------------------------------------------------------------------------------*/
+
+//Array of area blacklist markers. Areas covered by marker will not be used as waypoints for vehicle patrols. (Example: ["BlacklistArea1","BlacklistArea2","BlacklistArea3"])
+//Note: Vehicles may still pass through these areas but will not make stops unless enemies are encountered.
+DZAI_waypointBlacklist = [];
 
 
 /*	AI weapon selection settings

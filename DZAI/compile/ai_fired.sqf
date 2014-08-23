@@ -4,7 +4,7 @@ private["_unit","_ammo","_audible","_distance"];
 _unit = 		_this select 0;
 _ammo = 		_this select 4;
 
-if ((diag_tickTime - (_unit getVariable ["lastFired",0])) >= 5) then {
+if ((diag_tickTime - (_unit getVariable ["lastFired",0])) > 5) then {
 	//Calculate audible range of fired bullet
 	_audible = getNumber (configFile >> "CfgAmmo" >> _ammo >> "audibleFire");
 	_caliber = getNumber (configFile >> "CfgAmmo" >> _ammo >> "caliber");

@@ -47,7 +47,7 @@ if (isServer) then
 	_pos = _this select 1;
 	_max_dist = _this select 2;
 	//_debug = if ((count _this) > 3) then {_this select 3} else {((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled})};
-	_unitType = _grp getVariable ["unitType","unknown"];
+	_unitType = _grp getVariable ["unitType",""];
 	_allowWater = (_unitType == "aircustom");
 	_searchLoot = _unitType in ["static","dynamic"];
 	_isVehicle = (_unitType == "landcustom");

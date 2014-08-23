@@ -11,27 +11,39 @@ call {
 		if (_classname in (DZAI_checkedClassnames select 0)) then {
 			_result = true;
 		} else {
-			_config = "CfgWeapons";
-			_banString = "bin\config.bin/CfgWeapons/FakeWeapon";
-			_configIndex = 0;
+			if (_classname in (DZAI_invalidClassnames select 0)) then {
+				_result = false;
+			} else {
+				_config = "CfgWeapons";
+				_banString = "bin\config.bin/CfgWeapons/FakeWeapon";
+				_configIndex = 0;
+			};
 		};
 	};
 	if (_checkType == "magazine") exitWith {
 		if (_classname in (DZAI_checkedClassnames select 1)) then {
 			_result = true;
 		} else {
-			_config = "CfgMagazines";
-			_banString = "bin\config.bin/CfgMagazines/FakeMagazine";
-			_configIndex = 1;
+			if (_classname in (DZAI_invalidClassnames select 1)) then {
+				_result = false;
+			} else {
+				_config = "CfgMagazines";
+				_banString = "bin\config.bin/CfgMagazines/FakeMagazine";
+				_configIndex = 1;
+			};
 		};
 	};
 	if (_checkType == "vehicle") exitWith {
 		if (_classname in (DZAI_checkedClassnames select 2)) then {
 			_result = true;
 		} else {
-			_config = "CfgVehicles";
-			_banString = "bin\config.bin/CfgVehicles/Banned";
-			_configIndex = 2;
+			if (_classname in (DZAI_invalidClassnames select 2)) then {
+				_result = false;
+			} else {
+				_config = "CfgVehicles";
+				_banString = "bin\config.bin/CfgVehicles/Banned";
+				_configIndex = 2;
+			};
 		};
 	};
 };

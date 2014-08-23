@@ -1,0 +1,26 @@
+DZAI 2.1.2 Changelog
+
+
+    [NEW] Killing an AI unit will cause them to be ejected from their vehicle, if they are in a vehicle (Untested)
+    [NEW] Added setting DZAI_waypointBlacklist in dzai_config.sqf. Marker names added to this array will prevent these areas from being used as destinations for map-wide air/land AI vehicle patrols. Note: This won't prevent AI vehicles from pathing through these areas.
+    [NEW] Podagorsk: Added AI spawn location on Sona island (barracks/castle area).
+    [NEW] AI vehicle drivers will now wait for cargo units that need to be picked up instead of ditching them.
+	[NEW] Debug markers: Targeted players are now marked on the map with a marker. AI unit markers now also track vehicle crew units.
+	[NEW] Added a more aggressive "anti-stuck" procedure that respawns a land vehicle patrol group if they've required waypoint re-assignments twice in a row.
+	[NEW] The AI despawn process has been completely overhauled. The group_manager.sqf now handles the despawning of each AI group instead of different despawn scripts, which now simply instruct group_manager.sqf to delete the group when necessary. The processes seems rock-solid after much tweaking and fixing, but all changes to despawn/respawn-related functions have historically resulted in bugs and problems, so I will keep a close eye on this.
+	[FIXED] Epoch: Variable DZAI_metalBarNum now actually limits the number of metal bar currency that can be added per AI unit as loot. (Variable was not used at all previously)
+    [FIXED] Undefined variable errors related to group_manager.sqf
+    [FIXED] DZAI_deleteGroup function now only deletes units that are still alive. Dead units will be cleaned by DZAI's cleanup after a timer is finished.
+    [FIXED] Fixed bug where custom AI could not be despawned.
+	[FIXED] AI land vehicle patrols now only patrol between villages/towns/cities, and will avoid trying to travel to unreachable island locations.
+    [CHANGED] Reworked DZAI server cleanup to separate infantry and vehicle cleanup.
+    [CHANGED] Reworked static AI spawn system into a more efficient two-stage spawn procedure.
+    [CHANGED] AI hunting distance is now limited to defined patrol distance instead of being fixed at 250m.
+    [CHANGED] Default dead body cleanup timer changed from 600 seconds (10 min) to 900 seconds (15 min)
+    [CHANGED] Cleanup is now prevented for AI dead bodies if player(s) present within 30 meters (was 20m). Distance to prevent vehicle cleanup is 75m (was also 20m).
+    [CHANGED] Cleanup loop frequency reduced from every 5 minutes to every 10 minutes.
+    [CHANGED] Epoch: Dynamic spawns now prevented by all Epoch buildable items, not just Plot Poles.
+	[CHANGED] DZAI server monitor will now only keep track of the number of active AI groups instead of individual AI units due to the despawn process rework. Note that AI groups waiting for respawn are still considered "active". Only when the group is despawned is it considered inactive and removed from the counter. Static/dynamic triggers are considered "active" if they have not yet been despawned, instead of when there are no players present, and are considered "inactive" when they have despawned all AI that they have created.
+	[CHANGED] Updated SHK_pos (position-generating script package by Shuko) to version 2.4 (DZAI previously used version 2.1)
+	[CHANGED] Epoch: Map-wide air/land AI vehicle patrols won't travel to trader areas anymore. Note: This won't prevent AI vehicles from pathing through these areas.
+

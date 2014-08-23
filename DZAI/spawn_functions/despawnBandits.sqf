@@ -61,9 +61,11 @@ _permDelete = _trigger getVariable ["permadelete",false];
 	if (!isNull _x) then {
 		_groupSize = (_x getVariable ["groupSize",0]);
 		if ((_groupSize > 0) or {_permDelete}) then { //If trigger is not set to permanently despawn, then ignore empty groups.
-			(DZAI_numAIUnits - _groupSize) call DZAI_updateUnitCount;
+			//(DZAI_numAIUnits - _groupSize) call DZAI_updateUnitCount;
 			if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Despawning group %1 with %2 active units.",_x,(_x getVariable ["groupSize",0])];};
-			_x call DZAI_deleteGroup;
+			//_x call DZAI_deleteGroup;
+			_x setVariable ["GroupSize",-1];
+			_grpArray set [_forEachIndex,grpNull];
 		};
 	};
 } forEach _grpArray;
@@ -83,6 +85,7 @@ if !(_permDelete) then {
 		};
 	};
 	if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Despawned AI units at %1. Reset trigger's group array to: %2.",(triggerText _trigger),_trigger getVariable "GroupArray"];};
+	//diag_log format ["DEBUG :: Despawned trigger %1 has statements %2.",triggerText _trigger,triggerStatements _trigger];
 } else {
 	if (_debugMarkers) then {
 		deleteMarker (str (_trigger));

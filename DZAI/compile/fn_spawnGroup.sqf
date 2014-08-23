@@ -31,7 +31,7 @@ while {((count _pos) < 1) && {(_attempts < 3)}} do {
 	if ((count _pos) < 1) then {
 		_baseDist = (_baseDist + 25);	_attempts = (_attempts + 1);
 		if (_attempts == 3) then {
-			_pos = [_trigger,random (_trigger getVariable ["patrolDist",125]),random(360),false] call SHK_pos;
+			_pos = [_trigger,random (_trigger getVariable ["patrolDist",125]),random(360),0] call SHK_pos;
 			_attempts = (_attempts + 1);
 		};
 	};
@@ -40,7 +40,7 @@ _pos set [2,0];
 
 if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Found spawn position at %3 meters away at position %1 after %2 retries.",_pos,_attempts,(_pos distance _spawnPos)]};
 
-_unitGroup = if (isNull (_this select 1)) then {createGroup (call DZAI_getGroupSide)} else {_this select 1};
+_unitGroup = if (isNull (_this select 1)) then {[] call DZAI_createGroup} else {_this select 1};
 if (({isPlayer _x} count (_pos nearEntities ["CAManBase",100])) == 0) then {
 	_unitGroup setCombatMode "RED";	
 } else {
@@ -83,7 +83,7 @@ _unitGroup setVariable ["trigger",_trigger];
 _unitGroup setVariable ["GroupSize",_totalAI];
 _unitGroup setVariable ["weapongrade",_weapongrade];
 if (isNull _trigger) then {_unitGroup setVariable ["spawnPos",_spawnPos]}; 	//If group was spawned directly by scripting instead of a trigger object, record spawn position instead of trigger position as anchoring point
-(DZAI_numAIUnits + _totalAI) call DZAI_updateUnitCount;
-0 = [_unitGroup,_weapongrade] call DZAI_startGroupManager;	//start group-level manager
+//(DZAI_numAIUnits + _totalAI) call DZAI_updateUnitCount;
+0 = [_unitGroup,_weapongrade] spawn DZAI_autoRearm_group;	//start group-level manager
 
 _unitGroup

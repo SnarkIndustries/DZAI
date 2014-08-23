@@ -22,7 +22,7 @@ if (DZAI_staticAI) then {
 	_this setTriggerActivation ["ANY", "PRESENT", true];
 	_this setTriggerTimeout [10, 15, 20, true];
 	_this setTriggerText "Kamenyy";
-	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "nul = [1,1,200,thisTrigger,[],1] call fnc_spawnBandits;", "nul = [thisTrigger] spawn fnc_despawnBandits;"];
+	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "nul = [1,1,200,thisTrigger,[],1] call DZAI_spawnBandits_init;", "nul = [thisTrigger] spawn fnc_despawnBandits;"];
 	_trigger_0 = _this;
 
 	_this = createTrigger ["EmptyDetector", [3561.8384, 3708.8481]];
@@ -30,7 +30,7 @@ if (DZAI_staticAI) then {
 	_this setTriggerActivation ["ANY", "PRESENT", true];
 	_this setTriggerTimeout [10, 15, 20, true];
 	_this setTriggerText "Airbase 1";
-	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "nul = [2,2,175,thisTrigger,[],3] call fnc_spawnBandits;", "nul = [thisTrigger] spawn fnc_despawnBandits;"];
+	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "nul = [2,2,175,thisTrigger,[],3] call DZAI_spawnBandits_init;", "nul = [thisTrigger] spawn fnc_despawnBandits;"];
 	_trigger_2 = _this;
 
 	_this = createTrigger ["EmptyDetector", [3798.3088, 3443.5945]];
@@ -38,7 +38,7 @@ if (DZAI_staticAI) then {
 	_this setTriggerActivation ["ANY", "PRESENT", true];
 	_this setTriggerTimeout [10, 15, 20, true];
 	_this setTriggerText "Airbase 2";
-	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "nul = [2,2,200,thisTrigger,[],3] call fnc_spawnBandits;", "nul = [thisTrigger] spawn fnc_despawnBandits;"];
+	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "nul = [2,2,200,thisTrigger,[],3] call DZAI_spawnBandits_init;", "nul = [thisTrigger] spawn fnc_despawnBandits;"];
 	_trigger_4 = _this;
 
 	_this = createTrigger ["EmptyDetector", [4355.46, 3207.3979, 0.34515762]];
@@ -46,7 +46,7 @@ if (DZAI_staticAI) then {
 	_this setTriggerActivation ["ANY", "PRESENT", true];
 	_this setTriggerTimeout [10, 15, 20, true];
 	_this setTriggerText "Strelka";
-	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "nul = [1,1,175,thisTrigger,[],0] call fnc_spawnBandits;", "nul = [thisTrigger] spawn fnc_despawnBandits;"];
+	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "nul = [1,1,175,thisTrigger,[],0] call DZAI_spawnBandits_init;", "nul = [thisTrigger] spawn fnc_despawnBandits;"];
 	_trigger_6 = _this;
 
 	_this = createTrigger ["EmptyDetector", [2989.5833, 4469.9492]];
@@ -54,7 +54,7 @@ if (DZAI_staticAI) then {
 	_this setTriggerActivation ["ANY", "PRESENT", true];
 	_this setTriggerTimeout [10, 15, 20, true];
 	_this setTriggerText "Kamenyy Mil Base";
-	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "nul = [1,1,175,thisTrigger,[],2] call fnc_spawnBandits;", "nul = [thisTrigger] spawn fnc_despawnBandits;"];
+	_this setTriggerStatements ["{isPlayer _x} count thisList > 0;", "nul = [1,1,175,thisTrigger,[],2] call DZAI_spawnBandits_init;", "nul = [thisTrigger] spawn fnc_despawnBandits;"];
 	_trigger_8 = _this;
 
 //end of triggers

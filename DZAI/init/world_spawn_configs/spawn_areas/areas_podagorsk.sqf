@@ -68,7 +68,7 @@ _this setMarkerAlpha 0;
 _this setMarkerSize [125, 125];
 _marker_9 = _this;
 
-_this = createMarker ["DZAI_KronotskyBarracks", [11273.451, 8608.3271]];
+_this = createMarker ["DZAI_KronotskyBarracks", [11270.97, 8542.9961]];
 _this setMarkerShape "ELLIPSE";
 _this setMarkerType "Empty";
 _this setMarkerBrush "Solid";
@@ -155,5 +155,13 @@ _this setMarkerBrush "Solid";
 _this setMarkerAlpha 0;
 _this setMarkerSize [175, 175];
 _marker_21 = _this;
+
+_this = createMarker ["DZAI_Sona", [13611.271, 9968.752]];
+_this setMarkerShape "ELLIPSE";
+_this setMarkerType "Empty";
+_this setMarkerBrush "Solid";
+_this setMarkerAlpha 0;
+_this setMarkerSize [100, 100];
+_marker_22 = _this;
 
 diag_log "Podagorsk spawn areas loaded.";

@@ -85,9 +85,12 @@ if (_weapongrade > 0) then {
 	};
 	
 	if (DZAI_modName == "epoch") then {
+		_barsAdded = 0;
 		{
+			if (_barsAdded >= DZAI_metalBarNum) exitWith {};
 			if (((random 1) < (_x select 1)) && {[(_x select 0),"magazine"] call DZAI_checkClassname}) then {
 				_unit addMagazine (_x select 0);
+				_barsAdded = _barsAdded + 1;
 				if (DZAI_debugLevel > 1) then {_loot set [count _loot,(_x select 0)];};
 			}
 		} count DZAI_metalBars;
@@ -104,5 +107,5 @@ _toolsArray = if (_weapongrade < 2) then {DZAI_tools0} else {DZAI_tools1};
 		if (DZAI_debugLevel > 1) then {_loot set [count _loot,(_x select 0)];};
 	}
 } count _toolsArray;
-		
+
 if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Generated loot for AI death: %1",_loot];};

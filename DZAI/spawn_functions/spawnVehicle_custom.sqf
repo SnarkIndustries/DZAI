@@ -18,15 +18,15 @@ _maxGunnerUnits = _maxUnits select 1;
 _isAirVehicle = (_vehicleType isKindOf "Air");
 _vehSpawnPos = [];
 _roadSearching = 1; //SHK_pos will search for roads, and return random position if none found.
-_waterPosAllowed = false; //do not allow water position for land vehicles.
+_waterPosAllowed = 0; //do not allow water position for land vehicles.
 _spawnMode = "NONE";
 
 if (_isAirVehicle) then {
 	_roadSearching = 0;	//No need to search for road positions for air vehicles
-	_waterPosAllowed = true; //Allow water position for air vehicles
+	_waterPosAllowed = 1; //Allow water position for air vehicles
 	_spawnMode = "FLY"; //set flying mode for air vehicles
 	_vehSpawnPos set [2,180]; //spawn air vehicles in air
-	_markerPos set [2,125]; //set marker height in air
+	_markerPos set [2,150]; //set marker height in air
 	if (_maxCargoUnits != 0) then {_maxCargoUnits = 0}; //disable cargo units for air vehicles
 };
 
@@ -43,11 +43,12 @@ while {_keepLooking} do {
 	};
 };
 
-_unitGroup = createGroup (call DZAI_getGroupSide);
+_unitGroup = [] call DZAI_createGroup;
 _driver = _unitGroup createUnit [(DZAI_BanditTypes call BIS_fnc_selectRandom2), [0,0,0], [], 1, "NONE"];
 [_driver] joinSilent _unitGroup;
 
 _vehicle = createVehicle [_vehicleType, _vehSpawnPos, [], 0, _spawnMode];
+_vehicle setPos _vehSpawnPos;
 
 //Run needed commands to set up group vehicle
 _vehicle setFuel 1;
@@ -90,6 +91,8 @@ if (!(_driver hasWeapon "NVGoggles")) then {
 _driver addEventHandler [DZAI_healthType, DZAI_healthStatements];
 _driver assignAsDriver _vehicle;
 _driver moveInDriver _vehicle;
+_driver setVariable ["isDriver",true];
+_unitGroup selectLeader _driver;
 
 if (_isAirVehicle) then {_vehicle flyInHeight 115};
 
@@ -131,7 +134,7 @@ if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Spawned %1
 _unitGroup allowFleeing 0;
 _unitGroup setBehaviour "AWARE";
 _unitGroup setSpeedMode "NORMAL";
-_unitGroup setCombatMode "RED";
+_unitGroup setCombatMode "YELLOW";
 
 _unitType = if (_isAirVehicle) then {"aircustom"} else {"landcustom"};
 _unitGroup setVariable ["unitType",_unitType];
@@ -140,8 +143,9 @@ _unitGroup setVariable ["assignedVehicle",_vehicle];
 _unitGroup setVariable ["isArmed",_isArmed];
 _unitGroup setVariable ["spawnParams",_this];
 [_unitGroup,0] setWaypointPosition [_markerPos,0];		//Move group's initial waypoint position away from [0,0,0] (initial spawn position).
+(units _unitGroup) allowGetIn true;
 
-0 = [_unitGroup,_weapongrade] call DZAI_startGroupManager;
+0 = [_unitGroup,_weapongrade] spawn DZAI_autoRearm_group;
 0 = [_unitGroup,_markerPos,_markerSize,false] spawn DZAI_BIN_taskPatrol;
 
 if (_isAirVehicle) then {

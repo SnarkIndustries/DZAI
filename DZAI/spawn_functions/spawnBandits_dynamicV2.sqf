@@ -8,7 +8,7 @@
 	Last updated: 10:58 PM 6/6/2014
 */
 
-private ["_patrolDist","_trigger","_totalAI","_unitGroup","_targetPlayer","_playerPos","_playerDir","_spawnPos","_startTime","_baseDist","_distVariance","_dirVariance","_vehPlayer","_behavior","_triggerStatements","_spawnDist"];
+private ["_patrolDist","_trigger","_totalAI","_unitGroup","_targetPlayer","_playerPos","_playerDir","_spawnPos","_startTime","_baseDist","_distVariance","_dirVariance","_behavior","_triggerStatements","_spawnDist"];
 if (!isServer) exitWith {};
 
 _startTime = diag_tickTime;
@@ -24,21 +24,23 @@ if (isNull _targetPlayer) exitWith {
 	false
 };
 
-_vehPlayer = vehicle _targetPlayer;
 _baseDist = 200;		//On foot distance: 200-275
 _distVariance = 75;
 _dirVariance = 90;
-if !(_vehPlayer isKindOf "Man") then {
+if (!((vehicle _targetPlayer) isKindOf "Man")) then {
 	_baseDist = _baseDist - 50;	//In vehicle distance: 150-225m
-	//_distVariance = 75;
 	_dirVariance = 67.5;
 };
 
-_playerPos = ASLtoATL getPosASL _vehPlayer;
-_playerDir = getDir _vehPlayer;
+_playerPos = ASLtoATL getPosASL _targetPlayer;
+_playerDir = getDir _targetPlayer;
 _spawnDist = (_baseDist + random (_distVariance));
-_spawnPos = [_playerPos,_spawnDist,[(_playerDir-_dirVariance),(_playerDir+_dirVariance)],false] call SHK_pos;
-if ((surfaceIsWater _spawnPos) or {({isPlayer _x} count (_spawnPos nearEntities [["CAManBase","LandVehicle"],125])) > 0} or {(_spawnPos in (nearestLocation [_spawnPos,"Strategic"]))}) exitWith {
+_spawnPos = [_playerPos,_spawnDist,[(_playerDir-_dirVariance),(_playerDir+_dirVariance)],0] call SHK_pos;
+if (
+	(surfaceIsWater _spawnPos) or 
+	{({(isPlayer _x) && {_x != _targetPlayer}} count (_spawnPos nearEntities [["CAManBase","LandVehicle"],125])) > 0} or 
+	{(_spawnPos in (nearestLocation [_spawnPos,"Strategic"]))}
+	) exitWith {
 	if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Canceling dynamic spawn for target player %1. Possible reasons: Spawn position has water, player nearby, or is blacklisted.",name _targetPlayer]};
 	_nul = _trigger call DZAI_abortDynSpawn;
 	
@@ -64,13 +66,11 @@ _unitGroup setBehaviour "AWARE";
 _unitGroup setSpeedMode "FULL";
 _unitGroup allowFleeing 0;
 
-//Reveal target player and nearby players to AI, and set group direction to face target player
-_unitGroup setFormDir ([(leader _unitGroup),_vehPlayer] call BIS_fnc_dirTo);
-_unitGroup reveal [_vehPlayer,4];
-(units _unitGroup) doWatch _vehPlayer;
-
 //Begin hunting player or patrolling area
 _behavior = if ((random 1) < DZAI_huntingChance) then {
+	//Reveal target player and nearby players to AI, and set group direction to face target player
+	_unitGroup setFormDir ([(leader _unitGroup),_targetPlayer] call BIS_fnc_dirTo);
+	_unitGroup reveal [_targetPlayer,4];
 	0 = [_unitGroup,_spawnPos,_patrolDist,_targetPlayer,ASLtoATL getPosASL _trigger] spawn DZAI_dyn_huntPlayer;
 	"HUNTING"
 } else {

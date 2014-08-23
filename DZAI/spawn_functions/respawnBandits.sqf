@@ -29,7 +29,7 @@ if (_totalAI == 0) exitWith {
 };
 
 //Select spawn position
-_spawnPos = if ((count _spawnPositions) > 0) then {_spawnPositions call DZAI_findSpawnPos} else {[(ASLtoATL getPosASL _trigger),random (_patrolDist),random(360),false] call SHK_pos};
+_spawnPos = if ((count _spawnPositions) > 0) then {_spawnPositions call DZAI_findSpawnPos} else {[(ASLtoATL getPosASL _trigger),random (_patrolDist),random(360),0] call SHK_pos};
 if ((count _spawnPos) == 0) exitWith {
 	[0,_trigger,_unitGroup,true] call fnc_respawnHandler;
 	false

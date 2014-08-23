@@ -19,12 +19,10 @@ _unitsAlive = {alive _x} count (units _unitGroup);
 
 if (_unitsAlive > 0) then {
 	//Restrict patrol area to vehicle wreck
-	_waypointCount = (count (waypoints _unitGroup));
-	if ((waypointType [_unitGroup,(_waypointCount - 1)]) == "CYCLE") then {deleteWaypoint [_unitGroup,(_waypointCount - 1)]; _waypointCount = _waypointCount - 1};
-	while {_waypointCount > 0} do {
-		deleteWaypoint ((waypoints _unitGroup) select 0);
-		_waypointCount = _waypointCount - 1;
+	for "_i" from ((count (waypoints _unitGroup)) - 1) to 0 step -1 do {
+		deleteWaypoint [_unitGroup,_i];
 	};
+	
 	_vehPos = ASLToATL getPosASL _vehicle;
 	0 = [_unitGroup,_vehPos,100] spawn DZAI_BIN_taskPatrol;
 	
@@ -45,7 +43,7 @@ if (_unitsAlive > 0) then {
 	_trigger setVariable ["permadelete",true]; //units should be permanently despawned
 	//DZAI_actTrigs = DZAI_actTrigs + 1;
 	_trigger call DZAI_updStaticSpawnCount;
-	(DZAI_numAIUnits + _unitsAlive) call DZAI_updateUnitCount;
+	//(DZAI_numAIUnits + _unitsAlive) call DZAI_updateUnitCount;
 	0 = [_trigger] spawn fnc_despawnBandits;
 
 	_unitGroup setVariable ["unitType","static"];
@@ -53,7 +51,12 @@ if (_unitsAlive > 0) then {
 	_unitGroup setVariable ["groupSize",_unitsAlive];
 
 	_unitGroup setBehaviour "AWARE";
+	
+	{
+		unassignVehicle _x;
+	} forEach (assignedCargo _vehicle);
+} else {
+	_unitGroup setVariable ["GroupSize",-1];
 };
 
-//_vehicle setVariable ["DZAI_deathTime",diag_tickTime+900];
 if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: AI land vehicle patrol destroyed at %1",mapGridPosition _vehicle];};

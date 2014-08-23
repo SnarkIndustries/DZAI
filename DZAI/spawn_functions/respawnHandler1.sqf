@@ -12,7 +12,7 @@ call {
 		_trigger = _this select 1;	 //spawn area to respawn
 		_unitGroup = _this select 2; //infantry group to respawn
 		_fastMode = if ((count _this) > 3) then {_this select 3} else {false}; //shorter wait time if retrying a spawn
-		_respawnSleep = _trigger getVariable ["respawnTime",(DZAI_respawnTimeMin + random DZAI_respawnTimeVariance)];	//Calculate wait time for respawn. Respawn time may be individually defined for custom spawns.
+		_respawnSleep = _trigger getVariable ["respawnTime",(DZAI_respawnTimeMin + (random DZAI_respawnTimeVariance))];	//Calculate wait time for respawn. Respawn time may be individually defined for custom spawns.
 		if (_fastMode) then {_respawnSleep = (_respawnSleep/2) max 60};
 		_nextRespawnTime = (diag_tickTime + _respawnSleep);	//Determine time of next respawn
 		DZAI_respawnQueue set [(count DZAI_respawnQueue),[diag_tickTime + _respawnSleep,_mode,_trigger,_unitGroup]];

@@ -1,4 +1,4 @@
-DZAI 2.1.0 - AI Addon for DayZ
+DZAI 2.1.2 - AI Addon for DayZ
 ============
 
 
@@ -12,11 +12,13 @@ Questions? Comments? Start a thread on the OpenDayZ forums to send your feedback
 Features
 ============
 
-DZAI includes many added features that can be user-configured:
+DZAI includes many features that can be user-configured:
 - <b>Static AI Spawns</b> - AI spawn locations have been set up in cities, towns, and military bases for supported DayZ maps. AI are attracted to loot piles, so always be alert while looting.
 - <b>Dynamic AI Spawns</b> - AI spawn locations are also randomly created around the map. AI can appear anywhere, anytime.
-- <b>AI helicopter patrols</b> - AI helicopters patrol randomly around the map. Tip: Players on foot have the best chance of avoiding detection, but players in vehicles are much more noticeable to AI.
-- <b>AI can use any lootable weapon</b> - DZAI builds a list of AI-usable weapons using DayZ's loot tables. Beware, AI with rarer weapons will be more dangerous. (Users may also choose to set up their own AI loadouts).
+- <b>AI helicopter/plane patrols</b> - AI helicopters patrol randomly around the map. Tip: Players on foot have the best chance of avoiding detection, but players in vehicles are much more noticeable to AI.
+- <b>AI land vehicle patrols</b> - AI vehicle patrols randomly travel between cities and towns using roads. Be on the lookout for vehicles that decide to go off road.
+- <b>Custom-definable infantry and vehicle AI patrols</b> - Populate your AI bases with custom spawns and vehicle reinforcements.
+- <b>AI can use any lootable weapon</b> - DDZAI can read DayZ's loot tables to build a list of AI-usable weapons. Beware, AI with rarer weapons will be more dangerous. (Users may also choose to set up their own AI loadouts).
 - <b>AI health system</b> - AI units can take as much damage as players, and can also be knocked unconscious by heavy damage. Headshots are more likely to knock out an AI unit and for longer durations.
 
 Basic Installation Guide (with PBO Manager <b>(Recommended)</b>):
@@ -32,10 +34,9 @@ Basic Installation Guide (with PBO Manager <b>(Recommended)</b>):
 
 		allowConnection = true;
 
-	Change the line to this:
+	Above this line, add:
 
 		[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\init\dzai_initserver.sqf";
-		allowConnection = true;
 		
 4. Right click the DZAI folder inside the download package and click "Copy".
 5. Double-click your dayz_server.pbo to open the PBO Manager GUI. Inside the GUI, right-click on "dayz_server.pbo" and click "Paste". In the GUI, you should see "DZAI" in the list below "dayz_server.pbo".

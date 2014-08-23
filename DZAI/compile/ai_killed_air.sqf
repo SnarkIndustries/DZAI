@@ -3,9 +3,9 @@ private ["_vehicle","_victim","_unitGroup","_parachuted"];
 _victim = _this select 0;
 _unitGroup = _this select 1;
 
-_vehicle = (vehicle _victim);
-if (!(_vehicle isKindOf "ParachuteBase") && {alive _vehicle}) then {
-	if ((driver _vehicle) == _victim) then {
+_vehicle = (_unitGroup getVariable ["assignedVehicle",objNull]);
+if (alive _vehicle) then {
+	if (_victim getVariable ["isDriver",false]) then {
 		_unitGroup setVariable ["unitType","aircrashed"]; //prevent this case from being run for ejected non-pilot units
 		_parachuted = [_vehicle] call DZAI_parachuteOut;
 		if (_parachuted) then {

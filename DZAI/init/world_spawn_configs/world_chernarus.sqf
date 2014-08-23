@@ -26,7 +26,7 @@ if (DZAI_staticAI) then {
 	["DZAI_Cherno2",[1,1],[],0] call DZAI_static_spawn;
 	["DZAI_Cherno3",[1,1],[],0] call DZAI_static_spawn;
 	["DZAI_Cherno4",[2,1],[],1] call DZAI_static_spawn;
-	["DZAI_Elektro1",[1,1],[],0,2] call DZAI_static_spawn;
+	["DZAI_Elektro1",[1,1],[],0] call DZAI_static_spawn;
 	["DZAI_Elektro2",[1,2],[],1] call DZAI_static_spawn;
 	["DZAI_Elektro3",[1,2],[],0] call DZAI_static_spawn;
 	["DZAI_Skalisty",[0,1],['Skalisty1','Skalisty2','Skalisty3'],1] call DZAI_static_spawn;
@@ -76,7 +76,7 @@ if (DZAI_staticAI) then {
 	["DZAI_Rogovo",[0,1],[],1] call DZAI_static_spawn;
 	["DZAI_Gorka",[0,2],[],2] call DZAI_static_spawn;
 	["DZAI_NovySobor",[2,1],[],2] call DZAI_static_spawn;
-	["DZAI_StarySobor",[2,0],[],2,2] call DZAI_static_spawn;
+	["DZAI_StarySobor",[2,0],[],2,2] call DZAI_static_spawn;	//Recommended to remove for Epoch servers
 	["DZAI_Kabanino",[1,2],[],1] call DZAI_static_spawn;
 	["DZAI_Lopatino",[0,2],[],2] call DZAI_static_spawn;
 	["DZAI_DevilsCastle",[2,2],['DevilsCastle','DevilsCastle2','Devils3','Devils4'],1] call DZAI_static_spawn;

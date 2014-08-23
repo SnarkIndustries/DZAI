@@ -29,23 +29,20 @@ if (!surfaceIsWater _vehPos) then {
 					_health set [2,false];	
 					_x setHit["legs",0];
 				};
+				_x action ["eject",_helicopter];
+				unassignVehicle _x;
 			} else {
 				0 = [_x,_weapongrade] spawn DZAI_addLoot;
 			};
-			_x action ["eject",_helicopter];
-			unassignVehicle _x;
 		} forEach _units;
 		
 		_unitsAlive = {alive _x} count _units;
-		(DZAI_numAIUnits + _unitsAlive) call DZAI_updateUnitCount;
+		//(DZAI_numAIUnits + _unitsAlive) call DZAI_updateUnitCount;
 		if (_unitsAlive > 0) then {
-			_waypointCount = (count (waypoints _unitGroup));
-			if ((waypointType [_unitGroup,(_waypointCount - 1)]) == "CYCLE") then {deleteWaypoint [_unitGroup,(_waypointCount - 1)]; _waypointCount = _waypointCount - 1};
-			while {_waypointCount > 0} do {
-				deleteWaypoint ((waypoints _unitGroup) select 0);
-				_waypointCount = _waypointCount - 1;
+			for "_i" from ((count (waypoints _unitGroup)) - 1) to 0 step -1 do {
+				deleteWaypoint [_unitGroup,_i];
 			};
-
+	
 			0 = [_unitGroup,_vehPos,75] spawn DZAI_BIN_taskPatrol;
 			
 			_unitGroup allowFleeing 0;
@@ -75,15 +72,17 @@ if (!surfaceIsWater _vehPos) then {
 			_unitGroup setBehaviour "AWARE";
 		};
 	} else {
+		_unitGroup setVariable ["unitType","aircrashed"];
 		{
 			_x action ["eject",_helicopter];
 			_nul = [_x,_x] call DZAI_unitDeath;
 			0 = [_x,_weapongrade] spawn DZAI_addLoot;
 		} forEach _units;
-		_nul = [_unitGroup,30] spawn DZAI_deleteGroupTimed;
+		_unitGroup setVariable ["GroupSize",-1];
 	};
 } else {
-	_unitGroup call DZAI_deleteGroup;
+	//_unitGroup call DZAI_deleteGroup;
+	_unitGroup setVariable ["GroupSize",-1];
 };
 
 if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: AI helicopter %1 evacuated at %2.",typeOf _helicopter,mapGridPosition _helicopter];};

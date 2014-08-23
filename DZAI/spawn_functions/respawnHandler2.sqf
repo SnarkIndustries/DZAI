@@ -29,7 +29,7 @@ while {(count DZAI_respawnQueue) > 0} do {
 	for "_i" from 0 to ((count DZAI_respawnQueue) - 1) do {
 		_timeToRespawn = (DZAI_respawnQueue select _i) select 0;
 		//If enough time has passed to respawn the group.
-		if (diag_tickTime >= _timeToRespawn) then {
+		if (diag_tickTime > _timeToRespawn) then {
 			_mode = (DZAI_respawnQueue select _i) select 1;
 			call {
 				if (_mode == 0) exitWith {

@@ -10,7 +10,7 @@ while {_tooClose} do {
 		uiSleep 0.1;
 	};
 };
-_wpSelect = [_wpSelect,50+(random 900),(random 360),true] call SHK_pos;
+_wpSelect = [_wpSelect,50+(random 900),(random 360),1] call SHK_pos;
 [_unitGroup,0] setWPPos _wpSelect; 
 [_unitGroup,1] setWPPos _wpSelect;
 if ((waypointType [_unitGroup,1]) == "MOVE") then {

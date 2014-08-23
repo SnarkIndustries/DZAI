@@ -9,7 +9,7 @@ uiSleep 60;
 if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Starting helicopter awareness script for AI vehicle %1 (Group: %2).",typeOf _helicopter,_unitGroup];};
 
 while {!(_helicopter getVariable ["heli_disabled",false]) && {alive _helicopter}} do {
-	_detectOrigin = [getPosASL _helicopter,200,getDir _helicopter,true] call SHK_pos;
+	_detectOrigin = [getPosASL _helicopter,200,getDir _helicopter,1] call SHK_pos;
 	_detectOrigin set [2,0];
 	_detected = _detectOrigin nearEntities [["CAManBase","LandVehicle"],225];
 	{

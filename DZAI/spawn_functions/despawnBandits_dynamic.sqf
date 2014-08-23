@@ -52,8 +52,9 @@ if (_canDespawn) then {
 	_grpArray = _grpArray - [grpNull];
 	{
 		if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Deleting group %1 with %2 active units.",_x,(_x getVariable ["groupSize",0])];};
-		(DZAI_numAIUnits - (_x getVariable ["groupSize",0])) call DZAI_updateUnitCount;
-		_x call DZAI_deleteGroup;
+		//(DZAI_numAIUnits - (_x getVariable ["groupSize",0])) call DZAI_updateUnitCount;
+		//_x call DZAI_deleteGroup;
+		_x setVariable ["GroupSize",-1];
 	} forEach _grpArray;
 	
 	//Remove dynamic trigger from global dyn trigger array and clean up trigger
@@ -64,6 +65,7 @@ if (_canDespawn) then {
 	_triggerLocation = _trigger getVariable "triggerLocation";
 	_triggerLocation setVariable ["deletetime",(diag_tickTime + 900)];
 	DZAI_dynLocations set [(count DZAI_dynLocations),_triggerLocation];
+	if (_trigger in DZAI_reinforcePlaces) then {DZAI_reinforcePlaces = DZAI_reinforcePlaces - [_trigger]};
 
 	if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Removing expired dynamic trigger at %1.",mapGridPosition _trigger];};
 	deleteVehicle _trigger;

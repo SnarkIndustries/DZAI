@@ -1,12 +1,10 @@
 
-_areas = _this;
-
 waitUntil {uiSleep 1; !isNil "DZAI_locations_ready"};
 
-for "_i" from 0 to ((count _areas) -1) do {
+for "_i" from 0 to ((count DZAI_dynAreaBlacklist) -1) do {
 	private ["_area"];
 	
-	_area = _areas select _i;
+	_area = DZAI_dynAreaBlacklist select _i;
 	if (((typeName _area) == "STRING") && {((getMarkerColor _area) != "")}) then {
 		private ["_areaSize","_sizeX","_sizeY","_blacklist"];
 		_areaSize = getMarkerSize _area;

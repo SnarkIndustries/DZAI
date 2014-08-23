@@ -30,8 +30,9 @@ _playerUIDs = [];		//Array of all collected playerUIDs
 _timestamps = [];		//Array of timestamps for each corresponding playerUID
 //_playerData = [];
 _maxSpawnTime = DZAI_maxSpawnTime; //Time required for maximum % spawn probability. (seconds)
-_retainMaxSpawnTime = DZAI_maxSpawnTime + DZAI_keepMaxSpawnTime;
 //_maxSpawnTime = 1; //FOR DEBUGGING
+_retainMaxSpawnTime = DZAI_maxSpawnTime + DZAI_keepMaxSpawnTime;
+_debugMarkers = ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled});
 
 while {true} do {
 	if (({isPlayer _x} count playableUnits) > 0) then {
@@ -79,7 +80,7 @@ while {true} do {
 						{(!(_playerPos in (nearestLocation [_playerPos,"Strategic"])))} &&				//Player must not be in blacklisted area
 						{(!(surfaceIsWater _playerPos))} && 											//Player must not be on water position
 						{((_playerPos distance getMarkerpos "respawn_west") > 2000)} &&					//Player must not be in debug area
-						{((count (_playerPos nearObjects ["Plastic_Pole_EP1_DZ",100])) == 0)}			//Player must not be near a plot pole
+						{((count (_playerPos nearObjects ["DZE_Base_Object",100])) == 0)}					//Player must not be near Epoch buildables
 					) then {
 						_timestamps set [_index,time];
 						_trigger = createTrigger ["EmptyDetector",_playerPos];
@@ -90,7 +91,7 @@ while {true} do {
 						_trigger setVariable ["targetplayer",_player];
 						_trigActStatements = format ["0 = [175,thisTrigger,%1] call fnc_spawnBandits_dynamic;",_spawnChance];
 						_trigger setTriggerStatements ["{isPlayer _x} count thisList > 0;",_trigActStatements, "[thisTrigger] spawn fnc_despawnBandits_dynamic;"];
-						if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
+						if (_debugMarkers) then {
 							_nul = _trigger spawn {
 								_marker = str(_this);
 								if ((getMarkerColor _marker) != "") then {deleteMarker _marker};

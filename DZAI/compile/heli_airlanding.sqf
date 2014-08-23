@@ -29,16 +29,13 @@ if (_unitsAlive > 0) then {
 			unassignVehicle _x;
 		};
 	} count (units _unitGroup);
-	_waypointCount = (count (waypoints _unitGroup));
-	if ((waypointType [_unitGroup,(_waypointCount - 1)]) == "CYCLE") then {deleteWaypoint [_unitGroup,(_waypointCount - 1)]; _waypointCount = _waypointCount - 1};
-	while {_waypointCount > 0} do {
-		deleteWaypoint ((waypoints _unitGroup) select 0);
-		_waypointCount = _waypointCount - 1;
+	for "_i" from ((count (waypoints _unitGroup)) - 1) to 0 step -1 do {
+		deleteWaypoint [_unitGroup,_i];
 	};
 
 	_heliPos = ASLtoATL getPosASL _helicopter;
 	0 = [_unitGroup,_heliPos,75] spawn DZAI_BIN_taskPatrol;
-	(DZAI_numAIUnits + _unitsAlive) call DZAI_updateUnitCount;
+	//(DZAI_numAIUnits + _unitsAlive) call DZAI_updateUnitCount;
 
 	//Create area trigger
 	_trigger = createTrigger ["EmptyDetector",_heliPos];

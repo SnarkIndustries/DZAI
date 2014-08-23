@@ -26,7 +26,7 @@ if (_shape == "ICON") then {
     _return = true;
   };
 
-// Markers that has an area.
+// Markers that have an area.
 } else {
   if (_shape in ["RECTANGLE","SQUARE"]) then {
     private ["_corners"];

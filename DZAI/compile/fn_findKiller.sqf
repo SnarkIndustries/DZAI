@@ -5,7 +5,7 @@
 	
 	Last updated: 2:00 AM 7/1/2014
 */
-private ["_unitGroup","_targetPlayer","_startPos"];
+private ["_unitGroup","_targetPlayer","_startPos","_chaseDistance"];
 
 _targetPlayer = _this select 0;
 _unitGroup = _this select 1;
@@ -20,12 +20,12 @@ if (((_unitGroup getVariable ["pursuitTime",0]) > 0) && {((_unitGroup getVariabl
 };
 
 _startPos = _unitGroup getVariable ["trigger",(getPosASL (leader _unitGroup))];
+_chaseDistance = _unitGroup getVariable ["patrolDist",250];
 
 #define TRANSMIT_RANGE 50 //distance to broadcast radio text around target player
 #define RECEIVE_DIST 150 //distance requirement to receive message from AI group leader
-#define CHASE_DISTANCE 250	//distance to chase target from trigger position
 
-if ((_startPos distance _targetPlayer) < CHASE_DISTANCE) then {
+if ((_startPos distance _targetPlayer) < _chaseDistance) then {
 	private ["_targetPlayerPos","_leader","_ableToChase","_debugMarkers","_marker"];
 	if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Group %1 has entered pursuit state for 180 seconds. Target: %2. (fn_findKiller)",_unitGroup,_targetPlayer];};
 	
@@ -38,8 +38,8 @@ if ((_startPos distance _targetPlayer) < CHASE_DISTANCE) then {
 	
 	_debugMarkers = ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled});
 	if (_debugMarkers) then {
-		_markername = "Target Player";
-		if ((getMarkerColor _markername) != "") then {deleteMarker _markername; uiSleep 1;};
+		_markername = format ["%1 Target",_unitGroup];
+		if ((getMarkerColor _markername) != "") then {deleteMarker _markername; uiSleep 0.5;};
 		_marker = createMarker [_markername,getPosASL _targetPlayer];
 		_marker setMarkerText _markername;
 		_marker setMarkerType "Attack";
@@ -52,7 +52,7 @@ if ((_startPos distance _targetPlayer) < CHASE_DISTANCE) then {
 	while { 
 		_ableToChase &&
 		{alive _targetPlayer} && 
-		{((_startPos distance _targetPlayer) < CHASE_DISTANCE)} &&
+		{((_startPos distance _targetPlayer) < _chaseDistance)} &&
 		{(!((vehicle _targetPlayer) isKindOf "Air"))}
 	} do {
 		if ((_unitGroup knowsAbout _targetPlayer) < 4) then {_unitGroup reveal [_targetPlayer,4]};

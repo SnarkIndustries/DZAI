@@ -1,17 +1,31 @@
 /*
   SHK_pos
   
+  Version 0.24
   Author: Shuko (shuko@quakenet, miika@miikajarvinen.fi)
-  Version 0.21
-  Forum: http://forums.bistudio.com/showthread.php?t=89376
-  
+  Contributors: Cool=Azroul13, Hatifnat
+
+  Forum: http://forums.bistudio.com/showthread.php?162695-SHK_pos
+
   Marker Based Selection
     Required Parameters:
       0 String   Area marker's name.
       
     Optional Parameters:
-      1 Boolean           Allow water positions? Default is false.
+      1 Number            Water position. Default is only land positions allowed.
+                            0   Find closest land. Search outwards 360 degrees (20 degree steps) and 20m steps.
+                            1   Allow water positions.
+                            2   Find only water positions.
       2 Array or String   One or multiple blacklist area markers which are excluded from the main marker area.
+      3 Array, Number, Object or Vehicle Type         Force finding large enough empty position.
+                            0   Max range from the selection position to look for empty space. Default is 200.
+                            1   Vehicle or vehicle type to fit into an empty space.
+                            
+                            Examples:
+                              [...,[300,heli]]       Array with distance and vehicle object.
+                              [...,350]              Only distance given
+                              [...,(typeof heli)]    Only vehicle type given
+                              [...,heli]             Only vehicle object given
 
   Position Based Selection
     Required Parameters:
@@ -20,43 +34,52 @@
       
     Optional Parameters:
       2 Array of Number     Direction from anchor. Default is random between 0 and 360.
-      3 Boolean             Water position allowed? Default is false.
-                              false    Allow water positions.
-                              true     Find closest land. Search outwards 360 degrees (20 degree steps) and 20m steps.
-							  DZAI Edit: false = no water allowed. true = water allowed.
+      3 Number              Water position. Default is only land positions allowed.
+                              0   Find closest land. Search outwards 360 degrees (20 degree steps) and 20m steps.
+                              1   Allow water positions.
+                              2   Find only water positions.
       4 Array               Road positions.
                               0  Number  Road position forcing. Default is 0.
                                    0    Do not search for road positions.
                                    1    Find closest road position. Return the generated random position if none found.
                                    2    Find closest road position. Return empty array if none found.
                               1  Number   Road search range. Default is 200m.
+      5 Array, Number, Object or Vehicle Type         Force finding large enough empty position.
+                              0   Max range from the selection position to look for empty space. Default is 200.
+                              1   Vehicle or vehicle type to fit into an empty space.
+                            
+                            Examples:
+                              [...,[300,heli]]       Array with distance and vehicle object.
+                              [...,350]              Only distance given
+                              [...,(typeof heli)]    Only vehicle type given
+                              [...,heli]             Only vehicle object given                              
     
   Usage:
     Preprocess the file in init.sqf:
-      call compile preprocessfile "\z\addons\dayz_server\DZAI\shk_pos\shk_pos_init.sqf";
+      call compile preprocessfile "SHK_pos\shk_pos_init.sqf";
     
     Actually getting the position:
       pos = [parameters] call SHK_pos;
 */
 // Functions
-SHK_pos_getPos = compile preprocessfilelinenumbers format ["%1\shk_pos\shk_pos_getpos.sqf",DZAI_directory];
-SHK_pos_getPosMarker = compile preprocessfilelinenumbers format ["%1\shk_pos\shk_pos_getposmarker.sqf",DZAI_directory];
+SHK_pos_getPos = compile preprocessFileLineNumbers format ["%1\shk_pos\shk_pos_getpos.sqf",DZAI_directory];
+SHK_pos_getPosMarker = compile preprocessFileLineNumbers format ["%1\shk_pos\shk_pos_getposmarker.sqf",DZAI_directory];
 
 // Sub functions
-SHK_pos_fnc_findClosestPosition = compile preprocessfilelinenumbers format ["%1\shk_pos\shk_pos_fnc_findclosestposition.sqf",DZAI_directory];
-SHK_pos_fnc_getMarkerCorners = compile preprocessfilelinenumbers format ["%1\shk_pos\shk_pos_fnc_getmarkercorners.sqf",DZAI_directory];
-SHK_pos_fnc_getMarkerShape = compile preprocessfilelinenumbers format ["%1\shk_pos\shk_pos_fnc_getmarkershape.sqf",DZAI_directory];
-SHK_pos_fnc_getPos = compile preprocessfilelinenumbers format ["%1\shk_pos\shk_pos_fnc_getpos.sqf",DZAI_directory];
-SHK_pos_fnc_getPosFromCircle = compile preprocessfilelinenumbers format ["%1\shk_pos\shk_pos_fnc_getposfromcircle.sqf",DZAI_directory];
-SHK_pos_fnc_getPosFromEllipse = compile preprocessfilelinenumbers format ["%1\shk_pos\shk_pos_fnc_getposfromellipse.sqf",DZAI_directory];
-SHK_pos_fnc_getPosFromRectangle = compile preprocessfilelinenumbers format ["%1\shk_pos\shk_pos_fnc_getposfromrectangle.sqf",DZAI_directory];
-SHK_pos_fnc_getPosFromSquare = compile preprocessfilelinenumbers format ["%1\shk_pos\shk_pos_fnc_getposfromsquare.sqf",DZAI_directory];
-SHK_pos_fnc_isBlacklisted = compile preprocessfilelinenumbers format ["%1\shk_pos\shk_pos_fnc_isblacklisted.sqf",DZAI_directory];
-SHK_pos_fnc_isInCircle = compile preprocessfilelinenumbers format ["%1\shk_pos\shk_pos_fnc_isincircle.sqf",DZAI_directory];
-SHK_pos_fnc_isInEllipse = compile preprocessfilelinenumbers format ["%1\shk_pos\shk_pos_fnc_isinellipse.sqf",DZAI_directory];
-SHK_pos_fnc_isInRectangle = compile preprocessfilelinenumbers format ["%1\shk_pos\shk_pos_fnc_isinrectangle.sqf",DZAI_directory];
-SHK_pos_fnc_isSamePosition = compile preprocessfilelinenumbers format ["%1\shk_pos\shk_pos_fnc_issameposition.sqf",DZAI_directory];
-SHK_pos_fnc_rotatePosition = compile preprocessfilelinenumbers format ["%1\shk_pos\shk_pos_fnc_rotateposition.sqf",DZAI_directory];
+SHK_pos_fnc_findClosestPosition = compile preprocessFileLineNumbers format ["%1\shk_pos\shk_pos_fnc_findclosestposition.sqf",DZAI_directory];
+SHK_pos_fnc_getMarkerCorners = compile preprocessFileLineNumbers format ["%1\shk_pos\shk_pos_fnc_getmarkercorners.sqf",DZAI_directory];
+SHK_pos_fnc_getMarkerShape = compile preprocessFileLineNumbers format ["%1\shk_pos\shk_pos_fnc_getmarkershape.sqf",DZAI_directory];
+SHK_pos_fnc_getPos = compile preprocessFileLineNumbers format ["%1\shk_pos\shk_pos_fnc_getpos.sqf",DZAI_directory];
+SHK_pos_fnc_getPosFromCircle = compile preprocessFileLineNumbers format ["%1\shk_pos\shk_pos_fnc_getposfromcircle.sqf",DZAI_directory];
+SHK_pos_fnc_getPosFromEllipse = compile preprocessFileLineNumbers format ["%1\shk_pos\shk_pos_fnc_getposfromellipse.sqf",DZAI_directory];
+SHK_pos_fnc_getPosFromRectangle = compile preprocessFileLineNumbers format ["%1\shk_pos\shk_pos_fnc_getposfromrectangle.sqf",DZAI_directory];
+SHK_pos_fnc_getPosFromSquare = compile preprocessFileLineNumbers format ["%1\shk_pos\shk_pos_fnc_getposfromsquare.sqf",DZAI_directory];
+SHK_pos_fnc_isBlacklisted = compile preprocessFileLineNumbers format ["%1\shk_pos\shk_pos_fnc_isblacklisted.sqf",DZAI_directory];
+SHK_pos_fnc_isInCircle = compile preprocessFileLineNumbers format ["%1\shk_pos\shk_pos_fnc_isincircle.sqf",DZAI_directory];
+SHK_pos_fnc_isInEllipse = compile preprocessFileLineNumbers format ["%1\shk_pos\shk_pos_fnc_isinellipse.sqf",DZAI_directory];
+SHK_pos_fnc_isInRectangle = compile preprocessFileLineNumbers format ["%1\shk_pos\shk_pos_fnc_isinrectangle.sqf",DZAI_directory];
+SHK_pos_fnc_isSamePosition = compile preprocessFileLineNumbers format ["%1\shk_pos\shk_pos_fnc_issameposition.sqf",DZAI_directory];
+SHK_pos_fnc_rotatePosition = compile preprocessFileLineNumbers format ["%1\shk_pos\shk_pos_fnc_rotateposition.sqf",DZAI_directory];
 
 // Wrapper function
 // Decide which function to call based on parameters.

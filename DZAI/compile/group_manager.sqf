@@ -1,4 +1,4 @@
-private ["_unitGroup","_weapongrade","_vehicle","_lastRearmTime","_useLaunchers","_isArmed","_debugMarkers","_marker","_marker2","_antistuckTime","_antistuckPos"];
+private ["_unitGroup","_weapongrade","_vehicle","_lastRearmTime","_useLaunchers","_isArmed","_debugMarkers","_marker","_marker2","_antistuckTime","_antistuckPos","_lastReinforceTime","_vehicleMoved"];
 
 if (!isServer) exitWith {};
 
@@ -8,13 +8,12 @@ _weapongrade = _this select 1;
 if (_unitGroup getVariable ["rearmEnabled",false]) exitWith {};
 _unitGroup setVariable ["rearmEnabled",true];
 
-_units = (units _unitGroup);
-_unitType = (_unitGroup getVariable ["unitType",""]);
-_vehicle = if (_unitType in ["static","dynamic"]) then {objNull} else {(vehicle (leader _unitGroup))};
+_vehicle = if ((_unitGroup getVariable ["unitType",""]) in ["static","dynamic"]) then {objNull} else {(vehicle (leader _unitGroup))};
 _useLaunchers = (((count DZAI_launcherTypes) > 0) && {(_weapongrade in DZAI_launcherLevels)});
 _isArmed = _vehicle getVariable ["isArmed",false];
 _antistuckPos = (getWPPos [_unitGroup,(currentWaypoint _unitGroup)]);
-if (isNil {_unitGroup getVariable "GroupSize"}) then {_unitGroup setVariable ["GroupSize",(count _units)]};
+if (isNil {_unitGroup getVariable "GroupSize"}) then {_unitGroup setVariable ["GroupSize",(count (units _unitGroup))]};
+_vehicleMoved = true;
 
 //set up debug variables
 _debugMarkers = ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled});
@@ -24,6 +23,7 @@ _marker2 = "";
 //Set up timer variables
 _lastRearmTime = diag_tickTime;
 _antistuckTime = diag_tickTime + 600;
+_lastReinforceTime = diag_tickTime + 600;
 
 //Set up individual group units
 {
@@ -49,41 +49,20 @@ _antistuckTime = diag_tickTime + 600;
 		};
 	};
 	if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Unit %1 loadout: %2. Weapongrade %3. Blood: %4.",_x,_x getVariable ["loadout",[]],_weapongrade,((_x getVariable ["unithealth",[12000,0,false]]) select 0)];};
-} forEach _units;
+} forEach (units _unitGroup);
 
 if (_debugMarkers) then {
+	_markername = format ["%1-1",_unitGroup];
+	if ((getMarkerColor _markername) != "") then {deleteMarker _markername; uiSleep 0.5};	//Delete the previous marker if it wasn't deleted for some reason.
+	_marker = createMarker [_markername,getPosASL (leader _unitGroup)];
+	_marker setMarkerType "Attack";
+	_marker setMarkerBrush "Solid";
+	_marker setMarkerColor "ColorBlack";
+	
 	if (isNull _vehicle) then {
-		_markername = format ["%1 1",_unitGroup];
-		if ((getMarkerColor _markername) != "") then {deleteMarker _markername; uiSleep 0.5;};	//Delete the previous marker if it wasn't deleted for some reason.
-		_marker = createMarker [_markername,getPosASL (leader _unitGroup)];
 		_marker setMarkerText format ["%1 (AI L.%2)",_unitGroup,_weapongrade];
-		_marker setMarkerType "Attack";
-		_marker setMarkerColor "ColorRed";
-		_marker setMarkerBrush "Solid";
-		{
-			_x spawn {
-				_mark = createMarker [str (_this) + str (random 1000),getPosASL _this];
-				_mark setMarkerShape "ELLIPSE";
-				_mark setMarkerType "Dot";
-				_mark setMarkerColor "ColorRed";
-				_mark setMarkerBrush "SolidBorder";
-				_mark setMarkerSize [3,3];
-				while {alive _this} do {
-					_mark setMarkerPos (getPosASL _this);
-					uiSleep 15;
-				};
-				deleteMarker _mark;
-			};
-			uiSleep 0.1;
-		} count _units;
 	} else {
-		_markername = format ["%1-1",_unitGroup];
-		if ((getMarkerColor _markername) != "") then {deleteMarker _markername; uiSleep 0.5;};	//Delete the previous marker if it wasn't deleted for some reason.
-		_marker = createMarker [_markername,getPosASL (leader _unitGroup)];
 		_marker setMarkerText format ["%1 (AI %2)",_unitGroup,(typeOf (vehicle (leader _unitGroup)))];
-		_marker setMarkerType "Attack";
-		_marker setMarkerColor "ColorBlack";
-		_marker setMarkerBrush "Solid";
 	};
 	
 	_markername2 = format ["%1-2",_unitGroup];
@@ -93,50 +72,82 @@ if (_debugMarkers) then {
 	_marker2 setMarkerType "Waypoint";
 	_marker2 setMarkerColor "ColorBlue";
 	_marker2 setMarkerBrush "Solid";
+	
+	{
+		_x spawn {
+			private ["_mark","_markname"];
+			_markname = str(_this);
+			if ((getMarkerColor _markname) != "") then {deleteMarker _markname; uiSleep 0.5};
+			_mark = createMarker [_markname,getPosASL _this];
+			_mark setMarkerShape "ELLIPSE";
+			_mark setMarkerType "Dot";
+			_mark setMarkerColor "ColorRed";
+			_mark setMarkerBrush "SolidBorder";
+			_mark setMarkerSize [3,3];
+			waitUntil {uiSleep 15; (!(alive _this))};
+			//diag_log format ["DEBUG :: Deleting unit marker %1.",_mark];
+			deleteMarker _mark;
+		};
+		uiSleep 0.1;
+	} count (units _unitGroup);
 } else {
 	_marker = nil;
 	_marker2 = nil;
 };
 
 //Main loop
-while {(!isNull _unitGroup) && {(_unitGroup getVariable ["GroupSize",0]) > 0}} do {
+while {(!isNull _unitGroup) && {(_unitGroup getVariable ["GroupSize",-1]) > 0}} do {
+	//_debugStartTime = diag_tickTime;
 	_leader = leader _unitGroup;
-	if (alive _vehicle) then {	//If _vehicle is objNull (if no vehicle was assigned to the group) then nothing in this bracket should be executed
-		if ((_isArmed) && {someAmmo _vehicle}) then {	//Note: someAmmo check is not reliable for vehicles with multiple turrets
-			_lastRearmTime = diag_tickTime;	//Reset rearm timestamp if vehicle still has some ammo
-		} else {
-			if ((diag_tickTime - _lastRearmTime) > 180) then {	//If ammo is depleted, wait 3 minutes until rearm is possible.
-				_vehicle setVehicleAmmo 1;				//Rearm vehicle. Rearm timestamp will be reset durng the next loop cycle.
+	_unitType = (_unitGroup getVariable ["unitType",""]);
+	
+	call {
+		//Zed hostility check
+		if (_unitType in ["static","dynamic"]) exitWith {
+			if (DZAI_zombieEnemy) then {
+				if (_unitGroup getVariable ["detectReady",true]) then {
+					_unitGroup setVariable ["detectReady",false];
+					_nul = _unitGroup spawn {
+						_unitGroup = _this;
+						if !(isNull _unitGroup) then {
+							_detectRange = if ((_unitGroup getVariable ["pursuitTime",0]) == 0) then {DZAI_zDetectRange} else {DZAI_zDetectRange/2};	//Reduce detection range of new zombies while searching for killer unit
+							_nearbyZeds = (leader _unitGroup) nearEntities ["zZombie_Base",_detectRange];
+							_hostileZedsNew = [];
+							{
+								if (rating _x > -30000) then {
+									_hostileZedsNew set [count _hostileZedsNew,_x];
+								};
+								if ((_forEachIndex % 5) == 0) then {uiSleep 0.05};
+							} forEach _nearbyZeds;
+							if ((count _hostileZedsNew) > 0) then {
+								DZAI_ratingModify = [_hostileZedsNew,-30000];
+								(owner (_hostileZedsNew select 0)) publicVariableClient "DZAI_ratingModify";
+							};
+							_unitGroup setVariable ["detectReady",true];
+						};
+					};
+				};
 			};
 		};
-		if ((fuel _vehicle) < 0.25) then {_vehicle setFuel 1};
-	};
-	//Zombie detection if group leader is on foot
-	if (DZAI_zombieEnemy && {(vehicle _leader) == _leader}) then {
-		if (_unitGroup getVariable ["detectReady",true]) then {
-			_unitGroup setVariable ["detectReady",false];
-			_nul = _unitGroup spawn {
-				_unitGroup = _this;
-				if !(isNull _unitGroup) then {
-					_detectRange = if ((_unitGroup getVariable ["pursuitTime",0]) == 0) then {DZAI_zDetectRange} else {DZAI_zDetectRange/2};	//Reduce detection range of new zombies while searching for killer unit
-					_nearbyZeds = (leader _unitGroup) nearEntities ["zZombie_Base",_detectRange];
-					_hostileZedsNew = [];
-					{
-						if (rating _x > -30000) then {
-							_hostileZedsNew set [count _hostileZedsNew,_x];
-						};
-						uiSleep 0.05;
-					} forEach _nearbyZeds;
-					if ((count _hostileZedsNew) > 0) then {
-						uiSleep (random 0.5);
-						DZAI_ratingModify = [_hostileZedsNew,-30000];
-						(owner (_hostileZedsNew select 0)) publicVariableClient "DZAI_ratingModify";
-					};
-					_unitGroup setVariable ["detectReady",true];
+		//If any units have left vehicle then allow re-entry
+		if (_unitType in ["land","landcustom"]) exitWith {
+			if ((alive _vehicle) && {_unitGroup getVariable ["regrouped",true]}) then {
+				if (({(_x distance _vehicle) > 175} count (assignedCargo _vehicle)) > 0) then {
+					_unitGroup setVariable ["regrouped",false];
+					[_unitGroup,_vehicle] call DZAI_vehRegroup;
+				};
+			};
+		};
+		if (_unitType == "air") exitWith {
+			if ((alive _vehicle) && {!(_vehicle getVariable ["heli_disabled",false])}) then {
+				if (((diag_tickTime - _lastReinforceTime) > 900) && {((count DZAI_reinforcePlaces) > 0)}) then {
+					[_unitGroup,_vehicle] call DZAI_heliReinforce;
+					_lastReinforceTime = diag_tickTime;
 				};
 			};
 		};
 	};
+	
 	{
 		//Check infantry-type units
 		if (((vehicle _x) == _x) && {!(_x getVariable ["unconscious",false])} && {_x getVariable ["canCheckUnit",true]}) then {
@@ -194,65 +205,127 @@ while {(!isNull _unitGroup) && {(_unitGroup getVariable ["GroupSize",0]) > 0}} d
 			};
 		};
 		uiSleep 0.1;
-	} forEach _units;
-	
-	//Antistuck prevention
-	_wpPos = (getWPPos [_unitGroup,(currentWaypoint _unitGroup)]);
-	if ((diag_tickTime - _antistuckTime) > 600) then {
-		_unitType = (_unitGroup getVariable ["unitType",""]);
-		if (_unitType in ["static","aircustom","landcustom"]) then {
-			//Static and custom air/land vehicle patrol anti stuck routine
-			if ((_antistuckPos distance _wpPos) == 0) then {
-				_currentWP = (currentWaypoint _unitGroup);
-				_allWP = (waypoints _unitGroup);
-				_nextWP = _currentWP + 1;
-				if ((count _allWP) == _nextWP) then {_nextWP = 1}; //Cycle back to first added waypoint if group is currently on last waypoint.
-				_unitGroup setCurrentWaypoint [_unitGroup,_nextWP];
-				if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Antistuck prevention triggered for AI group %1. Forcing next waypoint.",_unitGroup];};
-			} else {
-				_antistuckPos = _wpPos;
-			};
+	} forEach (units _unitGroup);
+
+	//Vehicle ammo/fuel check
+	if (alive _vehicle) then {	//If _vehicle is objNull (if no vehicle was assigned to the group) then nothing in this bracket should be executed
+		if ((_isArmed) && {someAmmo _vehicle}) then {	//Note: someAmmo check is not reliable for vehicles with multiple turrets
+			_lastRearmTime = diag_tickTime;	//Reset rearm timestamp if vehicle still has some ammo
 		} else {
-			//Mapwide air/land vehicle patrol anti stuck routine
-			if ((canMove _vehicle) && {(_antistuckPos distance _wpPos) < 300}) then {
-				_tooClose = true;
-				_wpSelect = [];
-				while {_tooClose} do {
-					_wpSelect = (DZAI_locations call BIS_fnc_selectRandom2) select 1;
-					if (((waypointPosition [_unitGroup,0]) distance _wpSelect) < 300) then {
-						_tooClose = false;
-					} else {
-						uiSleep 0.1;
-					};
+			if ((diag_tickTime - _lastRearmTime) > 180) then {	//If ammo is depleted, wait 3 minutes until rearm is possible.
+				_vehicle setVehicleAmmo 1;				//Rearm vehicle. Rearm timestamp will be reset durng the next loop cycle.
+			};
+		};
+		if ((fuel _vehicle) < 0.25) then {_vehicle setFuel 1};
+	};
+
+	//Antistuck prevention
+	if ((diag_tickTime - _antistuckTime) > 900) then {
+		_wpPos = (getWPPos [_unitGroup,(currentWaypoint _unitGroup)]);
+		_unitType = (_unitGroup getVariable ["unitType",""]);
+		call {
+			if (_unitType in ["static","aircustom","landcustom"]) exitWith {
+				//Static and custom air/land vehicle patrol anti stuck routine
+				if ((_antistuckPos distance _wpPos) == 0) then {
+					_currentWP = (currentWaypoint _unitGroup);
+					_allWP = (waypoints _unitGroup);
+					_nextWP = _currentWP + 1;
+					if ((count _allWP) == _nextWP) then {_nextWP = 1}; //Cycle back to first added waypoint if group is currently on last waypoint.
+					_unitGroup setCurrentWaypoint [_unitGroup,_nextWP];
+					if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Antistuck prevention triggered for AI group %1. Forcing next waypoint.",_unitGroup];};
+				} else {
+					_antistuckPos = _wpPos;
 				};
-				_wpSelect = [_wpSelect,150 + random(150),random(360),false,[1,300]] call SHK_pos;
-				[_unitGroup,0] setWPPos _wpSelect;
-				if (_unitType == "air") then {
+			};
+			if (_unitType == "air") exitWith {
+				//Mapwide air vehicle patrol anti stuck routine
+				if ((canMove _vehicle) && {(_antistuckPos distance _wpPos) < 300}) then {
+					_tooClose = true;
+					_wpSelect = [];
+					while {_tooClose} do {
+						_wpSelect = (DZAI_locations call BIS_fnc_selectRandom2) select 1;
+						if (((waypointPosition [_unitGroup,0]) distance _wpSelect) < 300) then {
+							_tooClose = false;
+						} else {
+							uiSleep 0.1;
+						};
+					};
+					_wpSelect = [_wpSelect,50+(random 900),(random 360),1] call SHK_pos;
+					[_unitGroup,0] setWPPos _wpSelect;
 					[_unitGroup,1] setWPPos _wpSelect;
 					_vehicle doMove _wpSelect;
+					_antistuckPos = _wpSelect;
+					if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Antistuck prevention triggered for AI vehicle %1 (Group: %2). Forcing next waypoint.",(typeOf _vehicle),_unitGroup];};
+				} else {
+					_antistuckPos = _wpPos;
 				};
-				_antistuckPos = _wpSelect;
-				if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Antistuck prevention triggered for AI vehicle %1 (Group: %2). Forcing next waypoint.",(typeOf _vehicle),_unitGroup];};
-			} else {
-				_antistuckPos = _wpPos;
+			};
+			if (_unitType == "land") exitWith {
+				//Mapwide land vehicle patrol anti stuck routine
+				if ((_antistuckPos distance _wpPos) < 300) then {
+					if (_vehicleMoved && {canMove _vehicle}) then {
+						_tooClose = true;
+						_wpSelect = [];
+						while {_tooClose} do {
+							_wpSelect = (DZAI_locationsLand call BIS_fnc_selectRandom2) select 1;
+							if (((waypointPosition [_unitGroup,0]) distance _wpSelect) < 300) then {
+								_tooClose = false;
+							} else {
+								uiSleep 0.1;
+							};
+						};
+						_wpSelect = [_wpSelect,random(300),random(360),0,[1,300]] call SHK_pos;
+						[_unitGroup,0] setWPPos _wpSelect;
+						_antistuckPos = _wpSelect;
+						_vehicleMoved = false;
+						if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Antistuck prevention triggered for AI vehicle %1 (Group: %2). Forcing next waypoint.",(typeOf _vehicle),_unitGroup];};
+					} else {
+						if (!(_vehicle getVariable ["veh_disabled",false])) then {
+							[_vehicle] call DZAI_vehDestroyed;
+							if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: AI vehicle %1 (Group: %2) is immobilized. Respawning vehicle patrol group.",(typeOf _vehicle),_unitGroup];};
+						};
+					};
+				} else {
+					_antistuckPos = _wpPos;
+					if (!_vehicleMoved) then {
+						_vehicleMoved = true;
+						if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Antistuck check passed for AI vehicle %1 (Group: %2). Reset vehicleMoved flag.",(typeOf _vehicle),_unitGroup];};
+					};
+				};
 			};
 		};
 		_antistuckTime = diag_tickTime;
 	};
+	
 	if (_debugMarkers) then {
-		_marker setMarkerPos (getPosASL _leader);
+		_marker setMarkerPos (getPosASL (vehicle _leader));
 		_marker2 setMarkerPos (getWPPos [_unitGroup,(currentWaypoint _unitGroup)]);
+		{
+			(str (_x)) setMarkerPos (getPosASL _x);
+			uiSleep 0.025;
+		} forEach (units _unitGroup);
 	};
+	
+	//diag_log format ["DEBUG: Group Manager cycle time for group %1: %2 seconds.",_unitGroup,(diag_tickTime - _debugStartTime)];
 	if ((_unitGroup getVariable ["GroupSize",0]) > 0) then {uiSleep 15};
 };
 
-if (isEngineOn _vehicle) then {_vehicle engineOn false};
+_unitGroup setVariable ["rearmEnabled",false]; //allow group manager to run again on group respawn.
 
-if (!isNull _unitGroup) then {
-	_unitGroup setVariable ["rearmEnabled",false];
-};
+if (isEngineOn _vehicle) then {_vehicle engineOn false};
 
 if (_debugMarkers) then {
 	deleteMarker _marker;
 	deleteMarker _marker2;
+};
+
+//Wait until group is either respawned or marked for deletion. A dummy unit should be created to preserve group.
+while {(_unitGroup getVariable ["GroupSize",-1]) == 0} do {
+	sleep 5;
+};
+
+//GroupSize value of -1 marks group for deletion
+if ((_unitGroup getVariable ["GroupSize",-1]) == -1) then {
+	if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Deleting %2 group %1.",_unitGroup,(_unitGroup getVariable ["unitType","unknown"])]};
+	_unitGroup call DZAI_deleteGroup;
 };

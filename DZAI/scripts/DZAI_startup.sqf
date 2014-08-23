@@ -11,7 +11,7 @@ if (DZAI_debugLevel > 0) then {diag_log "DZAI Debug: DZAI Startup is running req
 //Set internal-use variables
 DZAI_weaponGrades = [0,1,2,3];							//All possible weapon grades (does not include custom weapon grades). A "weapon grade" is a tiered classification of gear. 0: Civilian, 1: Military, 2: MilitarySpecial, 3: Heli Crash. Weapon grade also influences the general skill level of the AI unit.
 DZAI_weaponGradesAll = [0,1,2,3,4,5,6,7,8,9];			//All possible weapon grades (including custom weapon grades).
-DZAI_numAIUnits = 0;										//Tracks current number of currently active AI units, including dead units waiting for respawn.
+//DZAI_numAIUnits = 0;										//Tracks current number of currently active AI units, including dead units waiting for respawn.
 DZAI_curHeliPatrols = 0;									//Current number of active air patrols
 DZAI_curLandPatrols = 0;									//Current number of active land patrols
 DZAI_dynTriggerArray = [];									//List of all generated dynamic triggers.
@@ -35,16 +35,19 @@ DZAI_bonusBlood = ((DZAI_unitBloodLevel select 1) - (DZAI_unitBloodLevel select 
 DZAI_customSpawnQueue = [];
 DZAI_serverObjectMonitorArray = [];	//dummy array in case DayZ's server object monitor can't be found
 DZAI_monitoredObjects = []; //used to cleanup AI vehicles that may not be destroyed.
-DZAI_nullScript = 0 spawn {};
+//DZAI_nullScript = 0 spawn {};
 DZAI_heliListFinal = [];
 DZAI_vehListFinal = [];
+DZAI_activeGroups = [];
+DZAI_locations = [];
+DZAI_locationsLand = [];
 
 //Create gamelogic to act as default trigger object if AI is spawned without trigger object specified (ie: for custom vehicle AI groups)
 _nul = [] spawn {
-	private ["_logicCenter","_logicGroup"];
+	private ["_logicCenter"];
 	_logicCenter = createCenter sideLogic;
-	_logicGroup = createGroup _logicCenter;
-	DZAI_defaultTrigger = _logicGroup createUnit ["LOGIC", [0,0,0], [], 0, "NONE"];
+	DZAI_logicGroup = createGroup _logicCenter;
+	DZAI_defaultTrigger = DZAI_logicGroup createUnit ["LOGIC", [0,0,0], [], 0, "NONE"];
 	DZAI_defaultTrigger setVariable ["isCleaning",true];
 	DZAI_defaultTrigger setVariable ["patrolDist",100];
 	DZAI_defaultTrigger setVariable ["equipType",1];
@@ -52,7 +55,7 @@ _nul = [] spawn {
 	DZAI_defaultTrigger setVariable ["maxUnits",[0,0]];
 	DZAI_defaultTrigger setVariable ["GroupSize",0];
 	DZAI_defaultTrigger setVariable ["initialized",true];
-	if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Default trigger gamelogic spawn check result: %1",(!isNull _logicGroup) && {(typeName DZAI_defaultTrigger) == "OBJECT"}]};
+	if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Default trigger gamelogic spawn check result: %1",(!isNull DZAI_logicGroup) && {(typeName DZAI_defaultTrigger) == "OBJECT"}]};
 };
 
 //Configure AI health system
@@ -113,16 +116,12 @@ uiSleep 0.1;
 
 if (DZAI_dynAISpawns) then {
 	if ((count DZAI_dynAreaBlacklist) > 0) then {
-		_nul = DZAI_dynAreaBlacklist execVM format ['%1\scripts\setup_blacklist_areas.sqf',DZAI_directory];
+		_nul = [] execVM format ['%1\scripts\setup_blacklist_areas.sqf',DZAI_directory];
 	};
 	if (DZAI_freshSpawnSafeArea) then {
 		_nul = [] execVM format ['%1\scripts\setup_playerspawn_areas.sqf',DZAI_directory];
 	};
 	_dynManagerV2 = [] execVM format ['%1\scripts\dynamicSpawn_manager.sqf',DZAI_directory];
-};
-
-if (DZAI_modName == "epoch") then {
-	_nul = [] execVM format ['%1\scripts\setup_trader_areas.sqf',DZAI_directory];
 };
 
 if ((DZAI_maxHeliPatrols > 0) or {(DZAI_maxLandPatrols > 0)}) then {
