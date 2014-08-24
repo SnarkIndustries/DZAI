@@ -1,7 +1,7 @@
 DZAI 2.1.2 Changelog
 
 
-    [NEW] Killing an AI unit will cause them to be ejected from their vehicle, if they are in a vehicle (Untested)
+    [NEW] Killing an AI unit will cause them to be ejected from their vehicle, if they are in a vehicle
     [NEW] Added setting DZAI_waypointBlacklist in dzai_config.sqf. Marker names added to this array will prevent these areas from being used as destinations for map-wide air/land AI vehicle patrols. Note: This won't prevent AI vehicles from pathing through these areas.
     [NEW] Podagorsk: Added AI spawn location on Sona island (barracks/castle area).
     [NEW] AI vehicle drivers will now wait for cargo units that need to be picked up instead of ditching them.

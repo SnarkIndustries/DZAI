@@ -18,7 +18,7 @@ DZAI includes many features that can be user-configured:
 - <b>AI helicopter/plane patrols</b> - AI helicopters patrol randomly around the map. Tip: Players on foot have the best chance of avoiding detection, but players in vehicles are much more noticeable to AI.
 - <b>AI land vehicle patrols</b> - AI vehicle patrols randomly travel between cities and towns using roads. Be on the lookout for vehicles that decide to go off road.
 - <b>Custom-definable infantry and vehicle AI patrols</b> - Populate your AI bases with custom spawns and vehicle reinforcements.
-- <b>AI can use any lootable weapon</b> - DDZAI can read DayZ's loot tables to build a list of AI-usable weapons. Beware, AI with rarer weapons will be more dangerous. (Users may also choose to set up their own AI loadouts).
+- <b>AI can use any lootable weapon</b> - DZAI can read DayZ's loot tables to build a list of AI-usable weapons. Beware, AI with rarer weapons will be more dangerous. (Users may also choose to set up their own AI loadouts).
 - <b>AI health system</b> - AI units can take as much damage as players, and can also be knocked unconscious by heavy damage. Headshots are more likely to knock out an AI unit and for longer durations.
 
 Basic Installation Guide (with PBO Manager <b>(Recommended)</b>):
