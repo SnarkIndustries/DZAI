@@ -40,8 +40,8 @@ Basic Installation Guide (with PBO Manager <b>(Recommended)</b>):
 		
 4. Right click the DZAI folder inside the download package and click "Copy".
 5. Double-click your dayz_server.pbo to open the PBO Manager GUI. Inside the GUI, right-click on "dayz_server.pbo" and click "Paste". In the GUI, you should see "DZAI" in the list below "dayz_server.pbo".
-6. Optionally, you may edit DZAI's settings in DZAI\init\dzai_config.sqf
-7. Copy all modified files back into their original locations inside dayz_server.pbo using the PBO Manager GUI.
+6. Optionally, you may edit DZAI's settings in DZAI\init\dzai_config.sqf. 
+7. If you have edited dzai_config.sqf in Step 6, place the modified file back inside dayz_server.pbo using the PBO Manager GUI.
 
 Basic Installation Guide (with cpbo):
 ============
@@ -53,10 +53,9 @@ Basic Installation Guide (with cpbo):
 
 		allowConnection = true;
 
-	Change the line to this:
+	Above this line, add:
 
 		[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\init\dzai_initserver.sqf";
-		allowConnection = true;
 	
 5. Optionally, you may edit DZAI's settings in DZAI\init\dzai_config.sqf
 6. Repack your dayz_server.pbo by right-clicking the unpacked folder, then click on "create PBO". If prompted to overwrite, click "Yes".
