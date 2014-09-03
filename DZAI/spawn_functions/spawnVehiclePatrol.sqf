@@ -30,7 +30,12 @@ if (_isAirVehicle) then {
 	while {_keepLooking} do {
 		_vehSpawnPos = [(getMarkerPos "DZAI_centerMarker"),300 + random((getMarkerSize "DZAI_centerMarker") select 0),random(360),0,[2,750]] call SHK_pos;
 		if ((count _vehSpawnPos) > 1) then {
-			_keepLooking = false;	//Found road position, stop searching
+            _playerNear = {isPlayer _x} count (_vehSpawnPos nearEntities ["CAManBase", 200]) > 1;
+            if(!_playerNear) then {
+    			_keepLooking = false;	//Found road position, stop searching
+            } else {
+                if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Unable to spawn AI %1 because a player was nearby. Retrying in 30 seconds.",_vehicleType]};
+            }
 		} else {
 			if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Unable to find road position to spawn AI %1. Retrying in 30 seconds.",_vehicleType]};
 			uiSleep 30; //Couldnt find road, search again in 30 seconds.
