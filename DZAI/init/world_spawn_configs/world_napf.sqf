@@ -15,8 +15,6 @@ if ((DZAI_maxHeliPatrols > 0) or {(DZAI_maxLandPatrols > 0)}) then {
 waitUntil {sleep 0.1; !isNil "DZAI_classnamesVerified"};	//Wait for DZAI to finish verifying classname arrays or finish building classname arrays if verification is disabled.
 
 if (DZAI_staticAI) then {
-	#include "spawn_areas\areas_napf.sqf"		//Load spawn area definitions file.
-	
 	if (DZAI_modName == "unleashed") then {
 		//DayZ Unleashed-specific spawns (Generic Napf spawns are further below in this file)
 		_this = createTrigger ["EmptyDetector", [16404.818, 18407.805]];
@@ -681,7 +679,7 @@ if (DZAI_staticAI) then {
 		['DZAI_SuhrenfeldHotels',[1,1],[],2] call DZAI_static_spawn;
 	};
 };
-
+#include "spawn_areas\areas_napf.sqf"		//Load spawn area definitions file.
 #include "custom_markers\cust_markers_napf.sqf"
 #include "custom_spawns\cust_spawns_napf.sqf"
 
