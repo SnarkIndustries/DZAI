@@ -30,12 +30,10 @@ if (_isAirVehicle) then {
 	while {_keepLooking} do {
 		_vehSpawnPos = [(getMarkerPos "DZAI_centerMarker"),300 + random((getMarkerSize "DZAI_centerMarker") select 0),random(360),0,[2,750]] call SHK_pos;
 		if ((count _vehSpawnPos) > 1) then {
-            _playerNear = {isPlayer _x} count (_vehSpawnPos nearEntities ["CAManBase", 200]) > 1;
-            if(!_playerNear) then {
-    			_keepLooking = false;	//Found road position, stop searching
-            } else {
-                if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Unable to spawn AI %1 because a player was nearby. Retrying in 30 seconds.",_vehicleType]};
-            }
+			_playerNear = ({isPlayer _x} count (_vehSpawnPos nearEntities ["CAManBase", 200]) > 0);
+			if(!_playerNear) then {
+				_keepLooking = false;	//Found road position, stop searching
+			};
 		} else {
 			if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Unable to find road position to spawn AI %1. Retrying in 30 seconds.",_vehicleType]};
 			uiSleep 30; //Couldnt find road, search again in 30 seconds.
@@ -48,14 +46,16 @@ _driver = _unitGroup createUnit [(DZAI_BanditTypes call BIS_fnc_selectRandom2), 
 [_driver] joinSilent _unitGroup;
 
 _vehicle = createVehicle [_vehicleType, _vehSpawnPos, [], 0, _spawnMode];
-_vehicle setPos _vehSpawnPos;
 
 //Run high-priority commands to set up group vehicle
 _vehicle setFuel 1;
 _vehicle setVehicleAmmo 1;
 _vehicle engineOn true;
 _nul = _vehicle call DZAI_protectObject;
-if !(_vehicle isKindOf "Plane") then {_vehicle setDir (random 360)};
+if !(_vehicle isKindOf "Plane") then {
+	_vehicle setPos _vehSpawnPos;
+	_vehicle setDir (random 360);
+};
 
 //Set variables
 _vehicle setVariable ["unitGroup",_unitGroup];
