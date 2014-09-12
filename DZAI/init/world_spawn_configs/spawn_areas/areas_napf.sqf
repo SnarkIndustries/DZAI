@@ -1,10 +1,9 @@
 /*
 	Napf Spawn Area Definitions	
-	Last updated: 9:07 PM 2/14/2014
+
 	
 */
 
-if (DZAI_modName == "unleashed") exitWith {};
 
 _this = createMarker ["DZAI_Lenzburg", [8876.1641, 16260.472]];
 _this setMarkerShape "ELLIPSE";
