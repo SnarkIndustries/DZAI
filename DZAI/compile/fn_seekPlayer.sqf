@@ -97,7 +97,7 @@ while {
 	_ableToChase = ((!isNull _unitGroup) && {(_unitGroup getVariable ["GroupSize",0]) > 0});
 	if (_ableToChase && {isNull _targetPlayer}) then {
 		if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Group %1 is attempting to search for a new target.",_unitGroup];};
-		_nearUnits = _targetPlayerPos nearEntities ["CAManBase",200];
+		_nearUnits = (leader _unitGroup) nearEntities ["CAManBase",200];
 		{
 			if (isPlayer _x) exitWith {
 				_targetPlayer = _x;
