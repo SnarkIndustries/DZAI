@@ -1,4 +1,4 @@
-DZAI 2.1.2 - AI Addon for DayZ
+DZAI 2.1.3 - AI Addon for DayZ
 ============
 
 

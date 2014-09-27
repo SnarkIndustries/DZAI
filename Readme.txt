@@ -1,4 +1,4 @@
-DZAI 2.1.2 - AI Addon for DayZ
+DZAI 2.1.3 - AI Addon for DayZ
 Introduction
 
 DZAI is designed to be a simple, configurable, easy-to-install AI package. This AI package is designed to work out of the box with any supported DayZ mod/map. Installation instructions are provided below.
