@@ -589,5 +589,6 @@ if (DZAI_staticAI) then {
 
 #include "custom_markers\cust_markers_isladuala.sqf"
 #include "custom_spawns\cust_spawns_isladuala.sqf"
-
+//----------------------------Do not edit anything below this line -----------------------------------------
+DZAI_customSpawnsReady = true;
 diag_log "Isladuala static spawn configuration loaded.";

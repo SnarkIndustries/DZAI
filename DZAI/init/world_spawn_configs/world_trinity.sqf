@@ -71,5 +71,6 @@ if (DZAI_staticAI) then {
 
 #include "custom_markers\cust_markers_trinity.sqf"
 #include "custom_spawns\cust_spawns_trinity.sqf"
-
+//----------------------------Do not edit anything below this line -----------------------------------------
+DZAI_customSpawnsReady = true;
 diag_log "Trinity Island static spawn configuration loaded.";

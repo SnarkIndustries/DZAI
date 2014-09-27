@@ -95,5 +95,6 @@ if (DZAI_staticAI) then {
 
 #include "custom_markers\cust_markers_sauerland.sqf"
 #include "custom_spawns\cust_spawns_sauerland.sqf"
-
+//----------------------------Do not edit anything below this line -----------------------------------------
+DZAI_customSpawnsReady = true;
 diag_log "Sauerland static spawn configuration loaded.";

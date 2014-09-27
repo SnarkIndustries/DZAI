@@ -60,7 +60,6 @@ for "_j" from 1 to (_numGroups - _groupsActive) do {
 			0 = [_unitGroup,_triggerPos,_patrolDist] spawn DZAI_BIN_taskPatrol;
 		} else {
 			[_unitGroup, 0] setWaypointType "HOLD";
-			_unitGroup setFormDir (random 360);
 		};
 		if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Spawned group %1 (weapongrade: %2) with %3 units.",_unitGroup,_weapongrade,_totalAI];};
 	} else {

@@ -45,5 +45,4 @@
 
 
 
-//----------------------------Do not edit anything below this line -----------------------------------------
-DZAI_customSpawnsReady = true;
+

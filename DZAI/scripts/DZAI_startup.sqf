@@ -11,7 +11,6 @@ if (DZAI_debugLevel > 0) then {diag_log "DZAI Debug: DZAI Startup is running req
 //Set internal-use variables
 DZAI_weaponGrades = [0,1,2,3];							//All possible weapon grades (does not include custom weapon grades). A "weapon grade" is a tiered classification of gear. 0: Civilian, 1: Military, 2: MilitarySpecial, 3: Heli Crash. Weapon grade also influences the general skill level of the AI unit.
 DZAI_weaponGradesAll = [0,1,2,3,4,5,6,7,8,9];			//All possible weapon grades (including custom weapon grades).
-//DZAI_numAIUnits = 0;										//Tracks current number of currently active AI units, including dead units waiting for respawn.
 DZAI_curHeliPatrols = 0;									//Current number of active air patrols
 DZAI_curLandPatrols = 0;									//Current number of active land patrols
 DZAI_dynTriggerArray = [];									//List of all generated dynamic triggers.
@@ -35,12 +34,17 @@ DZAI_bonusBlood = ((DZAI_unitBloodLevel select 1) - (DZAI_unitBloodLevel select 
 DZAI_customSpawnQueue = [];
 DZAI_serverObjectMonitorArray = [];	//dummy array in case DayZ's server object monitor can't be found
 DZAI_monitoredObjects = []; //used to cleanup AI vehicles that may not be destroyed.
-//DZAI_nullScript = 0 spawn {};
-DZAI_heliListFinal = [];
-DZAI_vehListFinal = [];
 DZAI_activeGroups = [];
 DZAI_locations = [];
 DZAI_locationsLand = [];
+DZAI_heliTypesUsable = [];
+DZAI_vehTypesUsable = [];
+
+if (DZAI_verifyTables) then {
+	DZAI_tableChecklist = ["DZAI_Rifles0","DZAI_Rifles1","DZAI_Rifles2","DZAI_Rifles3","DZAI_Pistols0","DZAI_Pistols1","DZAI_Pistols2","DZAI_Pistols3",
+				"DZAI_Backpacks0","DZAI_Backpacks1","DZAI_Backpacks2","DZAI_Backpacks3","DZAI_Edibles","DZAI_Medicals1","DZAI_Medicals2",
+				"DZAI_MiscItemS","DZAI_MiscItemL","DZAI_BanditTypes","DZAI_launcherTypes"];
+};
 
 //Create gamelogic to act as default trigger object if AI is spawned without trigger object specified (ie: for custom vehicle AI groups)
 _nul = [] spawn {
@@ -85,6 +89,7 @@ if (DZAI_objPatch) then {
 //Build DZAI weapon classname tables from CfgBuildingLoot data if DZAI_dynamicWeapons = true;
 if (DZAI_dynamicWeaponList) then {
 	_weaponlist = [] execVM format ['%1\scripts\buildWeaponArrays.sqf',DZAI_directory]; //Overwrite default weapon tables with classnames found in DayZ's loot tables.
+	waitUntil {uiSleep 0.25; scriptDone _weaponlist};
 } else {
 	DZAI_weaponsInitialized = true;	//Use default weapon tables defined in global_classnames.sqf
 };

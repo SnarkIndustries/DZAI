@@ -67,9 +67,7 @@ _unitGroup setSpeedMode "FULL";
 _unitGroup allowFleeing 0;
 
 //Begin hunting player or patrolling area
-_behavior = if ((random 1) < DZAI_huntingChance) then {
-	//Reveal target player and nearby players to AI, and set group direction to face target player
-	_unitGroup setFormDir ([(leader _unitGroup),_targetPlayer] call BIS_fnc_dirTo);
+_behavior = if (DZAI_huntingChance call DZAI_chance) then {
 	_unitGroup reveal [_targetPlayer,4];
 	0 = [_unitGroup,_spawnPos,_patrolDist,_targetPlayer,ASLtoATL getPosASL _trigger] spawn DZAI_dyn_huntPlayer;
 	"HUNTING"

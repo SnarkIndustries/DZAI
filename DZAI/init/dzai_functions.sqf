@@ -119,6 +119,18 @@ if (DZAI_radioMsgs) then {
 	};
 };
 
+if (DZAI_deathMessages) then {
+	DZAI_sendKillMessage = {
+		private ["_killer","_victimName"];
+		_killer = _this select 0;
+		_victimName = _this select 1;
+		{
+			DZAI_killMSG = _victimName;
+			(owner _x) publicVariableClient "DZAI_killMSG";
+		} count (crew _killer);
+	};
+};
+
 DZAI_updGroupCount = {
 	private ["_unitGroup","_isNewGroup"];
 	_unitGroup = _this select 0;
@@ -255,18 +267,6 @@ DZAI_getWeapongrade = {
 	DZAI_weaponGrades select (_indexWeighted call BIS_fnc_selectRandom2)
 };
 
-/*
-DZAI_updateUnitCount = {
-	if (((typeName _this) == "SCALAR") && {(_this >= 0)}) then {
-		DZAI_numAIUnits = _this;
-		true
-	} else {
-		diag_log format ["DZAI Error: Tried to update AI count using invalid value type! Value: %1",_this];
-		false
-	};
-};
-*/
-
 DZAI_spawn_vehicle = {
 	if ((getMarkerColor (_this select 0)) == "") exitWith {diag_log format ["DZAI Error: Unable to find provided marker %1 to spawn AI vehicle.",(_this select 0)]};
 	if (!([(_this select 1),"vehicle"] call DZAI_checkClassname)) exitWith {diag_log format ["DZAI Error: Provided vehicle classname %1 is a banned or nonexistent classname.",(_this select 1)]};
@@ -300,17 +300,22 @@ DZAI_addTempNVG = {
 
 DZAI_respawnAIVehicle = {
 	//Usage: [_unitGroup,_vehicle] call DZAI_respawnAIVehicle;
-	private ["_vehicle"];
+	private ["_vehicle","_unitType"];
+	_unitType = (_this select 0) getVariable ["unitType",""];
 	_vehicle = _this select 1;
-	if (_vehicle isKindOf "Air") then {DZAI_curHeliPatrols = DZAI_curHeliPatrols - 1} else {DZAI_curLandPatrols = DZAI_curLandPatrols - 1};
-	if (((_this select 0) getVariable ["unitType",""]) in ["aircustom","landcustom"]) then {
-		private ["_spawnParams"];
-		_spawnParams = (_this select 0) getVariable ["spawnParams",false];
-		if (_spawnParams select 4) then {
-			[1,_spawnParams] call fnc_respawnHandler;
+	call {
+		if (_unitType in ["aircustom","landcustom"]) exitWith {
+			private ["_spawnParams"];
+			_spawnParams = (_this select 0) getVariable ["spawnParams",false];
+			if (_spawnParams select 4) then {
+				[1,_spawnParams] call fnc_respawnHandler;
+			};
+			if (_vehicle isKindOf "Air") then {DZAI_curHeliPatrols = DZAI_curHeliPatrols - 1} else {DZAI_curLandPatrols = DZAI_curLandPatrols - 1};
 		};
-	} else {
-		[2,typeOf _vehicle] call fnc_respawnHandler;
+		if (_unitType in ["air","land"]) exitWith {
+			[2,typeOf _vehicle] call fnc_respawnHandler;
+			if (_vehicle isKindOf "Air") then {DZAI_curHeliPatrols = DZAI_curHeliPatrols - 1} else {DZAI_curLandPatrols = DZAI_curLandPatrols - 1};
+		};
 	};
 	_vehicle setVariable ["DZAI_deathTime",diag_tickTime]; //mark vehicle for cleanup
 	
@@ -364,6 +369,13 @@ DZAI_deleteGroup = {
 	deleteGroup _this;
 	
 	true
+};
+
+DZAI_chance = {
+	private ["_result"];
+	_result = ((random 1) < _this);
+	
+	_result
 };
 
 diag_log "[DZAI] DZAI functions compiled.";

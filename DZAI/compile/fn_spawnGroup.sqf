@@ -46,10 +46,8 @@ if (({isPlayer _x} count (_pos nearEntities ["CAManBase",100])) == 0) then {
 } else {
 	_unitGroup setCombatMode "BLUE";
 	_nul = _unitGroup spawn {
-		_this setVariable ["CombatModeBlue",true];
 		uiSleep 10;
 		_this setCombatMode "RED";	//Activate AI group hostility after 5 seconds
-		_this setVariable ["CombatModeBlue",false];
 	};
 };
 
@@ -57,7 +55,7 @@ for "_i" from 1 to _totalAI do {
 	private ["_type","_unit"];
 	_type = DZAI_BanditTypes call BIS_fnc_selectRandom2;								// Select skin of AI unit
 	_unit = _unitGroup createUnit [_type, _pos, [], 0, "FORM"];							// Spawn the AI unit
-	_unit setPosATL _pos;
+	_unit setPos _pos;
 	[_unit] joinSilent _unitGroup;														// Add AI unit to group
 
 	_unit setVariable ["bodyName",(name _unit)];										// Set unit body name (will be PVed upon death).
@@ -85,5 +83,6 @@ _unitGroup setVariable ["weapongrade",_weapongrade];
 if (isNull _trigger) then {_unitGroup setVariable ["spawnPos",_spawnPos]}; 	//If group was spawned directly by scripting instead of a trigger object, record spawn position instead of trigger position as anchoring point
 //(DZAI_numAIUnits + _totalAI) call DZAI_updateUnitCount;
 0 = [_unitGroup,_weapongrade] spawn DZAI_autoRearm_group;	//start group-level manager
+_unitGroup setFormDir (random 360);
 
 _unitGroup

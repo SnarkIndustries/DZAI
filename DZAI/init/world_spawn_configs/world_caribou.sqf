@@ -42,5 +42,6 @@ if (DZAI_staticAI) then {
 
 #include "custom_markers\cust_markers_caribou.sqf"
 #include "custom_spawns\cust_spawns_caribou.sqf"
-
+//----------------------------Do not edit anything below this line -----------------------------------------
+DZAI_customSpawnsReady = true;
 diag_log "Caribou Frontier static spawn configuration loaded.";

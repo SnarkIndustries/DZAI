@@ -127,5 +127,6 @@ if (DZAI_staticAI) then {
 
 #include "custom_markers\cust_markers_zargabad.sqf"
 #include "custom_spawns\cust_spawns_zargabad.sqf"
-
+//----------------------------Do not edit anything below this line -----------------------------------------
+DZAI_customSpawnsReady = true;
 diag_log "Zargabad static spawn configuration loaded.";

@@ -20,7 +20,7 @@ if (!surfaceIsWater _vehPos) then {
 	private ["_unitsAlive","_trigger","_weapongrade","_units","_waypointCount"];
 	_weapongrade = _unitGroup getVariable ["weapongrade",1];
 	_units = units _unitGroup;
-	if (((_vehPos select 2) > 60) or {(random 1) < 0.40}) then {
+	if (((_vehPos select 2) > 60) or {(0.40 call DZAI_chance)}) then {
 		{
 			if (alive _x) then {
 				_health = _x getVariable ["unithealth",[]];

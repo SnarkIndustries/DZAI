@@ -12,7 +12,7 @@ if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: DZAI is generating 
 	
 	if ((_placeType != "NameLocal") && {!(surfaceIsWater _placePos)}) then {
 		private ["_nearbldgs"];
-		_nearbldgs = _placePos nearObjects ["HouseBase",250];
+		_nearbldgs = _triggerPos nearObjects ["HouseBase",250];
 		if ((count _nearbldgs) > 19) then {
 			_ignoredObj = missionNamespace getVariable ["dayz_allowedObjects",[]];
 			_spawnPositions = [];
@@ -34,9 +34,6 @@ if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: DZAI is generating 
 			_trigger setTriggerActivation ["ANY", "PRESENT", true];
 			_trigger setTriggerTimeout [10, 15, 20, true];
 			_trigger setTriggerText _placeName;
-			_aiCount = [1,1];
-			_equipType = 1;
-			_patrolRad = 125;
 			switch (_placeType) do {
 				case "NameCityCapital":
 				{

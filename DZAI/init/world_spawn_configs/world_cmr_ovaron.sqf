@@ -20,5 +20,6 @@ if (DZAI_staticAI) then {
 
 #include "custom_markers\cust_markers_cmr_ovaron.sqf"
 #include "custom_spawns\cust_spawns_cmr_ovaron.sqf"
-
+//----------------------------Do not edit anything below this line -----------------------------------------
+DZAI_customSpawnsReady = true;
 diag_log "Ovaron static spawn configuration loaded.";

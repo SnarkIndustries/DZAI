@@ -219,7 +219,8 @@ if (DZAI_staticAI) then {
 
 #include "custom_markers\cust_markers_namalsk.sqf"
 #include "custom_spawns\cust_spawns_namalsk.sqf"
-
+//----------------------------Do not edit anything below this line -----------------------------------------
+DZAI_customSpawnsReady = true;
 //AI hostility to Bloodsuckers by decreasing their leader's rating (untested). Required because Bloodsuckers will aggro on AI.
 _nul = [] spawn {
 	sleep 120;

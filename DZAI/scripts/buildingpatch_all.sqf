@@ -31,7 +31,7 @@ if (_configExists) then {
 				//diag_log format ["OBJECT PATCH :: Creating object %1 at %2.",_objType,_objPos];
 				_object = _objType createVehicleLocal [_objPos select 0,_objPos select 1,0];
 				_object setDir _objDir;
-				_object setPosATL [_objPos select 0,_objPos select 1,0];
+				_object setPos [_objPos select 0,_objPos select 1,0];
 				_object allowDamage false;
 				_object enableSimulation false;
 				if ((_i % 25) == 0) then {uiSleep 0.01;};

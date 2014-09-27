@@ -14,7 +14,7 @@ _wpSelect = [_wpSelect,50+(random 900),(random 360),1] call SHK_pos;
 [_unitGroup,0] setWPPos _wpSelect; 
 [_unitGroup,1] setWPPos _wpSelect;
 if ((waypointType [_unitGroup,1]) == "MOVE") then {
-	if ((random 1) < 0.275) then {
+	if (0.275 call DZAI_chance) then {
 		[_unitGroup,1] setWaypointType "SAD";
 		[_unitGroup,1] setWaypointTimeout [20,25,30];
 		_unitGroup setVariable ["DetectPlayersWide",true];

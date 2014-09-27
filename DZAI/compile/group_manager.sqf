@@ -22,7 +22,7 @@ _marker2 = "";
 
 //Set up timer variables
 _lastRearmTime = diag_tickTime;
-_antistuckTime = diag_tickTime + 600;
+_antistuckTime = diag_tickTime + 900;
 _lastReinforceTime = diag_tickTime + 600;
 
 //Set up individual group units
@@ -219,7 +219,7 @@ while {(!isNull _unitGroup) && {(_unitGroup getVariable ["GroupSize",-1]) > 0}} 
 		if ((fuel _vehicle) < 0.25) then {_vehicle setFuel 1};
 	};
 
-	//Antistuck prevention
+	//Antistuck detection
 	if ((diag_tickTime - _antistuckTime) > 900) then {
 		_wpPos = (getWPPos [_unitGroup,(currentWaypoint _unitGroup)]);
 		_unitType = (_unitGroup getVariable ["unitType",""]);
@@ -232,9 +232,11 @@ while {(!isNull _unitGroup) && {(_unitGroup getVariable ["GroupSize",-1]) > 0}} 
 					_nextWP = _currentWP + 1;
 					if ((count _allWP) == _nextWP) then {_nextWP = 1}; //Cycle back to first added waypoint if group is currently on last waypoint.
 					_unitGroup setCurrentWaypoint [_unitGroup,_nextWP];
-					if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Antistuck prevention triggered for AI group %1. Forcing next waypoint.",_unitGroup];};
+					if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Antistuck detection triggered for AI group %1. Forcing next waypoint.",_unitGroup];};
+					_antistuckTime = diag_tickTime + 300;
 				} else {
 					_antistuckPos = _wpPos;
+					_antistuckTime = diag_tickTime;
 				};
 			};
 			if (_unitType == "air") exitWith {
@@ -255,9 +257,11 @@ while {(!isNull _unitGroup) && {(_unitGroup getVariable ["GroupSize",-1]) > 0}} 
 					[_unitGroup,1] setWPPos _wpSelect;
 					_vehicle doMove _wpSelect;
 					_antistuckPos = _wpSelect;
-					if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Antistuck prevention triggered for AI vehicle %1 (Group: %2). Forcing next waypoint.",(typeOf _vehicle),_unitGroup];};
+					if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Antistuck detection triggered for AI vehicle %1 (Group: %2). Forcing next waypoint.",(typeOf _vehicle),_unitGroup];};
+					_antistuckTime = diag_tickTime + 300;
 				} else {
 					_antistuckPos = _wpPos;
+					_antistuckTime = diag_tickTime;
 				};
 			};
 			if (_unitType == "land") exitWith {
@@ -279,6 +283,7 @@ while {(!isNull _unitGroup) && {(_unitGroup getVariable ["GroupSize",-1]) > 0}} 
 						_antistuckPos = _wpSelect;
 						_vehicleMoved = false;
 						if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Antistuck prevention triggered for AI vehicle %1 (Group: %2). Forcing next waypoint.",(typeOf _vehicle),_unitGroup];};
+						_antistuckTime = diag_tickTime + 300;
 					} else {
 						if (!(_vehicle getVariable ["veh_disabled",false])) then {
 							[_vehicle] call DZAI_vehDestroyed;
@@ -291,10 +296,10 @@ while {(!isNull _unitGroup) && {(_unitGroup getVariable ["GroupSize",-1]) > 0}} 
 						_vehicleMoved = true;
 						if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Antistuck check passed for AI vehicle %1 (Group: %2). Reset vehicleMoved flag.",(typeOf _vehicle),_unitGroup];};
 					};
+					_antistuckTime = diag_tickTime;
 				};
 			};
 		};
-		_antistuckTime = diag_tickTime;
 	};
 	
 	if (_debugMarkers) then {

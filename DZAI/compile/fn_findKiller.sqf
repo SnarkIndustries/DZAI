@@ -123,7 +123,8 @@ if ((_startPos distance _targetPlayer) < _chaseDistance) then {
 		_unitGroup lockWP false;
 		
 		if ((_unitGroup getVariable ["GroupSize",0]) > 0) then {
-			_unitGroup setCurrentWaypoint ((waypoints _unitGroup) call BIS_fnc_selectRandom2);
+			_waypoints = (waypoints _unitGroup);
+			_unitGroup setCurrentWaypoint (_waypoints call BIS_fnc_selectRandom2);
 			if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Pursuit state ended for group %1. Returning to patrol state. (fn_findKiller)",_unitGroup];};
 			
 			if (DZAI_radioMsgs) then {

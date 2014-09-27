@@ -42,7 +42,7 @@ while {(count DZAI_respawnQueue) > 0} do {
 							//Trigger is active, so respawn the group
 							_maxUnits = _trigger getVariable ["maxUnits",[1,0]];
 							_respawned = [_unitGroup,_trigger,_maxUnits] call fnc_respawnBandits;
-							if ((DZAI_debugLevel > 0) && {!_respawned}) then {diag_log format ["DZAI Debug: No units were respawned for group %1 at %2. Group %1 reinserted into respawn queue.",_unitGroup,(mapGridPosition _trigger)];};
+							if ((DZAI_debugLevel > 0) && {!_respawned}) then {diag_log format ["DZAI Debug: No units were respawned for group %1 at %2. Group %1 reinserted into respawn queue.",_unitGroup,(triggerText _trigger)];};
 						} else {
 							//Trigger is inactive (despawned or deleted) so clean up group instead
 							if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Spawn area %1 has already been despawned. Cleaning up group %2.",triggerText _trigger,_unitGroup]};
@@ -63,30 +63,32 @@ while {(count DZAI_respawnQueue) > 0} do {
 					//Vehicle AI patrol respawn
 					_vehicleTypeOld = (DZAI_respawnQueue select _i) select 2;
 					if (_vehicleTypeOld isKindOf "Air") then {
-						if ((count DZAI_heliListFinal) == 0) then {
+						//Air-type vehicle AI patrol respawn
+						if ((count DZAI_heliTypesUsable) == 0) then {
 							_nul = _vehicleTypeOld spawn DZAI_spawnVehiclePatrol; 
 							if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Respawning AI air vehicle patrol type %1.",_vehicleTypeOld]};
 						} else {
-							DZAI_heliListFinal set [(count DZAI_heliListFinal),_vehicleTypeOld];
-							_index = floor (random (count DZAI_heliListFinal));
-							_vehicleTypeNew = DZAI_heliListFinal select _index;						
+							DZAI_heliTypesUsable set [(count DZAI_heliTypesUsable),_vehicleTypeOld];
+							_index = floor (random (count DZAI_heliTypesUsable));
+							_vehicleTypeNew = DZAI_heliTypesUsable select _index;						
 							_nul = _vehicleTypeNew spawn DZAI_spawnVehiclePatrol;
-							DZAI_heliListFinal set [_index,objNull];
-							DZAI_heliListFinal = DZAI_heliListFinal - [objNull];
+							DZAI_heliTypesUsable set [_index,objNull];
+							DZAI_heliTypesUsable = DZAI_heliTypesUsable - [objNull];
 							if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Respawning AI air vehicle type patrol %1.",_vehicleTypeNew]};
 						};
 					} else {
 						if (_vehicleTypeOld isKindOf "LandVehicle") then {
-							if ((count DZAI_heliListFinal) == 0) then {
+							//Land-type vehicle AI patrol respawn
+							if ((count DZAI_heliTypesUsable) == 0) then {
 								_nul = _vehicleTypeOld spawn DZAI_spawnVehiclePatrol;
 								if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Respawning AI land vehicle patrol type %1.",_vehicleTypeOld]};
 							} else {
-								DZAI_vehListFinal set [(count DZAI_vehListFinal),_vehicleTypeOld];
-								_index = floor (random (count DZAI_vehListFinal));
-								_vehicleTypeNew = DZAI_vehListFinal select _index;	
+								DZAI_vehTypesUsable set [(count DZAI_vehTypesUsable),_vehicleTypeOld];
+								_index = floor (random (count DZAI_vehTypesUsable));
+								_vehicleTypeNew = DZAI_vehTypesUsable select _index;	
 								_nul = _vehicleTypeNew spawn DZAI_spawnVehiclePatrol;
-								DZAI_vehListFinal set [_index,objNull];
-								DZAI_vehListFinal = DZAI_vehListFinal - [objNull];
+								DZAI_vehTypesUsable set [_index,objNull];
+								DZAI_vehTypesUsable = DZAI_vehTypesUsable - [objNull];
 								if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Respawning AI land vehicle patrol type %1.",_vehicleTypeNew]};
 							};
 						};

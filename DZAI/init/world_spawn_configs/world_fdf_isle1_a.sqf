@@ -43,5 +43,6 @@ if (DZAI_staticAI) then {
 
 #include "custom_markers\cust_markers_podagorsk.sqf"
 #include "custom_spawns\cust_spawns_podagorsk.sqf"
-
+//----------------------------Do not edit anything below this line -----------------------------------------
+DZAI_customSpawnsReady = true;
 diag_log "Podagorsk static spawn configuration loaded.";

@@ -3,7 +3,7 @@
 	
 	Description: Contains all configurable settings of DZAI. Contains settings for debugging, customization of AI units, spawning, and loot.
 	
-	Last updated: 6:25 AM 6/17/2014
+
 */
 
 diag_log "[DZAI] Reading DZAI configuration file.";
@@ -19,7 +19,7 @@ DZAI_debugLevel = 0;
 DZAI_monitorRate = 300;
 
 //Enable or disable verification of classname tables used by DZAI. If invalid entries are found, they are removed and logged into the RPT log.
-//If disabled, any invalid classnames will not be removed and clients may crash if AI bodies with invalid items are looted. Disable ONLY if a previous scan shows no invalid classnames (Default: true).										
+//If disabled, any invalid classnames will not be removed and clients may crash if AI bodies with invalid items are looted. Only disable if a previous scan shows no invalid classnames (Default: true).										
 DZAI_verifyTables = true;
 
 //Enable to have server spawn in objects/buildings normally spawned clientside by DayZ's CfgTownGenerator. Prevents AI from walking/shooting through clutter and other objects. (Default: true)	
@@ -30,23 +30,9 @@ DZAI_objPatch = true;
 //Note: Other cleanup scripts might interfere by cleaning up dead AI bodies/vehicles!									
 DZAI_cleanupDelay = 900;									
 
-
-/*
-
-	DZAI_modName value	|	Enables additional settings for...	|	Automatically detected by DZAI? (If Yes, editing DZAI_modName is not needed)
-	--------------------------------------------------------------------------------------------------------------------
-	""						Automatically detect mod 						N/A
-	"default"				Force default settings							N/A
-	"2017"					DayZ 2017/Namalsk 2017						No - Must set DZAI_modName = "2017" to enable additional settings.
-	"epoch"					DayZ Epoch 									Yes - Adds bar currency to AI loot tables, AI skins, Epoch foods, replaces toolbelt items with Epoch versions.
-	"overwatch"				DayZ Overwatch 								Yes - Adds Overwatch skins for AI.
-	"huntinggrounds"		DayZ Hunting Grounds 						Yes - Enables additional static AI spawns for expanded Lingor map, AI skins, and backpacks.
-	"unleashed"				DayZ Unleashed								Yes - Enables Unleashed static AI spawns and AI skins.
-	
-*/
-
-//(Optional) In most cases this setting should be left unchanged. This setting should only be changed if DZAI is detecting the wrong DayZ mod automatically. (Default: "")
-DZAI_modName = "";
+//Enable auto detection of DayZ mod type ran by server. If additional support exists for the mod type, DZAI will load additional classnames (example: weapons, skins, or other items)
+//Additional support exists for the following DayZ mods: Epoch, Overwatch, Unleashed, Hunting Grounds, 2017. (Default: true)
+DZAI_modAutoDetect = true;
 
 
 /*	AI Unit Settings
@@ -99,7 +85,10 @@ DZAI_clientRadio = false;
 DZAI_zombieEnemy = false;	
 
 //Maximum distance (in meters) for AI group leader to detect zombies. Increasing range beyond default may negatively impact server performance. (Default: 150)							
-DZAI_zDetectRange = 150;									
+DZAI_zDetectRange = 150;
+
+//Enable or disable AI death messages. Messages will be sent only to player responsible for killing the unit. Messages will be sent in System chat in the format "(Unit name) was killed." (Default: false)
+DZAI_deathMessages = false;									
 
 
 /*	Static AI Spawning Settings

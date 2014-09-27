@@ -381,5 +381,6 @@ if (DZAI_staticAI) then {
 
 #include "custom_markers\cust_markers_mbg_celle2.sqf"
 #include "custom_spawns\cust_spawns_mbg_celle2.sqf"
-
+//----------------------------Do not edit anything below this line -----------------------------------------
+DZAI_customSpawnsReady = true;
 diag_log "Celle static spawn configuration loaded.";

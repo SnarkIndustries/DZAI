@@ -630,5 +630,6 @@ if (DZAI_staticAI) then {
 
 #include "custom_markers\cust_markers_tavi.sqf"
 #include "custom_spawns\cust_spawns_tavi.sqf"
-
+//----------------------------Do not edit anything below this line -----------------------------------------
+DZAI_customSpawnsReady = true;
 diag_log "Taviana static spawn configuration loaded.";

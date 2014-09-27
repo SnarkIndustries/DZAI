@@ -29,7 +29,7 @@ _unit addMagazine "ItemBandage";
 
 //Add edible items to inventory
 for "_i" from 1 to DZAI_invedibles do {
-	if ((random 1) < DZAI_chanceEdibles) then{
+	if (DZAI_chanceEdibles call DZAI_chance) then {
 		_invedible = DZAI_Edibles call BIS_fnc_selectRandom2;
 		_unit addMagazine _invedible;
 		if (DZAI_debugLevel > 1) then {_loot set [count _loot,_invedible];};
@@ -38,7 +38,7 @@ for "_i" from 1 to DZAI_invedibles do {
 
 //Add edible items to backpack
 for "_i" from 1 to DZAI_bpedibles do {
-	if ((random 1) < DZAI_chanceEdibles) then {
+	if (DZAI_chanceEdibles call DZAI_chance) then {
 		_bpedible = DZAI_Edibles call BIS_fnc_selectRandom2;
 		(unitBackpack _unit) addMagazineCargoGlobal [_bpedible, 1];
 		if (DZAI_debugLevel > 1) then {_loot set [count _loot,_bpedible];};
@@ -47,7 +47,7 @@ for "_i" from 1 to DZAI_bpedibles do {
 
 //Chance to add miscellaneous item (Small) to backpack
 for "_i" from 1 to DZAI_numMiscItemS do {
-	if ((random 1) < DZAI_chanceMiscItemS) then {
+	if (DZAI_chanceMiscItemS call DZAI_chance) then {
 		_miscItemS = DZAI_MiscItemS call BIS_fnc_selectRandom2;
 		(unitBackpack _unit) addMagazineCargoGlobal [_miscItemS,1];
 		if (DZAI_debugLevel > 1) then {_loot set [count _loot,_miscItemS];};
@@ -58,7 +58,7 @@ if (_weapongrade > 0) then {
 	//Chance to add miscellaneous item (Large) to backpack - only if backpack capacity greater than 6
 	if ((getNumber (configFile >> "CfgVehicles" >> (str (unitBackpack _unit)) >> "transportMaxMagazines")) > 6) then {
 		for "_i" from 1 to DZAI_numMiscItemL do {
-			if ((random 1) < DZAI_chanceMiscItemL) then {
+			if (DZAI_chanceMiscItemL call DZAI_chance) then {
 				_miscItemL = DZAI_MiscItemL call BIS_fnc_selectRandom2;
 				(unitBackpack _unit) addMagazineCargoGlobal [_miscItemL,1];
 				if (DZAI_debugLevel > 1) then {_loot set [count _loot,_miscItemL];};
@@ -68,7 +68,7 @@ if (_weapongrade > 0) then {
 	
 	//Add medical items to backpack
 	for "_i" from 1 to DZAI_bpmedicals do {
-		if ((random 1) < DZAI_chanceMedicals) then {
+		if (DZAI_chanceMedicals call DZAI_chance) then {
 			_bpmedical = DZAI_Medicals2 call BIS_fnc_selectRandom2;
 			(unitBackpack _unit) addMagazineCargoGlobal [_bpmedical, 1];
 			if (DZAI_debugLevel > 1) then {_loot set [count _loot,_bpmedical];};
@@ -77,7 +77,7 @@ if (_weapongrade > 0) then {
 
 	//Add medical items to inventory
 	for "_i" from 1 to DZAI_invmedicals do {
-		if ((random 1) < DZAI_chanceMedicals) then {
+		if (DZAI_chanceMedicals call DZAI_chance) then {
 			_invmedical = DZAI_Medicals1 call BIS_fnc_selectRandom2;
 			_unit addMagazine _invmedical;
 			if (DZAI_debugLevel > 1) then {_loot set [count _loot,_invmedical];};
@@ -88,7 +88,7 @@ if (_weapongrade > 0) then {
 		_barsAdded = 0;
 		{
 			if (_barsAdded >= DZAI_metalBarNum) exitWith {};
-			if (((random 1) < (_x select 1)) && {[(_x select 0),"magazine"] call DZAI_checkClassname}) then {
+			if (((_x select 1) call DZAI_chance) && {[(_x select 0),"magazine"] call DZAI_checkClassname}) then {
 				_unit addMagazine (_x select 0);
 				_barsAdded = _barsAdded + 1;
 				if (DZAI_debugLevel > 1) then {_loot set [count _loot,(_x select 0)];};
@@ -102,7 +102,7 @@ if (_weapongrade > 0) then {
 
 _toolsArray = if (_weapongrade < 2) then {DZAI_tools0} else {DZAI_tools1};
 {
-	if (((random 1) < (_x select 1)) && {[(_x select 0),"weapon"] call DZAI_checkClassname}) then {
+	if (((_x select 1) call DZAI_chance) && {[(_x select 0),"weapon"] call DZAI_checkClassname}) then {
 		_unit addWeapon (_x select 0);
 		if (DZAI_debugLevel > 1) then {_loot set [count _loot,(_x select 0)];};
 	}

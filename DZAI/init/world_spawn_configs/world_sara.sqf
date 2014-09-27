@@ -541,5 +541,6 @@ if (DZAI_staticAI) then {
 
 #include "custom_markers\cust_markers_sara.sqf"
 #include "custom_spawns\cust_spawns_sara.sqf"
-
+//----------------------------Do not edit anything below this line -----------------------------------------
+DZAI_customSpawnsReady = true;
 diag_log "Sahrani static spawn configuration loaded.";

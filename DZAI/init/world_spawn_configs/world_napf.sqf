@@ -93,5 +93,6 @@ if (DZAI_staticAI) then {
 
 #include "custom_markers\cust_markers_napf.sqf"
 #include "custom_spawns\cust_spawns_napf.sqf"
-
+//----------------------------Do not edit anything below this line -----------------------------------------
+DZAI_customSpawnsReady = true;
 diag_log "Napf static spawn configuration loaded.";

@@ -607,5 +607,6 @@ if (DZAI_staticAI) then {
 
 #include "custom_markers\cust_markers_lingor.sqf"
 #include "custom_spawns\cust_spawns_lingor.sqf"
-
+//----------------------------Do not edit anything below this line -----------------------------------------
+DZAI_customSpawnsReady = true;
 diag_log "Lingor static spawn configuration loaded.";

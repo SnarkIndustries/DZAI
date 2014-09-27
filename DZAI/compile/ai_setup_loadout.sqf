@@ -16,7 +16,7 @@ if ((count (weapons _unit)) > 0) then {
 };
 
 _weapons = missionNamespace getVariable ["DZAI_Rifles"+str(_weapongrade),DZAI_Rifles1+DZAI_Rifles2+DZAI_Rifles3];
-if ((_weapongrade == 0) && {(random 1) < 0.25}) then {
+if ((_weapongrade == 0) && {(0.25 call DZAI_chance)}) then {
 	_weapons = missionNamespace getVariable ("DZAI_Pistols" + str(floor(random 2)));
 };
 _backpacks = missionNamespace getVariable ["DZAI_Backpacks"+str(_weapongrade),DZAI_Backpacks1+DZAI_Backpacks2+DZAI_Backpacks3];
@@ -36,7 +36,7 @@ if ((getNumber (configFile >> "CfgMagazines" >> _magazine >> "count")) < 8) then
 
 _gadgetsArray = if (_weapongrade > 1) then {DZAI_gadgets1} else {DZAI_gadgets0};
 for "_i" from 0 to ((count _gadgetsArray) - 1) do {
-	if ((random 1) < ((_gadgetsArray select _i) select 1)) then {
+	if (((_gadgetsArray select _i) select 1) call DZAI_chance) then {
 		_gadget = ((_gadgetsArray select _i) select 0);
 		_unit addWeapon _gadget;
 	};

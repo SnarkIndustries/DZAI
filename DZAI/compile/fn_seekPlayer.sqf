@@ -39,7 +39,7 @@ if (DZAI_radioMsgs) then {
 					] call BIS_fnc_selectRandom2;
 					[_x,_radioSpeech] call DZAI_radioSend;
 				} else {
-					if ((random 1) < 0.10) then {
+					if (0.10 call DZAI_chance) then {
 						_radioSpeech = [
 							"You feel as if you are being watched...",
 							"You feel as if you are being followed...",

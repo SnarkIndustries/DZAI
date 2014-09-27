@@ -37,6 +37,7 @@ ArmaIIholic
 -- randomized initial direction -- Wolffy.au added only the offset which had to be reduced to 180 
            - however this script is making full circle from wherever it starts
 
+Edited version for DZAI (https://github.com/dayzai/DZAI)
 =======================================================================================================================
 */
 
@@ -73,8 +74,6 @@ if (isServer) then
 	_completionRadius = if (_isVehicle) then {(5 + _slack) max 75} else {(5 + _slack)};
 	if ( _slack < 20 ) then { _slack = 20 };
 
-	_setdir = round (random 1);
-
 	_angle_offset = random 180;
 	while {count _wp_array < _wp_count} do 
 	{
@@ -87,7 +86,7 @@ if (isServer) then
 			_newangle = abs (abs (_newangle) - 360);
 		};
 				
-		if (_setdir == 1) then 
+		if ((random 1) < 0.5) then 
 		{
 			_newangle = -_newangle;
 			
@@ -156,7 +155,7 @@ if (isServer) then
 
 	for "_i" from 1 to (_wp_count - 1) do
 	{
-		private ["_wp","_cur_pos","_marker","_markername"];
+		private ["_wp","_cur_pos"];
 
 		_cur_pos = (_wp_array select _i);
 		
@@ -165,25 +164,9 @@ if (isServer) then
 			_wp setWaypointType "MOVE";
 			_wp setWaypointCompletionRadius _completionRadius;
 			_wp setWaypointTimeout [_wpTimeouts select 0, _wpTimeouts select 1, _wpTimeouts select 2];
-			// When completing waypoint have 33% chance to choose a random next wp
 			_wp setWaypointStatements ["true", _wpStatements];
-			
-			/*
-			if (_debug) then {
-				_markername = str (_wp);
-				if ((getMarkerColor _markername) != "") then {deleteMarker _markername};
-				//diag_log format ["DEBUG :: Created patrol waypoint %1.",_markername];
-				_marker = createMarker[_markername,[_cur_pos select 0,_cur_pos select 1]];
-				//diag_log format ["DEBUG :: Created waypoint marker name %1. Waypoint is %2.",_markername,_wp];
-				_marker setMarkerShape "ELLIPSE";
-				_marker setMarkerType "Dot";
-				_marker setMarkerColor "ColorBlue";
-				_marker setMarkerBrush "SolidBorder";
-				_marker setMarkerSize [10, 10];
-			};
-			*/
 		};
-		uiSleep 0.5;
+		uiSleep 0.25;
 	};
 
 	if (_searchLoot) then {

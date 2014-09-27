@@ -292,5 +292,6 @@ if (DZAI_staticAI) then {
 
 #include "custom_markers\cust_markers_fallujah.sqf"
 #include "custom_spawns\cust_spawns_fallujah.sqf"
-
+//----------------------------Do not edit anything below this line -----------------------------------------
+DZAI_customSpawnsReady = true;
 diag_log "Fallujah static spawn configuration loaded.";

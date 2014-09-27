@@ -48,7 +48,6 @@ if (_patrolDist > 1) then {
 	0 = [_unitGroup,_triggerPos,_patrolDist] spawn DZAI_BIN_taskPatrol;
 } else {
 	[_unitGroup, 0] setWaypointType "HOLD";
-	_unitGroup setFormDir (random 360);
 };
 
 if (DZAI_debugLevel > 0) then {diag_log format["DZAI Debug: Spawned a group of %1 units in %2 seconds at %3 (spawnBandits).",_totalAI,(diag_tickTime - _startTime),(triggerText _trigger)];};

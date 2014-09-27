@@ -3,7 +3,7 @@
 	
 	Description: Handles startup process for DZAI. Does not contain any values intended for modification.
 */
-private ["_startTime","_directoryAsArray"];
+private ["_startTime","_directoryAsArray","_worldname"];
 
 if (!isServer || !isNil "DZAI_isActive") exitWith {};
 DZAI_isActive = true;
@@ -35,14 +35,17 @@ call compile preprocessFileLineNumbers format ["%1\init\dzai_config.sqf",DZAI_di
 call compile preprocessFileLineNumbers format ["%1\init\dzai_functions.sqf",DZAI_directory];
 
 //Set side relations
-createCenter east;
+if (({(side _x) == west} count allUnits) == 0) then {createCenter west};
+if (({(side _x) == east} count allUnits) == 0) then {createCenter east};
 east setFriend [west, 0];        
 west setFriend [east, 0];
 
 //Detect DayZ mod variant and version being used.
-if (isNil "DZAI_modName") then {DZAI_modName = ""};
+if (isNil "DZAI_modName") then {DZAI_modName = "Default"};
 if (isNil "DZAI_modVersion") then {DZAI_modVersion = toLower (getText (configFile >> "CfgMods" >> "DayZ" >> "version"))};
-if (DZAI_modName == "") then {
+if (isNil "DZAI_modAutoDetect") then {DZAI_modAutoDetect = true};
+
+if (DZAI_modAutoDetect) then {
 	private["_modVariant"];
 	_modVariant = toLower (getText (configFile >> "CfgMods" >> "DayZ" >> "dir"));
 	if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Detected mod variant %1.",_modVariant];};
@@ -60,27 +63,35 @@ if (DZAI_modName == "") then {
 if (isNil "DZAI_maxHeliPatrols") then {DZAI_maxHeliPatrols = 0};
 if (isNil "DZAI_maxLandPatrols") then {DZAI_maxLandPatrols = 0};
 if ((DZAI_maxHeliPatrols > 0) or {(DZAI_maxLandPatrols > 0)}) then {
-	DZAI_centerMarker = createMarker ["DZAI_centerMarker", (getMarkerPos 'center')];
-	DZAI_centerMarker setMarkerShape "ELLIPSE";
-	DZAI_centerMarker setMarkerType "Empty";
-	DZAI_centerMarker setMarkerBrush "Solid";
-	DZAI_centerMarker setMarkerSize [7000, 7000];
-	DZAI_centerMarker setMarkerAlpha 0;
+	_centerPos = (getMarkerPos 'center');
+	if ((_centerPos distance [0,0,0]) < 5) then {
+		_centerPos = getArray(configFile >> "CfgWorlds" >> worldName >> "centerPosition");
+	};
+	_centerMarker = createMarker ["DZAI_centerMarker", _centerPos];
+	_centerMarker setMarkerShape "ELLIPSE";
+	_centerMarker setMarkerType "Empty";
+	_centerMarker setMarkerBrush "Solid";
+	_centerMarker setMarkerSize [7000, 7000];
+	_centerMarker setMarkerAlpha 0;
 };
-
-private["_worldname"];
-_worldname=toLower format ["%1",worldName];
 
 //Load map-specific configuration file. Config files contain trigger/marker information, addition and removal of items/skins, and/or other variable customizations.
 //Classname files will overwrite basic settings specified in base_classnames.sqf
-if (_worldname in [
-	"chernarus","utes","zargabad","fallujah","takistan","tavi","lingor","namalsk","mbg_celle2","oring","panthera2","isladuala","sara","smd_sahrani_a2","trinity","napf","caribou","cmr_ovaron","sauerland","fdf_isle1_a","caribou"]) then {
-	call compile preprocessFileLineNumbers format ["%1\init\world_classname_configs\%2_classnames.sqf",DZAI_directory,_worldname];
+_worldname = (toLower worldName);
+if (_worldname in ["chernarus","utes","zargabad","fallujah","takistan","tavi","lingor","namalsk","mbg_celle2","oring","panthera2","isladuala","sara","smd_sahrani_a2","trinity","napf","caribou","cmr_ovaron","sauerland","fdf_isle1_a","caribou"]) then {
+	if (DZAI_modAutoDetect) then {
+		if (DZAI_modName in ["epoch","unleashed","overwatch","huntinggrounds"]) then {
+			call compile preprocessFileLineNumbers format ["%1\init\world_classname_configs\dayz_%2.sqf",DZAI_directory,DZAI_modName];
+		} else {
+			call compile preprocessFileLineNumbers format ["%1\init\world_classname_configs\default_classnames\%2.sqf",DZAI_directory,_worldname];
+		};
+	};
 	[] execVM format ["%1\init\world_spawn_configs\world_%2.sqf",DZAI_directory,_worldname];
 } else {
-	"DZAI_centerMarker" setMarkerSize [7000, 7000];
-	if (DZAI_modName == "epoch") then {
-		call compile preprocessFileLineNumbers format ["%1\init\world_classname_configs\epoch\dayz_epoch.sqf",DZAI_directory];
+	if (DZAI_modAutoDetect) then {
+		if (DZAI_modName == "epoch") then {
+			call compile preprocessFileLineNumbers format ["%1\init\world_classname_configs\dayz_epoch_classnames.sqf",DZAI_directory];
+		};
 	};
 	if (DZAI_staticAI) then {[] execVM format ["%1\scripts\setup_autoStaticSpawns.sqf",DZAI_directory];};
 };

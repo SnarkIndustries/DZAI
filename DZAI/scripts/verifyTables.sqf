@@ -2,20 +2,16 @@
 #define VEHICLE_BANNED_STRING "bin\config.bin/CfgVehicles/Banned"
 #define MAGAZINE_BANNED_STRING "bin\config.bin/CfgMagazines/FakeMagazine"
 
-private["_verified","_errorFound","_allArrays","_startTime"];
-waitUntil {sleep 0.5; !isNil "DZAI_weaponsInitialized"};
+private["_verified","_errorFound","_startTime"];
+//waitUntil {sleep 0.5; !isNil "DZAI_weaponsInitialized"};
 
 _startTime = diag_tickTime;
-
-_allArrays = ["DZAI_Rifles0","DZAI_Rifles1","DZAI_Rifles2","DZAI_Rifles3","DZAI_Pistols0","DZAI_Pistols1","DZAI_Pistols2","DZAI_Pistols3",
-				"DZAI_Backpacks0","DZAI_Backpacks1","DZAI_Backpacks2","DZAI_Backpacks3","DZAI_Edibles","DZAI_Medicals1","DZAI_Medicals2",
-				"DZAI_MiscItemS","DZAI_MiscItemL","DZAI_BanditTypes","DZAI_launcherTypes"];
 
 _verified = [];
 
 _index = 4;
 while {(typeName (missionNamespace getVariable ("DZAI_Rifles"+str(_index)))) == "ARRAY"} do {
-	_allArrays set [count _allArrays,("DZAI_Rifles"+str(_index))];
+	DZAI_tableChecklist set [count DZAI_tableChecklist,("DZAI_Rifles"+str(_index))];
 	_index = _index + 1;
 	if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Found custom weapon array %1.",("DZAI_Rifles"+str(_index))]};
 };
@@ -27,7 +23,7 @@ while {(typeName (missionNamespace getVariable ("DZAI_Rifles"+str(_index)))) == 
 		if !(_x in _verified) then {
 			call {
 				if (isClass (configFile >> "CfgWeapons" >> _x)) exitWith {
-					if ((str(inheritsFrom (configFile >> "CfgWeapons" >> _x))) == WEAPON_BANNED_STRING) then {
+					if (((str(inheritsFrom (configFile >> "CfgWeapons" >> _x))) == WEAPON_BANNED_STRING) or {(getNumber (configFile >> "CfgWeapons" >> _x >> "scope")) != 2}) then {
 						diag_log format ["[DZAI] Removing invalid classname: %1.",_x];
 						_array set [_forEachIndex,""];
 						if (!_errorFound) then {_errorFound = true};
@@ -36,7 +32,7 @@ while {(typeName (missionNamespace getVariable ("DZAI_Rifles"+str(_index)))) == 
 					};
 				};
 				if (isClass (configFile >> "CfgMagazines" >> _x)) exitWith {
-					if ((str(inheritsFrom (configFile >> "CfgMagazines" >> _x))) == MAGAZINE_BANNED_STRING) then {
+					if (((str(inheritsFrom (configFile >> "CfgMagazines" >> _x))) == MAGAZINE_BANNED_STRING) or {(getNumber (configFile >> "CfgMagazines" >> _x >> "scope")) != 2}) then {
 						diag_log format ["[DZAI] Removing invalid classname: %1.",_x];
 						_array set [_forEachIndex,""];
 						if (!_errorFound) then {_errorFound = true};
@@ -45,7 +41,7 @@ while {(typeName (missionNamespace getVariable ("DZAI_Rifles"+str(_index)))) == 
 					};
 				};
 				if (isClass (configFile >> "CfgVehicles" >> _x)) exitWith {
-					if ((str(inheritsFrom (configFile >> "CfgVehicles" >> _x))) == VEHICLE_BANNED_STRING) then {
+					if (((str(inheritsFrom (configFile >> "CfgVehicles" >> _x))) == VEHICLE_BANNED_STRING) or {(getNumber (configFile >> "CfgVehicles" >> _x >> "scope")) != 2}) then {
 						diag_log format ["[DZAI] Removing banned classname: %1.",_x];
 						_array set [_forEachIndex,""];
 						if (!_errorFound) then {_errorFound = true};
@@ -66,7 +62,7 @@ while {(typeName (missionNamespace getVariable ("DZAI_Rifles"+str(_index)))) == 
 		//diag_log format ["DEBUG :: Corrected contents of %1: %2.",_x,_array];
 		//diag_log format ["DEBUG :: Comparison check of %1: %2.",_x,missionNamespace getVariable [_x,[]]];
 	};
-} forEach _allArrays;
+} forEach DZAI_tableChecklist;
 
 diag_log format ["[DZAI] Verified %1 unique classnames in %2 seconds.",(count _verified),(diag_tickTime - _startTime)];
 

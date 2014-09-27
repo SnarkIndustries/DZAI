@@ -49,13 +49,16 @@ _driver = _unitGroup createUnit [(DZAI_BanditTypes call BIS_fnc_selectRandom2), 
 
 _vehicle = createVehicle [_vehicleType, _vehSpawnPos, [], 0, _spawnMode];
 _vehicle setPos _vehSpawnPos;
+_driver moveInDriver _vehicle;
 
 //Run needed commands to set up group vehicle
-_vehicle setFuel 1;
-_vehicle setVehicleAmmo 1;
-_vehicle engineOn true;
+//_vehicle setFuel 1;
+//_vehicle setVehicleAmmo 1;
+//_vehicle engineOn true;
 _nul = _vehicle call DZAI_protectObject;
-if !(_vehicle isKindOf "Plane") then {_vehicle setDir (random 360)};
+if !(_vehicle isKindOf "Plane") then {
+	_vehicle setDir (random 360);
+};
 
 //Set variables
 _vehicle setVariable ["unitGroup",_unitGroup];
@@ -90,7 +93,6 @@ if (!(_driver hasWeapon "NVGoggles")) then {
 };
 _driver addEventHandler [DZAI_healthType, DZAI_healthStatements];
 _driver assignAsDriver _vehicle;
-_driver moveInDriver _vehicle;
 _driver setVariable ["isDriver",true];
 _unitGroup selectLeader _driver;
 

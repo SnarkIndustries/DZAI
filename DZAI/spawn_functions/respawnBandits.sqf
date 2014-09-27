@@ -48,7 +48,6 @@ if (_patrolDist > 1) then {
 	};
 } else {
 	[_unitGroup, 0] setWaypointType "HOLD";
-	_unitGroup setFormDir (random 360);
 };
 
 if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
