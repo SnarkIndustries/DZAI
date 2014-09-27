@@ -17,20 +17,4 @@ DZAI Client Optional Addon
 2. How to configure
 ------------------
 
-Add these parameters inside the empty array [] to the left of execVM.
-
-"clientradio" - Enable client-side radio messages
-"zombieenemy" - Enable AI-to-zombie hostility
-
-Example: 
-
-	_nul = ["clientradio","zombieenemy"] execVM "DZAI_Client\dzai_initclient.sqf";
-	
-	This will enable both client-side radio and AI-to-zombie hostility.
-
-
-3. What it's used for
-------------------
-
-	- Display radio text messages to players if they have a Radio in their inventory
-	- AI-to Zombie hostility
+Edit dzai_client_config.sqf to change settings and enable/disable features.
