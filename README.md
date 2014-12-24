@@ -26,11 +26,11 @@ Basic Installation Guides:
 
 Choose your preferred installation method:
 
-1. Install DZAI into dayz_server.pbo (using cpbo): https://raw.githubusercontent.com/dayzai/DZAI/master/Installation%20Guides/1.%20Install%20Instructions%20-%20dayz_server.pbo%20installation%20%28cpbo%29.txt
-2. Install DZAI into dayz_server.pbo (using PBO Manager): https://raw.githubusercontent.com/dayzai/DZAI/master/Installation%20Guides/2.%20Install%20Instructions%20-%20dayz_server.pbo%20installation%20%28PBOManager%29.txt
-3. Install DZAI into mission pbo: https://raw.githubusercontent.com/dayzai/DZAI/master/Installation%20Guides/3.%20Install%20Instructions%20-%20Mission%20PBO%20Installation.txt
+1. Install DZAI into dayz_server.pbo (using cpbo): <a href="https://raw.githubusercontent.com/dayzai/DZAI/master/Installation%20Guides/1.%20Install%20Instructions%20-%20dayz_server.pbo%20installation%20%28cpbo%29.txt">Click here</a> 
+2. Install DZAI into dayz_server.pbo (using PBO Manager): <a href="https://raw.githubusercontent.com/dayzai/DZAI/master/Installation%20Guides/2.%20Install%20Instructions%20-%20dayz_server.pbo%20installation%20%28PBOManager%29.txt">Click here</a> 
+3. Install DZAI into mission pbo: <a href="https://raw.githubusercontent.com/dayzai/DZAI/master/Installation%20Guides/3.%20Install%20Instructions%20-%20Mission%20PBO%20Installation.txt">Click here</a> 
 
-Example server_monitor.sqf showing required edit: https://raw.githubusercontent.com/dayzai/DZAI/master/Installation%20Guides/server_monitor_example.sqf
+Example server_monitor.sqf showing required edit: <a href="https://raw.githubusercontent.com/dayzai/DZAI/master/Installation%20Guides/server_monitor_example.sqf">Click here</a> 
 NOTE: Only use the above file as a visual reference, do not replace your server's server_monitor.sqf with this!
 
 
