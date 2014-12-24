@@ -7,11 +7,6 @@
 
 #include "spawn_markers\markers_utes.sqf"	//Load manual spawn point definitions file.
 
-if ((DZAI_maxHeliPatrols > 0) or {(DZAI_maxLandPatrols > 0)}) then {
-	"DZAI_centerMarker" setMarkerPos [3519.8037, 3703.0649];
-	"DZAI_centerMarker" setMarkerSize [1000, 1000];
-};
-
 waitUntil {sleep 0.1; !isNil "DZAI_classnamesVerified"};	//Wait for DZAI to finish verifying classname arrays or finish building classname arrays if verification is disabled.
 
 if (DZAI_staticAI) then {

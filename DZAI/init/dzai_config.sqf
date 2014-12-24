@@ -18,9 +18,12 @@ DZAI_debugLevel = 0;
 //Frequency of server monitor update to RPT log in seconds. The monitor periodically reports number of max/current AI units and dynamically spawned triggers into RPT log. (Default: 300, 0 = Disable reporting)										
 DZAI_monitorRate = 300;
 
-//Enable or disable verification of classname tables used by DZAI. If invalid entries are found, they are removed and logged into the RPT log.
+//Enable or disable verification and error-correction of classname tables used by DZAI. If invalid entries are found, they are removed and logged into the RPT log.
 //If disabled, any invalid classnames will not be removed and clients may crash if AI bodies with invalid items are looted. Only disable if a previous scan shows no invalid classnames (Default: true).										
 DZAI_verifyTables = true;
+
+//(Feature in development) Enables additional checking and error-correction of certain classname tables. (Default: false)
+DZAI_extendedVerify = false;
 
 //Enable to have server spawn in objects/buildings normally spawned clientside by DayZ's CfgTownGenerator. Prevents AI from walking/shooting through clutter and other objects. (Default: true)	
 //If running DayZ Mod ("vanilla DayZ") or DayZ Overwatch, it is highly recommended to enable this option, as many added buildings are handled by the CfgTownGenerator. Not used with Epoch.							
@@ -105,10 +108,16 @@ DZAI_respawnTimeMax = 600;
 DZAI_despawnWait = 120;										
 
 //Respawn limits. Set to -1 for unlimited respawns. (Default: -1 for each).
-DZAI_respawnLimit0 = -1; //Respawn limit for low level AI found in low-value areas (Default: -1)
-DZAI_respawnLimit1 = -1; //Respawn limit for mid level AI found in cities and other mid-value areas (Default: -1)
-DZAI_respawnLimit2 = -1; //Respawn limit for high level AI found in places with military loot (Default: -1)
-DZAI_respawnLimit3 = -1; //Respawn limit for very high level AI in places with high-grade military loot (Default: -1)
+DZAI_respawnLimit0 = -1; 	//Respawn limit for low level AI found in low-value areas (Default: -1)
+DZAI_respawnLimit1 = -1; 	//Respawn limit for mid level AI found in cities and other mid-value areas (Default: -1)
+DZAI_respawnLimit2 = -1; 	//Respawn limit for high level AI found in places with military loot (Default: -1)
+DZAI_respawnLimit3 = -1; 	//Respawn limit for very high level AI in places with high-grade military loot (Default: -1)
+
+//Spawn probabilities
+DZAI_spawnChance0 = 0.40;	//Spawn chance for low-skill AI typically found in small towns (Default: 0.40)
+DZAI_spawnChance1 = 0.60;	//Spawn chance for mid-level AI typically found in cities and large towns (Default: 0.60)
+DZAI_spawnChance2 = 0.80;	//Spawn chance for high-level AI typically found in places with military-grade loot (Default: 0.80)
+DZAI_spawnChance3 = 0.90;	//Spawn chance for expert-level AI found in areas with high-grade military loot (Default: 0.90)
 
 
 /*	Dynamic AI Spawning Settings
@@ -117,11 +126,11 @@ DZAI_respawnLimit3 = -1; //Respawn limit for very high level AI in places with h
 //Enable or disable dynamic AI spawns. If enabled, AI spawn locations will be generated for randomly selected players at randomized intervals (Default: true)									
 DZAI_dynAISpawns = true;
 
-//Time (seconds) required to reach maximum spawn probability per player, after which the probability is reset to 0%. Lower number = More frequent spawns, Higher Number = Less frequent. (Recommended range: 1200-2700, Default: 1800)
-DZAI_maxSpawnTime = 1800;
+//Time (seconds) required to reach maximum spawn probability per player, after which the probability is reset to 0%. Lower number = More frequent spawns, Higher Number = Less frequent. (Recommended range: 1200-2700, Default: 1200)
+DZAI_maxSpawnTime = 1200;
 
-//Time (seconds) to allow each player to retain maximum spawn probability. (Default: 1800).
-DZAI_keepMaxSpawnTime = 1800;
+//Time (seconds) to allow each player to retain maximum spawn probability. (Default: 1200).
+DZAI_keepMaxSpawnTime = 1200;
 
 //Probability for dynamic AI to actively hunt a targeted player. If probability check fails, dynamic AI will patrol the area instead of hunting (Default: 0.50)
 DZAI_huntingChance = 0.50;
@@ -133,11 +142,26 @@ DZAI_heliReinforceChance = 0.50;
 //Epoch: DZAI will automatically set up 200m-radius blacklist areas around each trader area.
 DZAI_dynAreaBlacklist = [];
 
-//Time to wait before despawning all AI units in dynamic trigger area when no players are present. (Default: 120)
+//Time to wait before despawning all AI units in dynamic spawn area when no players are present. (Default: 120)
 DZAI_dynDespawnWait = 120;
 
 //Enable or disable dynamic spawn-free zones of 600m radius around player spawn areas. (Default: false)
 DZAI_freshSpawnSafeArea = false;
+
+
+/*	Random AI Spawning Settings (Feature in development)
+--------------------------------------------------------------------------------------------------------------------*/		
+
+//Maximum number of placed random spawns on map
+DZAI_maxRandomSpawns = 0;
+
+//Time to wait before despawning all AI units in random spawn area when no players are present. (Default: 120)
+DZAI_randDespawnWait = 120;
+
+//Array of area blacklist markers. Players within marker areas will not be targeted for random AI spawns (Example: ["BlacklistArea1","BlacklistArea2","BlacklistArea3"])
+//Epoch: DZAI will automatically set up 200m-radius blacklist areas around each trader area.
+//Tip: To use dynamic-spawn blacklist areas for random-spawn blacklist areas, simply set DZAI_randAreaBlacklist = DZAI_dynAreaBlacklist;
+DZAI_randAreaBlacklist = [];
 
 
 /*	AI Air vehicle patrol settings. These AI vehicles will randomly travel between different cities and towns.
@@ -150,8 +174,11 @@ DZAI_maxHeliPatrols = 0;
 DZAI_respawnTMinA = 600;
 DZAI_respawnTMaxA = 900;
 
-//Classnames of air vehicle types to use, with the maximum amount of each type to spawn. Default: [["UH1H_DZ",1]]
-DZAI_heliList = [["UH1H_DZ",1]];
+//Classnames of air vehicle types to use, with the maximum amount of each type to spawn.
+DZAI_heliList = [
+	["UH1H_DZ",5],
+	["Mi17_DZ",5]
+];
 
 //Difficulty level of air vehicle patrol units. Difficulty level also affects unit loadout and loot. Possible values: 0 to 3 (Default: 3)
 DZAI_heliUnitLevel = 3;
@@ -181,8 +208,11 @@ DZAI_maxLandPatrols = 0;
 DZAI_respawnTMinL = 600;
 DZAI_respawnTMaxL = 900;
 
-//Classnames of land vehicle types to use, with the maximum amount of each type to spawn. Default: [["UAZ_Unarmed_TK_EP1",1]]
-DZAI_vehList = [["UAZ_Unarmed_TK_EP1",1]];
+//Classnames of land vehicle types to use, with the maximum amount of each type to spawn.
+DZAI_vehList = [
+	["UAZ_Unarmed_TK_EP1",5],
+	["SUV_TK_CIV_EP1",5]
+];
 
 //Difficulty level of land vehicle patrol units. Difficulty level also affects unit loadout and loot. Possible values: 0 to 3 (Default: 3)
 DZAI_vehUnitLevel = 3;
@@ -459,10 +489,5 @@ DZAI_gadgets0 = [["binocular",0.40],["NVGoggles",0.00]];
 DZAI_gadgets1 = [["binocular",0.60],["NVGoggles",0.05]];
 
 
-
 //NOTHING TO EDIT BEYOND THIS POINT
-
-//Load custom DZAI settings file.
-if ((!isNil "DZAI_overrideEnabled") && {DZAI_overrideEnabled}) then {call compile preprocessFileLineNumbers format ["%1\DZAI_settings_override.sqf",DZAI_directory]};
-
 diag_log "[DZAI] DZAI configuration file loaded.";

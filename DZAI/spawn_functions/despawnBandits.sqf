@@ -39,7 +39,7 @@ if (_debugMarkers) then {
 
 if (({isNull _x} count _grpArray) < _grpCount) then {uiSleep DZAI_despawnWait};
 
-if (isNull _trigger) exitWith {_trigger call DZAI_updStaticSpawnCount};
+if (isNull _trigger) exitWith {[_trigger,"DZAI_staticTriggerArray"] call DZAI_updateSpawnCount};
 
 if ((triggerActivated _trigger) && {({isNull _x} count _grpArray) < _grpCount}) exitWith {			//Exit script if trigger has been reactivated since DZAI_despawnWait seconds has passed.
 	_trigger setVariable ["isCleaning",false];	//Allow next despawn request.
@@ -70,7 +70,7 @@ _permDelete = _trigger getVariable ["permadelete",false];
 	};
 } forEach _grpArray;
 
-_trigger call DZAI_updStaticSpawnCount;
+[_trigger,"DZAI_staticTriggerArray"] call DZAI_updateSpawnCount;
 if !(_permDelete) then {
 	//Cleanup variables attached to trigger
 	_trigger setVariable ["GroupArray",_grpArray - [grpNull]];

@@ -1,17 +1,45 @@
+//Function frequency definitions
+#define CLEANDEAD_FREQ 600
+#define VEHICLE_CLEANUP_FREQ 900
+#define LOCATION_CLEANUP_FREQ 360
+#define RANDSPAWN_CHECK_FREQ 360
+#define RANDSPAWN_EXPIRY_TIME 1080
+#define SIDECHECK_TIME 900
 
 if (DZAI_debugLevel > 0) then {diag_log "DZAI Server Monitor will start in 1 minute."};
 
+//Initialize timer variables
 _cleanDead = diag_tickTime;
 _monitorReport = diag_tickTime;
 _deleteObjects = diag_tickTime;
 _dynLocations = diag_tickTime;
-_reportDynOrVehicles = (DZAI_dynAISpawns || ((DZAI_maxHeliPatrols > 0) or {(DZAI_maxLandPatrols > 0)}));
+_checkRandomSpawns = diag_tickTime;
+_sideCheck = diag_tickTime;
+
+//Define settings
+_reportDynOrVehicles = (DZAI_dynAISpawns || ((DZAI_maxHeliPatrols > 0) or {(DZAI_maxLandPatrols > 0)}) || (DZAI_maxRandomSpawns > 0));
+_debugMarkers = ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled});
+
+//Local functions
+_getUptime = {
+	private ["_currentSec","_outSec","_outMin","_outHour"];
+	_currentSec = diag_tickTime;
+	_outHour = floor (_currentSec/3600);
+	_outMin = floor ((_currentSec - (_outHour*3600))/60);
+	_outSec = floor (_currentSec - (_outHour*3600) - (_outMin*60));
+	
+	[_outHour,_outMin,_outSec]
+};
+
+_purgeEH = {
+	{_this removeAllEventHandlers _x} count ["Killed","HandleDamage","GetIn","GetOut","Fired"];
+};
 
 uiSleep 60;
 
 while {true} do {
 	//Main cleanup loop
-	if ((diag_tickTime - _cleanDead) > 600) then {
+	if ((diag_tickTime - _cleanDead) > CLEANDEAD_FREQ) then {
 		_bodiesCleaned = 0;
 		_vehiclesCleaned = 0;
 		_nullObjects = 0;
@@ -36,7 +64,7 @@ while {true} do {
 								detach _soundflies;
 								deleteVehicle _soundflies;
 							};
-							_x call DZAI_purgeEH;
+							_x call _purgeEH;
 							//diag_log format ["DEBUG :: Deleting object %1 (type: %2).",_x,typeOf _x];
 							deleteVehicle _x;
 							_bodiesCleaned = _bodiesCleaned + 1;
@@ -44,7 +72,7 @@ while {true} do {
 					};
 				} else {
 					if (_x isKindOf "AllVehicles") then {
-						if ((diag_tickTime - _deathTime) > 900) then {
+						if ((diag_tickTime - _deathTime) > VEHICLE_CLEANUP_FREQ) then {
 							if (({isPlayer _x} count (_x nearEntities [["CAManBase","AllVehicles"],75])) == 0) then {
 								if (_x in DZAI_monitoredObjects) then {
 									{
@@ -54,7 +82,7 @@ while {true} do {
 									} forEach (crew _x);
 									//diag_log format ["DEBUG :: Object %1 (type: %2) found in server object monitor.",_x,typeOf _x];
 								};
-								_x call DZAI_purgeEH;
+								_x call _purgeEH;
 								//diag_log format ["DEBUG :: Deleting object %1 (type: %2).",_x,typeOf _x];
 								deleteVehicle _x;
 								_vehiclesCleaned = _vehiclesCleaned + 1;
@@ -72,8 +100,8 @@ while {true} do {
 				private ["_deathTime"];
 				_deathTime = _x getVariable "DZAI_deathTime";
 				if (!isNil "_deathTime") then {
-					if ((diag_tickTime - _deathTime) > 900) then {
-						_x call DZAI_purgeEH;
+					if ((diag_tickTime - _deathTime) > VEHICLE_CLEANUP_FREQ) then {
+						_x call _purgeEH;
 						//diag_log format ["DEBUG :: Deleting object %1 (type: %2).",_x,typeOf _x];
 						{
 							if (!alive _x) then {
@@ -102,8 +130,10 @@ while {true} do {
 	};
 
 	//Main location cleanup loop
-	if ((diag_tickTime - _dynLocations) > 360) then { //clean up locations every 6 minutes
+	if ((diag_tickTime - _dynLocations) > LOCATION_CLEANUP_FREQ) then {
 		_locationsDeleted = 0;
+		DZAI_tempBlacklist = DZAI_tempBlacklist - [locationNull];
+		//diag_log format ["DEBUG :: DZAI_tempBlacklist: %1",DZAI_tempBlacklist];
 		{
 			_deletetime = _x getVariable "deletetime";
 			if (diag_tickTime > _deletetime) then {
@@ -111,21 +141,60 @@ while {true} do {
 				_locationsDeleted = _locationsDeleted + 1;
 			};
 			uiSleep 0.025;
-		} count DZAI_dynLocations;
-		DZAI_dynLocations = DZAI_dynLocations - [locationNull];
-		if (_locationsDeleted > 0) then {diag_log format ["DZAI Cleanup: Cleaned up %1 expired dynamic blacklist areas.",_locationsDeleted]};
+		} count DZAI_tempBlacklist;
+		DZAI_tempBlacklist = DZAI_tempBlacklist - [locationNull];
+		if (_locationsDeleted > 0) then {diag_log format ["DZAI Cleanup: Cleaned up %1 expired temporary blacklist areas.",_locationsDeleted]};
 		_dynLocations = diag_tickTime;
 	};
 
-	//Report statistics to RPT log
-	if ((DZAI_monitorRate > 0) && {((diag_tickTime - _monitorReport) > DZAI_monitorRate)}) then {
-		_uptime = [] call DZAI_getUptime;
-		diag_log format ["DZAI Monitor :: Server Uptime: [%1d %2h %3m %4s]. Active AI Groups: %5.",_uptime select 0, _uptime select 1, _uptime select 2, _uptime select 3,({!isNull _x} count DZAI_activeGroups)];
-		diag_log format ["DZAI Monitor :: Static Spawns: %1. Respawn Queue: %2 groups queued.",(count DZAI_staticTriggerArray),(count DZAI_respawnQueue)];
-		if (_reportDynOrVehicles) then {diag_log format ["DZAI Monitor :: Dynamic Spawns: %1. Air Patrols: %2. Land Patrols: %3.",(count DZAI_dynTriggerArray),DZAI_curHeliPatrols,DZAI_curLandPatrols];};
-		_monitorReport = diag_tickTime;
+	if ((diag_tickTime - _checkRandomSpawns) > RANDSPAWN_CHECK_FREQ) then {
+		DZAI_randTriggerArray = DZAI_randTriggerArray - [objNull];
+		{
+			if ((((triggerStatements _x) select 1) != "") && {(diag_tickTime - (_x getVariable ["timestamp",diag_tickTime])) > RANDSPAWN_EXPIRY_TIME}) then {
+				deleteLocation (_x getVariable ["triggerLocation",locationNull]);
+				if (_debugMarkers) then {deleteMarker (str _x)};	
+				deleteVehicle _x;
+			};
+			if ((_forEachIndex % 3) == 0) then {uiSleep 0.05};
+		} forEach DZAI_randTriggerArray;
+		DZAI_randTriggerArray = DZAI_randTriggerArray - [objNull];
+		_spawnsAvailable = DZAI_maxRandomSpawns - (count DZAI_randTriggerArray);
+		if (_spawnsAvailable > 0) then {
+			_nul = _spawnsAvailable spawn DZAI_createRandomSpawns;
+		};
+		_checkRandomSpawns = diag_tickTime;
 	};
 	
+	if ((diag_tickTime - _sideCheck) > SIDECHECK_TIME) then {
+		if ((east getFriend west) > 0) then {
+			east setFriend [west, 0];
+		};
+		if ((west getFriend east) > 0) then {
+			west setFriend [east,0];
+		};
+		_sideCheck = diag_tickTime;
+	};
+	
+	if (_debugMarkers) then {
+		{
+			if ((getMarkerColor _x) != "") then {
+				_x setMarkerPos (getMarkerPos _x);
+			} else {
+				DZAI_mapMarkerArray set [_forEachIndex,""];
+			};
+			if ((_forEachIndex % 3) == 0) then {uiSleep 0.05};
+		} forEach DZAI_mapMarkerArray;
+		DZAI_mapMarkerArray = DZAI_mapMarkerArray - [""];
+	};
+	
+	//Report statistics to RPT log
+	if ((DZAI_monitorRate > 0) && {((diag_tickTime - _monitorReport) > DZAI_monitorRate)}) then {
+		_uptime = [] call _getUptime;
+		diag_log format ["DZAI Monitor :: Server Uptime: %1:%2:%3]. Active AI Groups: %4.",_uptime select 0, _uptime select 1, _uptime select 2,({!isNull _x} count DZAI_activeGroups)];
+		diag_log format ["DZAI Monitor :: Static Spawns: %1. Respawn Queue: %2 groups queued.",(count DZAI_staticTriggerArray),(count DZAI_respawnQueue)];
+		if (_reportDynOrVehicles) then {diag_log format ["DZAI Monitor :: Dynamic Spawns: %1. Random Spawns: %2. Air Patrols: %3. Land Patrols: %4.",(count DZAI_dynTriggerArray),(count DZAI_randTriggerArray),DZAI_curHeliPatrols,DZAI_curLandPatrols];};
+		_monitorReport = diag_tickTime;
+	};
+
 	uiSleep 30;
 };
-_nul = [] execVM format ['%1\scripts\DZAI_serverMonitor.sqf',DZAI_directory]; //restart DZAI server monitor if main loop exits for some reason.

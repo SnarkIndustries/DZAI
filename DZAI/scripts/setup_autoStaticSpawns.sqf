@@ -57,7 +57,7 @@ if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: DZAI is generating 
 			};
 			_statements = format ["0 = [%1,%2,%3,thisTrigger,[],%4] call fnc_spawnBandits;",_aiCount select 0,_aiCount select 1,_patrolRad,_equipType];
 			_trigger setTriggerStatements ["{isPlayer _x} count thisList > 0;", _statements, "0 = [thisTrigger] spawn fnc_despawnBandits;"];
-			0 = [_trigger,[],_patrolRad,_equipType,_spawnPositions,_aiCount] call DZAI_setTrigVars;
+			0 = [0,_trigger,[],_patrolRad,_equipType,_spawnPositions,_aiCount] call DZAI_setTrigVars;
 		};
 	};
 	uiSleep 0.1;

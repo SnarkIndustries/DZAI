@@ -42,7 +42,7 @@ if (_unitsAlive > 0) then {
 	_trigger setVariable ["respawn",false]; //landed AI units should never respawn
 	_trigger setVariable ["permadelete",true]; //units should be permanently despawned
 	//DZAI_actTrigs = DZAI_actTrigs + 1;
-	_trigger call DZAI_updStaticSpawnCount;
+	[_trigger,"DZAI_staticTriggerArray"] call DZAI_updateSpawnCount;
 	//(DZAI_numAIUnits + _unitsAlive) call DZAI_updateUnitCount;
 	0 = [_trigger] spawn fnc_despawnBandits;
 

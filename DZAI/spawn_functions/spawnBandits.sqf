@@ -8,7 +8,7 @@
 	Last updated: 8:38 AM 10/23/2013
 */
 
-private ["_minAI","_addAI","_patrolDist","_trigger","_equipType","_numGroups","_grpArray","_triggerPos","_locationArray","_startTime","_totalSpawned","_debugMarkers","_triggerStatements","_groupsActive"];
+private ["_minAI","_addAI","_patrolDist","_trigger","_equipType","_numGroups","_grpArray","_triggerPos","_startTime","_totalSpawned","_debugMarkers","_triggerStatements","_groupsActive"];
 if (!isServer) exitWith {};
 
 _minAI = _this select 0;									//Mandatory minimum number of AI units to spawn
@@ -30,9 +30,9 @@ if (_groupsActive == _numGroups) exitWith {
 	_triggerStatements set [1,""];
 	_trigger setTriggerStatements _triggerStatements;
 	_trigger setTriggerArea [750,750,0,false];
-	_trigger call DZAI_updStaticSpawnCount;
+	[_trigger,"DZAI_staticTriggerArray"] call DZAI_updateSpawnCount;
 	if (_debugMarkers) then {
-		_nul = [_trigger] spawn DZAI_updateSpawnMarker;
+		_nul = _trigger call DZAI_addMapMarker;
 	};
 	if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Maximum number of groups already spawned at %1. Exiting spawn script (spawnBandits)",(triggerText _trigger)];};
 };						
@@ -47,8 +47,12 @@ _totalSpawned = 0;
 //Spawn groups
 for "_j" from 1 to (_numGroups - _groupsActive) do {
 	private ["_unitGroup","_spawnPos","_totalAI"];
-	_totalAI = (_minAI + round(random _addAI));
-	_spawnPos = if ((count _locationArray) > 0) then {_locationArray call DZAI_findSpawnPos} else {[(ASLtoATL getPosASL _trigger),random (_patrolDist),random(360),0] call SHK_pos};
+	_totalAI = 0;
+	_spawnPos = [];
+	if ((_trigger getVariable ["spawnChance",1]) call DZAI_chance) then {
+		_totalAI = (_minAI + round(random _addAI));
+		_spawnPos = if ((count _locationArray) > 0) then {_locationArray call DZAI_findSpawnPos} else {[(ASLtoATL getPosASL _trigger),random (_patrolDist),random(360),0] call SHK_pos};
+	};
 
 	//If non-zero unit amount and valid spawn position, spawn group, otherwise add it to respawn queue.
 	_unitGroup = grpNull;
@@ -67,7 +71,7 @@ for "_j" from 1 to (_numGroups - _groupsActive) do {
 		_dummy = _unitGroup call DZAI_protectGroup;
 		_unitGroup setVariable ["GroupSize",0];
 		_unitGroup setVariable ["trigger",_trigger];
-		0 = [0,_trigger,_unitGroup,true] call fnc_respawnHandler;
+		0 = [0,_trigger,_unitGroup] call fnc_respawnHandler;
 		if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: No units spawned for group %1. Added group to respawn queue.",_unitGroup];};
 	};
 
@@ -82,12 +86,12 @@ if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Trigger gr
 _trigger setVariable ["isCleaning",false];
 _triggerStatements set [1,""];
 _trigger setTriggerStatements _triggerStatements;
-_trigger call DZAI_updStaticSpawnCount;
+[_trigger,"DZAI_staticTriggerArray"] call DZAI_updateSpawnCount;
 
 if (DZAI_debugLevel > 0) then {diag_log format["DZAI Debug: Spawned %1 new AI groups (%2 units total) in %3 seconds at %4 (spawnBandits).",_numGroups,_totalSpawned,(diag_tickTime - _startTime),(triggerText _trigger)];};
 
 if (_debugMarkers) then {
-	_nul = [_trigger] spawn DZAI_updateSpawnMarker;
+	_nul = _trigger call DZAI_addMapMarker;
 };
 
 //diag_log format ["DEBUG :: Activated trigger %1 has statements %2.",triggerText _trigger,triggerStatements _trigger];

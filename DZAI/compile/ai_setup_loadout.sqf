@@ -2,12 +2,12 @@ private ["_unit","_weapongrade","_weapons","_weapon","_magazine","_backpacks","_
 _unit = _this select 0;
 _weapongrade = _this select 1;
 
-if (_unit getVariable ["loadoutDone",false]) exitWith {diag_log "DZAI Error: Unit already has loadout!";};
+if (_unit getVariable ["loadoutDone",false]) exitWith {diag_log format ["DZAI Error: Unit already has loadout! (%1)",__FILE__];};
 
 if !(_weapongrade in DZAI_weaponGradesAll) then {
 	_weapongradeInvalid = _weapongrade;
 	_weapongrade = DZAI_weaponGrades call BIS_fnc_selectRandom2;
-	diag_log format ["DZAI Error: Invalid weapongrade provided! (%1). Generating random weapongrade...",_weapongradeInvalid,_weapongrade];
+	diag_log format ["DZAI Error: Invalid weapongrade provided: %1. Generating new weapongrade value: %2. (%3)",_weapongradeInvalid,_weapongrade,__FILE__];
 };
 
 if ((count (weapons _unit)) > 0) then {
