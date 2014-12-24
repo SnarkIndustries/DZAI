@@ -21,17 +21,15 @@ _patrolDist = _trigger getVariable ["patrolDist",150];
 _equipType = _trigger getVariable ["equipType",1];
 _spawnPositions = _trigger getVariable ["locationArray",[]];
 
-_totalAI = ((_maxUnits select 0) + round(random (_maxUnits select 1)));
-
-if (_totalAI == 0) exitWith {
-	[0,_trigger,_unitGroup,true] call fnc_respawnHandler;
-	false
+_totalAI = 0;
+_spawnPos = [];
+if ((_trigger getVariable ["spawnChance",1]) call DZAI_chance) then {
+	_totalAI = ((_maxUnits select 0) + round(random (_maxUnits select 1)));
+	_spawnPos = if ((count _spawnPositions) > 0) then {_spawnPositions call DZAI_findSpawnPos} else {[(ASLtoATL getPosASL _trigger),random (_patrolDist),random(360),0] call SHK_pos};
 };
 
-//Select spawn position
-_spawnPos = if ((count _spawnPositions) > 0) then {_spawnPositions call DZAI_findSpawnPos} else {[(ASLtoATL getPosASL _trigger),random (_patrolDist),random(360),0] call SHK_pos};
-if ((count _spawnPos) == 0) exitWith {
-	[0,_trigger,_unitGroup,true] call fnc_respawnHandler;
+if ((_totalAI == 0) or {((count _spawnPos) == 0)}) exitWith {
+	[0,_trigger,_unitGroup] call fnc_respawnHandler;
 	false
 };
 
@@ -51,9 +49,7 @@ if (_patrolDist > 1) then {
 };
 
 if ((!isNil "DZAI_debugMarkersEnabled") && {DZAI_debugMarkersEnabled}) then {
-	if ((getMarkerColor (str _trigger)) == "ColorGreen") then {
-		_nul = [_trigger] spawn DZAI_updateSpawnMarker;
-	};
+	_nul = _trigger call DZAI_addMapMarker;
 };
 if (DZAI_debugLevel > 0) then {diag_log format["DZAI Debug: %1 AI units respawned for group %2 (weapongrade %3) at %4 in %5 seconds (respawnBandits).",_totalAI,_unitGroup,_weapongrade,(triggerText _trigger),diag_tickTime - _startTime];};
 

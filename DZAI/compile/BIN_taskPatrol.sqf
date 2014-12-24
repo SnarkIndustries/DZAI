@@ -173,7 +173,7 @@ if (isServer) then
 		// End back near start point and then pick a new random point
 		_wp1 = _grp addWaypoint [_pos, 0];
 		_wp1 setWaypointType "SAD";
-		_wp1 setWaypointCompletionRadius (random (_max_dist));
+		_wp1 setWaypointCompletionRadius (_max_dist max 100);
 		[_grp,(count waypoints _grp)] setWaypointStatements ["true", "group this setCurrentWaypoint [(group this), (round (random 2) + 1)];"];
 	};
 	

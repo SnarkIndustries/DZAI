@@ -149,6 +149,7 @@ _unitGroup setVariable ["spawnParams",_this];
 
 0 = [_unitGroup,_weapongrade] spawn DZAI_autoRearm_group;
 0 = [_unitGroup,_markerPos,_markerSize,false] spawn DZAI_BIN_taskPatrol;
+//if (daytime < 6 or {daytime > 20}) then {_vehicle action ["lightOn", _vehicle]};
 
 if (_isAirVehicle) then {
 	_awareness = [_vehicle,_unitGroup] spawn DZAI_heliAwareness;

@@ -7,11 +7,6 @@
 
 #include "spawn_markers\markers_mbg_celle2.sqf"	//Load manual spawn point definitions file.
 
-if ((DZAI_maxHeliPatrols > 0) or {(DZAI_maxLandPatrols > 0)}) then {
-	"DZAI_centerMarker" setMarkerPos [6163.52, 6220.3984];
-	"DZAI_centerMarker" setMarkerSize [6000, 6000];
-};
-
 waitUntil {sleep 0.1; !isNil "DZAI_classnamesVerified"};	//Wait for DZAI to finish verifying classname arrays or finish building classname arrays if verification is disabled.
 
 if (DZAI_staticAI) then {

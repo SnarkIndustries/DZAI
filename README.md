@@ -1,4 +1,4 @@
-DZAI 2.1.3 - AI Addon for DayZ
+DZAI 2.2.1 - AI Addon for DayZ
 ============
 
 
@@ -21,50 +21,22 @@ DZAI includes many features that can be user-configured:
 - <b>AI can use any lootable weapon</b> - DZAI can read DayZ's loot tables to build a list of AI-usable weapons. Beware, AI with rarer weapons will be more dangerous. (Users may also choose to set up their own AI loadouts).
 - <b>AI health system</b> - AI units can take as much damage as players, and can also be knocked unconscious by heavy damage. Headshots are more likely to knock out an AI unit and for longer durations.
 
-Basic Installation Guide (with PBO Manager <b>(Recommended)</b>):
+Basic Installation Guides:
 ----------------------------------------------------
 
-**NEW**: A visual installation guide for DZAI is available here: http://opendayz.net/threads/dzai-visual-installation-guide.18447/
+Choose your preferred installation method:
 
-**Note**: To avoid pbo corruption, do not use the "Pack into dayz_server.pbo" right-click option. Modify files only using PBO Manager's graphical interface.
+1. Install DZAI into dayz_server.pbo (using cpbo): <a href="https://raw.githubusercontent.com/dayzai/DZAI/master/Installation%20Guides/1.%20Install%20Instructions%20-%20dayz_server.pbo%20installation%20%28cpbo%29.txt">Click here</a> 
+2. Install DZAI into dayz_server.pbo (using PBO Manager): <a href="https://raw.githubusercontent.com/dayzai/DZAI/master/Installation%20Guides/2.%20Install%20Instructions%20-%20dayz_server.pbo%20installation%20%28PBOManager%29.txt">Click here</a> 
+3. Install DZAI into mission pbo: <a href="https://raw.githubusercontent.com/dayzai/DZAI/master/Installation%20Guides/3.%20Install%20Instructions%20-%20Mission%20PBO%20Installation.txt">Click here</a> 
 
-1. Unpack your dayz_server.pbo. Right click dayz_server.pbo, select "PBO Manager", click on "Extract to dayz_server\"
-2. Inside the unpacked dayz_server folder, locate server_monitor.sqf in dayz_server\system\. Edit server_monitor.sqf with a text editor.
-3. Inside server_monitor.sqf, search for the line that says:
-
-		allowConnection = true;
-
-	Above this line, add:
-
-		[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\init\dzai_initserver.sqf";
-		
-4. Right click the DZAI folder inside the download package and click "Copy".
-5. Double-click your dayz_server.pbo to open the PBO Manager GUI. Inside the GUI, right-click on "dayz_server.pbo" and click "Paste". In the GUI, you should see "DZAI" in the list below "dayz_server.pbo".
-6. Optionally, you may edit DZAI's settings in DZAI\init\dzai_config.sqf. 
-7. If you have edited dzai_config.sqf in Step 6, place the modified file back inside dayz_server.pbo using the PBO Manager GUI.
-
-Basic Installation Guide (with cpbo):
-============
-
-1. Unpack your dayz_server.pbo. Right click dayz_server.pbo and click "Extract".
-2. Copy the downloaded DZAI folder inside your unpacked dayz_server folder.
-3. Inside the unpacked dayz_server folder, locate server_monitor.sqf in dayz_server\system\. Edit server_monitor.sqf with a text editor.
-4. Inside server_monitor.sqf, search for the line that says:
-
-		allowConnection = true;
-
-	Above this line, add:
-
-		[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\init\dzai_initserver.sqf";
-	
-5. Optionally, you may edit DZAI's settings in DZAI\init\dzai_config.sqf
-6. Repack your dayz_server.pbo by right-clicking the unpacked folder, then click on "create PBO". If prompted to overwrite, click "Yes".
+Example server_monitor.sqf showing required edit: <a href="https://raw.githubusercontent.com/dayzai/DZAI/master/Installation%20Guides/server_monitor_example.sqf">Click here</a> 
+NOTE: Only use the above file as a visual reference, do not replace your server's server_monitor.sqf with this!
 
 
 Contribute
 ----------------------------------------------------
 
-If you enjoy using DZAI and would like to show your support with a small donation, thank you. Contributions are always appreciated but never required.
+If you enjoy using DZAI and would like to show your support with a small donation, you can do so by clicking the Tip Jar icon below. Contributions are always appreciated but never required.
 
-<iframe src="http://imraising.com/dzai/widgets/imraising/dzai+tip+jar" width="320px" height="200px" frameBorder="0" allowTransparency="true" ></iframe>
-http://imraising.com/dzai/
+[![Donate](http://imageshack.com/a/img673/6646/qjrNdn.png)](http://imraising.com/dzai/)

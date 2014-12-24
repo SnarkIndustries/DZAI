@@ -57,7 +57,7 @@ _triggerStatements = [
 ]; 
 _newTrigger setVariable ["respawnLimit",(missionNamespace getVariable ["DZAI_respawnLimit"+str(_equipType),5])];
 _newTrigger setTriggerStatements _triggerStatements;
-0 = [_newTrigger,[],_patrolDist,_equipType,_locationArray,[_minAI,_addAI]] call DZAI_setTrigVars;
+0 = [0,_newTrigger,[],_patrolDist,_equipType,_locationArray,[_minAI,_addAI]] call DZAI_setTrigVars;
 //diag_log format ["DEBUG :: Created trigger %1 has statements %2.",triggerText _newTrigger,triggerStatements _newTrigger];
 //diag_log format ["DEBUG :: Created trigger %1 has saved statements %2.",triggerText _newTrigger,(_newTrigger getVariable "triggerStatements")];
 

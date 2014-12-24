@@ -1,5 +1,5 @@
 
-waitUntil {uiSleep 0.1; !isNil "DZAI_locations_ready"};
+waitUntil {uiSleep 0.1; (!isNil "DZAI_locations_ready" && {!isNil "DZAI_classnamesVerified"})};
 
 if (DZAI_maxHeliPatrols > 0) then {
 	_nul = [] spawn {
@@ -12,7 +12,7 @@ if (DZAI_maxHeliPatrols > 0) then {
 					DZAI_heliTypesUsable set [count DZAI_heliTypesUsable,_heliType];
 				};
 			} else {
-				if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Attempted to spawn invalid vehicle type %1.",_heliType];};
+				if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: %1 attempted to spawn invalid vehicle type %2.",__FILE__,_heliType];};
 			};
 		};
 		
@@ -42,7 +42,7 @@ if (DZAI_maxLandPatrols > 0) then {
 					DZAI_vehTypesUsable set [count DZAI_vehTypesUsable,_vehType];
 				};
 			} else {
-				if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Attempted to spawn invalid vehicle type %1.",_vehType];};
+				if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: %1 attempted to spawn invalid vehicle type %2.",__FILE__,_vehType];};
 			};
 		};
 		

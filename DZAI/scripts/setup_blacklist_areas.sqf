@@ -11,9 +11,6 @@ for "_i" from 0 to ((count DZAI_dynAreaBlacklist) -1) do {
 		_sizeX = if ((_areaSize select 0) > 0) then {_areaSize select 0} else {100};
 		_sizeY = if ((_areaSize select 1) > 0) then {_areaSize select 1} else {100};
 		_blacklist = createLocation ["Strategic",getMarkerPos _area,_sizeX,_sizeY];
-		if ((markerShape _area) == "RECTANGLE") then {
-			_blacklist setRectangular true;
-		};
 	};
 	uiSleep 0.001;
 };

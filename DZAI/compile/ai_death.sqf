@@ -41,14 +41,16 @@ call {
 		[_victim,_killer,_unitGroup,_groupIsEmpty] call DZAI_AI_killed_dynamic;
 		0 = [_victim,_killer,_unitGroup,_unitType,_unitsAlive] call DZAI_AI_killed_all;
 	};
+	if (_unitType == "randomspawn") exitWith {
+		[_victim,_killer,_unitGroup,_groupIsEmpty] call DZAI_AI_killed_random;
+		0 = [_victim,_killer,_unitGroup,_unitType,_unitsAlive] call DZAI_AI_killed_all;
+	};
 	if (_unitType in ["air","aircustom"]) exitWith {
 		[_victim,_unitGroup] call DZAI_AI_killed_air;
 	};
 	if (_unitType in ["land","landcustom"]) exitWith {
 		0 = [_victim,_killer,_unitGroup,_unitType] call DZAI_AI_killed_all;
-		if (_groupIsEmpty) then {
-			[_unitGroup] call DZAI_AI_killed_land; //Only run this if entire group has been killed
-		};
+		[_victim,_unitGroup,_groupIsEmpty] call DZAI_AI_killed_land;
 	};
 	if (_unitType == "aircrashed") exitWith {};
 	if (_groupIsEmpty) then {

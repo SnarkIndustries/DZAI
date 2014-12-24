@@ -62,7 +62,7 @@ if (!surfaceIsWater _vehPos) then {
 			_trigger setVariable ["maxUnits",[_unitsAlive,0]];
 			_trigger setVariable ["respawn",false]; //landed AI units should never respawn
 			_trigger setVariable ["permadelete",true]; //units should be permanently despawned
-			_trigger call DZAI_updStaticSpawnCount;
+			[_trigger,"DZAI_staticTriggerArray"] call DZAI_updateSpawnCount;
 			0 = [_trigger] spawn fnc_despawnBandits;
 
 			_unitGroup setVariable ["unitType","static"];

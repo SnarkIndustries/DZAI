@@ -33,11 +33,16 @@ _lastReinforceTime = diag_tickTime + 600;
 	_x setVariable ["lastBandage",0];
 	_x setVariable ["needsHeal",false];
 	_x setVariable ["rearmEnabled",true]; //prevent DZAI_autoRearm loop from executing on unit.
-	_loadout = _x getVariable ["loadout",[]];
-
-	if ((count _loadout) > 0) then {
-		if ((getNumber (configFile >> "CfgMagazines" >> ((_loadout select 1) select 0) >> "count")) <= 8) then {_x setVariable ["extraMag",true]};
+	_loadout = _x getVariable "loadout";
+	
+	if (isNil "_loadout") then {
+		_weapon = primaryWeapon _x;
+		_magazine = getArray (configFile >> "CfgWeapons" >> _weapon >> "magazines") select 0;
+		_loadout = [[_weapon],[_magazine]];
+		_x setVariable ["loadout",_loadout];
 	};
+	
+	if ((getNumber (configFile >> "CfgMagazines" >> ((_loadout select 1) select 0) >> "count")) <= 8) then {_x setVariable ["extraMag",true]};
 	
 	if (_useLaunchers) then {
 		_maxLaunchers = (DZAI_launchersPerGroup min _weapongrade);
@@ -60,9 +65,9 @@ if (_debugMarkers) then {
 	_marker setMarkerColor "ColorBlack";
 	
 	if (isNull _vehicle) then {
-		_marker setMarkerText format ["%1 (AI L.%2)",_unitGroup,_weapongrade];
+		_marker setMarkerText format ["%1 (AI L%2)",_unitGroup,_weapongrade];
 	} else {
-		_marker setMarkerText format ["%1 (AI %2)",_unitGroup,(typeOf (vehicle (leader _unitGroup)))];
+		_marker setMarkerText format ["%1 (AI L%2 %3)",_unitGroup,_weapongrade,(typeOf (vehicle (leader _unitGroup)))];
 	};
 	
 	_markername2 = format ["%1-2",_unitGroup];
@@ -98,8 +103,9 @@ if (_debugMarkers) then {
 //Main loop
 while {(!isNull _unitGroup) && {(_unitGroup getVariable ["GroupSize",-1]) > 0}} do {
 	//_debugStartTime = diag_tickTime;
-	_leader = leader _unitGroup;
+	//_leader = leader _unitGroup;
 	_unitType = (_unitGroup getVariable ["unitType",""]);
+	_unitList = +(units _unitGroup);
 	
 	call {
 		//Zed hostility check
@@ -131,10 +137,12 @@ while {(!isNull _unitGroup) && {(_unitGroup getVariable ["GroupSize",-1]) > 0}} 
 		};
 		//If any units have left vehicle then allow re-entry
 		if (_unitType in ["land","landcustom"]) exitWith {
-			if ((alive _vehicle) && {_unitGroup getVariable ["regrouped",true]}) then {
-				if (({(_x distance _vehicle) > 175} count (assignedCargo _vehicle)) > 0) then {
-					_unitGroup setVariable ["regrouped",false];
-					[_unitGroup,_vehicle] call DZAI_vehRegroup;
+			if (alive _vehicle) then {
+				if (_unitGroup getVariable ["regrouped",true]) then {
+					if (({(_x distance _vehicle) > 175} count (assignedCargo _vehicle)) > 0) then {
+						_unitGroup setVariable ["regrouped",false];
+						[_unitGroup,_vehicle] call DZAI_vehRegroup;
+					};
 				};
 			};
 		};
@@ -154,7 +162,7 @@ while {(!isNull _unitGroup) && {(_unitGroup getVariable ["GroupSize",-1]) > 0}} 
 			_x setVariable ["canCheckUnit",false];
 			_nul = _x spawn {
 				_unit = _this;
-				_loadout = _unit getVariable ["loadout",[]];
+				_loadout = _unit getVariable ["loadout",[[],[]]];
 				_currentMagazines = (magazines _unit);
 				for "_i" from 0 to ((count (_loadout select 0)) - 1) do {
 					if (((_unit ammo ((_loadout select 0) select _i)) == 0) || {!((((_loadout select 1) select _i) in _currentMagazines))}) then {
@@ -205,7 +213,7 @@ while {(!isNull _unitGroup) && {(_unitGroup getVariable ["GroupSize",-1]) > 0}} 
 			};
 		};
 		uiSleep 0.1;
-	} forEach (units _unitGroup);
+	} forEach _unitList;
 
 	//Vehicle ammo/fuel check
 	if (alive _vehicle) then {	//If _vehicle is objNull (if no vehicle was assigned to the group) then nothing in this bracket should be executed
@@ -303,12 +311,14 @@ while {(!isNull _unitGroup) && {(_unitGroup getVariable ["GroupSize",-1]) > 0}} 
 	};
 	
 	if (_debugMarkers) then {
-		_marker setMarkerPos (getPosASL (vehicle _leader));
+		_marker setMarkerPos (getPosASL (vehicle (leader _unitGroup)));
 		_marker2 setMarkerPos (getWPPos [_unitGroup,(currentWaypoint _unitGroup)]);
 		{
-			(str (_x)) setMarkerPos (getPosASL _x);
-			uiSleep 0.025;
-		} forEach (units _unitGroup);
+			if (alive _x) then {
+				(str (_x)) setMarkerPos (getPosASL _x);
+			};
+			if ((_forEachIndex % 3) == 0) then {uiSleep 0.05};
+		} forEach _unitList;
 	};
 	
 	//diag_log format ["DEBUG: Group Manager cycle time for group %1: %2 seconds.",_unitGroup,(diag_tickTime - _debugStartTime)];
@@ -326,7 +336,7 @@ if (_debugMarkers) then {
 
 //Wait until group is either respawned or marked for deletion. A dummy unit should be created to preserve group.
 while {(_unitGroup getVariable ["GroupSize",-1]) == 0} do {
-	sleep 5;
+	uiSleep 5;
 };
 
 //GroupSize value of -1 marks group for deletion

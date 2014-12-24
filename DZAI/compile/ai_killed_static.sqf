@@ -40,7 +40,7 @@ if (_groupIsEmpty) then {
 				_x setVariable ["GroupSize",-1];
 			} forEach (_trigger getVariable ["GroupArray",[]]);
 			deleteMarker (_trigger getVariable ["spawnmarker",""]);
-			_trigger call DZAI_updStaticSpawnCount;
+			[_trigger,"DZAI_staticTriggerArray"] call DZAI_updateSpawnCount;
 			deleteVehicle _trigger;
 		};
 	};

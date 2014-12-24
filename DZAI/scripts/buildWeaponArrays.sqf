@@ -20,7 +20,11 @@ _lootConfigFile = if !((DZAI_customLootTables) && {(isClass (missionConfigFile >
 	missionConfigFile
 };
 
-_bldgClasses = [["Residential","Farm"],["Military"],["MilitarySpecial"],["HeliCrash"]];
+_bldgClasses = [
+	["Residential","Farm"], //weapongrade 0
+	["Military"],			//weapongrade 1
+	["MilitarySpecial"],	//weapongrade 2
+	["HeliCrash"]];			//weapongrade 3
 
 //Built-in weapon ban list for melee weapons and nonweapon items
 _aiWeaponBanList = 

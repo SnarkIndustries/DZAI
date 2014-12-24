@@ -23,7 +23,7 @@ if (_damage > 0.4) then {
 		if (_hit == "legs") exitWith {
 			_partdamage = (_unithealth select 1) + (_damage/2);
 			_unithealth set [1,_partdamage];	//Record leg damage internally
-			if ((_partdamage >= 1) && {!(_unithealth select 2)}) then {
+			if ((_partdamage > 0.99) && {!(_unithealth select 2)}) then {
 				_nul = _unit spawn {_this setHit["legs",1]}; //Break legs when enough damage taken
 				[nil,_unit,rSAY,["z_fracture_1",40]] call RE;
 				_unithealth set [2,true];
@@ -31,6 +31,19 @@ if (_damage > 0.4) then {
 		};
 		if (_headHit) exitWith {
 			_scale = _scale + 500;
+		};
+	};
+	
+	//additional damage if attacker is a player
+	if (isPlayer _source) then {
+		_scale = _scale + 800;
+		if (_headHit) then {			
+			if (_damage > 1.5) then {
+				_deathType = "shothead";
+				_scale = 12000;	//sufficient head shot damage causes instant death
+			} else {
+				_scale = _scale + 500;
+			};
 		};
 	};
 	
@@ -52,17 +65,6 @@ if (_damage > 0.4) then {
 		};
 	};
 	
-	//additional damage if attacker is a player
-	if (isPlayer _source) then {
-		_scale = _scale + 800;
-		if (_headHit) then {
-			_scale = _scale + 500;
-			if (_damage > 1.5) then {
-				_deathType = "shothead";
-				_scale = 12000;	//sufficient head shot damage causes instant death
-			};
-		};
-	};
 	_blooddamage = (_damage * _scale);
 	_newbloodlevel = (_unithealth select 0) - _blooddamage;
 	_unithealth set [0,_newbloodlevel];

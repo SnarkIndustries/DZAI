@@ -22,7 +22,7 @@ DZAI_gradeIndices2 = [];
 DZAI_gradeIndices3 = [];
 DZAI_gradeIndicesDyn = [];
 DZAI_dynEquipType = 4;
-DZAI_dynLocations = [];										//Queue of temporary dynamic spawn area blacklists for deletion
+DZAI_tempBlacklist = [];										//Queue of temporary dynamic spawn area blacklists for deletion
 DZAI_reinforcePlaces = [];									//AI helicopter patrols will periodically check this array for dynamic trigger objects to use as reinforcement positions.
 DZAI_checkedClassnames = [[],[],[]];						//Classnames verified - Weapons/Magazines/Vehicles
 DZAI_invalidClassnames = [[],[],[]];						//Classnames known as invalid - Weapons/Magazines/Vehicles
@@ -39,6 +39,8 @@ DZAI_locations = [];
 DZAI_locationsLand = [];
 DZAI_heliTypesUsable = [];
 DZAI_vehTypesUsable = [];
+DZAI_randTriggerArray = [];
+DZAI_mapMarkerArray = [];
 
 if (DZAI_verifyTables) then {
 	DZAI_tableChecklist = ["DZAI_Rifles0","DZAI_Rifles1","DZAI_Rifles2","DZAI_Rifles3","DZAI_Pistols0","DZAI_Pistols1","DZAI_Pistols2","DZAI_Pistols3",
@@ -110,7 +112,6 @@ if (!isNil "DZAI_MiscItemLNew") then {[DZAI_MiscItemL,DZAI_MiscItemLNew] call DZ
 if (DZAI_verifyTables) then {
 	_verify = [] execVM format ["%1\scripts\verifyTables.sqf",DZAI_directory];
 	waitUntil {uiSleep 0.5; scriptDone _verify}; //wait for verification to complete before proceeding
-	if ((count DZAI_BanditTypes) == 0) then {DZAI_BanditTypes = ["Survivor2_DZ"]}; //Failsafe in case all AI skin classnames are invalid.
 } else {
 	DZAI_classnamesVerified = true;	//skip classname verification if disabled
 };

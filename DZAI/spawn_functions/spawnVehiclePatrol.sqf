@@ -11,35 +11,38 @@ _isAirVehicle = (_vehicleType isKindOf "Air");
 _vehSpawnPos = [];
 _spawnMode = "NONE";
 _keepLooking = true;
+_error = false;
 
-if (_vehicleType isKindOf "Air") then {
-	//Note: no cargo units for air vehicles
-	_maxGunnerUnits = DZAI_heliGunnerUnits;
-	_weapongrade = DZAI_heliUnitLevel call DZAI_getWeapongrade;
-} else {
-	_maxGunnerUnits = DZAI_vehGunnerUnits;
-	_maxCargoUnits = DZAI_vehCargoUnits;
-	_weapongrade = DZAI_vehUnitLevel call DZAI_getWeapongrade;
-};
-
-if (_isAirVehicle) then {
-	_vehSpawnPos = [(getMarkerPos "DZAI_centerMarker"),300 + (random((getMarkerSize "DZAI_centerMarker") select 0)),random(360),1] call SHK_pos;
-	_vehSpawnPos set [2,150];
-	_spawnMode = "FLY";
-} else {
-	while {_keepLooking} do {
-		_vehSpawnPos = [(getMarkerPos "DZAI_centerMarker"),300 + random((getMarkerSize "DZAI_centerMarker") select 0),random(360),0,[2,750]] call SHK_pos;
-		if ((count _vehSpawnPos) > 1) then {
-			_playerNear = ({isPlayer _x} count (_vehSpawnPos nearEntities ["CAManBase", 200]) > 0);
-			if(!_playerNear) then {
-				_keepLooking = false;	//Found road position, stop searching
+call {
+	if (_vehicleType isKindOf "Air") exitWith {
+		//Note: no cargo units for air vehicles
+		_maxGunnerUnits = DZAI_heliGunnerUnits;
+		_weapongrade = DZAI_heliUnitLevel call DZAI_getWeapongrade;
+		_vehSpawnPos = [(getMarkerPos "DZAI_centerMarker"),300 + (random((getMarkerSize "DZAI_centerMarker") select 0)),random(360),1] call SHK_pos;
+		_vehSpawnPos set [2,150];
+		_spawnMode = "FLY";
+	};
+	if (_vehicleType isKindOf "LandVehicle") exitWith {
+		_maxGunnerUnits = DZAI_vehGunnerUnits;
+		_maxCargoUnits = DZAI_vehCargoUnits;
+		_weapongrade = DZAI_vehUnitLevel call DZAI_getWeapongrade;
+		while {_keepLooking} do {
+			_vehSpawnPos = [(getMarkerPos "DZAI_centerMarker"),300 + random((getMarkerSize "DZAI_centerMarker") select 0),random(360),0,[2,750]] call SHK_pos;
+			if ((count _vehSpawnPos) > 1) then {
+				_playerNear = ({isPlayer _x} count (_vehSpawnPos nearEntities [["CAManBase","Land","Air"], 300]) > 0);
+				if(!_playerNear) then {
+					_keepLooking = false;	//Found road position, stop searching
+				};
+			} else {
+				if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Unable to find road position to spawn AI %1. Retrying in 30 seconds.",_vehicleType]};
+				uiSleep 30; //Couldnt find road, search again in 30 seconds.
 			};
-		} else {
-			if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Unable to find road position to spawn AI %1. Retrying in 30 seconds.",_vehicleType]};
-			uiSleep 30; //Couldnt find road, search again in 30 seconds.
 		};
 	};
+	_error = true;
 };
+
+if (_error) exitWith {diag_log format ["DZAI Error: %1 attempted to spawn unsupported vehicle type %2.",__FILE__,_vehicleType]};
 
 _unitGroup = [] call DZAI_createGroup;
 _driver = _unitGroup createUnit [(DZAI_BanditTypes call BIS_fnc_selectRandom2), [0,0,0], [], 1, "NONE"];
@@ -156,6 +159,7 @@ if (_isAirVehicle && {!_isArmed}) then {
 };
 
 _rearm = [_unitGroup,_weapongrade] spawn DZAI_autoRearm_group;	//start group-level manager
+//if (daytime < 6 or {daytime > 20}) then {_vehicle action ["lightOn", _vehicle]};
 
 if (_isAirVehicle) then {
 	//Set initial waypoint and begin patrol

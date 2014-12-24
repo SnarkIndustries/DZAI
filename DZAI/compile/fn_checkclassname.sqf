@@ -47,7 +47,7 @@ call {
 if (_configIndex > -1) then {
 	_check = (str(inheritsFrom (configFile >> _config >> _classname)));
 	_classnameArray = [];
-	if ((_check != "") && {(_check != _banString)} && {(getNumber (configFile >> _config >> _classname >> "scope")) == 2}) then {
+	if ((_check != "") && {(_check != _banString)} && {(getNumber (configFile >> _config >> _classname >> "scope")) != 0}) then {
 		_classnameArray = DZAI_checkedClassnames;
 		_result = true;
 	} else {

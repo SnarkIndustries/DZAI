@@ -26,7 +26,7 @@ if ((count _this) > 1) then {
 };
 
 if (_abort) exitWith {
-	diag_log format ["DZAI Error: Zero AI amount for spawn area %1. Spawn area not created.",_spawnMarker];
+	diag_log format ["DZAI Error: Zero AI amount for spawn area %1. Spawn area not created. (%2)",_spawnMarker,__FILE__];
 	
 	objNull
 };
@@ -37,6 +37,8 @@ _numGroups = if ((count _this) > 4) then {_this select 4} else {1};
 
 _patrolDist = (getMarkerSize _spawnMarker) select 0;
 
+if !(_equipType in [0,1,2,3]) then {_equipType = 1};
+
 _onActStatements = format ["_nul = [%1,%2,%3,thisTrigger,%4,%5,%6] call DZAI_spawnBandits_init;",_minAI,_addAI,_patrolDist,_positionArray,_equipType,_numGroups];
 _trigger = createTrigger ["EmptyDetector", getMarkerPos(_spawnMarker)];
 _trigger setTriggerArea [600, 600, 0, false];
@@ -44,5 +46,7 @@ _trigger setTriggerActivation ["ANY", "PRESENT", true];
 _trigger setTriggerTimeout [10, 10, 10, true];
 _trigger setTriggerText _spawnMarker;
 _trigger setTriggerStatements ["{isPlayer _x} count thisList > 0;",_onActStatements,""];
+
+deleteMarker _spawnMarker;
 
 _trigger
