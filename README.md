@@ -37,6 +37,6 @@ NOTE: Only use the above file as a visual reference, do not replace your server'
 Contribute
 ----------------------------------------------------
 
-If you enjoy using DZAI and would like to show your support with a small donation, thank you. Contributions are always appreciated but never required.
+If you enjoy using DZAI and would like to show your support with a small donation, you can do so by clicking the Tip Jar icon below. Contributions are always appreciated but never required.
 
 [![Donate](http://imageshack.com/a/img673/6646/qjrNdn.png)](http://imraising.com/dzai/)
