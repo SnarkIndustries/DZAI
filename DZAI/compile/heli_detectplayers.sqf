@@ -10,6 +10,7 @@ uiSleep 2;
 
 if (_unitGroup getVariable ["HeliDetectReady",true]) then {
 	_unitGroup setVariable ["HeliDetectReady",false];
+	_detectStartPos = getPosASL _helicopter;
 	while {!(_helicopter getVariable ["heli_disabled",false])} do {
 		private ["_detected","_detectOrigin","_detectedCount","_startPos"];
 		_startPos = getPosASL _helicopter;
@@ -30,7 +31,7 @@ if (_unitGroup getVariable ["HeliDetectReady",true]) then {
 				uiSleep 0.1;
 			} forEach _detected;
 			
-			if (((_helicopter distance _startPos) > 500) or {_helicopter getVariable ["heli_disabled",false]}) exitWith {_unitGroup setVariable ["HeliDetectReady",true]};
+			if (((_helicopter distance _detectStartPos) > 700) or {_helicopter getVariable ["heli_disabled",false]}) exitWith {_unitGroup setVariable ["HeliDetectReady",true]};
 			uiSleep 15;
 		} else {
 			uiSleep 7.5;
