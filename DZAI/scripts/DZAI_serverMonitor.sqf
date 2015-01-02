@@ -190,7 +190,7 @@ while {true} do {
 	//Report statistics to RPT log
 	if ((DZAI_monitorRate > 0) && {((diag_tickTime - _monitorReport) > DZAI_monitorRate)}) then {
 		_uptime = [] call _getUptime;
-		diag_log format ["DZAI Monitor :: Server Uptime: %1:%2:%3]. Active AI Groups: %4.",_uptime select 0, _uptime select 1, _uptime select 2,({!isNull _x} count DZAI_activeGroups)];
+		diag_log format ["DZAI Monitor :: Server Uptime: %1:%2:%3. Active AI Groups: %4.",_uptime select 0, _uptime select 1, _uptime select 2,({!isNull _x} count DZAI_activeGroups)];
 		diag_log format ["DZAI Monitor :: Static Spawns: %1. Respawn Queue: %2 groups queued.",(count DZAI_staticTriggerArray),(count DZAI_respawnQueue)];
 		if (_reportDynOrVehicles) then {diag_log format ["DZAI Monitor :: Dynamic Spawns: %1. Random Spawns: %2. Air Patrols: %3. Land Patrols: %4.",(count DZAI_dynTriggerArray),(count DZAI_randTriggerArray),DZAI_curHeliPatrols,DZAI_curLandPatrols];};
 		_monitorReport = diag_tickTime;
