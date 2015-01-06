@@ -118,6 +118,7 @@ while {true} do {
 				if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Cancel dynamic spawn check for player %1 (Reason: Probability reduction or Player death).",_player]};
 			};
 			_allPlayers = _allPlayers - [_player];
+			_activeDynamicSpawns = _activeDynamicSpawns + 1;
 			if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Processed a spawning probability check in %1 seconds.",diag_tickTime - _time]};
 			uiSleep 5;
 		};
