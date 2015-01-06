@@ -161,6 +161,7 @@ while {(!isNull _unitGroup) && {(_unitGroup getVariable ["GroupSize",-1]) > 0}} 
 		if (((vehicle _x) == _x) && {!(_x getVariable ["unconscious",false])} && {_x getVariable ["canCheckUnit",true]}) then {
 			_x setVariable ["canCheckUnit",false];
 			_nul = _x spawn {
+				if (!alive _this) exitWith {};
 				_unit = _this;
 				_loadout = _unit getVariable ["loadout",[[],[]]];
 				if (!isNil "_loadout") then {
