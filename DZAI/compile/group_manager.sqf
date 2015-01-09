@@ -117,7 +117,7 @@ while {(!isNull _unitGroup) && {(_unitGroup getVariable ["GroupSize",-1]) > 0}} 
 						_unitGroup = _this;
 						if !(isNull _unitGroup) then {
 							_detectRange = if ((_unitGroup getVariable ["pursuitTime",0]) == 0) then {DZAI_zDetectRange} else {DZAI_zDetectRange/2};	//Reduce detection range of new zombies while searching for killer unit
-							_nearbyZeds = (leader _unitGroup) nearEntities ["zZombie_Base",_detectRange];
+							_nearbyZeds = (_unitList select 0) nearEntities ["zZombie_Base",_detectRange];
 							_hostileZedsNew = [];
 							{
 								if (rating _x > -30000) then {
