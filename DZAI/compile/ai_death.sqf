@@ -88,7 +88,7 @@ if !(isNull _victim) then {
 		_victim setPosASL (getPosASL _victim);
 	};
 	if ((combatMode _unitGroup) == "BLUE") then {_unitGroup setCombatMode "RED"};
-	[_victim] joinSilent grpNull;
+	//[_victim] joinSilent grpNull;
 	if (DZAI_deathMessages && {isPlayer _killer}) then {
 		_nul = [_killer,_bodyName] spawn DZAI_sendKillMessage;
 	};
