@@ -37,9 +37,12 @@ if ((count _positionArray) == 0) then {
 	if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Spawn trigger %1 is generating spawn positions from nearby buildings.",triggerText _trigger];};
 } else {
 	{
-		if (((getMarkerColor _x) != "") && {!(surfaceIsWater _pos)}) then {
-			_locationArray set [(count _locationArray),_pos];
-			deleteMarker _x;
+		if ((getMarkerColor _x) != "") then {
+			_pos = getMarkerPos _x;
+				if !(surfaceIsWater _pos) then {
+				_locationArray pushBack _pos;
+				deleteMarker _x;
+			};
 		};
 	} count _positionArray;
 	if (DZAI_debugLevel > 1) then {diag_log format ["DZAI Extended Debug: Spawn trigger %1 is generating spawn positions from provided markers.",triggerText _trigger];};
