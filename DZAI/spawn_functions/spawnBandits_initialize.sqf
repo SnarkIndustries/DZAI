@@ -40,7 +40,7 @@ if ((count _positionArray) == 0) then {
 		if ((getMarkerColor _x) != "") then {
 			_pos = getMarkerPos _x;
 				if !(surfaceIsWater _pos) then {
-				_locationArray pushBack _pos;
+				_locationArray set [(count _locationArray),_pos];
 				deleteMarker _x;
 			};
 		};
