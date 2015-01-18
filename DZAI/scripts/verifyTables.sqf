@@ -77,16 +77,16 @@ if (DZAI_extendedVerify) then {
 	} forEach DZAI_BanditTypes;
 	
 	{
-		if !((_x select 1) isKindOf "Air") then {
-			diag_log format ["[DZAI] Removing invalid classname from DZAI_heliList array: %1.",(_x select 1)];
+		if !((_x select 0) isKindOf "Air") then {
+			diag_log format ["[DZAI] Removing invalid classname from DZAI_heliList array: %1.",(_x select 0)];
 			DZAI_heliList set [_forEachIndex,""];
 		};
 	} forEach DZAI_heliList;
 	DZAI_heliList = DZAI_heliList - [""];
 	
 	{
-		if !((_x select 1) isKindOf "LandVehicle") then {
-			diag_log format ["[DZAI] Removing invalid classname from DZAI_vehList array: %1.",(_x select 1)];
+		if !((_x select 0) isKindOf "LandVehicle") then {
+			diag_log format ["[DZAI] Removing invalid classname from DZAI_vehList array: %1.",(_x select 0)];
 			DZAI_vehList set [_forEachIndex,""];
 		};
 	} forEach DZAI_vehList;
