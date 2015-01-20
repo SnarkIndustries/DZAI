@@ -44,6 +44,7 @@ _triggerPos = getPosASL _trigger;
 while {_checkArea && {_nearAttempts < 4}} do {
 	_spawnPos = [_triggerPos,(_baseDist + (random _extraDist)),(random 360),0] call SHK_pos;
 	_checkArea = ({isPlayer _x} count (_spawnPos nearEntities [["CAManBase","Land"], 175]) > 0);
+	_nearAttempts = _nearAttempts + 1;
 };
 
 if (_nearAttempts > 3) exitWith {_nul = _trigger call DZAI_abortRandSpawn};
