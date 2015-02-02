@@ -102,11 +102,8 @@ if (_debugMarkers) then {
 
 //Main loop
 while {(!isNull _unitGroup) && {(_unitGroup getVariable ["GroupSize",-1]) > 0}} do {
-	//_debugStartTime = diag_tickTime;
-	//_leader = leader _unitGroup;
+	private ["_unitType"];
 	_unitType = (_unitGroup getVariable ["unitType",""]);
-	_unitList = (units _unitGroup);
-	_leaderPos = getPosASL (leader _unitGroup);
 	
 	call {
 		//Zed hostility check
@@ -118,17 +115,20 @@ while {(!isNull _unitGroup) && {(_unitGroup getVariable ["GroupSize",-1]) > 0}} 
 						_unitGroup = _this;
 						if !(isNull _unitGroup) then {
 							_detectRange = if ((_unitGroup getVariable ["pursuitTime",0]) == 0) then {DZAI_zDetectRange} else {DZAI_zDetectRange/2};	//Reduce detection range of new zombies while searching for killer unit
-							_nearbyZeds = _leaderPos nearEntities ["zZombie_Base",_detectRange];
-							_hostileZedsNew = [];
-							{
-								if (rating _x > -30000) then {
-									_hostileZedsNew set [count _hostileZedsNew,_x];
+							_leader = (leader _unitGroup);
+							if (alive _leader) then {
+								_nearbyZeds = _leader nearEntities ["zZombie_Base",_detectRange];
+								_hostileZedsNew = [];
+								{
+									if (rating _x > -30000) then {
+										_hostileZedsNew set [count _hostileZedsNew,_x];
+									};
+									if ((_forEachIndex % 5) == 0) then {uiSleep 0.05};
+								} forEach _nearbyZeds;
+								if ((count _hostileZedsNew) > 0) then {
+									DZAI_ratingModify = [_hostileZedsNew,-30000];
+									(owner (_hostileZedsNew select 0)) publicVariableClient "DZAI_ratingModify";
 								};
-								if ((_forEachIndex % 5) == 0) then {uiSleep 0.05};
-							} forEach _nearbyZeds;
-							if ((count _hostileZedsNew) > 0) then {
-								DZAI_ratingModify = [_hostileZedsNew,-30000];
-								(owner (_hostileZedsNew select 0)) publicVariableClient "DZAI_ratingModify";
 							};
 							_unitGroup setVariable ["detectReady",true];
 						};
@@ -217,7 +217,7 @@ while {(!isNull _unitGroup) && {(_unitGroup getVariable ["GroupSize",-1]) > 0}} 
 			};
 		};
 		uiSleep 0.1;
-	} forEach _unitList;
+	} forEach (units _unitGroup);
 
 	//Vehicle ammo/fuel check
 	if (alive _vehicle) then {	//If _vehicle is objNull (if no vehicle was assigned to the group) then nothing in this bracket should be executed
@@ -322,7 +322,7 @@ while {(!isNull _unitGroup) && {(_unitGroup getVariable ["GroupSize",-1]) > 0}} 
 				(str (_x)) setMarkerPos (getPosASL _x);
 			};
 			if ((_forEachIndex % 3) == 0) then {uiSleep 0.05};
-		} forEach _unitList;
+		} forEach (units _unitGroup);
 	};
 	
 	//diag_log format ["DEBUG: Group Manager cycle time for group %1: %2 seconds.",_unitGroup,(diag_tickTime - _debugStartTime)];
