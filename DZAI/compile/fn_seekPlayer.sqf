@@ -9,7 +9,7 @@
 #define TRANSMIT_RANGE 50 //distance to broadcast radio text around target player (target player will also recieve messages)
 #define SEEK_RANGE 450 //distance to chase player from initial group spawn location
 
-private ["_unitGroup","_spawnPos","_waypoint","_patrolDist","_statement","_targetPlayer","_triggerPos","_leader","_nearbyUnits","_radioSpeech","_radioText","_ableToChase"];
+private ["_unitGroup","_spawnPos","_waypoint","_patrolDist","_statement","_targetPlayer","_triggerPos","_leader","_nearbyUnits","_radioSpeech","_radioText","_ableToChase","_targetPlayerPos"];
 
 _unitGroup = _this select 0;
 _spawnPos = _this select 1;
