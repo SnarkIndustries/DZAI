@@ -90,7 +90,7 @@ if (DZAI_staticAI) then {
 		['DZAI_SuhrenfeldHotels',[1,1],[],2] call DZAI_static_spawn;
 	};
 };
-
+#include "spawn_areas\areas_napf.sqf"		//Load spawn area definitions file.
 #include "custom_markers\cust_markers_napf.sqf"
 #include "custom_spawns\cust_spawns_napf.sqf"
 //----------------------------Do not edit anything below this line -----------------------------------------
