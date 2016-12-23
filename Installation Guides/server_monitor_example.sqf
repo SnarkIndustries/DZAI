@@ -145,7 +145,7 @@ diag_log "HIVE: Starting";
 					_objWpnQty = (_inventory select 1) select 1;
 					_countr = 0;
 					{
-						if (_x == "BoltSteel") then { _x = "WoodenArrow" }; // Convert BoltSteel to WoodenArrow
+						if (_x == "BoltSteel") then { _x = "1Rnd_Arrow_Wood" }; // Convert BoltSteel to WoodenArrow
 						_isOK = 	isClass(configFile >> "CfgMagazines" >> _x);
 						if (_isOK) then {
 							_block = 	getNumber(configFile >> "CfgMagazines" >> _x >> "stopThis") == 1;

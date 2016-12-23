@@ -55,7 +55,7 @@ if (DZAI_modAutoDetect) then {
 	if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: Detected mod variant %1.",_modVariant];};
 	DZAI_modName = call {
 		if (_modVariant == "@dayz_epoch") exitWith {"epoch"};
-		if ((isClass (configFile >> "CfgWeapons" >> "ItemHatchet_DZE")) && {isClass (configFile >> "CfgWeapons" >> "ItemMatchbox_DZE")}) exitWith {"epoch"};
+		if ((isClass (configFile >> "CfgWeapons" >> "ItemHatchet")) && {isClass (configFile >> "CfgWeapons" >> "ItemMatchbox")}) exitWith {"epoch"};
 		if (_modVariant in ["dayzoverwatch","@dayzoverwatch"]) exitWith {"overwatch"};
 		if (_modVariant == "@dayzhuntinggrounds") exitWith {"huntinggrounds"};
 		if (_modVariant == "@dayzunleashed") exitWith {"unleashed"};

@@ -31,7 +31,7 @@ _aiWeaponBanList =
 	[
 		"Crossbow_DZ","Crossbow","MeleeHatchet","MeleeCrowbar","MeleeMachete","MeleeBaseball","MeleeBaseBallBat","MeleeBaseBallBatBarbed","MeleeBaseBallBatNails","Chainsaw", //Melee weapons
 		"ItemMap","Binocular","ItemWatch","ItemCompass","ItemFlashlight","ItemKnife","NVGoggles","ItemGPS","ItemEtool","Binocular_Vector","ItemMatchbox","ItemToolbox", //Non-weapon items
-		"ItemKeyKit","ItemMatchbox_DZE" //Epoch items
+		"ItemKeyKit","ItemMatchbox" //Epoch items
 	];
 
 //Add user-specified banned weapons to DZAI weapon banlist.
