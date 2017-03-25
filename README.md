@@ -22,5 +22,5 @@ DZAI includes many features that can be user-configured:
 Basic Installation Guides:
 ----------------------------------------------------
 
-1. DZAI server-sided installation: <a href="https://raw.githubusercontent.com/dayzai/DZAI/master/Installation%20Guides/2.%20Install%20Instructions%20-%20dayz_server.pbo%20installation%20%28PBOManager%29.txt">Click here</a> 
-3. DZAI mission(client)-sided installation: <a href="https://raw.githubusercontent.com/dayzai/DZAI/master/Installation%20Guides/3.%20Install%20Instructions%20-%20Mission%20PBO%20Installation.txt">Click here</a> 
+1. DZAI server-sided installation: [Click here](./Installation Guides/Mission-Installation.md)
+2. DZAI mission(client)-sided installation [Click here](./Installation Guides/Server-Installation.md)
