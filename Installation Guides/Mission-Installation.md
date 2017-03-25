@@ -17,7 +17,9 @@ Basic Installation Guide:
 1. Drop the downloaded DZAI_Client folder from the downloaded package inside your mission\dayz_code.
 2. Edit your mission init.sqf with a text editor. Find this line:
 
+    ```
     execVM "\z\addons\dayz_server\traders\chernarus11.sqf"; //Add trader agents
+    ```
    
 and add this line directly below it:
 
