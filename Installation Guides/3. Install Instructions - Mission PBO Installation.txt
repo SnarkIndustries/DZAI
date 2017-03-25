@@ -1,8 +1,5 @@
-Installation Instructions for DZAI 1.7.0+ (mission file version)
-Last Updated: 7:39 PM 1/19/2014
-
-About the Mission File Version of DZAI: Use these instructions to convert the DZAI install package for compatibility with your mission pbo if you are unable to edit your dayz_server.pbo
-
+Installation Instructions for DZAI for Epoch 1.0.6+ (with PBOManager)
+Last Updated: 6:17 AM 3/25/2017
 
 What you need:
 ----------------------------------------------------
@@ -17,13 +14,15 @@ What you need:
 
 Basic Installation Guide:
 ----------------------------------------------------
+1. Drop the downloaded DZAI_Client folder from the downloaded package inside your mission\dayz_code.
+2. Edit your mission init.sqf with a text editor. Find this line:
 
-1. Unpack your mission pbo. If using cpbo, right click the .pbo file and click "Extract".
-2. Copy the downloaded DZAI folder from the download package inside your unpacked mission folder. In this folder, you should also see init.sqf, mission.sqm, description.ext.
-3. Edit your mission init.sqf with a text editor. Add this line at the end of your init.sqf:
+    execVM "\z\addons\dayz_server\traders\chernarus11.sqf"; //Add trader agents
+   
+and add this line directly below it:
 
-    if (isServer) then {[] call compile preprocessFileLineNumbers "DZAI\dzai_initserver.sqf";};
+    [] call compile preprocessFileLineNumbers "dayz_code\DZAI_Client\dzai_initclient.sqf";
 
-4. Optionally, you may edit DZAI's settings in DZAI\init\dzai_config.sqf
+3. Now you can edit DZAI_Client\dzai_client_config.sqf to your liking.
 
-5. Repack your mission pbo by right-clicking the unpacked folder, then click on "create PBO". If prompted to overwrite, click "Yes".
+That's all for the client part.
