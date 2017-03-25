@@ -25,4 +25,4 @@ Basic Installation Guide (with PBO Manager):
 3. Drop the DZAI folder from the downloaded file into your server.pbo.
 4. Edit DZAI\init\dzai_config.sqf as to your needs.
 
-That's it for the server part, now go ahead with the mission (client) part: [Go ahead](Installation Guides/Mission-Installation.md)
+That's it for the server part, now go ahead with the mission (client) part.
