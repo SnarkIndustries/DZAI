@@ -1,4 +1,4 @@
-Installation Instructions for DZAI for Epoch 1.0.6+ (with PBOManager)
+Installation Instructions for DZAI for Epoch 1.0.6+
 Last Updated: 6:17 AM 3/25/2017
 
 What you need:
@@ -23,6 +23,6 @@ Basic Installation Guide (with PBO Manager):
 		[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\init\dzai_initserver.sqf";
 		
 3. Drop the DZAI folder from the downloaded file into your server.pbo.
-4. Edit DZAI\init\dzai_config.sqf as you need it.
+4. Edit DZAI\init\dzai_config.sqf as to your needs.
 
-That's it for the server part, now go ahead with the mission (client) part.
+That's it for the server part, now go ahead with the mission (client) part: [Go ahead](Installation Guides/Mission-Installation.md)
