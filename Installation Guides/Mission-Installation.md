@@ -17,13 +17,14 @@ Basic Installation Guide:
 1. Drop the downloaded DZAI_Client folder from the downloaded package inside your mission\dayz_code.
 2. Edit your mission init.sqf with a text editor. Find this line:
 
-    ```
-    execVM "\z\addons\dayz_server\traders\chernarus11.sqf"; //Add trader agents
+    ```sqf
+    execFSM "\z\addons\dayz_code\system\player_monitor.fsm";
     ```
    
 and add this line directly below it:
-
+```sqf
     [] call compile preprocessFileLineNumbers "dayz_code\DZAI_Client\dzai_initclient.sqf";
+```
 
 3. Now you can edit DZAI_Client\dzai_client_config.sqf to your liking.
 
