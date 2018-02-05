@@ -1,0 +1,4 @@
+Version 2.2.2
+
+[Changed] Reworked the whole structure of the Addon
+[Fixed] Installation instructions (especially client-sided)

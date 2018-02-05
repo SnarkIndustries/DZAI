@@ -14,7 +14,7 @@ if (DZAI_debugLevel > 0) then {diag_log format ["DZAI Debug: DZAI is generating 
 		private ["_nearbldgs"];
 		_nearbldgs = _placePos nearObjects ["HouseBase",250];
 		if ((count _nearbldgs) > 19) then {
-			_ignoredObj = missionNamespace getVariable ["dayz_allowedObjects",[]];
+			_ignoredObj = missionNamespace getVariable ["DayZ_SafeObjects",[]];
 			_spawnPositions = [];
 			_spawnPoints = 0;
 			{
