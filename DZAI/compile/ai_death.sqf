@@ -80,7 +80,7 @@ if !(isNull _victim) then {
 
 	_victim spawn DZAI_deathFlies;
 	_bodyName = _victim getVariable ["bodyName","unknown"];
-	_victim setVariable ["bodyName",_bodyName,true];		//Broadcast the unit's name (was previously a private variable).
+	_victim setVariable ["bodyName",_bodyName];
 	_victim setVariable ["deathType",_deathType,true];
 	_victim setVariable ["DZAI_deathTime",diag_tickTime];
 	_victim setVariable ["unconscious",true];

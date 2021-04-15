@@ -1,4 +1,4 @@
-DZAI 2.2.2 - AI Addon for DayZ
+DZAI 2.2.3 - AI Addon for Epoch 1.0.7
 ============
 
 
