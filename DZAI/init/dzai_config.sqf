@@ -76,6 +76,8 @@ DZAI_radioMsgs = true;
 //If enabled, last surviving unit of a group will be granted slightly boosted skills. No effect if unit is spawned alone (Default: false)
 DZAI_lastManStanding = false;
 
+//If enabled, dead AI bodies have coins. From 100 - 2000 coins on each AI. Works only if Z_SingleCurrency = true; (Default: [false,[100,2000]])
+DZAI_hasCoins = [false,[100,2000]];
 
 /*DZAI client-side addon settings. 
 **NOTE**: These settings require the DZAI client-side addon to be installed to your mission pbo file in order to work.

@@ -1,0 +1,4 @@
+Version 2.2.4
+
+[Added] Add coins on dead bodies
+

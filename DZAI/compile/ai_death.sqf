@@ -6,7 +6,7 @@
         Usage: [_unit,_killer] call DZAI_unitDeath;
 */
 
-private["_victim","_killer","_unitGroup","_unitType","_launchWeapon","_launchAmmo","_deathType","_groupIsEmpty","_unitsAlive","_vehicle","_groupSize"];
+private["_coins","_values","_victim","_killer","_unitGroup","_unitType","_launchWeapon","_launchAmmo","_deathType","_groupIsEmpty","_unitsAlive","_vehicle","_groupSize"];
 
 _victim = _this select 0;
 _killer = _this select 1;
@@ -84,6 +84,13 @@ if !(isNull _victim) then {
 	_victim setVariable ["deathType",_deathType,true];
 	_victim setVariable ["DZAI_deathTime",diag_tickTime];
 	_victim setVariable ["unconscious",true];
+	
+	if (Z_SingleCurrency && {DZAI_hasCoins select 0}) then {
+		_values = DZAI_hasCoins select 1;
+		_coins = ceil(random (_values select 1)) max (_values select 0);
+		_victim setVariable ["cashMoney",_coins,true];
+	};	
+	
 	if (_vehicle == (_unitGroup getVariable ["assignedVehicle",objNull])) then {
 		_victim setPosASL (getPosASL _victim);
 	};

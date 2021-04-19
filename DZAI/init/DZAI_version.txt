@@ -3,4 +3,4 @@
 */
 
 #define DZAI_TYPE "DZAI"
-#define DZAI_VERSION "2.2.3 Release Build 20210415"
+#define DZAI_VERSION "2.2.4 Release Build 20210419"
