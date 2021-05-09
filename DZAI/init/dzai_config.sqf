@@ -429,7 +429,7 @@ DZAI_Pistols2 = ["M9_SD_DZ","Makarov_SD_DZ","PDW_DZ","G17_FL_DZ"]; 		//Weapongra
 DZAI_Pistols3 = ["M9_SD_DZ","Makarov_SD_DZ","PDW_DZ","G17_FL_DZ"]; 		//Weapongrade 3 pistols
 
 DZAI_Rifles0 = ["LeeEnfield_DZ","Winchester1866_DZ","MR43_DZ","CZ550_DZ","LeeEnfield_DZ","Winchester1866_DZ","MR43_DZ"]; //Weapongrade 0 rifles
-DZAI_Rifles1 = ["M16A2_DZ","M16A2_GL_DZ","AK74_DZ","M4A1_CCO_DZ","AK74_Kobra_DZ","AKS74U_DZ","AKM_DZ","M24_DZ","M1014_DZ","DMR_DZ","M4A1_DZ","M14_CCO_DZ","Remington870_FL_DZ","MP5_DZ","MP5_SD_DZ","M4A3_CCO_EP1"]; //Weapongrade 1 rifles
+DZAI_Rifles1 = ["M16A2_DZ","M16A2_GL_DZ","AK74_DZ","M4A1_CCO_DZ","AK74_Kobra_DZ","AKS74U_DZ","AKM_DZ","M24_DZ","M1014_DZ","DMR_DZ","M4A1_DZ","M14_CCO_DZ","Remington870_FL_DZ","MP5_DZ","MP5_SD_DZ","M4A3_DES_CCO_DZ"]; //Weapongrade 1 rifles
 DZAI_Rifles2 = ["M16A2_DZ","M16A2_GL_DZ","M249_DZ","AK74_DZ","M4A1_CCO_DZ","AK74_Kobra_DZ","AKS74U_DZ","AKM_DZ","M24_DZ","SVD_Gh_DZ","M1014_DZ","DMR_DZ","M4A1_DZ","M14_CCO_DZ","Remington870_FL_DZ","M240_DZ","M4A1_Camo_CCO_SD_DZ","M16A4_ACOG_DZ","M4A1_Camo_Holo_GL_DZ","Mk48_CCO_DZ","M4A3_DES_CCO_DZ","Sa58V_Camo_ACOG_DZ","Sa58V_Camo_CCO_DZ","M40A3_Gh_DZ","SA58_DZ","SA58_DZ"]; //Weapongrade 2 rifles
 DZAI_Rifles3 = ["FNFAL_DZ","FN_FAL_ANPVS4_DZE","Mk48_CCO_DZ","M249_DZ","L85_Holo_DZ","G36C_DZ","G36C_Camo_DZ","G36A_Camo_DZ","G36K_Camo_DZ","AKM_DZ","AKS74U_DZ","M14_CCO_DZ","Bizon_SD_DZ","DMR_DZ","RPK74_DZ"]; //Weapongrade 3 rifles
 
