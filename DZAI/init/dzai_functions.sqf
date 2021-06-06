@@ -236,8 +236,8 @@ DZAI_protectObject = {
 	_objectMonitor = missionNamespace getVariable [DZAI_serverObjectMonitor,[]];
 	_objectMonitor set [count _objectMonitor,_object];
 	DZAI_monitoredObjects set [count DZAI_monitoredObjects,_object];
-	_object setVariable ["ObjectID",""];
-	_object setVariable ["ObjectUID",""];
+	_object setVariable ["ObjectID","1"];
+	_object setVariable ["ObjectUID","1"];
 	
 	true
 };
