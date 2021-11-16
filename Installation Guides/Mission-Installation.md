@@ -1,16 +1,14 @@
-Installation Instructions for DZAI for Epoch 1.0.6+
-Last Updated: 6:17 AM 3/25/2017
+Installation Instructions for DZAI for Epoch 1.0.7+
+Last Updated: 9:00 PM 11/16/2021
 
 What you need:
 ----------------------------------------------------
-- cpbo* or PBO Manager**.
-- A text editor (Notepad++ is recommended).
-- Access to your mission .pbo.
+- PBO Manager installed
+- A text editor (Notepad++ is recommended)
+- Access to your mission .pbo
 - A downloaded copy of DZAI
 
-* cpbo can be downloaded as part of the Arma Tools package here: http://www.armaholic.com/page.php?id=411
-** PBO Manager can be downloaded here: http://www.armaholic.com/page.php?id=16369
-
+** PBO Manager can be downloaded here: https://native-network.net/downloads/file/6-pbo-manager-v1-4-beta/
 
 Basic Installation Guide:
 ----------------------------------------------------
@@ -23,7 +21,7 @@ Basic Installation Guide:
    
 and add this line directly below it:
 ```sqf
-    [] call compile preprocessFileLineNumbers "dayz_code\DZAI_Client\dzai_initclient.sqf";
+    call compile preprocessFileLineNumbers "dayz_code\DZAI_Client\dzai_initclient.sqf";
 ```
 
 3. Now you can edit DZAI_Client\dzai_client_config.sqf to your liking.

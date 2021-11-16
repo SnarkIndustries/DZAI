@@ -1,4 +1,4 @@
-DZAI 2.2.4 - AI Addon for Epoch 1.0.7
+DZAI 2.2.5 - AI Addon for Epoch 1.0.7+
 ============
 
 

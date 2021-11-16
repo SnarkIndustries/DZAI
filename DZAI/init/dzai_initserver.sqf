@@ -81,7 +81,8 @@ call {
 		_centerPos = [3938.9722, 4195.7417];
 		_markerSize = [3500, 3500];
 	};
-	if (_worldname == "chernarus") exitWith {
+	if (_worldname in ["chernarus","chernarus_winter"]) exitWith {
+		_worldname = "chernarus";
 		_centerPos = [7652.9634, 7870.8076];
 		_markerSize = [5500, 5500];
 	};
@@ -161,7 +162,7 @@ _centerMarker setMarkerSize _markerSize;
 
 //Load map-specific configuration file. Config files contain trigger/marker information, addition and removal of items/skins, and/or other variable customizations.
 //Classname files will overwrite basic settings specified in base_classnames.sqf
-if (_worldname in ["chernarus","utes","zargabad","fallujah","takistan","tavi","lingor","namalsk","mbg_celle2","oring","panthera2","isladuala","sara","smd_sahrani_a2","trinity","napf","caribou","cmr_ovaron","sauerland","fdf_isle1_a","caribou"]) then {
+if (_worldname in ["chernarus","chernarus_winter","utes","zargabad","fallujah","takistan","tavi","lingor","namalsk","mbg_celle2","oring","panthera2","isladuala","sara","smd_sahrani_a2","trinity","napf","caribou","cmr_ovaron","sauerland","fdf_isle1_a","caribou"]) then {
 	if (DZAI_modAutoDetect) then {
 		if (DZAI_modName in ["epoch","unleashed","overwatch","huntinggrounds"]) then {
 			call compile preprocessFileLineNumbers format ["%1\init\world_classname_configs\dayz_%2.sqf",DZAI_directory,DZAI_modName];

@@ -1,0 +1,4 @@
+Version 2.2.5
+
+[Fixed] Epoch config got not detected when using Chernarus Winter
+
