@@ -22,5 +22,5 @@ DZAI includes many features that can be user-configured:
 Basic Installation Guides:
 ----------------------------------------------------
 
-1. DZAI server-sided installation: [Click here](https://github.com/DAmNRelentless/DZAI/blob/master/Installation%20Guides/Server-Installation.md)
-2. DZAI mission(client)-sided installation [Click here](https://github.com/DAmNRelentless/DZAI/blob/master/Installation%20Guides/Mission-Installation.md)
+1. DZAI server-sided installation: [Click here](https://github.com/oiad/DZAI/blob/master/Installation%20Guides/Mission-Installation.md)
+2. DZAI mission(client)-sided installation [Click here](https://github.com/oiad/DZAI/blob/master/Installation%20Guides/Server-Installation.md)
