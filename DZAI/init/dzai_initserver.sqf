@@ -137,7 +137,8 @@ call {
 		_centerPos = [6368.2764, 6624.2744];
 		_markerSize = [6000, 6000];
 	};
-	if (_worldname == "tavi") exitWith {
+	if (_worldname in ["tavi","taviana"]) exitWith {
+		_worldname = "tavi";
 		_centerPos = [10887.825, 11084.657];
 		_markerSize = [8500, 8500];
 	};
