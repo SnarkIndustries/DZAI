@@ -20,7 +20,7 @@ Basic Installation Guide:
 ```
 	Add this line above it (if you have DZMS or WAI, add it above their lines):
 ```sqf
-		call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\init\dzai_initserver.sqf";
+		[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\DZAI\init\dzai_initserver.sqf";
 ```		
 3. Drop the DZAI folder from the downloaded file into your server.pbo.
 4. Edit DZAI\init\dzai_config.sqf as to your needs.
