@@ -262,6 +262,12 @@ DZAI_launcherLevels = [1,2,3];
 //Limit of number of launcher-type weapons to add to each AI group. Groups cannot have more launcher weapons than their weapongrade value (Default: 1).
 DZAI_launchersPerGroup = 1;
 
+// The weapons in the loot tables are base models that can have attachments added. Setting this to true will place a random attachment that fits the issued weapon in the AI unit's inventory.
+DZAI_issueAttachments = true;
+
+// The TWS attachment can be used on the ACR weapons. Server owners that do not wish to have TWS weapons on their server should set this to false.
+DZAI_allowTWSAttachment = false;
+
 
 /*	AI loot quantity settings
 --------------------------------------------------------------------------------------------------------------------*/
