@@ -1,4 +1,4 @@
-DZAI 2.2.1 - AI Addon for DayZ
+DZAI 2.2.5 - AI Addon for Epoch 1.0.7+
 ============
 
 
@@ -6,8 +6,6 @@ Introduction
 ============
 
 DZAI is designed to be a simple, configurable, easy-to-install AI package. This AI package is designed to work out of the box with any supported DayZ mod/map. Installation instructions are provided below.
-
-Questions? Comments? Start a thread on the OpenDayZ forums to send your feedback or ask questions: http://opendayz.net/forums/DZAI/.
 
 Features
 ============
@@ -24,19 +22,5 @@ DZAI includes many features that can be user-configured:
 Basic Installation Guides:
 ----------------------------------------------------
 
-Choose your preferred installation method:
-
-1. Install DZAI into dayz_server.pbo (using cpbo): <a href="https://raw.githubusercontent.com/dayzai/DZAI/master/Installation%20Guides/1.%20Install%20Instructions%20-%20dayz_server.pbo%20installation%20%28cpbo%29.txt">Click here</a> 
-2. Install DZAI into dayz_server.pbo (using PBO Manager): <a href="https://raw.githubusercontent.com/dayzai/DZAI/master/Installation%20Guides/2.%20Install%20Instructions%20-%20dayz_server.pbo%20installation%20%28PBOManager%29.txt">Click here</a> 
-3. Install DZAI into mission pbo: <a href="https://raw.githubusercontent.com/dayzai/DZAI/master/Installation%20Guides/3.%20Install%20Instructions%20-%20Mission%20PBO%20Installation.txt">Click here</a> 
-
-Example server_monitor.sqf showing required edit: <a href="https://raw.githubusercontent.com/dayzai/DZAI/master/Installation%20Guides/server_monitor_example.sqf">Click here</a> 
-NOTE: Only use the above file as a visual reference, do not replace your server's server_monitor.sqf with this!
-
-
-Contribute
-----------------------------------------------------
-
-If you enjoy using DZAI and would like to show your support with a small donation, you can do so by clicking the Tip Jar icon below. Contributions are always appreciated but never required.
-
-[![Donate](http://imageshack.com/a/img673/6646/qjrNdn.png)](http://imraising.com/dzai/)
+1. DZAI server-sided installation: [Click here](https://github.com/oiad/DZAI/blob/master/Installation%20Guides/Server-Installation.md)
+2. DZAI mission(client)-sided installation [Click here](https://github.com/oiad/DZAI/blob/master/Installation%20Guides/Mission-Installation.md)

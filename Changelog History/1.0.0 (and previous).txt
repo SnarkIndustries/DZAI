@@ -195,7 +195,7 @@ Version 0.08 Patch 1:
 
 Version 0.08 Patch 2:
 
-- [FIXED] Removed Saiga12K and DZ_Czech_Vest_Puch from Celle loot tables.
+- [FIXED] Removed Saiga12K and DZ_Czech_Vest_Pouch from Celle loot tables.
 - [MODIFIED] Modified spawn trigger locations, area sizes for Chernarus, Celle, Namalsk.
 
 Version 0.08 Patch 3:

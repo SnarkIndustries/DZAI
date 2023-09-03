@@ -3,7 +3,7 @@ if (isServer) exitWith {};
 #include "DZAI_client_version.hpp"
 diag_log format ["[DZAI] Initializing %1 version %2.",DZAI_CLIENT_TYPE,DZAI_CLIENT_VERSION];
 
-call compile preprocessFileLineNumbers "DZAI_Client\dzai_client_config.sqf";
+call compile preprocessFileLineNumbers "dayz_code\DZAI_Client\dzai_client_config.sqf";
 
 if (DZAIC_radio) then {
 	"DZAI_SMS" addPublicVariableEventHandler {

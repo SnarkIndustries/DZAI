@@ -76,6 +76,8 @@ DZAI_radioMsgs = true;
 //If enabled, last surviving unit of a group will be granted slightly boosted skills. No effect if unit is spawned alone (Default: false)
 DZAI_lastManStanding = false;
 
+//If enabled, dead AI bodies have coins. From 100 - 2000 coins on each AI. Works only if Z_SingleCurrency = true; (Default: [false,[100,2000]])
+DZAI_hasCoins = [false,[100,2000]];
 
 /*DZAI client-side addon settings. 
 **NOTE**: These settings require the DZAI client-side addon to be installed to your mission pbo file in order to work.
@@ -210,8 +212,8 @@ DZAI_respawnTMaxL = 900;
 
 //Classnames of land vehicle types to use, with the maximum amount of each type to spawn.
 DZAI_vehList = [
-	["UAZ_Unarmed_TK_EP1",5],
-	["SUV_TK_CIV_EP1",5]
+	["UAZ_Unarmed_TK_EP1_DZE",5],
+	["SUV_TK_CIV_EP1_DZE",5]
 ];
 
 //Difficulty level of land vehicle patrol units. Difficulty level also affects unit loadout and loot. Possible values: 0 to 3 (Default: 3)
@@ -259,6 +261,12 @@ DZAI_launcherLevels = [1,2,3];
 
 //Limit of number of launcher-type weapons to add to each AI group. Groups cannot have more launcher weapons than their weapongrade value (Default: 1).
 DZAI_launchersPerGroup = 1;
+
+// The weapons in the loot tables are base models that can have attachments added. Setting this to true will place a random attachment that fits the issued weapon in the AI unit's inventory.
+DZAI_issueAttachments = true;
+
+// The TWS attachment can be used on the ACR weapons. Server owners that do not wish to have TWS weapons on their server should set this to false.
+DZAI_allowTWSAttachment = false;
 
 
 /*	AI loot quantity settings
@@ -421,15 +429,15 @@ DZAI_skill9 = nil;
 //Default weapon classname tables - DZAI will ONLY use these tables if the dynamic weapon list (DZAI_dynamicWeaponList) is disabled, otherwise they are ignored and overwritten if it is enabled.
 //Note: Low-level AI (weapongrade 0) may use pistols listed in DZAI_Pistols0 or DZAI_Pistols1. Mid/high level AI (weapongrade 1+) will carry pistol weapons but not use them - they will use rifle weapons instead.
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DZAI_Pistols0 = ["Makarov","Colt1911","revolver_EP1"]; 				//Weapongrade 0 pistols
-DZAI_Pistols1 = ["M9","M9SD","MakarovSD","UZI_EP1","glock17_EP1"]; 	//Weapongrade 1 pistols
-DZAI_Pistols2 = ["M9SD","MakarovSD","UZI_EP1","glock17_EP1"]; 		//Weapongrade 2 pistols
-DZAI_Pistols3 = ["M9SD","MakarovSD","UZI_EP1","glock17_EP1"]; 		//Weapongrade 3 pistols
+DZAI_Pistols0 = ["Makarov_DZ","M1911_DZ","Revolver_DZ"]; 				//Weapongrade 0 pistols
+DZAI_Pistols1 = ["M9_DZ","M9_SD_DZ","Makarov_SD_DZ","PDW_DZ","G17_FL_DZ"]; 	//Weapongrade 1 pistols
+DZAI_Pistols2 = ["M9_SD_DZ","Makarov_SD_DZ","PDW_DZ","G17_FL_DZ"]; 		//Weapongrade 2 pistols
+DZAI_Pistols3 = ["M9_SD_DZ","Makarov_SD_DZ","PDW_DZ","G17_FL_DZ"]; 		//Weapongrade 3 pistols
 
-DZAI_Rifles0 = ["LeeEnfield","Winchester1866","MR43","huntingrifle","LeeEnfield","Winchester1866","MR43"]; //Weapongrade 0 rifles
-DZAI_Rifles1 = ["M16A2","M16A2GL","AK_74","M4A1_Aim","AKS_74_kobra","AKS_74_U","AK_47_M","M24","M1014","DMR_DZ","M4A1","M14_EP1","Remington870_lamp","MP5A5","MP5SD","M4A3_CCO_EP1"]; //Weapongrade 1 rifles
-DZAI_Rifles2 = ["M16A2","M16A2GL","M249_DZ","AK_74","M4A1_Aim","AKS_74_kobra","AKS_74_U","AK_47_M","M24","SVD_CAMO","M1014","DMR_DZ","M4A1","M14_EP1","Remington870_lamp","M240_DZ","M4A1_AIM_SD_camo","M16A4_ACG","M4A1_HWS_GL_camo","Mk_48_DZ","M4A3_CCO_EP1","Sa58V_RCO_EP1","Sa58V_CCO_EP1","M40A3","Sa58P_EP1","Sa58V_EP1"]; //Weapongrade 2 rifles
-DZAI_Rifles3 = ["FN_FAL","FN_FAL_ANPVS4","Mk_48_DZ","M249_DZ","BAF_L85A2_RIS_Holo","G36C","G36C_camo","G36A_camo","G36K_camo","AK_47_M","AKS_74_U","M14_EP1","bizon_silenced","DMR_DZ","RPK_74"]; //Weapongrade 3 rifles
+DZAI_Rifles0 = ["LeeEnfield_DZ","Winchester1866_DZ","MR43_DZ","CZ550_DZ","LeeEnfield_DZ","Winchester1866_DZ","MR43_DZ"]; //Weapongrade 0 rifles
+DZAI_Rifles1 = ["M16A2_DZ","M16A2_GL_DZ","AK74_DZ","M4A1_CCO_DZ","AK74_Kobra_DZ","AKS74U_DZ","AKM_DZ","M24_DZ","M1014_DZ","DMR_DZ","M4A1_DZ","M14_CCO_DZ","Remington870_FL_DZ","MP5_DZ","MP5_SD_DZ","M4A3_DES_CCO_DZ"]; //Weapongrade 1 rifles
+DZAI_Rifles2 = ["M16A2_DZ","M16A2_GL_DZ","M249_DZ","AK74_DZ","M4A1_CCO_DZ","AK74_Kobra_DZ","AKS74U_DZ","AKM_DZ","M24_DZ","SVD_Gh_DZ","M1014_DZ","DMR_DZ","M4A1_DZ","M14_CCO_DZ","Remington870_FL_DZ","M240_DZ","M4A1_Camo_CCO_SD_DZ","M16A4_ACOG_DZ","M4A1_Camo_Holo_GL_DZ","Mk48_CCO_DZ","M4A3_DES_CCO_DZ","Sa58V_Camo_ACOG_DZ","Sa58V_Camo_CCO_DZ","M40A3_Gh_DZ","SA58_DZ","SA58_DZ"]; //Weapongrade 2 rifles
+DZAI_Rifles3 = ["FNFAL_DZ","FN_FAL_ANPVS4_DZE","Mk48_CCO_DZ","M249_DZ","L85_Holo_DZ","G36C_DZ","G36C_Camo_DZ","G36A_Camo_DZ","G36K_Camo_DZ","AKM_DZ","AKS74U_DZ","M14_CCO_DZ","Bizon_SD_DZ","DMR_DZ","RPK74_DZ"]; //Weapongrade 3 rifles
 
 	
 /*
@@ -455,10 +463,10 @@ DZAI_BanditTypes = ["Survivor2_DZ", "SurvivorW2_DZ", "Bandit1_DZ", "BanditW1_DZ"
 
 //AI Backpack types (for weapongrade levels 0-3)
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-DZAI_Backpacks0 = ["DZ_Patrol_Pack_EP1","DZ_Czech_Vest_Puch","DZ_Assault_Pack_EP1"];
-DZAI_Backpacks1 = ["DZ_Patrol_Pack_EP1","DZ_Czech_Vest_Puch","DZ_Assault_Pack_EP1","DZ_British_ACU","DZ_TK_Assault_Pack_EP1","DZ_CivilBackpack_EP1","DZ_ALICE_Pack_EP1"];
-DZAI_Backpacks2 = ["DZ_CivilBackpack_EP1","DZ_British_ACU","DZ_Backpack_EP1"];
-DZAI_Backpacks3 = ["DZ_CivilBackpack_EP1","DZ_Backpack_EP1"];
+DZAI_Backpacks0 = ["Patrol_Pack_DZE1","Czech_Vest_Pouch_DZE1","Assault_Pack_DZE1"];
+DZAI_Backpacks1 = ["Patrol_Pack_DZE1","Czech_Vest_Pouch_DZE1","Assault_Pack_DZE1","British_ACU_DZE1","TK_Assault_Pack_DZE1","CzechBackpack_DZE1","ALICE_Pack_DZE1"];
+DZAI_Backpacks2 = ["CzechBackpack_DZE1","British_ACU_DZE1","CoyoteBackpack_DZE1"];
+DZAI_Backpacks3 = ["CzechBackpack_DZE1","CoyoteBackpack_DZE1"];
 
 
 //AI Food/Medical item types. DZAI_Edibles: Drinkable and edible items. DZAI_Medicals1: List of common medical items to be added to AI inventory. DZAI_Medicals2: List of all medical items available only in hospitals to be added to AI backpack.

@@ -10,10 +10,10 @@ if !(_weapongrade in DZAI_weaponGradesAll) then {
 	diag_log format ["DZAI Error: Invalid weapongrade provided: %1. Generating new weapongrade value: %2. (%3)",_weapongradeInvalid,_weapongrade,__FILE__];
 };
 
-if ((count (weapons _unit)) > 0) then {
-	removeAllWeapons _unit;
-	{_unit removeWeapon _x} count ["ItemMap","ItemGPS","ItemCompass","ItemRadio","ItemWatch"];
-};
+// clear all gear from the unit
+removeAllWeapons _unit;
+removeAllItems _unit;
+removeBackpack _unit;
 
 _weapons = missionNamespace getVariable ["DZAI_Rifles"+str(_weapongrade),DZAI_Rifles1+DZAI_Rifles2+DZAI_Rifles3];
 if ((_weapongrade == 0) && {(0.25 call DZAI_chance)}) then {
@@ -33,6 +33,21 @@ _unit selectWeapon _weapon;
 _unit addBackpack _backpack;
 if ((getNumber (configFile >> "CfgWeapons" >> _weapon >> "type")) == 2) then {_unit setVariable ["CanGivePistol",false]};
 if ((getNumber (configFile >> "CfgMagazines" >> _magazine >> "count")) < 8) then {_unit addMagazine _magazine};
+
+// Issue random attachment for the assigned weapon if available
+if (DZAI_issueAttachments) then {
+	local _attachments = configFile >> "CfgWeapons" >> _weapon >> "Attachments";
+	if (isClass _attachments && {count _attachments > 0}) then {
+		local _attach = configName (_attachments call BIS_fnc_selectRandom);
+		if (_attach == "Attachment_Tws") then {
+			if (DZAI_allowTWSAttachment) then {
+				_unit addMagazine _attach;
+			};
+		} else {
+			_unit addMagazine _attach;
+		};
+	};
+};
 
 _gadgetsArray = if (_weapongrade > 1) then {DZAI_gadgets1} else {DZAI_gadgets0};
 for "_i" from 0 to ((count _gadgetsArray) - 1) do {
